@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://www.springframework.org/schema/beans 
+		 https://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<!-- 
+		<jsp:useBean id="" class=""></jsp:useBean>
+		
+		<jsp:setProperty name="" property="" value=""></jsp:setProperty>
+	 -->
+	
+	<bean id="t3" class="test2.Today">
+		<property name="name" value="이지은" />
+<!-- 		<constructor-arg></constructor-arg> -->
+	</bean>
+	
+</beans>
