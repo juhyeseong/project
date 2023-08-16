@@ -41,6 +41,7 @@
             </div>
             <div class="category">
             	<img src="https://a0.muscache.com/pictures/aaa02c2d-9f0d-4c41-878a-68c12ec6c6bd.jpeg"class="categoryImg"><p>시골</p>
+
             </div>
             <div class="btn2">
             	<button><img src="http://192.168.64.200/rightArrow.png" class="arrow"></button>
@@ -51,73 +52,96 @@
 	        	<div class="fav">
 	            	<img src="http://192.168.64.200/room1.jpeg">
 	        		<button class="fav-btn"><img src="http://192.168.64.200/heart.jpeg"></button>
+
 	        	</div>
 	        </div>
 	        <div class="room">
 	        	<div class="fav">
 	            	<img src="https://a0.muscache.com/im/pictures/miso/Hosting-13903824/original/82d996fb-d7c4-46a8-a713-febd281cd69f.jpeg?im_w=720">
+
 	        		<button class="fav-btn"><img src="http://192.168.64.200/heart.jpeg"></button>
+
 	        	</div>
 	        </div>
 	        <div class="room">
 	        	<div class="fav">
 		            <img src="https://a0.muscache.com/im/pictures/miso/Hosting-668146487515150072/original/8ff2a532-e0cd-41a2-9164-554c4d9eb28a.jpeg?im_w=720">
+
 		        	<button class="fav-btn"><img src="http://192.168.64.200/heart.jpeg"></button>
+
 	        	</div>
 	        </div>
 	        <div class="room">
 	        	<div class="fav">
 		            <img src="https://a0.muscache.com/im/pictures/miso/Hosting-51809333/original/0da70267-d9da-4efb-9123-2714b651c9fd.jpeg?im_w=720">
+
 		        	<button class="fav-btn"><img src="http://192.168.64.200/heart.jpeg"></button>
+
 		        </div>	
 	        </div>
 	        <div class="room">
 	        	<div class="fav">
 		            <img src="https://a0.muscache.com/im/pictures/miso/Hosting-26300485/original/ee94e6c1-6ebc-496e-af84-1502edd1b759.jpeg?im_w=720">
+
 		        	<button class="fav-btn"><img src="http://192.168.64.200/heart.jpeg"></button>
+
 		        </div>
 	        </div>
 	        <div class="room">
 	        	<div class="fav">
 		            <img src="https://a0.muscache.com/im/pictures/miso/Hosting-26300485/original/ee94e6c1-6ebc-496e-af84-1502edd1b759.jpeg?im_w=720">
+
 		        	<button class="fav-btn"><img src="http://192.168.64.200/heart.jpeg"></button>
+
 	        	</div>
 	        </div>
 	        <div class="room">
 	        	<div class="fav">
 		            <img src="https://a0.muscache.com/im/pictures/miso/Hosting-26300485/original/ee94e6c1-6ebc-496e-af84-1502edd1b759.jpeg?im_w=720">
+
 		        	<button class="fav-btn"><img src="http://192.168.64.200/heart.jpeg"></button>
+
 	        	</div>
 	        </div>
 	        <div class="room">
 	        	<div class="fav">
 		            <img src="https://a0.muscache.com/im/pictures/miso/Hosting-26300485/original/ee94e6c1-6ebc-496e-af84-1502edd1b759.jpeg?im_w=720">
+
 		        	<button class="fav-btn"><img src="http://192.168.64.200/heart.jpeg"></button>
+
 	        	</div>
 	        </div>
 	        <div class="room">
 	        	<div class="fav">
 		            <img src="https://a0.muscache.com/im/pictures/miso/Hosting-26300485/original/ee94e6c1-6ebc-496e-af84-1502edd1b759.jpeg?im_w=720">
+
 		        	<button class="fav-btn"><img src="http://192.168.64.200/heart.jpeg"></button>
+
 		        	<p>그레이터 런던</p>
 	        	</div>
 	        </div>
 	        <div class="room">
 	        	<div class="fav">
 		            <img src="https://a0.muscache.com/im/pictures/miso/Hosting-26300485/original/ee94e6c1-6ebc-496e-af84-1502edd1b759.jpeg?im_w=720">
+
 		        	<button class="fav-btn"><img src="http://192.168.64.200/heart.jpeg"></button>
+
 	        	</div>
 	        </div>
 	        <div class="room">
 	        	<div class="fav">
 		            <img src="https://a0.muscache.com/im/pictures/miso/Hosting-26300485/original/ee94e6c1-6ebc-496e-af84-1502edd1b759.jpeg?im_w=720">
+
 		        	<button class="fav-btn"><img src="http://192.168.64.200/heart.jpeg"></button>
+
 	        	</div>
 	        </div>
 	        <div class="room">
 	        	<div class="fav">
 		            <img src="https://a0.muscache.com/im/pictures/miso/Hosting-26300485/original/ee94e6c1-6ebc-496e-af84-1502edd1b759.jpeg?im_w=720">
+
 		        	<button class="fav-btn"><img src="http://192.168.64.200/heart.jpeg"></button>
+
 	        	</div>
 	        </div>
 		</div>

@@ -241,6 +241,7 @@ legend{
         	<h1><a href="${cpath }">자바방</a></h1>
 	        <div class="btn3">
 	        	<button><img src="http://192.168.64.200/search.jpeg" class="search"></button>
+
 	        </div>
 	        <ul>
 	            <li>숙소를 올려방~</li>
