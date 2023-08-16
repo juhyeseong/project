@@ -1,7 +1,0 @@
-INDEX VERSION 1.4+D:\aws클라우드활용 주혜성\github\project\workspace\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
-2521144501.index
-3583942058.index
-1473252370.index
-1346986641.index
-1830648950.index
-550266831.index
