@@ -14,12 +14,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.javabang.model.MemberDTO;
 import com.javabang.service.MemberService;
-
+     
 @Controller
 @RequestMapping("/member")
 public class MemberController {
 	
-	@Autowired private MemberService mservice;
+	@Autowired private MemberService  mservice;
 	
 	//회원가입
 	@GetMapping("/join")
