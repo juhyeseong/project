@@ -10,7 +10,7 @@
             		<img src="https://a0.muscache.com/pictures/51f5cf64-5821-400c-8033-8a10c7787d69.jpg" class="categoryImg"><p>한옥</p>
             </div>
             <div class="category">
-            	<img src="https://a0.muscache.com/pictures/ca25c7f3-0d1f-432b-9efa-b9f5dc6d8770.jpeg" class="categoryImg"><p>캠핑장</p>
+            	<img src="https://a0.muscache.com/pictures/ca25c7f3-0d1f-432b-9efa-b9f5dc6d8770.jpg" class="categoryImg"><p>캠핑장</p>
             </div>
             <div class="category">
                 <img src="https://a0.muscache.com/pictures/3fb523a0-b622-4368-8142-b5e03df7549b.jpeg" class="categoryImg"><p>수영장</p>
