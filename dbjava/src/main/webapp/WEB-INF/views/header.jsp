@@ -37,6 +37,7 @@ header > div {
     justify-content: space-between;
 	align-items: center;
 }
+
 .btn3 > button{
     all: unset;
     cursor: pointer;
@@ -68,6 +69,7 @@ ul > li{
 	width: 1000px;
 	margin: auto;
 }
+
 .btn1 >  button{
     margin-top:50px;
     margin-right:100px;
@@ -241,13 +243,16 @@ legend{
         	<h1><a href="${cpath }">자바방</a></h1>
 	        <div class="btn3">
 	        	<button><img src="http://192.168.64.200/search.jpeg" class="search"></button>
-
 	        </div>
+	        
 	        <ul>
 	            <li>숙소를 올려방~</li>
-	            <li><a href="${cpath }/member/login">로그인</a></li>
-	            test1
+	            <li><a href="${cpath }/member/${empty login ? 'login' : 'logout'}"><button>${empty login ? '로그인' : '로그아웃'}</button></a></li>
+	           
 	        </ul>
+	        <c:if test="${not empty login }">
+	       		${login.userNick } 님 환영합니다 !
+	       	</c:if>
         </div>
     </header>
 </body>

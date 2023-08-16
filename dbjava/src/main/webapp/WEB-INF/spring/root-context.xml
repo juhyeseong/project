@@ -14,10 +14,10 @@
 <!-- 	<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"></property>
 	<property name="jdbcUrl" value="jdbc:oracle:thin:@192.168.1.100:1521:xe"></property> -->
 	<property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"/>
-	<property name="jdbcUrl" value="jdbc:log4jdbc:oracle:thin:@localhost:1521:xe"/>
+	<property name="jdbcUrl" value="jdbc:log4jdbc:oracle:thin:@192.168.64.100:1521:xe"/>
 	
-	<property name="username" value="c##itbank"/>
-	<property name="password" value="it"/>
+	<property name="username" value="c##rent"/>
+	<property name="password" value="rent"/>
 	</bean>
 	
 	<bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource">
@@ -26,13 +26,13 @@
 	
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource"></property>
-		<!-- <property name="configLocation" value="classpath:mybatis/config.xml"/>
+		<property name="configLocation" value="classpath:mybatis/config.xml"/>
 		<property name="mapperLocations">
 			<list>
-				<value>classpath:mybatis/upload-mapper.xml</value>
+				<value>classpath:mybatis/member-mapper.xml</value>
 				
 			</list>
-		</property> -->
+		</property>
 	</bean>
 	
 	<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
@@ -42,6 +42,7 @@
 	<!-- 트랜잭션 어노테이션을 활성화함 -->
 	<tx:annotation-driven/>
 
+	<context:component-scan base-package="com.javabang.component"/>
 	<context:component-scan base-package="com.javabang.service"/>
 	<mybatis-spring:scan base-package="com.javabang.repository"/>
 </beans>
