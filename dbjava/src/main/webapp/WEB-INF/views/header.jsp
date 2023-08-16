@@ -251,7 +251,7 @@ legend {
 	           
 	        </ul>
 	        <c:if test="${not empty login }">
-	       		${login.userNick } 님 환영합니다 !
+	       		${login.userNick } 님 환영합니다 !##
 	       	</c:if>
         </div>
     </header>
