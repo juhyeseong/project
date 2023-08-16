@@ -117,7 +117,7 @@
 
 		        	<button class="fav-btn"><img src="http://192.168.64.200/heart.jpeg"></button>
 
-		        	<p>그레이터 런던</p>
+		        	<p>그레이터 그레이트 런던</p>
 	        	</div>
 	        </div>
 	        <div class="room">
