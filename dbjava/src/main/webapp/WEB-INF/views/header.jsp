@@ -230,7 +230,7 @@ legend{
     padding: 5px 10px;
     cursor: pointer;
    
-}
+}  
 .fav-btn > img{
 	width:20px;
     height:20px;
@@ -246,7 +246,7 @@ legend{
 	        </div>
 	        
 	        <ul>
-	            <li>숙소를 올려방~</li>
+	            <li>숙소를 올려방 !!!!</li>
 	            <li><a href="${cpath }/member/${empty login ? 'login' : 'logout'}"><button>${empty login ? '로그인' : '로그아웃'}</button></a></li>
 	           
 	        </ul>
