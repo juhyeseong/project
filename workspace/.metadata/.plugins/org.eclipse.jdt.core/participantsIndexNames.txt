@@ -1,9 +1,0 @@
-INDEX VERSION 1.131
-C:\Users\hlkm1\Desktop\����\kg itbank �п�\��������Ʈ\workspace\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\2269994676.index
-\dbjava\src\main\java
-C:\Users\hlkm1\Desktop\����\kg itbank �п�\��������Ʈ\workspace\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\2322339624.index
-\dbjava\src\main\java
-/Users/jaewon/2023년/project/workspace/.metadata/.plugins/org.eclipse.jst.jsp.core/jspsearch/2877881587.index
-/dbjava/src/main/java
-/Users/jaewon/2023년/project/workspace/.metadata/.plugins/org.eclipse.jst.jsp.core/jspsearch/3202160436.index
-/dbjava/src/main/java

@@ -1,7 +1,0 @@
-INDEX VERSION 1.4+/Users/jaewon/2023년/project/workspace/.metadata/.plugins/org.eclipse.wst.jsdt.core/indexes
-377584941.index
-1787267272.index
-2424712706.index
-3202160436.index
-2693220555.index
-2320549540.index
