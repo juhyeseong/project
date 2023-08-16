@@ -252,10 +252,14 @@ legend {
 	        </ul>
 	        <c:if test="${not empty login }">
 <<<<<<< HEAD
+<<<<<<< HEAD
 	       		${login.userNick } 님 환영합니다 !!
 =======
 	       		${login.userNick } 님 환영합니다 !^^
 >>>>>>> dac44030cf46b94f5e669e1677f82b7c8fa21144
+=======
+	       		${login.userNick } 님 환영합니다 !
+>>>>>>> f1c8b3f1a2d01d22d55037927c7b52388056bca3
 	       	</c:if>
         </div>
     </header>
