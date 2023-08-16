@@ -1,8 +1,6 @@
-INDEX VERSION 1.4+C:\Users\hlkm1\Desktop\¹ÎÇÏ\kg itbank ÇÐ¿ø\ÆÀÇÁ·ÎÁ§Æ®\workspace\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
-2269994676.index
-2028016406.index
-1909576856.index
-3377047336.index
-1098405496.index
-1473252370.index
-693754024.index
+INDEX VERSION 1.4+/Users/jaewon/2023ë…„/project/workspace/.metadata/.plugins/org.eclipse.wst.jsdt.core/indexes
+377584941.index
+1787267272.index
+2424712706.index
+2693220555.index
+2320549540.index
