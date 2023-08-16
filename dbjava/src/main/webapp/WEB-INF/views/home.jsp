@@ -13,38 +13,38 @@
             	<img src="https://a0.muscache.com/pictures/ca25c7f3-0d1f-432b-9efa-b9f5dc6d8770.jpg" class="categoryImg"><p>캠핑장</p>
             </div>
             <div class="category">
-                <img src="https://a0.muscache.com/pictures/3fb523a0-b622-4368-8142-b5e03df7549b.jpeg" class="categoryImg"><p>수영장</p>
+                <img src="https://a0.muscache.com/pictures/3fb523a0-b622-4368-8142-b5e03df7549b.jpg" class="categoryImg"><p>수영장</p>
             </div>
             <div class="category">
-                <img src="https://a0.muscache.com/pictures/1d477273-96d6-4819-9bda-9085f809dad3.jpeg" class="categoryImg"><p>A자형<br> 주택</p>
+                <img src="https://a0.muscache.com/pictures/1d477273-96d6-4819-9bda-9085f809dad3.jpg" class="categoryImg"><p>A자형<br> 주택</p>
             </div>
             <div class="category">
-                <img src="https://a0.muscache.com/pictures/d721318f-4752-417d-b4fa-77da3cbc3269.jpeg" class="categoryImg"><p>타워</p>
+                <img src="https://a0.muscache.com/pictures/d721318f-4752-417d-b4fa-77da3cbc3269.jpg" class="categoryImg"><p>타워</p>
             </div>
             <div class="category">
-                <img src="https://a0.muscache.com/pictures/10ce1091-c854-40f3-a2fb-defc2995bcaf.jpeg" class="categoryImg"><p>해변<br>근처</p>
+                <img src="https://a0.muscache.com/pictures/10ce1091-c854-40f3-a2fb-defc2995bcaf.jpg" class="categoryImg"><p>해변<br>근처</p>
             </div>
             <div class="category">
-                <img src="https://a0.muscache.com/pictures/89faf9ae-bbbc-4bc4-aecd-cc15bf36cbca.jpeg" class="categoryImg"><p>돔 <br>하우스</p>
+                <img src="https://a0.muscache.com/pictures/89faf9ae-bbbc-4bc4-aecd-cc15bf36cbca.jpg" class="categoryImg"><p>돔 <br>하우스</p>
             </div>
             <div class="category">
-                <img src="https://a0.muscache.com/pictures/d7445031-62c4-46d0-91c3-4f29f9790f7a.jpeg" class="categoryImg"><p>복토 <br> 주택</p>
+                <img src="https://a0.muscache.com/pictures/d7445031-62c4-46d0-91c3-4f29f9790f7a.jpg" class="categoryImg"><p>복토 <br> 주택</p>
             </div>
             <div class="category">
-                <img src="https://a0.muscache.com/pictures/35919456-df89-4024-ad50-5fcb7a472df9.jpeg" class="categoryImg"><p>초소형<br> 주택</p>
+                <img src="https://a0.muscache.com/pictures/35919456-df89-4024-ad50-5fcb7a472df9.jpg" class="categoryImg"><p>초소형<br> 주택</p>
             </div>
             <div class="category">
-                <img src="https://a0.muscache.com/pictures/7630c83f-96a8-4232-9a10-0398661e2e6f.jpeg" class="categoryImg"><p>방</p>
+                <img src="https://a0.muscache.com/pictures/7630c83f-96a8-4232-9a10-0398661e2e6f.jpg" class="categoryImg"><p>방</p>
             </div>
             <div class="category">
-                <img src="https://a0.muscache.com/pictures/c0a24c04-ce1f-490c-833f-987613930eca.jpeg" class="categoryImg"><p>국립 <br> 공원</p>
+                <img src="https://a0.muscache.com/pictures/c0a24c04-ce1f-490c-833f-987613930eca.jpg" class="categoryImg"><p>국립 <br> 공원</p>
             </div>
             <div class="category">
-            	<img src="https://a0.muscache.com/pictures/aaa02c2d-9f0d-4c41-878a-68c12ec6c6bd.jpeg"class="categoryImg"><p>시골</p>
+            	<img src="https://a0.muscache.com/pictures/aaa02c2d-9f0d-4c41-878a-68c12ec6c6bd.jpg"class="categoryImg"><p>시골</p>
 
             </div>
             <div class="btn2">
-            	<button><img src="http://192.168.64.200/rightArrow.png" class="arrow"></button>
+            	<button><img src="http://192.168.64.200/rightArrow.jpeg" class="arrow"></button>
             </div>    
         </div>
         <div class="type">
