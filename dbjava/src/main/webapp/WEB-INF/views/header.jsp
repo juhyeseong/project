@@ -10,11 +10,11 @@
 body {
 	margin: 0px;
 }
-a{
+a {
 	all: unset;
 	cursor: pointer;
 }
-p{
+p {
     text-align:center;
 }
 
@@ -38,7 +38,7 @@ header > div {
 	align-items: center;
 }
 
-.btn3 > button{
+.btn3 > button {
     all: unset;
     cursor: pointer;
     
@@ -60,7 +60,7 @@ ul {
     
     display: flex;
 }
-ul > li{    
+ul > li {    
 	margin-left: 30px;
 }
 
@@ -70,7 +70,7 @@ ul > li{
 	margin: auto;
 }
 
-.btn1 >  button{
+.btn1 >  button {
     margin-top:50px;
     margin-right:100px;
     border: none;
@@ -80,7 +80,7 @@ ul > li{
     cursor: pointer;
     outline: inherit;
 }
-.btn2 > button{
+.btn2 > button {
     margin-top:50px;
     margin-left:100px;
     border: none;
@@ -90,18 +90,18 @@ ul > li{
     cursor: pointer;
     outline: inherit;
 }
-.category{
+.category {
     margin-left:200px;
     margin-top:30px;
 }
-.arrow{
+.arrow {
     width:30px;
 }
-.categories{
+.categories {
     display:flex;
    
 }
-.category{
+.category {
    margin-left:20px;
    margin-top:30px;
    /* opacity: 0.7; */
@@ -110,7 +110,7 @@ ul > li{
 .categoryImg {
 	width: 30px;
 }
-.type{
+.type {
 	margin-right:20px;
 	display: flex;
     flex-flow: wrap;
@@ -127,10 +127,10 @@ ul > li{
     overflow: hidden;
 }
 /*login css*/
-.login{
+.login {
     text-align: center;
 }
-.login fieldset{
+.login fieldset {
     width:600px;
     margin: 30px auto;
 }
@@ -145,7 +145,7 @@ legend{
 .login legend {
     margin-bottom: 40px;
 }
-.kakao{
+.kakao {
     width:500px;
     height: 50px;
     line-height: 50px;
@@ -155,7 +155,7 @@ legend{
     cursor: pointer;
     outline: inherit;
 }
-.naver{
+.naver {
     width:500px;
     height: 50px;
     line-height: 50px;
@@ -166,7 +166,7 @@ legend{
     outline: inherit;
     margin-top:10px;
 }
-.email{
+.email {
 	width:500px;
     height: 50px;
     line-height: 50px;
@@ -177,7 +177,7 @@ legend{
     outline: inherit;
     margin-top:10px;
 }
-.login input[type="submit"]{
+.login input[type="submit"] {
     background-color: #C2D6F0;
     border : none;
     width:500px;
@@ -187,15 +187,15 @@ legend{
     word-spacing: 20px;
 }
 /*join css*/
-fieldset{
+fieldset {
     width:600px;
     margin:0 auto;
     margin-top:100px;
 }
-legend{
+legend {
     font-size:30px;
 }
-.join{
+.join {
     text-align: center;
 }
 .join input[type="submit"] {
@@ -216,11 +216,11 @@ legend{
     text-align: center;
 }
 /*찜하기 css*/
-.fav{
+.fav {
 	position:relative;
 	
 }
-.fav-btn{
+.fav-btn {
     position: absolute;
     top: 10px; /* 버튼을 이미지 위로 위치시키려면 적절한 값으로 조정 */
     right: 10px; /* 버튼을 이미지 오른쪽에 위치시키려면 적절한 값으로 조정 */
@@ -231,7 +231,7 @@ legend{
     cursor: pointer;
    
 }  
-.fav-btn > img{
+.fav-btn > img {
 	width:20px;
     height:20px;
 }
