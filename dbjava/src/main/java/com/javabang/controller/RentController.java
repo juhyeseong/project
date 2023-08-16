@@ -11,3 +11,4 @@ public class RentController {
 	@GetMapping("/hosting")
 	public void hosting() {}
 }
+  
