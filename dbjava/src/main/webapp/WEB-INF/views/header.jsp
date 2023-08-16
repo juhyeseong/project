@@ -134,7 +134,7 @@ ul > li {
     width:600px;
     margin: 30px auto;
 }
-legend{
+legend {
     font-size: 30px;
 }
 .login input {
@@ -183,7 +183,7 @@ legend{
     width:500px;
     height:50px;
 }
-.login p{
+.login p {
     word-spacing: 20px;
 }
 /*join css*/
@@ -251,7 +251,7 @@ legend {
 	           
 	        </ul>
 	        <c:if test="${not empty login }">
-	       		${login.userNick } 님 환영합니다 !
+	       		${login.userNick } 님 환영합니다 !!
 	       	</c:if>
         </div>
     </header>
