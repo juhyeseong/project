@@ -246,6 +246,7 @@ legend{
 	        <ul>
 	            <li>숙소를 올려방~</li>
 	            <li><a href="${cpath }/member/login">로그인</a></li>
+	            잠시만 테스트할게요
 	        </ul>
         </div>
     </header>
