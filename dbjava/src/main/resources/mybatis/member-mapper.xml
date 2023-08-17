@@ -25,6 +25,10 @@
 <update id="update" parameterType="member">
 	update member set userNick = #{userNick}, phoneNum = #{phoneNum}, email = #{email} where idx = #{idx} 
 </update>
+
+<delete id="delete">
+	delete from member where idx = #{idx}
+</delete>
 	
 </mapper>
 

@@ -12,7 +12,9 @@
 		<p><input type="email" name="email" placeholder="이메일 수정"></p>
 		<p><input type="submit" value="정보수정"></p>
 		
-		<a href="${cpath }/member/resetPassword">비밀번호재설정</a>
+		<p><a href="${cpath }/member/resetPassword">비밀번호 재설정</a></p>
+		<p><a href="${cpath }/member/delete">회원탈퇴</a></p>
+		
 		
 	</fieldset>
 </div>

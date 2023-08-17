@@ -73,4 +73,9 @@ public class MemberService {
 		
 		return mdao.update(dto);
 	}
+
+	// 회원탈퇴(삭제)
+	public int delete(int idx) {
+		return mdao.delete(idx);
+	}
 }
