@@ -325,6 +325,161 @@ legend{
 .profileImg {
 	border-radius: 50%;
 }
+
+/* host style */
+.hidden {
+	display: none;
+}
+.blackBtn {
+	all: unset;
+	cursor: pointer;
+	
+	border-radius: 5px;
+	padding: 13px;
+	margin: 0px 10px;
+	
+	color: white;
+	background-color: black;
+	font-size: 17px;
+}
+#host {
+	display: flex;
+	height: 720px;
+}
+.hostLeft {
+	flex: 1;
+	
+	display: flex;
+	align-items: center;
+}
+.hostLeft h1 {
+	margin-left: 20px;
+	
+	font-size: 50px;
+}
+.hostRight {
+	flex: 1;
+	
+	display: flex;
+	flex-direction: column;
+}
+.hostInfo {
+	flex: 1;
+	
+	display: flex;
+	align-items: center;
+}
+.infoWrite {
+	width: 60%;
+}
+.infoImg {
+	width: 40%;
+}
+.infoImg img {
+	width: 140px;
+}
+.infoWrite {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+.hostInfo h2 {
+	margin: 8px 0px;
+}
+.hostInfo span {
+	font-size: 17px;
+}
+.btnSpace {
+	display: flex;
+	justify-content: flex-end;
+}
+#nextHost {
+	all: unset;
+	cursor: pointer;
+	
+	border-radius: 5px;
+	padding: 13px;
+	
+	color: white;
+	background-color: hotpink;
+	font-size: 17px;
+}
+
+/* category style */
+#selectCategory h1 {
+	text-align: center;
+}
+.categoryItems {
+	width: 900px;
+	margin: auto;
+	
+	display: flex;
+	flex-wrap: wrap;
+}
+.categoryItem {
+	all: unset;
+	cursor:pointer;
+	
+	width: 275px;
+	padding: 20px 0px;
+	margin: 10px;
+	
+	font-size: 20px;
+	font-weight: bold;
+	
+	border: 1px solid gray;
+	border-radius: 10px;
+}
+.categoryItem:hover {
+	border: 2px solid black;
+}
+.categoryItem div {
+	display: flex;
+	justify-content: center;
+}
+.categoryItem img {
+	width: 100px;
+}
+.selected {
+	border: 2px solid black;
+}
+
+/* roomType style */
+#selectRoomType {
+	width: 700px;
+	margin: auto;
+}
+.roomTypeItem {
+	all: unset;
+	cursor: pointer;
+	
+	width: 700px;
+	height: 100px;
+	
+	margin-bottom: 20px;
+	padding-left: 30px;
+	
+	border: 1px solid gray;
+	border-radius: 10px;
+	
+	display: flex;
+	justify-content: space-between;
+}
+.roomInfo {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+.roomTypeItem:hover {
+	border: 2px solid black;
+}
+.roomTypeItem h3 {
+	margin: 0px;
+}
+.roomTypeItem img {
+	height: 70px;
+	margin: 15px 30px;
+}
 </style>
 </head>
 <body>
