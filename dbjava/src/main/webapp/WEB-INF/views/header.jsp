@@ -37,6 +37,12 @@ header > div {
     justify-content: space-between;
 	align-items: center;
 }
+header img {
+	width: 43px;
+	height: 43px;
+	
+	border-radius: 50%;
+}
 
 .btn3 > button{
     all: unset;
@@ -300,7 +306,7 @@ legend{
 	           
 	        </ul>
 	        <c:if test="${not empty login }">
-	       		<h4>${login.userNick } 님 환영합니다 !</h4> <a href="${cpath }/member/update/${login.idx}"><button>회원정보 수정</button></a>
+	       		<img src="${login.profile }"><h4>${login.userNick } 님 환영합니다 !</h4> <a href="${cpath }/member/update/${login.idx}"><button>회원정보 수정</button></a>
 	       	</c:if>
         </div>
     </header>
