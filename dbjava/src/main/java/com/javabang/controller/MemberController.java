@@ -63,6 +63,12 @@ public class MemberController {
 		int row = mservice.update(dto);
 		return "redirect:/member/login";
 	}
+	//회원탈퇴 
+	@GetMapping("/delete/{idx}")
+	public String delete(@PathVariable("idx") int idx) {
+		int row = mservice.delete(idx);
+		return "redirect:/";
+	}
 	
 	//비밀번호 재설정
 	@GetMapping("/resetPassword")

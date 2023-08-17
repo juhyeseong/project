@@ -17,4 +17,6 @@ public interface MemberDAO {
 
 	int update(MemberDTO dto);   // 회원정보 수정
 
+	int delete(int idx); // 회원탈퇴(삭제)
+
 }
