@@ -294,7 +294,7 @@ legend{
 	        
 	        <ul>
 	        	<c:if test="${not empty login }">
-	           		<li>숙소를 올려방~</li>
+	           		<li><a href="${cpath }/rent/hosting">숙소를 올려방~</a></li>
 	            </c:if>
 	            <li><a href="${cpath }/member/${empty login ? 'login' : 'logout'}"><button>${empty login ? '로그인' : '로그아웃'}</button></a></li>
 	           
