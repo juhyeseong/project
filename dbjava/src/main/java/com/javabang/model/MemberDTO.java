@@ -2,6 +2,8 @@ package com.javabang.model;
 
 import java.sql.Date;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class MemberDTO {
 	private int idx;
 	private String userId;
@@ -15,6 +17,8 @@ public class MemberDTO {
 	private String phoneNum;
 	private String profile;
 	private String gender;
+	
+	private MultipartFile upload;
 
 	private Date birth;
 	
@@ -97,5 +101,11 @@ public class MemberDTO {
 		this.gender = gender;
 	}
 	
+	public MultipartFile getUpload() {
+		return upload;
+	}
+	public void setUpload(MultipartFile upload) {
+		this.upload = upload;
+	}
 	
 }

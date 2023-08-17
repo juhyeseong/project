@@ -7,7 +7,6 @@
 <div class="update">
 	<fieldset>
 		<legend>비밀번호 수정</legend>
-
 		<p><input type="password" name="userPw" placeholder="비밀번호 수정"></p>
 		<p><input type="submit" value="비밀번호 수정"></p>
 

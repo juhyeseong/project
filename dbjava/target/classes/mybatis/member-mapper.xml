@@ -38,8 +38,14 @@
 	update member set userPw = #{userPw} where idx = #{idx}
 </update>
 
+<select id="selectCount" resultType="int" parameterType="string">
+	select count(*) as cnt from member where userId = #{userId}
 
+</select>
 
+<update id="updateProfile" parameterType="member">
+	update member set profile = #{profile} where idx = #{idx} 
+</update>
 
 </mapper>
 

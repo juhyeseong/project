@@ -25,6 +25,10 @@ public interface MemberDAO {
 
 	int updatePw(MemberDTO tmp);
 
+	int selectCount(String userId);
+
+	int updateProfile(MemberDTO dto);
+
 	
 
 }

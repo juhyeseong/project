@@ -316,6 +316,15 @@ legend{
 .list > table > thead > tr{
 	background-color:#C2D6F0; 
 }
+.hidden{
+	display: none;
+}
+.info{
+	word-spacing:50px;
+}
+.profileImg {
+	border-radius: 50%;
+}
 </style>
 </head>
 <body>

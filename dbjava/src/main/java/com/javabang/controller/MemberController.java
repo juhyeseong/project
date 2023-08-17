@@ -92,9 +92,15 @@ public class MemberController {
 	
 	//회원 탈퇴
 	@GetMapping("/delete/{idx}")
-	public String delete(@PathVariable("idx") int idx) {
+	public ModelAndView delete(@PathVariable("idx") int idx, HttpSession session) {
+		ModelAndView mav = new ModelAndView("alert");
 		int row = mservice.delete(idx);
-		return "redirect:/";
+		String msg = row != 0 ? "회원탈퇴 완료!" : "회원탈퇴에 실패했습니다";
+		String url = row != 0 ? "/" : "/member/update";
+		mav.addObject("msg", msg);
+		mav.addObject("url",url);
+		session.invalidate();
+		return mav;
 	}
 	
 	//비밀번호 재설정
@@ -133,5 +139,24 @@ public class MemberController {
 		mav.addObject("one", one);
 		return mav;
 	}
+	
+	// 프로필 수정
+	
+	@GetMapping("/updateProfile/{idx}")
+	public ModelAndView profile(@PathVariable("idx") int idx) {
+		ModelAndView mav = new ModelAndView("/member/updateProfile");
+		MemberDTO tmp = mservice.selectOne(idx);
+		mav.addObject("tmp", tmp);
+		return mav;
+	}
+	
+	@PostMapping("/updateProfile/{idx}")
+	public String profile(MemberDTO dto) {
+		int row = mservice.updateProfile(dto);
+		
+		return "redirect:member/mypage";
+	}
+	
+	
 	
 }

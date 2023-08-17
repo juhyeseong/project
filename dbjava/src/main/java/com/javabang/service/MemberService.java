@@ -1,5 +1,6 @@
 package com.javabang.service;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
@@ -8,10 +9,12 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Random;
 import java.util.Scanner;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.javabang.component.HashComponent;
 import com.javabang.mail.MailComponent;
@@ -25,6 +28,15 @@ public class MemberService {
 	@Autowired private MemberDAO mdao;
 	@Autowired private HashComponent hcomponent;
 	@Autowired private MailComponent mcomponent;
+	
+	private File dir = new File("C:\\test0817");
+	
+	public MemberService() {
+		if(dir.exists() == false)
+		{
+			dir.mkdirs();
+		}
+	}
 	
 	@Value("classpath:resetPassword.html")
 	private Resource html;
@@ -116,5 +128,41 @@ public class MemberService {
 		userPw = hcomponent.getHash(userPw);
 		dto.setUserPw(userPw);
 		return mdao.updatePw(dto);
+	}
+
+	public int dupCheck(String userId) {
+		
+		return mdao.selectCount(userId);
+	}
+
+	public int sendAuthNumber(String email) throws IOException {
+		String content = "<h3>인증번호는 [%s]입니다.</h3>";
+		int authNumber = ran.nextInt(89999999) + 10000000;
+		content = String.format(content, authNumber);
+		int row = mcomponent.sendMail(email, content);
+		return row > 0 ? authNumber : row;
+	}
+
+
+	public int updateProfile(MemberDTO dto) {
+		MultipartFile f = dto.getUpload();
+		
+		String ymd = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
+		String fileName = f.getOriginalFilename();
+		fileName = fileName.substring(0,fileName.lastIndexOf("."));
+		File dest = new File(dir,fileName + "_" + ymd + ".jpeg" );
+		
+		int row = 0;
+		try {
+			f.transferTo(dest);
+			dto.setProfile(dest.getName());
+			row= mdao.updateProfile(dto);
+			
+		}catch(IllegalStateException | IOException e) {
+			e.printStackTrace();
+		}
+		return row;
+		
+		
 	}
 }
