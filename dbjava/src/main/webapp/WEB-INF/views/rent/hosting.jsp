@@ -7,7 +7,7 @@
 }
 </style>
 
-<div class="registerRentBtn"><a href="${cpath }/rent/bec">숙소 등록 하기</button></div>
+<div class="registerRentBtn"><a href="${cpath }/rent/become-a-host"><button>숙소 등록 하기</button></a></div>
 
 <div></div>
 </body>
