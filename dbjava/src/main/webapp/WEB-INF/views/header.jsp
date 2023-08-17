@@ -7,6 +7,11 @@
 <meta charset="UTF-8">
 <title>자바방</title>
 <style>
+.title > a > img{
+	height: 130px;
+	width: 140px;
+}
+
 body {
 	margin: 0px;
 }
@@ -31,7 +36,7 @@ header {
     align-items: center;
 }
 header > div {
-	width: 1200px;
+	width: 1300px;
 	
     display: flex;
     justify-content: space-between;
@@ -287,13 +292,37 @@ legend{
     width:500px;
     height:50px;
 }
-
+/* 마이페이지 정보수정 버튼 */
+.mypage{
+	width:700px;
+	height:40px;
+	line-height:40px;
+	text-align: center;
+	margin-left:auto;
+	margin-right:auto;
+	margin-top:30px;
+	border:3px solid #C2D6F0;
+}
+/* 회원정보 확인 css */
+.list{
+	margin-top:100px;
+}
+.list > h2{
+	margin-left:100px;
+}
+.list > table{
+	margin-left:100px;
+}
+.list > table > thead > tr{
+	background-color:#C2D6F0; 
+}
 </style>
 </head>
 <body>
 	<header>
         <div>
-        	<h1><a href="${cpath }">자바방</a></h1>
+        	 <!-- <h1><a href="${cpath }">자바방</a></h1> -->
+        	<div class="title"><a href="${cpath }"><img src="http://192.168.64.200/javaBang.jpeg"></a></div>
 	        <div class="btn3">
 	        	<button><img src="http://192.168.64.200/search.jpeg" class="search"></button>
 	        </div>
@@ -306,7 +335,7 @@ legend{
 	           
 	        </ul>
 	        <c:if test="${not empty login }">
-	       		<img src="${login.profile }"><h4>${login.userNick } 님 환영합니다 !</h4> <a href="${cpath }/member/update/${login.idx}"><button>회원정보 수정</button></a>
+	       		<img src="${login.profile }"><h4>${login.userNick } 님 환영합니다 !</h4> <a href="${cpath }/member/mypage/${login.idx}"><button>마이페이지</button></a>
 	       	</c:if>
         </div>
     </header>

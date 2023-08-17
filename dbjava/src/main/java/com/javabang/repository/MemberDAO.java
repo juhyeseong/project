@@ -11,12 +11,20 @@ public interface MemberDAO {
 
 	MemberDTO login(MemberDTO dto);
 
-	int reset(MemberDTO dto);   // ë¹„ë°€ë²ˆí˜¸ ì¬ì„¤ì •
+	int reset(MemberDTO dto);   // ºñ¹Ğ¹øÈ£ Àç¼³Á¤
 
-	MemberDTO selectOne(int idx);   // íšŒì›ì •ë³´ ìˆ˜ì • ëª©ë¡ í•˜ë‚˜ë§Œ ë¶ˆëŸ¬ì˜¤ê¸°
+	MemberDTO selectOne(int idx);   // È¸¿øÁ¤º¸¼öÁ¤ ¸ñ·ÏÇÏ³ª¸¸ ºÎ¸£±â
 
-	int update(MemberDTO dto);   // íšŒì›ì •ë³´ ìˆ˜ì •
+	int update(MemberDTO dto);   // È¸¿øÁ¤º¸¼öÁ¤
 
-	int delete(int idx); // íšŒì›íƒˆí‡´(ì‚­ì œ)
+	int delete(int idx); // È¸¿ø Å»Åğ(»èÁ¦)
+
+	String getMail(MemberDTO dto); // ºñ¹Ğ¹øÈ£ Àç¼³Á¤ ÀÌ¸ŞÀÏ º¸³»±â
+
+	MemberDTO userCheck(MemberDTO dto);
+
+	int updatePw(MemberDTO tmp);
+
+	
 
 }

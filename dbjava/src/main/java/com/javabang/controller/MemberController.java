@@ -2,18 +2,24 @@ package com.javabang.controller;
 
 
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
+import java.util.UUID;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.javabang.component.HashComponent;
+import com.javabang.mail.MailComponent;
 import com.javabang.model.MemberDTO;
 import com.javabang.service.MemberService;
 
@@ -22,8 +28,10 @@ import com.javabang.service.MemberService;
 public class MemberController {
 	
 	@Autowired private MemberService mservice;
+	@Autowired private MailComponent mcomponent;
+	@Autowired private HashComponent hcomponent;
 	
-	//íšŒì›ê°€ì…
+	//È¸¿ø°¡ÀÔ
 	@GetMapping("/join")
 	public void join() {}
 	
@@ -33,7 +41,7 @@ public class MemberController {
 		return "redirect:/member/login";
 	}
 	
-	//ë¡œê·¸ì¸
+	//·Î±×ÀÎ
 	@GetMapping("/login")
 	public void login() {}
 	@PostMapping("/login")
@@ -43,14 +51,14 @@ public class MemberController {
 		return "redirect:/";
 	}
 	
-	//ë¡œê·¸ì•„ì›ƒ
+	//·Î±×¾Æ¿ô
 	@GetMapping("/logout")
 	public String logout(HttpSession session) {
 		session.invalidate();
 		return "redirect:/";
 	}
 	
-	// íšŒì›ì •ë³´ ìˆ˜ì • 
+	// È¸¿øÁ¤º¸¼öÁ¤
 	@GetMapping("/update/{idx}")
 	public ModelAndView update(@PathVariable("idx") int idx) {
 		ModelAndView mav = new ModelAndView("/member/update");
@@ -59,23 +67,71 @@ public class MemberController {
 		return mav;
 	}
 	@PostMapping("/update/{idx}")
-	public String update(MemberDTO dto) {
+	public String update(MemberDTO dto, HttpSession session) {
 		int row = mservice.update(dto);
-		return "redirect:/member/login";
+		MemberDTO tmp = mservice.selectOne(dto.getIdx());
+		session.setAttribute("login", tmp);
+		return "redirect:/";
 	}
-	//íšŒì›íƒˆí‡´ 
+	
+	// ºñ¹Ğ¹øÈ£¸¸ ¼öÁ¤ÇÏ±â
+	@GetMapping("/modifyPassword/{idx}")
+	public ModelAndView modifyPassword(@PathVariable("idx") int idx) {
+		ModelAndView mav = new ModelAndView("/member/modifyPassword");
+		MemberDTO dto = mservice.selectOne(idx);
+		mav.addObject("dto", dto);
+		return mav;
+	}
+	
+	@PostMapping("/modifyPassword/{idx}")
+	public String modifyPassword(MemberDTO dto) throws NoSuchAlgorithmException {
+		int row = mservice.modifyPassword(dto);
+		return "redirect:/";
+	}
+	
+	
+	//È¸¿ø Å»Åğ
 	@GetMapping("/delete/{idx}")
 	public String delete(@PathVariable("idx") int idx) {
 		int row = mservice.delete(idx);
 		return "redirect:/";
 	}
 	
-	//ë¹„ë°€ë²ˆí˜¸ ì¬ì„¤ì •
+	//ºñ¹Ğ¹øÈ£ Àç¼³Á¤
 	@GetMapping("/resetPassword")
 	public void resetPassword() {}
+	
 	@PostMapping("/resetPassword")
-	public String resetPassword(MemberDTO dto) {
-		int row = mservice.reset(dto);
+	@Transactional
+	public String resetPassword(MemberDTO dto) throws FileNotFoundException, IOException, NoSuchAlgorithmException {
+		System.out.println("dto.userid : " + dto.getUserId());
+		System.out.println("dto.useremail : " + dto.getEmail());
+		
+		MemberDTO tmp = mservice.userCheck(dto);
+		
+		System.out.println("row.getIdx : " + tmp.getIdx());
+		System.out.println("row.getUserId : " + tmp.getUserId());
+		System.out.println("row.getEmail : " + tmp.getEmail());
+		
+		String random = UUID.randomUUID().toString().replace("-", "").substring(0,16);
+		
+		tmp.setUserPw(random);
+		
+		mcomponent.sendMail(tmp.getEmail(), tmp.getUserPw());
+		
+		random = hcomponent.getHash(random);
+		tmp.setUserPw(random);
+		int row = mservice.updatePw(tmp);
+		
 		return "redirect:/member/login";
 	}
+	// ¸¶ÀÌÆäÀÌÁö
+	@GetMapping("/mypage/{idx}")
+	public ModelAndView mypage(@PathVariable("idx") int idx) {
+		ModelAndView mav = new ModelAndView("/member/mypage");
+		MemberDTO one = mservice.selectOne(idx);
+		mav.addObject("one", one);
+		return mav;
+	}
+	
 }

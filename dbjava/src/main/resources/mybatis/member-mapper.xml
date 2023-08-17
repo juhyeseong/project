@@ -29,7 +29,18 @@
 <delete id="delete">
 	delete from member where idx = #{idx}
 </delete>
+
+<select id="userCheck" parameterType="member" resultType="member">
+	select * from member where userId = #{userId} and email = #{email} 
+</select>
 	
+<update id="updatePw" parameterType="member">
+	update member set userPw = #{userPw} where idx = #{idx}
+</update>
+
+
+
+
 </mapper>
 
 
