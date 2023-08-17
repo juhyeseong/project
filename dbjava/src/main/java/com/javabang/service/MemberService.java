@@ -6,6 +6,7 @@ import java.security.NoSuchAlgorithmException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,6 +19,8 @@ import com.javabang.repository.MemberDAO;
 public class MemberService {
 	@Autowired private MemberDAO mdao;
 	@Autowired private HashComponent hcomponent;
+	
+	Random ran = new Random();
 
 	// 회원가입
 	public int add(MemberDTO dto) throws NoSuchAlgorithmException  {
@@ -47,5 +50,27 @@ public class MemberService {
 		dto.setUserPw(hash);
 		MemberDTO login = mdao.login(dto);
 		return login;
+	}
+
+	// 비밀번호 재설정
+	public int reset(MemberDTO dto) {
+		String userPw = (ran.nextInt(99999)+100000) + "";
+		int row = mdao.reset(dto);
+		while(row != 0)
+		{
+			
+		}
+		return 0;
+	}
+
+	// 회원정보 수정용 목록 하나만 불러오기
+	public MemberDTO selectOne(int idx) {
+		return mdao.selectOne(idx);
+	}
+
+	// 회원정보 수정 하기
+	public int update(MemberDTO dto) {
+		
+		return mdao.update(dto);
 	}
 }

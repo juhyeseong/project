@@ -8,7 +8,7 @@
 <insert id="add" parameterType="member">
 
 	insert into member(userId, userPw, userNick, email, userName, birth, phoneNum, gender) 
-		values(#{userId}, #{userPw}, #{userNick}, #{email}, #{userName}, #{birth}, #{phoneNum}, #{gender})
+	values(#{userId}, #{userPw}, #{userNick}, #{email}, #{userName}, #{birth}, #{phoneNum}, #{gender})
 
 </insert>
 
@@ -17,6 +17,14 @@
 	select * from member where userId = #{userId} and userPw = #{userPw}
 
 </select>
+
+<select id="selectOne" resultType="member" parameterType="int">
+	select * from member where idx = #{idx}	
+</select>
+
+<update id="update" parameterType="member">
+	update member set userNick = #{userNick}, phoneNum = #{phoneNum}, email = #{email} where idx = #{idx} 
+</update>
 	
 </mapper>
 
