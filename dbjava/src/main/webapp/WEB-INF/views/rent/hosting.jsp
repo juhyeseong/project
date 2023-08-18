@@ -188,6 +188,52 @@
 			</div>
 		</div>
 		
+		<!-- information -->
+		<div id="rentInformation" class="hidden">
+			<div class="rentInformationWrap">
+				<div class="rentInformationScroll">
+					<h1>숙소 편의시설 정보를 추가하세요</h1>
+					
+					<div class="rentInformationItmes">
+						<button class="rentInformationItem">
+							<div><img src="http://192.168.64.200/wifi.jpeg"></div>
+							<div>무선 인터넷</div>
+						</button>
+						<button class="rentInformationItem">
+							<div><img src="http://192.168.64.200/TV.jpeg"></div>
+							<div>TV</div>
+						</button>
+						<button class="rentInformationItem">
+							<div><img src="http://192.168.64.200/computer.jpeg"></div>
+							<div>컴퓨터</div>
+						</button>
+						<button class="rentInformationItem">
+							<div><img src="http://192.168.64.200/kitchen.jpeg"></div>
+							<div>주방</div>
+						</button>
+						<button class="rentInformationItem">
+							<div><img src="http://192.168.64.200/laundry.jpeg"></div>
+							<div>세탁기</div>
+						</button>
+						<button class="rentInformationItem">
+							<div><img src="http://192.168.64.200/airCondition.jpeg"></div>
+							<div>에어컨</div>
+						</button>
+						<button class="rentInformationItem">
+							<div><img src="http://192.168.64.200/freeParking.jpeg"></div>
+							<div>주변 무료 주차</div>
+						</button>
+						<button class="rentInformationItem">
+							<div><img src="http://192.168.64.200/unfreeParking.jpeg"></div>
+							<div>주변 유료 주차</div>
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<hr>
+		
 		<!-- buttons -->
 		<div class="btnSpace">
 			<div id="hostBtn">
@@ -206,6 +252,10 @@
 			<div id="rentCountBtn" class="hidden">
 				<button id="preRentCount" class="blackBtn">이전</button>
 				<button id="nextRentCount" class="blackBtn">다음</button>
+			</div>
+			<div id="rentInformationBtn" class="hidden">
+				<button id="preRentInformation" class="blackBtn">이전</button>
+				<button id="nextRentInformation" class="blackBtn">다음</button>
 			</div>
 		</div>
 	</div>
@@ -232,6 +282,12 @@
 		const rentCountBtn = document.getElementById('rentCountBtn')
 		const minusList = document.querySelectorAll('.minus')
 		const plusList = document.querySelectorAll('.plus')
+		const preRentCount = document.getElementById('preRentCount')
+		const nextRentCount = document.getElementById('nextRentCount')
+		// rentInformation 변수
+		const rentInformation = document.getElementById('rentInformation')
+		const rentInformationBtn = document.getElementById('rentInformationBtn')
+		const preRentInformation = document.getElementById('preRentInformation')
 		// ajax 옵션
 		let opt = {						
 				method: 'POST',					
@@ -287,6 +343,9 @@
 				return
 			}
 			
+			if(formData.get("category") != null) {
+				formData.delete("category")
+			}
 			formData.append("category", categorySelected.children[1].innerText)
 			
 			category.classList.add('hidden')
@@ -332,9 +391,11 @@
 				return
 			}
 		
+			if(formData.get("roomType") != null) {
+				formData.delete("roomType")
+			}
 			formData.append("roomType", roomTypeSelected.children[0].children[0].innerText)
 			
-			console.log(formData.get("roomType"))
 			roomType.classList.add('hidden')
 			rentCount.classList.remove('hidden')
 			roomTypeBtn.classList.add('hidden')
@@ -385,6 +446,42 @@
 			value.innerText = +value.innerText + 1
 		}
 		
+		function rentCountHandler() {
+			const roomCountValue = document.querySelector('.roomCountValue')
+			const bathCountValue = document.querySelector('.bathCountValue')
+			const guestCountValue = document.querySelector('.guestCountValue')
+			const bedCountValue = document.querySelector('.bedCountValue')
+			
+			if(formData.get("roomCount") != null) {
+				formData.delete("roomCount")
+				formData.delete("bathCount")
+				formData.delete("guestCount")
+				formData.delete("bedCount")
+			}
+			formData.append("roomCount", roomCountValue.innerText)
+			formData.append("bathCount", bathCountValue.innerText)
+			formData.append("guestCount", guestCountValue.innerText)
+			formData.append("bedCount", bedCountValue.innerText)
+			
+			console.log('')
+			for (const entry of formData.entries()) {
+			    console.log("Key:", entry[0], "Value:", entry[1]);
+			}
+			
+			rentCount.classList.add('hidden')
+			rentInformation.classList.remove('hidden')
+			rentCountBtn.classList.add('hidden')
+			rentInformationBtn.classList.remove('hidden')
+		}
+		
+		// rentInformation handler
+		function preRentInformationHandler() {
+			rentInformation.classList.add('hidden')
+			rentCount.classList.remove('hidden')
+			rentInformationBtn.classList.add('hidden')
+			rentCountBtn.classList.remove('hidden')
+		}
+		
 		// host event
 		nextHost.onclick = hostHandler
 		// category event
@@ -399,6 +496,8 @@
 		preRentCount.onclick = preRentCountHandler
 		minusList.forEach(minus => minus.onclick = minusHandler)
 		plusList.forEach(plus => plus.onclick = plusHandler)
-		
+		nextRentCount.onclick = rentCountHandler
+		// rentInformation event
+		preRentInformation.onclick = preRentInformationHandler
 	</script>
 </body>

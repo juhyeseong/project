@@ -465,6 +465,10 @@ legend{
 	display: flex;
 	justify-content: flex-end;
 }
+.main hr {
+	width: 1000px;
+	margin: 30px 0px;
+}
 #nextHost {
 	all: unset;
 	cursor: pointer;
@@ -478,8 +482,17 @@ legend{
 }
 
 /* category style */
+#selectCategory {
+	height: 720px;
+	padding-top: 20px;
+	
+	box-sizing: border-box;
+}
 #selectCategory h1 {
 	text-align: center;
+	
+	margin-top: 0px;
+	margin-bottom: 21.440px;
 }
 .categoryItems {
 	width: 900px;
@@ -518,14 +531,21 @@ legend{
 
 /* roomType style */
 #selectRoomType {
-	width: 700px;
+	width: 800px;
 	margin: auto;
+}
+.roomTypeWrap {
+	height: 720px;
+	
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
 }
 .roomTypeItem {
 	all: unset;
 	cursor: pointer;
 	
-	width: 700px;
+	width: 800px;
 	height: 100px;
 	
 	margin-bottom: 20px;
@@ -580,8 +600,10 @@ legend{
 .rentCountWrap > span {
 	width: 830px;
 	padding-left: 5px;
-	
 	margin-bottom: 20px;
+	
+	font-size: 17px;
+	color: #717171;
 }
 .rentCountItem {
 	width: 800px;
@@ -626,10 +648,66 @@ legend{
 	justify-content: center;
 	align-items: center;
 }
-
 .roomCountNumber > button > span {
 	font-size: 15px;
 	padding: 5px;
+}
+.rentInformationWrap {
+	width: 830px;
+	height: 720px;
+	margin: auto;
+	padding-top: 20px;
+	
+	box-sizing: border-box;
+	
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+.rentInformationScroll {
+	width: 830px;
+	max-height: 720px;
+	
+	flex-wrap: wrap;
+	overflow-x: hidden;
+	overflow-y: scroll;
+	
+	scrollbar-width: none;
+}
+::-webkit-scrollbar {
+	width: 0.1em;
+	background-color: transparent;
+}
+.rentInformationWrap h1 {
+	width: 830px;
+	margin-top: 0px;
+	margin-bottom: 30px;
+}
+.rentInformationItem {
+	all: unset;
+	cursor:pointer;
+	
+	width: 240px;
+	height: 140px;
+	padding: 20px 0px;
+	margin: 10px;
+	
+	font-size: 20px;
+	font-weight: bold;
+	
+	border: 1px solid gray;
+	border-radius: 10px;
+}
+.rentInformationItem:hover {
+	border: 2px solid black;
+}
+.rentInformationItem div {
+	display: flex;
+	justify-content: center;
+}
+.rentInformationItem img {
+	width: 80px;
 }
 </style>
 </head>
