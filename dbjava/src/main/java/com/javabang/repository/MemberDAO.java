@@ -7,28 +7,28 @@ import com.javabang.model.MemberDTO;
 @Repository
 public interface MemberDAO {
 
-	int add(MemberDTO dto);
+   int add(MemberDTO dto);
 
-	MemberDTO login(MemberDTO dto);
+   MemberDTO login(MemberDTO dto);
 
-	int reset(MemberDTO dto);   // ºñ¹Ğ¹øÈ£ Àç¼³Á¤
+   int reset(MemberDTO dto);   // ë¹„ë°€ë²ˆí˜¸ ì¬ì„¤ì •
 
-	MemberDTO selectOne(int idx);   // È¸¿øÁ¤º¸¼öÁ¤ ¸ñ·ÏÇÏ³ª¸¸ ºÎ¸£±â
+   MemberDTO selectOne(int idx);   // íšŒì›ì •ë³´ìˆ˜ì • ëª©ë¡í•˜ë‚˜ë§Œ ë¶€ë¥´ê¸°
 
-	int update(MemberDTO dto);   // È¸¿øÁ¤º¸¼öÁ¤
+   int update(MemberDTO dto);   // íšŒì›ì •ë³´ìˆ˜ì •
 
-	int delete(int idx); // È¸¿ø Å»Åğ(»èÁ¦)
+   int delete(int idx); // íšŒì› íƒˆí‡´(ì‚­ì œ)
 
-	String getMail(MemberDTO dto); // ºñ¹Ğ¹øÈ£ Àç¼³Á¤ ÀÌ¸ŞÀÏ º¸³»±â
+   String getMail(MemberDTO dto); // ë¹„ë°€ë²ˆí˜¸ ì¬ì„¤ì • ì´ë©”ì¼ ë³´ë‚´ê¸°
 
-	MemberDTO userCheck(MemberDTO dto);
+   MemberDTO userCheck(MemberDTO dto);
 
-	int updatePw(MemberDTO tmp);
+   int updatePw(MemberDTO tmp);
 
-	int selectCount(String userId);
+   int selectCount(String userId);
 
-	int updateProfile(MemberDTO dto);
+   int updateProfile(MemberDTO dto);
 
-	
+   
 
 }

@@ -27,138 +27,138 @@ import com.jcraft.jsch.SftpException;
 @Controller
 @RequestMapping("/member")
 public class MemberController {
-	
-	@Autowired private MemberService mservice;
-	@Autowired private MailComponent mcomponent;
-	@Autowired private HashComponent hcomponent;
-	
-	//È¸¿ø°¡ÀÔ
-	@GetMapping("/join")
-	public void join() {}
-	
-	@PostMapping("/join")
-	public String join(MemberDTO dto) throws NoSuchAlgorithmException  {
-		int row = mservice.add(dto);
-		return "redirect:/member/login";
-	}
-	
-	//·Î±×ÀÎ
-	@GetMapping("/login")
-	public void login() {}
-	@PostMapping("/login")
-	public String login(MemberDTO dto, HttpSession session) throws NoSuchAlgorithmException  {
-		MemberDTO login = mservice.login(dto);
-		session.setAttribute("login", login);
-		return "redirect:/";
-	}
-	
-	//·Î±×¾Æ¿ô
-	@GetMapping("/logout")
-	public String logout(HttpSession session) {
-		session.invalidate();
-		return "redirect:/";
-	}
-	
-	// È¸¿øÁ¤º¸¼öÁ¤
-	@GetMapping("/update/{idx}")
-	public ModelAndView update(@PathVariable("idx") int idx) {
-		ModelAndView mav = new ModelAndView("/member/update");
-		MemberDTO dto = mservice.selectOne(idx);
-		mav.addObject("dto", dto);
-		return mav;
-	}
-	@PostMapping("/update/{idx}")
-	public String update(MemberDTO dto, HttpSession session) {
-		int row = mservice.update(dto);
-		MemberDTO tmp = mservice.selectOne(dto.getIdx());
-		session.setAttribute("login", tmp);
-		return "redirect:/";
-	}
-	
-	// ºñ¹Ğ¹øÈ£¸¸ ¼öÁ¤ÇÏ±â
-	@GetMapping("/modifyPassword/{idx}")
-	public ModelAndView modifyPassword(@PathVariable("idx") int idx) {
-		ModelAndView mav = new ModelAndView("/member/modifyPassword");
-		MemberDTO dto = mservice.selectOne(idx);
-		mav.addObject("dto", dto);
-		return mav;
-	}
-	
-	@PostMapping("/modifyPassword/{idx}")
-	public String modifyPassword(MemberDTO dto) throws NoSuchAlgorithmException {
-		int row = mservice.modifyPassword(dto);
-		return "redirect:/";
-	}
-	
-	
-	//È¸¿ø Å»Åğ
-	@GetMapping("/delete/{idx}")
-	public ModelAndView delete(@PathVariable("idx") int idx, HttpSession session) {
-		ModelAndView mav = new ModelAndView("alert");
-		int row = mservice.delete(idx);
-		String msg = row != 0 ? "È¸¿øÅ»Åğ ¿Ï·á!" : "È¸¿øÅ»Åğ¿¡ ½ÇÆĞÇß½À´Ï´Ù";
-		String url = row != 0 ? "/" : "/member/update";
-		mav.addObject("msg", msg);
-		mav.addObject("url",url);
-		session.invalidate();
-		return mav;
-	}
-	
-	//ºñ¹Ğ¹øÈ£ Àç¼³Á¤
-	@GetMapping("/resetPassword")
-	public void resetPassword() {}
-	
-	@PostMapping("/resetPassword")
-	@Transactional
-	public String resetPassword(MemberDTO dto) throws FileNotFoundException, IOException, NoSuchAlgorithmException {
-		System.out.println("dto.userid : " + dto.getUserId());
-		System.out.println("dto.useremail : " + dto.getEmail());
-		
-		MemberDTO tmp = mservice.userCheck(dto);
-		
-		System.out.println("row.getIdx : " + tmp.getIdx());
-		System.out.println("row.getUserId : " + tmp.getUserId());
-		System.out.println("row.getEmail : " + tmp.getEmail());
-		
-		String random = UUID.randomUUID().toString().replace("-", "").substring(0,16);
-		
-		tmp.setUserPw(random);
-		
-		mcomponent.sendMail(tmp.getEmail(), tmp.getUserPw());
-		
-		random = hcomponent.getHash(random);
-		tmp.setUserPw(random);
-		int row = mservice.updatePw(tmp);
-		
-		return "redirect:/member/login";
-	}
-	// ¸¶ÀÌÆäÀÌÁö
-	@GetMapping("/mypage/{idx}")
-	public ModelAndView mypage(@PathVariable("idx") int idx) {
-		ModelAndView mav = new ModelAndView("/member/mypage");
-		MemberDTO one = mservice.selectOne(idx);
-		mav.addObject("one", one);
-		return mav;
-	}
-	
-	// ÇÁ·ÎÇÊ ¼öÁ¤
-	
-	@GetMapping("/updateProfile/{idx}")
-	public ModelAndView profile(@PathVariable("idx") int idx) {
-		ModelAndView mav = new ModelAndView("/member/updateProfile");
-		MemberDTO tmp = mservice.selectOne(idx);
-		mav.addObject("tmp", tmp);
-		return mav;
-	}
-	
-	@PostMapping("/updateProfile/{idx}")
-	public String profile(HttpSession session,MemberDTO dto, @PathVariable("idx") int idx) throws IllegalStateException, SftpException, IOException, Exception {
-		int row = mservice.updateProfile(dto);
-		MemberDTO tmp = mservice.selectOne(idx);
-		session.setAttribute("login", tmp);
-		return "redirect:/member/mypage/"+ idx;
-	}
-	
-	
-	
+   
+   @Autowired private MemberService mservice;
+   @Autowired private MailComponent mcomponent;
+   @Autowired private HashComponent hcomponent;
+   
+   //íšŒì›ê°€ì…
+   @GetMapping("/join")
+   public void join() {}
+   
+   @PostMapping("/join")
+   public String join(MemberDTO dto) throws NoSuchAlgorithmException  {
+      int row = mservice.add(dto);
+      return "redirect:/member/login";
+   }
+   
+   //ë¡œê·¸ì¸
+   @GetMapping("/login")
+   public void login() {}
+   @PostMapping("/login")
+   public String login(MemberDTO dto, HttpSession session) throws NoSuchAlgorithmException  {
+      MemberDTO login = mservice.login(dto);
+      session.setAttribute("login", login);
+      return "redirect:/";
+   }
+   
+   //ë¡œê·¸ì•„ì›ƒ
+   @GetMapping("/logout")
+   public String logout(HttpSession session) {
+      session.invalidate();
+      return "redirect:/";
+   }
+   
+   // íšŒì›ì •ë³´ìˆ˜ì •
+   @GetMapping("/update/{idx}")
+   public ModelAndView update(@PathVariable("idx") int idx) {
+      ModelAndView mav = new ModelAndView("/member/update");
+      MemberDTO dto = mservice.selectOne(idx);
+      mav.addObject("dto", dto);
+      return mav;
+   }
+   @PostMapping("/update/{idx}")
+   public String update(MemberDTO dto, HttpSession session) {
+      int row = mservice.update(dto);
+      MemberDTO tmp = mservice.selectOne(dto.getIdx());
+      session.setAttribute("login", tmp);
+      return "redirect:/";
+   }
+   
+   // ë¹„ë°€ë²ˆí˜¸ë§Œ ìˆ˜ì •í•˜ê¸°
+   @GetMapping("/modifyPassword/{idx}")
+   public ModelAndView modifyPassword(@PathVariable("idx") int idx) {
+      ModelAndView mav = new ModelAndView("/member/modifyPassword");
+      MemberDTO dto = mservice.selectOne(idx);
+      mav.addObject("dto", dto);
+      return mav;
+   }
+   
+   @PostMapping("/modifyPassword/{idx}")
+   public String modifyPassword(MemberDTO dto) throws NoSuchAlgorithmException {
+      int row = mservice.modifyPassword(dto);
+      return "redirect:/";
+   }
+   
+   
+   //íšŒì› íƒˆí‡´
+   @GetMapping("/delete/{idx}")
+   public ModelAndView delete(@PathVariable("idx") int idx, HttpSession session) {
+      ModelAndView mav = new ModelAndView("alert");
+      int row = mservice.delete(idx);
+      String msg = row != 0 ? "íšŒì›íƒˆí‡´ ì™„ë£Œ!" : "íšŒì›íƒˆí‡´ì— ì‹¤íŒ¨í–ˆìŠµë‹ˆë‹¤";
+      String url = row != 0 ? "/" : "/member/update";
+      mav.addObject("msg", msg);
+      mav.addObject("url",url);
+      session.invalidate();
+      return mav;
+   }
+   
+   //ë¹„ë°€ë²ˆí˜¸ ì¬ì„¤ì •
+   @GetMapping("/resetPassword")
+   public void resetPassword() {}
+   
+   @PostMapping("/resetPassword")
+   @Transactional
+   public String resetPassword(MemberDTO dto) throws FileNotFoundException, IOException, NoSuchAlgorithmException {
+      System.out.println("dto.userid : " + dto.getUserId());
+      System.out.println("dto.useremail : " + dto.getEmail());
+      
+      MemberDTO tmp = mservice.userCheck(dto);
+      
+      System.out.println("row.getIdx : " + tmp.getIdx());
+      System.out.println("row.getUserId : " + tmp.getUserId());
+      System.out.println("row.getEmail : " + tmp.getEmail());
+      
+      String random = UUID.randomUUID().toString().replace("-", "").substring(0,16);
+      
+      tmp.setUserPw(random);
+      
+      mcomponent.sendMail(tmp.getEmail(), tmp.getUserPw());
+      
+      random = hcomponent.getHash(random);
+      tmp.setUserPw(random);
+      int row = mservice.updatePw(tmp);
+      
+      return "redirect:/member/login";
+   }
+   // ë§ˆì´í˜ì´ì§€
+   @GetMapping("/mypage/{idx}")
+   public ModelAndView mypage(@PathVariable("idx") int idx) {
+      ModelAndView mav = new ModelAndView("/member/mypage");
+      MemberDTO one = mservice.selectOne(idx);
+      mav.addObject("one", one);
+      return mav;
+   }
+   
+   // í”„ë¡œí•„ ìˆ˜ì •
+   
+   @GetMapping("/updateProfile/{idx}")
+   public ModelAndView profile(@PathVariable("idx") int idx) {
+      ModelAndView mav = new ModelAndView("/member/updateProfile");
+      MemberDTO tmp = mservice.selectOne(idx);
+      mav.addObject("tmp", tmp);
+      return mav;
+   }
+   
+   @PostMapping("/updateProfile/{idx}")
+   public String profile(HttpSession session,MemberDTO dto, @PathVariable("idx") int idx) throws IllegalStateException, SftpException, IOException, Exception {
+      int row = mservice.updateProfile(dto);
+      MemberDTO tmp = mservice.selectOne(idx);
+      session.setAttribute("login", tmp);
+      return "redirect:/member/mypage/"+ idx;
+   }
+   
+   
+   
 }

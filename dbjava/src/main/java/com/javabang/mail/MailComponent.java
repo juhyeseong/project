@@ -22,72 +22,72 @@ import jakarta.mail.internet.MimeMessage;
 
 @Component
 public class MailComponent {
-	@Value ("classpath:mailaccount.txt")
-	private Resource mailAccount;
-	
-	private String host = "smtp.naver.com";
-	private int port = 465;
-	private String serverId = "";
-	private String serverPw = "";
-	
-	private Properties prop = new Properties();
-	
-	public int sendMail(String email, String content) throws IOException {
-		Scanner sc = new Scanner(mailAccount.getFile());
-		while(sc.hasNextLine()) {
-			String text = sc.nextLine();
-			serverId = text.split("/")[0];
-			serverPw = text.split("/")[1];
-			
-		}
-		sc.close();
-		
-		prop.put("mail.smtp.host", host);
-		prop.put("mail.smtp.port", port);
-		prop.put("mail.smtp.auth", "true");
-		prop.put("mail.smtp.ssl.enable", "true");
-		prop.put("mail.smtp.ssl.trust",host);
-		
-		Session mailSession = Session.getDefaultInstance(prop, new Authenticator() {
-			String un = serverId;
-			String pw = serverPw;
-			
-			@Override
-			protected PasswordAuthentication getPasswordAuthentication() {
-				return new PasswordAuthentication(un, pw);
-			}
-			
-		});
-		mailSession.setDebug(true);
-		
-		Message mimeMessage = new MimeMessage(mailSession);
-		try {
-			mimeMessage.setFrom(new InternetAddress(serverId + "@naver.com"));
-			mimeMessage.setRecipient(Message.RecipientType.TO, new InternetAddress(email));
-			mimeMessage.setSubject("JavaBang ºñ¹Ğ¹øÈ£ Àç¼³Á¤ ¸ŞÀÏÀÔ´Ï´Ù");
-			
-			String tag = "<pre style=\"%s\">%s</pre>"; 
-			String style = "";
-			style += "border:1px solid black;";
-			style += "padding :10px;";
-			style += "font-size:20px;";
-			content = String.format(tag,style, content);
-			
-			mimeMessage.setContent(content,"text/html;charset=utf-8");
-			
-			Transport.send(mimeMessage);
-			return 1;
-		} catch(AddressException e) {
-			System.out.println("Àß¸øµÈ ÁÖ¼ÒÀÔ´Ï´Ù !");
-			return -1;
-		}
-		
-		catch (MessagingException e) {
-			System.out.println("¸ŞÀÏÀü¼Û¿¡ ¹®Á¦°¡ ¹ß»ıÇß½À´Ï´Ù !");
-			return -2;
-		}
-	
-		
-		
-	}
+   @Value ("classpath:mailaccount.txt")
+   private Resource mailAccount;
+   
+   private String host = "smtp.naver.com";
+   private int port = 465;
+   private String serverId = "";
+   private String serverPw = "";
+   
+   private Properties prop = new Properties();
+   
+   public int sendMail(String email, String content) throws IOException {
+      Scanner sc = new Scanner(mailAccount.getFile());
+      while(sc.hasNextLine()) {
+         String text = sc.nextLine();
+         serverId = text.split("/")[0];
+         serverPw = text.split("/")[1];
+         
+      }
+      sc.close();
+      
+      prop.put("mail.smtp.host", host);
+      prop.put("mail.smtp.port", port);
+      prop.put("mail.smtp.auth", "true");
+      prop.put("mail.smtp.ssl.enable", "true");
+      prop.put("mail.smtp.ssl.trust",host);
+      
+      Session mailSession = Session.getDefaultInstance(prop, new Authenticator() {
+         String un = serverId;
+         String pw = serverPw;
+         
+         @Override
+         protected PasswordAuthentication getPasswordAuthentication() {
+            return new PasswordAuthentication(un, pw);
+         }
+         
+      });
+      mailSession.setDebug(true);
+      
+      Message mimeMessage = new MimeMessage(mailSession);
+      try {
+         mimeMessage.setFrom(new InternetAddress(serverId + "@naver.com"));
+         mimeMessage.setRecipient(Message.RecipientType.TO, new InternetAddress(email));
+         mimeMessage.setSubject("JavaBang ë¹„ë°€ë²ˆí˜¸ ì¬ì„¤ì • ë©”ì¼ì…ë‹ˆë‹¤");
+         
+         String tag = "<pre style=\"%s\">%s</pre>"; 
+         String style = "";
+         style += "border:1px solid black;";
+         style += "padding :10px;";
+         style += "font-size:20px;";
+         content = String.format(tag,style, content);
+         
+         mimeMessage.setContent(content,"text/html;charset=utf-8");
+         
+         Transport.send(mimeMessage);
+         return 1;
+      } catch(AddressException e) {
+         System.out.println("ì˜ëª»ëœ ì£¼ì†Œì…ë‹ˆë‹¤ !");
+         return -1;
+      }
+      
+      catch (MessagingException e) {
+         System.out.println("ë©”ì¼ì „ì†¡ì— ë¬¸ì œê°€ ë°œìƒí–ˆìŠµë‹ˆë‹¤ !");
+         return -2;
+      }
+   
+      
+      
+   }
 }

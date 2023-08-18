@@ -15,7 +15,7 @@ public class MemberDTO {
 	private String day;
 	private String userName;
 	private String phoneNum;
-	private String profile;   // ÇÁ»ç °æ·Î
+	private String profile;   // í”„ì‚¬ ê²½ë¡œ
 	private String gender;
 	
 	private MultipartFile upload;   // input type name="upload" 
