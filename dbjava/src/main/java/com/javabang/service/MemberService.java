@@ -1,6 +1,7 @@
 package com.javabang.service;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
@@ -20,6 +21,11 @@ import com.javabang.component.HashComponent;
 import com.javabang.mail.MailComponent;
 import com.javabang.model.MemberDTO;
 import com.javabang.repository.MemberDAO;
+import com.jcraft.jsch.Channel;
+import com.jcraft.jsch.ChannelSftp;
+import com.jcraft.jsch.JSch;
+import com.jcraft.jsch.Session;
+import com.jcraft.jsch.SftpException;
 
 import org.springframework.core.io.Resource;
 
@@ -29,14 +35,15 @@ public class MemberService {
 	@Autowired private HashComponent hcomponent;
 	@Autowired private MailComponent mcomponent;
 	
-	private File dir = new File("C:\\test0817");
 	
-	public MemberService() {
-		if(dir.exists() == false)
-		{
-			dir.mkdirs();
-		}
-	}
+	private String serverIp = "192.168.64.200";
+	private int serverPort = 22;
+	private String serverUser = "root";
+	private String serverPass = "1";
+	private ChannelSftp chSftp = null;
+
+	
+
 	
 	@Value("classpath:resetPassword.html")
 	private Resource html;
@@ -144,25 +151,59 @@ public class MemberService {
 	}
 
 
-	public int updateProfile(MemberDTO dto) {
-		MultipartFile f = dto.getUpload();
-		
-		String ymd = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
-		String fileName = f.getOriginalFilename();
-		fileName = fileName.substring(0,fileName.lastIndexOf("."));
-		File dest = new File(dir,fileName + "_" + ymd + ".jpeg" );
-		
-		int row = 0;
-		try {
-			f.transferTo(dest);
-			dto.setProfile(dest.getName());
-			row= mdao.updateProfile(dto);
+	//프로필 수정
+	public int updateProfile(MemberDTO dto) throws SftpException, IllegalStateException, IOException, Exception {
+
+					MultipartFile f = dto.getUpload();
+					File dest = new File(f.getOriginalFilename());
+					f.transferTo(dest);
+					
+					
+					Session sess = null;
+					Channel channel = null;
+					JSch jsch = new JSch();
+					
+					sess = jsch.getSession(serverUser, serverIp, serverPort);
+					sess.setPassword(serverPass);
+					sess.setConfig("StrictHostKeyChecking", "no");
+					sess.connect();
+					
+					System.out.println("sftp> connected");
+					
+					channel = sess.openChannel("sftp");	
+					channel.connect();
+					
+					chSftp = (ChannelSftp) channel;
+					
+					FileInputStream fis = new FileInputStream(dest);
+					chSftp.cd("/var/www/html");		
+					chSftp.put(fis, dest.getName());	
+					System.out.println("sftp> transfer complete");
+					
+					fis.close();
+					chSftp.isClosed();
+					
+					String filePath = "";	
+					filePath += "http://";
+					filePath += serverIp;
+					filePath += "/" + dest.getName();
+					
+					dto.setProfile(filePath);
+					
+
+					dest.delete();
+					
+					return mdao.updateProfile(dto);
 			
-		}catch(IllegalStateException | IOException e) {
-			e.printStackTrace();
 		}
-		return row;
 		
 		
-	}
 }
+		
+		
+		
+		
+
+		
+	
+

@@ -22,6 +22,7 @@ import com.javabang.component.HashComponent;
 import com.javabang.mail.MailComponent;
 import com.javabang.model.MemberDTO;
 import com.javabang.service.MemberService;
+import com.jcraft.jsch.SftpException;
 
 @Controller
 @RequestMapping("/member")
@@ -151,10 +152,11 @@ public class MemberController {
 	}
 	
 	@PostMapping("/updateProfile/{idx}")
-	public String profile(MemberDTO dto) {
+	public String profile(HttpSession session,MemberDTO dto, @PathVariable("idx") int idx) throws IllegalStateException, SftpException, IOException, Exception {
 		int row = mservice.updateProfile(dto);
-		
-		return "redirect:member/mypage";
+		MemberDTO tmp = mservice.selectOne(idx);
+		session.setAttribute("login", tmp);
+		return "redirect:/member/mypage/"+ idx;
 	}
 	
 	

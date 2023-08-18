@@ -1,19 +1,15 @@
 package com.javabang.controller;
-
-
 import java.io.IOException;
 import java.util.HashMap;
-
 import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.javabang.model.MemberDTO;
 import com.javabang.service.MemberService;
+
 
 @RestController
 public class AjaxController {
@@ -55,4 +51,6 @@ public class AjaxController {
 	}
 
 	
+	        
+	   
 }

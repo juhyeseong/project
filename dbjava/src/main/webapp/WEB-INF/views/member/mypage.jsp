@@ -3,13 +3,15 @@
 <%@ include file="../header.jsp" %>
 
 
-
+<div class="list-info">
 <div class="list">
 <h2>${one.userNick }님의 정보</h2>
 
-	<table >
+	<table>
 		<tr>
-			<td colspan="2"><img class="profileImg" src="http://192.168.64.200/basicProfile.jpeg" /></td>
+			<td colspan="2"><!-- <img class="profileImg" src="http://192.168.64.200/basicProfile.jpeg" /> -->
+				<img class="profileImg" src="${one.profile }">
+			</td>
 		</tr>
 		<tr>
 			<th>아이디</th>
@@ -50,5 +52,9 @@
 
 <div class="mypage"><a href="${cpath }/member/update/${one.idx}">회원정보 수정</a></div>
 <div class="mypage"><a href="${cpath }/member/updateProfile/${one.idx}">프로필사진 수정</a></div>
+<div class="mypage"><a href="${cpath }/member/reservation/${one.idx}">예약내역 확인하기</a></div>
+
+</div>
+
 </body>
 </html>

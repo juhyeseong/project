@@ -140,6 +140,7 @@ ul > li{
 /*login css*/
 .login{
     text-align: center;
+
 }
 .login fieldset{
     width:600px;
@@ -156,16 +157,33 @@ legend{
 .login legend {
     margin-bottom: 40px;
 }
+/*소셜 로그인 버튼  css*/
 .kakao{
     width:500px;
     height: 50px;
-    line-height: 50px;
+  
     border: none;
     padding: 0; 
     font: inherit;
     cursor: pointer;
     outline: inherit;
+    
+    display: flex;
+	justify-content:center;
+	align-items: center;
+	margin-left:50px;
+	border-radius: 10px;
+	
+	background-color: #FBE31F;
+	font-weight:bold;
 }
+.kakao > img{
+	width:40px;
+	height:35px;
+	border-radius:50%;
+    margin-right:10px;
+}
+
 .naver{
     width:500px;
     height: 50px;
@@ -176,6 +194,21 @@ legend{
     cursor: pointer;
     outline: inherit;
     margin-top:10px;
+    border-radius: 10px;
+    
+    display: flex;
+	justify-content:center;
+	align-items: center;
+	margin-left:50px;
+	
+	background-color: #1EC124;
+	font-weight:bold;
+}
+.naver > img{
+	width:30px;
+	height:30px;
+	border-radius:50%;
+    margin-right:10px;
 }
 .email{
 	width:500px;
@@ -187,6 +220,20 @@ legend{
     cursor: pointer;
     outline: inherit;
     margin-top:10px;
+    
+    display: flex;
+	justify-content:center;
+	align-items: center;
+	margin-left:50px;
+	border-radius: 10px;
+	
+	background-color: #eeeeee;
+	font-weight:bold;
+}
+.email > img{
+	width:30px;
+	height:30px;
+    margin-right:10px;
 }
 .login input[type="submit"]{
     background-color: #C2D6F0;
@@ -223,7 +270,6 @@ legend{
 .join select {
     width: 500px;
     height: 50px;
-
     text-align: center;
 }
 /*찜하기 css*/
@@ -292,14 +338,18 @@ legend{
     width:500px;
     height:50px;
 }
+.update > fieldset > p {
+	word-spacing:10px;
+}
 /* 마이페이지 정보수정 버튼 */
 .mypage{
-	width:700px;
+	width:550px;
 	height:40px;
 	line-height:40px;
 	text-align: center;
-	margin-left:auto;
-	margin-right:auto;
+	margin-left:450px;
+	/* margin-left:auto; */
+	/* margin-right:auto; */
 	margin-top:30px;
 	border:3px solid #C2D6F0;
 }
@@ -312,9 +362,10 @@ legend{
 }
 .list > table{
 	margin-left:100px;
+	float : left;
 }
-.list > table > thead > tr{
-	background-color:#C2D6F0; 
+.list-info{
+	margin-left:250px;
 }
 .hidden{
 	display: none;
@@ -323,8 +374,29 @@ legend{
 	word-spacing:50px;
 }
 .profileImg {
-	border-radius: 50%;
+    width:250px;
+	height:250px; 
+
+	border-radius: 70%;
 }
+
+/*프로필 사진 변경 버튼*/
+.update-profile input[type="submit"]{
+    background-color: #C2D6F0;
+    border : none;
+    width:500px;
+    height:50px;
+} 
+.file-icon {
+  display: inline-block;
+  cursor: pointer;
+}
+.file-icon img {
+  width: 60px;
+  height: 60px;
+  margin-right:200px;
+}
+
 
 /* host style */
 .hidden {
@@ -480,6 +552,8 @@ legend{
 	height: 70px;
 	margin: 15px 30px;
 }
+
+
 </style>
 </head>
 <body>

@@ -15,10 +15,10 @@ public class MemberDTO {
 	private String day;
 	private String userName;
 	private String phoneNum;
-	private String profile;
+	private String profile;   // 프사 경로
 	private String gender;
 	
-	private MultipartFile upload;
+	private MultipartFile upload;   // input type name="upload" 
 
 	private Date birth;
 	
