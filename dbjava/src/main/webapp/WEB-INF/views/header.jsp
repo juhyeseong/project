@@ -551,9 +551,86 @@ legend{
 .roomTypeItem img {
 	height: 70px;
 	margin: 15px 30px;
+}.categorySelected {
+	border: 2px solid black;
+}
+.roomTypeSelected {
+	border: 2px solid black;
 }
 
+/* rentCount */
+#rentCount {
+	width: 800px;
+	margin: auto;
+}
+.rentCountWrap {
+	height: 720px;
+	
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+.rentCountWrap h1 {
+	width: 832px;
+	
+	margin-bottom: 10px;
+}
 
+.rentCountWrap > span {
+	width: 830px;
+	padding-left: 5px;
+	
+	margin-bottom: 20px;
+}
+.rentCountItem {
+	width: 800px;
+	height: 100px;
+	margin-bottom: 20px;
+	padding-left: 50px;
+	
+	border: 1px solid gray;
+	border-radius: 10px;
+	
+	display: flex;
+	
+	font-size: 18px;
+	font-weight: bold;
+}
+.roomCountName {
+	width: 75%;
+	
+	display: flex;
+	align-items: center;
+	
+}
+.roomCountNumber {
+	width: 25%;
+	
+	display: flex;
+	align-items: center;
+}
+
+.roomCountNumber button {
+	all: unset;
+	cursor: pointer;
+	
+	width: 35px;
+	height: 35px;
+	margin: 0px 20px;
+	
+	border: 1px solid black;
+	border-radius: 50%;
+	
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.roomCountNumber > button > span {
+	font-size: 15px;
+	padding: 5px;
+}
 </style>
 </head>
 <body>
