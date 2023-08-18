@@ -152,49 +152,49 @@ public class MemberService {
 
 
 	//프로필 수정
-	public int updateProfile(MemberDTO dto) throws SftpException, IllegalStateException, IOException, Exception {
+	public int updateProfile(MemberDTO dto) throws Exception {
 
-					MultipartFile f = dto.getUpload();
-					File dest = new File(f.getOriginalFilename());
-					f.transferTo(dest);
-					
-					
-					Session sess = null;
-					Channel channel = null;
-					JSch jsch = new JSch();
-					
-					sess = jsch.getSession(serverUser, serverIp, serverPort);
-					sess.setPassword(serverPass);
-					sess.setConfig("StrictHostKeyChecking", "no");
-					sess.connect();
-					
-					System.out.println("sftp> connected");
-					
-					channel = sess.openChannel("sftp");	
-					channel.connect();
-					
-					chSftp = (ChannelSftp) channel;
-					
-					FileInputStream fis = new FileInputStream(dest);
-					chSftp.cd("/var/www/html");		
-					chSftp.put(fis, dest.getName());	
-					System.out.println("sftp> transfer complete");
-					
-					fis.close();
-					chSftp.isClosed();
-					
-					String filePath = "";	
-					filePath += "http://";
-					filePath += serverIp;
-					filePath += "/" + dest.getName();
-					
-					dto.setProfile(filePath);
-					
+		MultipartFile f = dto.getUpload();
+		File dest = new File(f.getOriginalFilename());
+		f.transferTo(dest);
+		
+		
+		Session sess = null;
+		Channel channel = null;
+		JSch jsch = new JSch();
+		
+		sess = jsch.getSession(serverUser, serverIp, serverPort);
+		sess.setPassword(serverPass);
+		sess.setConfig("StrictHostKeyChecking", "no");
+		sess.connect();
+		
+		System.out.println("sftp> connected");
+		
+		channel = sess.openChannel("sftp");	
+		channel.connect();
+		
+		chSftp = (ChannelSftp) channel;
+		
+		FileInputStream fis = new FileInputStream(dest);
+		chSftp.cd("/var/www/html");		
+		chSftp.put(fis, dest.getName());	
+		System.out.println("sftp> transfer complete");
+		
+		fis.close();
+		chSftp.isClosed();
+		
+		String filePath = "";	
+		filePath += "http://";
+		filePath += serverIp;
+		filePath += "/" + dest.getName();
+		
+		dto.setProfile(filePath);
+		
 
-					dest.delete();
-					
-					return mdao.updateProfile(dto);
-			
+		dest.delete();
+		
+		return mdao.updateProfile(dto);
+
 		}
 		
 		

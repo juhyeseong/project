@@ -39,7 +39,7 @@ public class AjaxController {
 		}
 		HashMap<String, Object> result = new HashMap<>();
 		result.put("success", row > 0 ? 1 : 0);
-		result.put("message", row > 0 ? "¸ŞÀÏÀÌ ¹ß¼ÛµÇ¾ú½À´Ï´Ù" : "¸ŞÀÏ Àü¼Û¿¡ ½ÇÆĞÇß½À´Ï´Ù");
+		result.put("message", row > 0 ? "ì¸ì¦ë²ˆí˜¸ê°€ ë°œì†¡ ë˜ì—ˆìŠµë‹ˆë‹¤ !" : "ì¸ì¦ë²ˆí˜¸ ë°œì†¡ì— ì‹¤íŒ¨í–ˆìŠµë‹ˆë‹¤ !");
 		return result;
 	}
 	
