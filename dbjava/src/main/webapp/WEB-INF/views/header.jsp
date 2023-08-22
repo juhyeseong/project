@@ -22,6 +22,12 @@ a{
 p{
     text-align:center;
 }
+/*로그인 버튼 + 마이페이지 버튼*/
+.login-btn{
+	background-color: #C2D6F0;
+	border:none;
+	height:23px;
+}
 
 /* header style */
 header {
@@ -338,6 +344,7 @@ legend{
     width:500px;
     height:50px;
 }
+
 .update > fieldset > p {
 	word-spacing:10px;
 }
@@ -379,9 +386,24 @@ legend{
 
 	border-radius: 70%;
 }
+/*기본 이미지로 변경 버튼*/
+.updateBasicProfile > a{
+    width:300px;
+	height:40px;
+	line-height:40px;
+	text-align: center;
+	border:3px solid #C2D6F0;
+	bottom:200px;
+}
 
 /*프로필 사진 변경 버튼*/
 .update-profile input[type="submit"]{
+    background-color: #C2D6F0;
+    border : none;
+    width:500px;
+    height:50px;
+} 
+.update-profile input[type="button"]{
     background-color: #C2D6F0;
     border : none;
     width:500px;
@@ -724,11 +746,11 @@ legend{
 	        	<c:if test="${not empty login }">
 	           		<li><a href="${cpath }/rent/hosting">숙소를 올려방~</a></li>
 	            </c:if>
-	            <li><a href="${cpath }/member/${empty login ? 'login' : 'logout'}"><button>${empty login ? '로그인' : '로그아웃'}</button></a></li>
+	            <li><a href="${cpath }/member/${empty login ? 'login' : 'logout'}"><button class="login-btn">${empty login ? '로그인' : '로그아웃'}</button></a></li>
 	           
 	        </ul>
 	        <c:if test="${not empty login }">
-	       		<img src="${login.profile }"><h4>${login.userNick } 님 환영합니다 !</h4> <a href="${cpath }/member/mypage/${login.idx}"><button>마이페이지</button></a>
+	       		<img src="${login.profile }"><h4>${login.userNick }님 환영합니다 !</h4> <a href="${cpath }/member/mypage/${login.idx}"><button class="login-btn">마이페이지</button></a>
 	       	</c:if>
         </div>
     </header>

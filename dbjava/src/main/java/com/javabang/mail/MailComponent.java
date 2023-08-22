@@ -32,7 +32,7 @@ public class MailComponent {
    
    private Properties prop = new Properties();
    
-   public int sendMail(String email, String content) throws IOException {
+   public int sendMailPw(String email, String content) throws IOException {
       Scanner sc = new Scanner(mailAccount.getFile());
       while(sc.hasNextLine()) {
          String text = sc.nextLine();
@@ -61,6 +61,7 @@ public class MailComponent {
       mailSession.setDebug(true);
       
       Message mimeMessage = new MimeMessage(mailSession);
+
       try {
          mimeMessage.setFrom(new InternetAddress(serverId + "@naver.com"));
          mimeMessage.setRecipient(Message.RecipientType.TO, new InternetAddress(email));
@@ -86,6 +87,64 @@ public class MailComponent {
          System.out.println("메일전송에 문제가 발생했습니다 !");
          return -2;
       }
+   }  
+      
+      public int sendMailAuth(String email, String content) throws IOException {
+          Scanner sc = new Scanner(mailAccount.getFile());
+          while(sc.hasNextLine()) {
+             String text = sc.nextLine();
+             serverId = text.split("/")[0];
+             serverPw = text.split("/")[1];
+             
+          }
+          sc.close();
+          
+          prop.put("mail.smtp.host", host);
+          prop.put("mail.smtp.port", port);
+          prop.put("mail.smtp.auth", "true");
+          prop.put("mail.smtp.ssl.enable", "true");
+          prop.put("mail.smtp.ssl.trust",host);
+          
+          Session mailSession2 = Session.getDefaultInstance(prop, new Authenticator() {
+             String un = serverId;
+             String pw = serverPw;
+             
+             @Override
+             protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(un, pw);
+             }
+             
+          });
+          mailSession2.setDebug(true);
+          
+          Message mimeMessage = new MimeMessage(mailSession2);
+
+          try {
+             mimeMessage.setFrom(new InternetAddress(serverId + "@naver.com"));
+             mimeMessage.setRecipient(Message.RecipientType.TO, new InternetAddress(email));
+             mimeMessage.setSubject("JavaBang 인증번호 메일입니다");
+             
+             String tag = "<pre style=\"%s\">%s</pre>"; 
+             String style = "";
+             style += "border:1px solid black;";
+             style += "padding :10px;";
+             style += "font-size:20px;";
+             content = String.format(tag,style, content);
+             
+             mimeMessage.setContent(content,"text/html;charset=utf-8");
+             
+             Transport.send(mimeMessage);
+             return 1;
+          } catch(AddressException e) {
+             System.out.println("잘못된 주소입니다 !");
+             return -1;
+          }
+          
+          catch (MessagingException e) {
+             System.out.println("메일전송에 문제가 발생했습니다 !");
+             return -2;
+          }
+      
    
       
       

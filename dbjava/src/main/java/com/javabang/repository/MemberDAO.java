@@ -29,6 +29,13 @@ public interface MemberDAO {
 
    int updateProfile(MemberDTO dto);
 
+  int basicProfile(MemberDTO dto);   // 기본 이미지로 변경
+
+
+  MemberDTO selectKakao(MemberDTO dto);
+
+  int insertKakao(MemberDTO dto);
+
    
 
 }

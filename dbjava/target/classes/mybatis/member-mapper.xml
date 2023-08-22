@@ -47,6 +47,19 @@
 	update member set profile = #{profile} where idx = #{idx} 
 </update>
 
+<update id="basicProfile" parameterType="member">
+	update member set profile = #{profile}
+	where idx = #{idx}
+</update>
+
+<select id="selectKakao" parameterType="member" resultType="member">
+	select * from member where userId=#{userId} and userNick=#{userNick}
+</select>
+
+<insert id="insertKakao" parameterType="member">
+	insert into member(userId, userNick, gender, email) values(#{userId}, #{userNick}, #{gender}, #{email})
+</insert>
+
 </mapper>
 
 

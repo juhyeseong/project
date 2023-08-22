@@ -4,8 +4,8 @@
 
 
 <div class="list-info">
-<div class="list">
 <h2>${one.userNick }님의 정보</h2>
+<div class="list">
 
 	<table>
 		<tr>
@@ -45,6 +45,7 @@
 			<th>성별</th>
 			<td>${one.gender }</td>
 		</tr>
+		
 	</table>
 	
 

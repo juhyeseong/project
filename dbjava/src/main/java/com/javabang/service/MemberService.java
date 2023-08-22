@@ -23,6 +23,7 @@ import com.javabang.repository.MemberDAO;
 import com.jcraft.jsch.Channel;
 import com.jcraft.jsch.ChannelSftp;
 import com.jcraft.jsch.JSch;
+import com.jcraft.jsch.JSchException;
 import com.jcraft.jsch.Session;
 
 import org.springframework.core.io.Resource;
@@ -93,7 +94,7 @@ public class MemberService {
 			sc.close();
 			
 			content = String.format(content, userPw);
-			mcomponent.sendMail(dto.getEmail(), content);
+			mcomponent.sendMailPw(dto.getEmail(), content);
 		}
 		return row;
 	}
@@ -144,12 +145,12 @@ public class MemberService {
 		String content = "<h3>인증번호는 [%s]입니다.</h3>";
 		int authNumber = ran.nextInt(89999999) + 10000000;
 		content = String.format(content, authNumber);
-		int row = mcomponent.sendMail(email, content);
+		int row = mcomponent.sendMailAuth(email, content);
 		return row > 0 ? authNumber : row;
 	}
 
 
-	//프로필 수정
+	//프로필 사진 수정
 	public int updateProfile(MemberDTO dto) throws Exception {
 
 		MultipartFile f = dto.getUpload();
@@ -194,8 +195,35 @@ public class MemberService {
 		return mdao.updateProfile(dto);
 
 		}
+
+	public int basicProfile(MemberDTO dto) throws Exception {
+		
+
+		    return mdao.basicProfile(dto);
 		
 		
+		
+	}
+
+//	public int kakao(String id, String email, String name) {
+//	    MemberDTO dto = new MemberDTO();
+//	    dto.setUserId(id);
+//	    dto.setEmail(email);
+//	    dto.setUserNick(name);
+//		return mdao.kakao(dto);
+//	}
+
+
+
+	public MemberDTO selectKakao(MemberDTO dto) {
+	
+		return mdao.selectKakao(dto);
+	}
+
+	public int insertKakao(MemberDTO dto) {
+		
+		return mdao.insertKakao(dto);
+	}
 }
 		
 		

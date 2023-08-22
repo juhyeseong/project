@@ -1,21 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="../header.jsp" %>
 
-<form class="join" method="POST">
+<form class="join" method="POST" action="${cpath }/member/join">
 	<fieldset>
 	    <legend>회원가입</legend>
 	    
-	    <p><input type="text" name="userId" placeholder="아이디 입력" required>
+	    <p><input type="text" name="userId" placeholder="아이디 입력" value="${dto.userId }" required>
 	    <input id="dupCheckBtn" type="button" value="중복확인">
 	    <br>
 	    <span id="dupMessage"></span>
 	    </p>
 	    
 	    <p><input type="password" name="userPw" placeholder="비밀번호 입력" required></p>
-	    <p><input type="text" name="userNick"  placeholder="닉네임 입력" required></p>
+	    <p><input type="text" name="userNick"  placeholder="닉네임 입력" value="${dto.userNick }" required></p>
 	    
 	    <p>
-	    	<input type="email" name="email" placeholder="이메일 입력" required>
+	    	<input type="email" name="email" placeholder="이메일 입력" value="${dto.email }" required>
 	    	<input type="button" id="sendAuthNumber" value="인증번호 발송">
 	    </p>
 	    <p class="hidden">
@@ -43,8 +43,8 @@
 	    </p>
 	    <p><input type="text" name="phoneNum" placeholder="전화번호 입력" required></p>
 	    <p><select name="gender" required>
-	        <option value="man">남성</option>
-	        <option value="woman">여성</option>
+	        <option value="male">남성</option>
+	        <option value="female">여성</option>
 	    </select></p>
 	    <p><input type="submit" value="회원가입"></p>
 	</fieldset>
@@ -77,11 +77,11 @@
 		if(row != 0) {
 			document.querySelector('input[type="submit"]').removeAttribute('disabled')
 			authMessage.innerText = '인증 성공'
-			authMessage.style.color = 'blue'
+			authMessage.style.color = 'grey'
 		}
 		else { 
 			authMessage.innerText = '인증 실패'
-			authMessage.style.color = 'red'
+			authMessage.style.color = 'pink'
 		}
 	}
 	checkAuthNumber.onclick = checkAuthNumberHandler
@@ -109,7 +109,7 @@
 		}
 		else if(count == 0){
 			dupMessage.innerText = '사용가능한 아이디입니다.'
-			dupMessage.style.color = 'blue'
+			dupMessage.style.color = 'grey'
 		}
 		else{
 			dupMessage.innerText = '이미 사용중인 아이디입니다.'

@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+
+
 import com.javabang.model.MemberDTO;
 import com.javabang.service.MemberService;
 
@@ -14,7 +16,7 @@ import com.javabang.service.MemberService;
 @RestController
 public class AjaxController {
 	@Autowired private MemberService mservice;
-	
+
 	@GetMapping("/getmail/{email}")
 	public HashMap<String, Object> getEmail(@RequestBody MemberDTO dto){
 		String email = mservice.getEmail(dto);
