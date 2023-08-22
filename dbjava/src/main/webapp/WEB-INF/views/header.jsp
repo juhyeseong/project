@@ -421,24 +421,32 @@ legend{
 
 
 /* host style */
-.hidden {
-	display: none;
-}
 .blackBtn {
 	all: unset;
 	cursor: pointer;
 	
 	border-radius: 5px;
-	padding: 13px;
-	margin: 0px 10px;
+	padding: 15px 30px;
+	margin-right: 30px;
 	
 	color: white;
 	background-color: black;
 	font-size: 17px;
 }
+.btnSpace {
+	height: 80px;
+	
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+}
+#start {
+	width: 1500px;
+	margin: auto;
+}
 #host {
 	display: flex;
-	height: 720px;
+	height: 760px;
 }
 .hostLeft {
 	flex: 1;
@@ -483,10 +491,6 @@ legend{
 .hostInfo span {
 	font-size: 17px;
 }
-.btnSpace {
-	display: flex;
-	justify-content: flex-end;
-}
 .main hr {
 	width: 1000px;
 	margin: 30px 0px;
@@ -496,7 +500,8 @@ legend{
 	cursor: pointer;
 	
 	border-radius: 5px;
-	padding: 13px;
+	padding: 15px 30px;
+	margin-right: 30px;
 	
 	color: white;
 	background-color: hotpink;
@@ -505,7 +510,7 @@ legend{
 
 /* category style */
 #selectCategory {
-	height: 720px;
+	height: 760px;
 	padding-top: 20px;
 	
 	box-sizing: border-box;
@@ -547,9 +552,6 @@ legend{
 .categoryItem img {
 	width: 100px;
 }
-.selected {
-	border: 2px solid black;
-}
 
 /* roomType style */
 #selectRoomType {
@@ -557,7 +559,7 @@ legend{
 	margin: auto;
 }
 .roomTypeWrap {
-	height: 720px;
+	height: 760px;
 	
 	display: flex;
 	flex-direction: column;
@@ -593,11 +595,6 @@ legend{
 .roomTypeItem img {
 	height: 70px;
 	margin: 15px 30px;
-}.categorySelected {
-	border: 2px solid black;
-}
-.roomTypeSelected {
-	border: 2px solid black;
 }
 
 /* rentCount */
@@ -606,7 +603,7 @@ legend{
 	margin: auto;
 }
 .rentCountWrap {
-	height: 720px;
+	height: 760px;
 	
 	display: flex;
 	flex-direction: column;
@@ -674,25 +671,20 @@ legend{
 	font-size: 15px;
 	padding: 5px;
 }
+
+/* information style */
 .rentInformationWrap {
-	width: 830px;
+	width: 700px;
 	height: 720px;
 	margin: auto;
 	padding-top: 20px;
-	
-	box-sizing: border-box;
-	
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
 }
 .rentInformationScroll {
-	width: 830px;
-	max-height: 720px;
+	width: 1500px;
+	max-height: 760px;
+	margin: auto;
 	
 	flex-wrap: wrap;
-	overflow-x: hidden;
 	overflow-y: scroll;
 	
 	scrollbar-width: none;
@@ -706,16 +698,21 @@ legend{
 	margin-top: 0px;
 	margin-bottom: 30px;
 }
+.rentInformationItems {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+}
 .rentInformationItem {
 	all: unset;
 	cursor:pointer;
 	
-	width: 240px;
-	height: 140px;
+	width: 200px;
+	height: 100px;
 	padding: 20px 0px;
 	margin: 10px;
 	
-	font-size: 20px;
+	font-size: 17px;
 	font-weight: bold;
 	
 	border: 1px solid gray;
@@ -729,7 +726,181 @@ legend{
 	justify-content: center;
 }
 .rentInformationItem img {
-	width: 80px;
+	width: 60px;
+}
+
+/* rentImg style */
+.rentImg {
+	height: 760px;
+}
+.rentImgAdd {
+	width: 1500px;
+	margin: auto;
+	height: 760px;
+	padding-top: 20px;
+	box-sizing: border-box;
+	
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+.rentImgWrap {
+	width: 702px;
+	margin: auto;
+}
+.rentImgScroll {
+	width: 1500px;
+	display: flex;
+	flex-wrap: wrap;
+	overflow-y: scroll;
+}
+.rentImgAdd h1 {
+	margin-top: 0px;
+	margin-bottom: 10px;
+}
+.mainImgSpace {
+	width: 700px;
+	height: 450px;
+
+	border: 1px dashed black;
+	
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	
+	position: relative;
+}
+.mainInputSpace {
+	width: 699px;
+	height: 450px;
+
+	border: 1px dashed black;
+	
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	
+	position: relative;
+}
+.addMainImg {
+	max-width: 699px;
+	max-height: 449px;
+	width: auto;
+	height: auto;
+	
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.inputInfo {
+	width: 350px;
+	height: 450px;
+	margin: auto;
+	
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+.inputInfo img {
+	width: 100px;
+	height: 100px;
+}
+.subImgWrap {
+	width: 700px;
+	
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+}
+.subImgSpace {
+	width: 310px;
+	height: 230px;
+	margin: 10px;
+
+	border: 1px dashed black;
+	
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	
+	position: relative;
+}
+.fileImg {
+	position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+}
+.subImgSpace img {
+	max-width: 309px;
+	max-height: 229px;
+	
+	width: auto;
+	height: auto;
+}
+.subInfo img {
+	width: 100px;
+	height: 100px;
+}
+.imgDelete {
+	position: absolute;
+	
+	left: 90%;
+	top: 2%;
+}
+
+/* rentContent */
+#rentContent {
+	width: 1000px;
+	height: 760px;
+	margin: auto;
+}
+.rentContentSpace {
+	height: 760px;
+	
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+#rentContent input {
+	width: 500px;
+	height: 50px;
+	
+	border-radius: 10px;
+	
+	font-size: 20px;
+	font-weight: bold;
+}
+#rentContent textarea {
+	width: 500px;
+	height: 400px;
+	
+	border-radius: 10px;
+	
+	font-size: 20px;
+	font-weight: bold;
+	
+	resize: none;
+}
+
+/* selecteds */
+.categorySelected {
+	border: 2px solid black;
+}
+.roomTypeSelected {
+	border: 2px solid black;
+}
+.rentInformationSelected {
+	border: 2px solid black;
+}
+.hidden{
+	display: none;
 }
 </style>
 </head>

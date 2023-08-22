@@ -1,9 +1,16 @@
 package com.javabang.model;
 
+import java.util.List;
+
+import org.springframework.web.multipart.MultipartFile;
+
 public class RentDTO {
 	private int idx, member;
 	private String category, roomType, location, information, content;
 	private int roomCount, guestCount, bedCount, bathCount, price, discount, state;
+	
+	private String filePath;
+	private List<MultipartFile> files;
 	
 	public int getIdx() {
 		return idx;
@@ -88,5 +95,17 @@ public class RentDTO {
 	}
 	public void setState(int state) {
 		this.state = state;
+	}
+	public String getFilePath() {
+		return filePath;
+	}
+	public void setFilePath(String filePath) {
+		this.filePath = filePath;
+	}
+	public List<MultipartFile> getFiles() {
+		return files;
+	}
+	public void setFiles(List<MultipartFile> files) {
+		this.files = files;
 	}
 }
