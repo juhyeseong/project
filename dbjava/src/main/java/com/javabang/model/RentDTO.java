@@ -6,7 +6,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class RentDTO {
 	private int idx, member;
-	private String category, roomType, location, information, content;
+	private String category, roomType, address, detailAddress, information, title, content;
 	private int roomCount, guestCount, bedCount, bathCount, price, discount, state;
 	
 	private String filePath;
@@ -36,17 +36,30 @@ public class RentDTO {
 	public void setRoomType(String roomType) {
 		this.roomType = roomType;
 	}
-	public String getLocation() {
-		return location;
+	public String getAddress() {
+		return address;
 	}
-	public void setLocation(String location) {
-		this.location = location;
+	public void setAddress(String address) {
+		this.address = address;
+	}
+	public String getDetailAddress() {
+		return detailAddress;
+	}
+	public void setDetailAddress(String detailAddress) {
+		this.detailAddress = detailAddress;
 	}
 	public String getInformation() {
 		return information;
 	}
 	public void setInformation(String information) {
 		this.information = information;
+	}
+	
+	public String getTitle() {
+		return title;
+	}
+	public void setTitle(String title) {
+		this.title = title;
 	}
 	public String getContent() {
 		return content;

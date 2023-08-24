@@ -5,17 +5,21 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-
+import org.springframework.web.servlet.ModelAndView;
 
 import com.javabang.model.MemberDTO;
+import com.javabang.model.RentDTO;
 import com.javabang.service.MemberService;
+import com.javabang.service.RentService;
 
 
 @RestController
 public class AjaxController {
 	@Autowired private MemberService mservice;
+	@Autowired private RentService rservice;
 
 	@GetMapping("/getmail/{email}")
 	public HashMap<String, Object> getEmail(@RequestBody MemberDTO dto){
@@ -52,7 +56,20 @@ public class AjaxController {
 		return authNumber == sessionNumber ? 1 : 0;
 	}
 
-	
-	        
-	   
+	@PostMapping("/rent/createRent")
+	public ModelAndView createRent(RentDTO dto) {
+		ModelAndView mav = new ModelAndView("alert");
+		int row = 0;
+		String msg = null;
+		String url = null;
+		
+		row = rservice.rentInsert(dto);
+		msg = row != 0 ? "숙소 등록이 완료되었습니다 ~~ " : "숙소 등록에 실패하였습니다 ~~";
+		url = row != 0 ? "/member/mypage" : "/rent/hosting";
+
+		mav.addObject("msg", msg);
+		mav.addObject("url", url);
+		
+		return mav;
+	} 
 }

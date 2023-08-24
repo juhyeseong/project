@@ -13,9 +13,9 @@
           <legend>Welcome JavaBang</legend>
 
 			<form method="POST" action="${cpath }/member/login">
-          		<p><input type="text" name="userId" placeholder="아이디"></p>
+          		<p><input type="text" name="userId" placeholder="아이디" required></p>
           		<p class="passwordBox">
-          			<input id="password" type="password" name="userPw" placeholder="비밀번호">
+          			<input id="password" type="password" name="userPw" placeholder="비밀번호" required>
           			<span id="toggleButton" onclick="togglePasswordVisibility()">O_O</span>
           		</p>
           		<p><input type="submit" value="로그인"></p>

@@ -378,6 +378,10 @@ legend{
 
 
 /* host style */
+.container {
+	width: 100%;
+	position: relative;
+}
 .blackBtn {
 	all: unset;
 	cursor: pointer;
@@ -632,7 +636,7 @@ legend{
 /* information style */
 .rentInformationWrap {
 	width: 700px;
-	height: 720px;
+	height: 760px;
 	margin: auto;
 	padding-top: 20px;
 }
@@ -844,6 +848,81 @@ legend{
 	font-weight: bold;
 	
 	resize: none;
+}
+
+/* location style */
+.rentLocationScroll {
+	width: 1700px;
+	height: 740px;
+	margin: auto;
+	
+	display: flex;
+	flex-wrap: wrap;
+	
+	overflow-y: scroll;
+}
+.rentLocationWrap {
+	width: 1000px;
+	height: 740px;
+	margin: auto;
+}
+.rentLocationWrap h1 {
+	margin-bottom: 2px;
+}
+.rentLocationWrap h4 {
+	width: 600px;
+	margin: 10px 0px;
+	font-size: 17px;
+	color: #717171;
+}
+.locationSpace {
+	display: flex;
+}
+.locationSpace div {
+	flex: 1;
+	
+	display: flex;
+	align-items: center;
+}
+.searchLocationSpace {
+	margin-top: 10px;
+	
+	justify-content: flex-end;
+}
+.searchLocationSpace input {
+	width: 300px;
+	height: 35px;
+	
+	border-radius: 10px;
+}
+.searchLocationSpace button {
+	all: unset;
+	
+	padding: 8px 15px;
+	margin-left: 10px;
+	
+	background-color: black;
+	color: white;
+	border-radius: 10px;
+}
+#map {
+	width: 100%;
+	height: 400px;
+}
+
+.locationValue select {
+	width: 500px;
+	height: 50px;
+	
+	font-size: 20px;
+	font-weight: bold;
+}
+.locationValue input {
+	width: 500px;
+	height: 50px;
+	
+	font-size: 20px;
+	font-weight: bold;
 }
 
 /* selecteds */

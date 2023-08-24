@@ -27,6 +27,7 @@
 		<property name="mapperLocations">
 			<list>
 				<value>classpath:mybatis/member-mapper.xml</value>
+				<value>classpath:mybatis/rent-mapper.xml</value>
 				
 			</list>
 		</property>

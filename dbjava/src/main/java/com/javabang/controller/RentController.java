@@ -9,7 +9,4 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class RentController {
 	@GetMapping("/hosting")
 	public void hosting() {}
-	
-	@GetMapping("/becomeAhost")
-	public void becomeAhost() {}
 }
