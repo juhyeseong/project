@@ -34,16 +34,12 @@ public class MemberService {
 	@Autowired private HashComponent hcomponent;
 	@Autowired private MailComponent mcomponent;
 	
-	
 	private String serverIp = "192.168.64.200";
 	private int serverPort = 22;
 	private String serverUser = "root";
 	private String serverPass = "1";
 	private ChannelSftp chSftp = null;
 
-	
-
-	
 	@Value("classpath:resetPassword.html")
 	private Resource html;
 	
@@ -178,42 +174,22 @@ public class MemberService {
 		chSftp.cd("/var/www/html");		
 		chSftp.put(fis, dest.getName());	
 		System.out.println("sftp> transfer complete");
-		
 		fis.close();
 		chSftp.isClosed();
-		
 		String filePath = "";	
 		filePath += "http://";
 		filePath += serverIp;
 		filePath += "/" + dest.getName();
-		
 		dto.setProfile(filePath);
-		
-
 		dest.delete();
-		
 		return mdao.updateProfile(dto);
 
 		}
 
 	public int basicProfile(MemberDTO dto) throws Exception {
 		
-
 		    return mdao.basicProfile(dto);
-		
-		
-		
 	}
-
-//	public int kakao(String id, String email, String name) {
-//	    MemberDTO dto = new MemberDTO();
-//	    dto.setUserId(id);
-//	    dto.setEmail(email);
-//	    dto.setUserNick(name);
-//		return mdao.kakao(dto);
-//	}
-
-
 
 	public MemberDTO selectKakao(MemberDTO dto) {
 	

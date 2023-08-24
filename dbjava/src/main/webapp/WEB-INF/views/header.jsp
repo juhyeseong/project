@@ -81,67 +81,102 @@ ul > li{
 	margin-left: 30px;
 }
 
-/* home style */
-.main {
-	width: 1000px;
-	margin: auto;
+/*home css*/
+.homeMain {
+	width: 80%;
+	height:100px;
+	margin-left: auto;
+	margin-right: auto;
 }
 
-.btn1 >  button{
-    margin-top:50px;
-    margin-right:100px;
-    border: none;
-    background: none;
-    padding: 0; 
-    font: inherit;
-    cursor: pointer;
-    outline: inherit;
-}
-.btn2 > button{
-    margin-top:50px;
-    margin-left:100px;
-    border: none;
-    background: none;
-    padding: 0; 
-    font: inherit;
-    cursor: pointer;
-    outline: inherit;
-}
-.category{
-    margin-left:200px;
-    margin-top:30px;
-}
-.arrow{
-    width:30px;
-}
-.categories{
-    display:flex;
-   
-}
-.category{
-   margin-left:20px;
-   margin-top:30px;
-   /* opacity: 0.7; */
+.categories {
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	padding: 20px 0px;
+	border-bottom: 1px dashed; 
 }
 
 .categoryImg {
 	width: 30px;
-}
-.type{
-	margin-right:20px;
+	height: 30px;
+} 
+
+.categorieImgBox {
 	display: flex;
-    flex-flow: wrap;
-    width : 1000px;
-    overflow :hidden;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
 }
-.room {
+.roomBox{
+	display: flex;
+	flex-wrap: wrap;
+}
+.room{
+	display: flex;
+	flex-direction: column;
+	margin:10px 15px;
+}
+.roomImg{
+	width:250px;
+	height:250px;
 	
-	width : 240px;
-    height : 240px;
-    margin : 5px;
-    border-radius:10px;
-    position : relative;
-    overflow: hidden;
+}
+/*room.jsp */
+.roomExplain{
+	width:80%;
+	margin-left:auto;
+	margin-right:auto;
+/* 	border : 1px solid red; */
+	display:flex;
+}
+.roomImgBox{
+/* 	border : 1px solid blue; */
+}
+.roomBig{
+/* 	border: 1px solid green; */
+	width:500px;
+	height:350px;
+}
+.roomSmall{
+/* 	border:1px solid purple; */
+	display:flex;
+	justify-content:space-around;
+	width:500px;
+	
+}
+.roomSmall > img {
+	width:120px;
+/* 	border:1px solid green; */
+	height:86px;
+}
+.roomText{
+	width:360px;
+	margin-left:auto;
+	margin-right:auto;
+/* 	border:1px solid black; */
+	
+}
+.roomTitle{
+	font-weight: bold;
+	font-size: 30px;
+}
+.roomTitle, .roomAddress,
+.roomPrice, .roomDetailAddress
+{
+	text-align: left;
+}
+.roomBtn{
+	margin:30px 150px;
+}
+
+.roomBtn > button{
+ 	background-color: #C2D6F0;
+ 	margin-right:20px;
+ 	border: none;
+ 	border-radius:5px;
+ 	width:150px;
+    height:40px;
 }
 /*login css*/
 .login{
@@ -974,6 +1009,10 @@ legend{
 	position: absolute;
 	right: 55px;
 	top: 15px;
+}
+/*review css*/
+.review{
+	margin:10px 150px;
 }
 </style>
 </head>

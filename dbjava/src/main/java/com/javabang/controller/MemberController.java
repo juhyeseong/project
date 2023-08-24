@@ -26,7 +26,6 @@ import com.jcraft.jsch.SftpException;
 @Controller
 @RequestMapping("/member")
 public class MemberController {
-
 	@Autowired
 	private MemberService mservice;
 	@Autowired
@@ -205,9 +204,9 @@ public class MemberController {
 		mav.addObject("tmp", tmp);
 		return mav;
 	}
-	
-	@PostMapping("/resultId") 
-	public void resultId() {}
 
+	@PostMapping("/resultId")
+	public void resultId() {
+	}
 
 }

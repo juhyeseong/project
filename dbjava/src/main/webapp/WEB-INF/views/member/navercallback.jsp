@@ -9,52 +9,30 @@
   	<form id = "naverLoginForm"method="POST" action="${cpath }/api/naversignup">
   					<input type="hidden" name="userId" id="naveremail" />
 		          	 <input type="hidden" name="userName" id="navername" />  
-		       <!--    	 <input type="hidden" name="gender" id="navergender"/>
-		          	 <input type="hidden" name="email" id="naveremail"/> -->
 		          	  <input type="hidden" name="userNick" id="navernick"/>
-		          	  
   	</form>
-  
   </div>
-  
-  
-  
-  
   
   <script>
  var naver_id_login = new naver_id_login("QBQcG_g3ay39MPum66CS", "http://localhost:8080/dbjava/member/navercallback");
  //var naver = new naver("QBQcG_g3ay39MPum66CS", "http://localhost:8080/dbjava/member/navercallback");
-  // 접근 토큰 값 출력
-/*   alert(naver.oauthParams.access_token); */
 	const token = naver_id_login.oauthParams.access_token
   // 네이버 사용자 프로필 조회
   naver_id_login.get_naver_userprofile("naverSignInCallback()");
   // 네이버 사용자 프로필 조회 이후 프로필 정보를 처리할 callback function
   function naverSignInCallback() {
-  /*   alert(naver_id_login.getProfileData('email'));
-    alert(naver_id_login.getProfileData('nickname'));
-    alert(naver_id_login.getProfileData('name'));
-    alert(naver_id_login.getProfileData('gender')); */
-    
+
     const email = naver_id_login.getProfileData('email')
     const nickname = naver_id_login.getProfileData('nickname')
     const name = naver_id_login.getProfileData('name')
     const gender = naver_id_login.getProfileData('gender')
     
-    console.log(email)
-    console.log(nickname)
-    console.log(name)
-    console.log(gender)
-    
-    
-	    document.getElementById('naveremail').value = email
-		document.getElementById('navernick').value=nickname
-		document.getElementById('navername').value=name
+	document.getElementById('naveremail').value = email
+	document.getElementById('navernick').value=nickname
+	document.getElementById('navername').value=name
 				 	 
-		const naverLoginForm = document.getElementById('naverLoginForm')
-		naverLoginForm.submit()
-    
-
+	const naverLoginForm = document.getElementById('naverLoginForm')
+	naverLoginForm.submit()
   }
 </script>
 </body>

@@ -9,6 +9,13 @@
 			rent(member, category, roomType, address, detailAddress, roomCount, guestCount, bedCount, bathCount, information, title, content, price)
 			values(#{member}, #{category}, #{roomType}, #{address}, #{detailAddress}, #{roomCount}, #{guestCount}, #{bedCount}, #{bathCount}, #{information}, #{title}, #{content}, #{price})
 	</insert>
+	
+	<select id="selectAll" resultType="rent">
+		select * from rent
+	</select>
+	<select id="selectOne" parameterType="int" resultType="rent">
+		select * from rent where idx = #{idx}
+	</select>
 </mapper>
 
 

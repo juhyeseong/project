@@ -18,15 +18,12 @@ public class KakaoController {
 	
 	@Autowired MemberService service;
 	
-	
 	@PostMapping("/kakaosignup")   //카카오 회원가입 + 로그인
 	public ModelAndView signup(MemberDTO dto, HttpSession session) {
 		ModelAndView mav = new ModelAndView();
 	   MemberDTO tmp = service.selectKakao(dto);
 
-	
 		if (tmp == null) {
-//			int row = service.insertKakao(dto);
 			mav.addObject("dto", dto);
 			mav.setViewName("/member/socialJoin");
 			return mav;
@@ -36,11 +33,5 @@ public class KakaoController {
 			mav.setViewName("/home");
 			return mav;
 		}
-	
-	
-		
-
-
-
 	}
 }
