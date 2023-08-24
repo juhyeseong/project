@@ -4,43 +4,51 @@
  <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
  <script src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.0.js" charset="utf-8"></script>
  
+ <!-- 네이버로그인에 필요한 js -->
+ <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
+  <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
  
 <div class="login">
       <fieldset>
           <legend>Welcome JavaBang</legend>
 
-			<form method="POST">
+			<form method="POST" action="${cpath }/member/login">
           		<p><input type="text" name="userId" placeholder="아이디"></p>
-          		<p><input type="password" name="userPw" placeholder="비밀번호"></p>
+          		<p class="passwordBox">
+          			<input id="password" type="password" name="userPw" placeholder="비밀번호">
+          			<span id="toggleButton" onclick="togglePasswordVisibility()">O_O</span>
+          		</p>
           		<p><input type="submit" value="로그인"></p>
  			</form>    
- 			
+ 		  <%--  <p> <a href="http://developers.kakao.com/logout">카카오로그아웃</a> </p> 
+ 		   <p><a href="https://nid.naver.com/nidlogin.logout?returl=${cpath }/dbjava/member/login">네이버 로그아웃</a></p> --%>
+ 		   
+ 		 <p> or </p>
+ 		    
+ 		    <div class="socialbox">
           	<div id="kakaologin">
-          		
 				 <form method="post" action="${cpath }/api/kakaosignup"> 
 		          	<input type="hidden" name="userId" id="kakaoid" />
-		          	<input type="hidden" name="userNick" id="kakaoname" /> 
+		          	<input type="hidden" name="userName" id="kakaoname" /> 
+		          	<input type="hidden" name="userNick" id="kakaonick" /> 
 		          	<input type="hidden" name="gender" id="kakaogender" /> 
 		          	<input type="hidden" name="email" id="kakaoemail" />         
-		            <button class="kakao"> <img src="http://192.168.64.200/kakaoLogo.jpeg" > 카카오 아이디로 로그인하기</button> 
+		            <button class="kakao"> <img src="http://192.168.64.200/kakaoLogo.jpeg" > 카카오 아이디로 로그인</button> 
 		          
 	         	 </form>
 	         	
          	 </div>
-         	 <p> <a href="http://developers.kakao.com/logout">카카오로그아웃</a> </p>  
-      		 <div id="naverlogin">
-	          <form method="POST" action="${cpath }/api/naversignup">
-		             <input type="hidden" name="userId" id="naveremail" />
-		          	 <input type="hidden" name="userNick" id="navername" />  
-	         		 <button class="naver"> <img src="http://192.168.64.200/naverLogo.jpeg" >네이버 아이디로 로그인하기</button>
-	          </form>
-              </div> 
-          <%--  <a href="${cpath }/member/naverlogin"><button class="naver"> <img src="http://192.168.64.200/naverLogo.jpeg" >네이버 아이디로 로그인하기</button></a> --%>
-          <button class="email"> <img src="http://192.168.64.200/mailLogo.jpeg" >구글 이메일로 로그인하기</button> 
+           
+         	 
+   		     <div id="naver_id_login" >  </div>  
+   		     </div>
+
+
  		  <p>
  
 		  	<a href="${cpath }/member/join">회원가입 </a> |
-	      	<a href="${cpath }/member/resetPassword">비밀번호재설정 </a>
+	      	<a href="${cpath }/member/resetPassword">비밀번호재설정 </a> |
+	      	<a href="${cpath }/member/findId">아이디찾기</a>
 	      </p> 
     
       </fieldset>
@@ -81,6 +89,7 @@
  
  					document.getElementById('kakaoid').value = userId
  					document.getElementById('kakaoname').value = userNick
+ 					document.getElementById('kakaonick').value = userNick
  					document.getElementById('kakaogender').value = gender
  					document.getElementById('kakaoemail').value = email
  				 	 
@@ -91,43 +100,40 @@
 
  			}
  		});
-	 		console.log(1)
-//		 	alert(event.target)
-//	 		location.href = event.target.parentNode.action
-//			event.target.parentNode.submit()
-			 	  
+		 	  
  	}
-  //window.addEventListener('load', kakaoLogin)
  	kakaologin.addEventListener('click',kakaoLogin)
  </script>
  
+ <!-- 네이버로그인 script-->
+ 
+<script>
+	
 
- <!-- 	네이버로그인 script -->
+	  	var naver_id_login = new naver_id_login("QBQcG_g3ay39MPum66CS", "http://localhost:8080/dbjava/member/navercallback");
+	  	var state = naver_id_login.getUniqState();
+	  	naver_id_login.setButton("green", 3, 50);
+	  	naver_id_login.setDomain("http://localhost:8080/dbjava/member/login");
+	  	naver_id_login.setState(state);
+	  	naver_id_login.init_naver_id_login();
 
- <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
- <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
- <script>
- var naver = new naver("QBQcG_g3ay39MPum66CS", "http://localhost:8080/dbjava/member/navercallback");
- // 접근 토큰 값 출력
- alert(naver_id_login.oauthParams.access_token);
- // 네이버 사용자 프로필 조회
- naver_id_login.get_naver_userprofile("naverSignInCallback()");
- // 네이버 사용자 프로필 조회 이후 프로필 정보를 처리할 callback function
- function naverSignInCallback() {
-   const email = (naver_id_login.getProfileData('email'));
-   const nickname = (naver_id_login.getProfileData('nickname'));
-   const userName = (naver_id_login.getProfileData('name'));
-   const gender = (naver_id_login.getProfileData('gender'));
-   
-   console.log(email)
-   console.log(nickname)
-   console.log(userName)
-   console.log(gender)
-
- }
 </script>
 
- 
+<!-- 눈 아이콘 클릭시 비밀번호 보기 -->
+<script>
+function togglePasswordVisibility() {
+    var passwordInput = document.getElementById("password");
+    var toggleButton = document.getElementById("toggleButton");
+
+    if (passwordInput.type === "password") {
+        passwordInput.type = "text";
+        toggleButton.textContent = "◡‿◡";
+    } else {
+        passwordInput.type = "password";
+        toggleButton.textContent = "O_O";
+    }
+}
+</script>
  
  
  

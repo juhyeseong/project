@@ -35,6 +35,10 @@ public interface MemberDAO {
   MemberDTO selectKakao(MemberDTO dto);
 
   int insertKakao(MemberDTO dto);
+  		 
+  MemberDTO selectNaver(MemberDTO dto);
+
+  MemberDTO findId(MemberDTO dto);
 
    
 

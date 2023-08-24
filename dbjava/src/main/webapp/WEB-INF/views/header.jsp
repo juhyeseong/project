@@ -164,12 +164,20 @@ legend{
     margin-bottom: 40px;
 }
 /*소셜 로그인 버튼  css*/
+.socialbox{
+	display:flex;
+}
+
+
+
 .kakao{
-    width:500px;
+    width:250px;
     height: 50px;
+    color:#381E20;
   
     border: none;
     padding: 0; 
+    margin-right:20px;
     font: inherit;
     cursor: pointer;
     outline: inherit;
@@ -178,67 +186,16 @@ legend{
 	justify-content:center;
 	align-items: center;
 	margin-left:50px;
-	border-radius: 10px;
+	border-radius: 5px;
 	
 	background-color: #FBE31F;
 	font-weight:bold;
+	font-size:15px;
 }
 .kakao > img{
-	width:40px;
-	height:35px;
+	width:37px;
+	height:33px;
 	border-radius:50%;
-    margin-right:10px;
-}
-
-.naver{
-    width:500px;
-    height: 50px;
-    line-height: 50px;
-    border: none;
-    padding: 0; 
-    font: inherit;
-    cursor: pointer;
-    outline: inherit;
-    margin-top:10px;
-    border-radius: 10px;
-    
-    display: flex;
-	justify-content:center;
-	align-items: center;
-	margin-left:50px;
-	
-	background-color: #1EC124;
-	font-weight:bold;
-}
-.naver > img{
-	width:30px;
-	height:30px;
-	border-radius:50%;
-    margin-right:10px;
-}
-.email{
-	width:500px;
-    height: 50px;
-    line-height: 50px;
-    border: none;
-    padding: 0; 
-    font: inherit;
-    cursor: pointer;
-    outline: inherit;
-    margin-top:10px;
-    
-    display: flex;
-	justify-content:center;
-	align-items: center;
-	margin-left:50px;
-	border-radius: 10px;
-	
-	background-color: #eeeeee;
-	font-weight:bold;
-}
-.email > img{
-	width:30px;
-	height:30px;
     margin-right:10px;
 }
 .login input[type="submit"]{
@@ -901,6 +858,43 @@ legend{
 }
 .hidden{
 	display: none;
+}
+/*아이디 찾기 css*/
+
+.findId input {
+    border-radius: 10px;
+    width:500px;
+    height:50px;
+}
+.goToLogin,
+.findId input[type="submit"] {
+    background-color: #C2D6F0;
+    border : none;
+    width:500px;
+    height:50px;
+    border-radius:10px;
+}
+.goToLoginLink{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin: 10px 0px;
+}
+.goToLoginContent {
+	font-size: 20px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin:20px 0px;
+}
+/*이모지 클릭시 비밀번호 보이기*/
+.passwordBox {
+	position: relative;
+}
+#toggleButton {
+	position: absolute;
+	right: 55px;
+	top: 15px;
 }
 </style>
 </head>

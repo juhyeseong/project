@@ -25,7 +25,7 @@ public class AjaxController {
 		result.put("status", email != null);
 		return result;
 	}
-	@GetMapping("/dupCheck/{userId}")
+	@GetMapping("/dupCheck/{userId}/")
 	public int dupCheck(@PathVariable("userId") String userId) {
 		int row = mservice.dupCheck(userId);
 		return row;

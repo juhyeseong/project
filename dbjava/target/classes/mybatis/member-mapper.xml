@@ -53,12 +53,20 @@
 </update>
 
 <select id="selectKakao" parameterType="member" resultType="member">
-	select * from member where userId=#{userId} and userNick=#{userNick}
+	select * from member where userId=#{userId} and userName=#{userName}
 </select>
 
 <insert id="insertKakao" parameterType="member">
 	insert into member(userId, userNick, gender, email) values(#{userId}, #{userNick}, #{gender}, #{email})
 </insert>
+
+<select id="selectNaver" parameterType="member" resultType="member">
+	select * from member where userId=#{userId} and userName=#{userName}
+</select>
+
+<select id="findId" parameterType="member" resultType="member">
+	select * from member where userName = #{userName} and phoneNum=#{phoneNum}
+</select>
 
 </mapper>
 

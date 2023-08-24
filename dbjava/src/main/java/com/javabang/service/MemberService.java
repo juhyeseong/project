@@ -224,6 +224,16 @@ public class MemberService {
 		
 		return mdao.insertKakao(dto);
 	}
+
+	public MemberDTO selectNaver(MemberDTO dto) {
+		
+		return mdao.selectNaver(dto);
+	}
+
+	public MemberDTO findId(MemberDTO dto) {
+	
+		return mdao.findId(dto);
+	}
 }
 		
 		

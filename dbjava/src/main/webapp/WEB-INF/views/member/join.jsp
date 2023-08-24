@@ -25,7 +25,7 @@
 	    	<span id="authMessage"></span>
 	    </p>
 	    
-	    <p><input type="text" name="userName" placeholder="이름 입력" required></p>
+	    <p><input type="text" name="userName" placeholder="이름 입력" value="${dto.userName }" required readonly></p>
 	    <p>
 	    	<input type="text" name="year" placeholder="생년 입력" required>
 	    	<select name="month" required>
@@ -100,7 +100,7 @@
 			alert('먼저 사용할 아이디를 입력해주세요')
 			return
 		}
-		const url = '${cpath}/dupCheck/' + userId.value
+		const url = '${cpath}/dupCheck/' + userId.value + '/'
 		const count = await fetch(url).then(resp => resp.text())
 		
 		if(isNaN(count)){
