@@ -3,9 +3,9 @@
 
 <form class="join" method="POST" action="${cpath }/member/join">
 	<fieldset>
-	    <legend>회원가입</legend>
+	    <legend>소셜 로그인 회원가입</legend>
 	    
-	    <p><input type="text" name="userId" placeholder="아이디 입력" value="${dto.userId }" required>
+	    <p><input type="text" name="userId" placeholder="아이디 입력" value="${dto.userId }" required readonly>
 
 	    <input id="dupCheckBtn" type="button" value="중복확인">
 	    <br>
@@ -26,7 +26,7 @@
 	    	<span id="authMessage"></span>
 	    </p>
 	    
-	    <p><input type="text" name="userName" placeholder="이름 입력" value="${dto.userName }" required></p>
+	    <p><input type="text" name="userName" placeholder="이름 입력" value="${dto.userName }" required readonly></p>
 	 
 	    <p>
 	    	<input type="text" name="year" placeholder="생년 입력" required>

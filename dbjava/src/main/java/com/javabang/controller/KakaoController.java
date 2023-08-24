@@ -28,7 +28,7 @@ public class KakaoController {
 		if (tmp == null) {
 //			int row = service.insertKakao(dto);
 			mav.addObject("dto", dto);
-			mav.setViewName("/member/join");
+			mav.setViewName("/member/socialJoin");
 			return mav;
 		} 
 	 else {

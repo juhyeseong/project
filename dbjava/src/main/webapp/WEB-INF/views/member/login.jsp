@@ -25,6 +25,7 @@
  		   
  		 <p> or </p>
  		    
+ 		    
  		    <div class="socialbox">
           	<div id="kakaologin">
 				 <form method="post" action="${cpath }/api/kakaosignup"> 

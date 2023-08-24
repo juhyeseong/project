@@ -26,7 +26,7 @@ public class NaverController {
 		
 			if (tmp == null) { 
 				mav.addObject("dto", dto);
-				mav.setViewName("/member/join");
+				mav.setViewName("/member/socialJoin");
 				return mav;
 			} 
 		 else {
