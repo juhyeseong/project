@@ -865,6 +865,12 @@
 			let index = 0
 			const mainImgSpace = document.querySelector('.mainImgSpace')
 			
+			for(let i = 0; i > 5; i++) {
+				if(formData.get('files['+ i +']') != null) {
+					formData.delete('files['+ i +']')
+				}
+			}
+			
 			fileInputs.forEach(fileInput => {
 				if(fileInput.files[0] != null) {
 					formData.append('files[' + index + ']', fileInput.files[0])
@@ -920,6 +926,16 @@
 			const price = document.querySelector('input[name="price"]')
 			const content = document.querySelector('textarea[name="content"]')
 
+			if(formData.get("title") != null) {
+				formData.delete("title")
+			}
+			if(formData.get("price") != null) {
+				formData.delete("price")
+			}
+			if(formData.get("content") != null) {
+				formData.delete("content")
+			}
+			
 			formData.append('title', title.value)
 			formData.append('price', price.value)
 			formData.append('content', content.value)
@@ -1025,12 +1041,39 @@
 		    
 		    geocoder.coord2Address(latlng.getLng(), latlng.getLat(), (result, status) => {
 			    var resultDiv = document.getElementById('clickLatlng');
-		    	
+			    const select = document.querySelector('select[name="sido"]')
+				const sigugun = document.querySelector('input[name="sigugun"]')
+				const gueup = document.querySelector('input[name="gueup"]')
+				const road = document.querySelector('input[name="road"]')
+				
+				select.options[0].selected = true
+				sigugun.value = ""
+				gueup.value = ""
+				road.value = ""
+			    
 			    if(status === kakao.maps.services.Status.OK) {
 		    		const roadAddress = result[0].road_address.address_name
 		    		var message = roadAddress
 		    	}
 			    resultDiv.innerText = message
+			    
+			    const addressParts = message.split(' ')
+				
+ 				for(let i = 0; i < addressParts.length; i++) {
+ 					if(i == 0) {
+						const option = document.querySelector('option[value="' + addressParts[i] + '"]')
+ 						option.selected = true
+ 					}
+ 					else if(i == 1) {
+ 						sigugun.value = addressParts[i]
+ 					}
+ 					else if('구/읍'.includes(addressParts[i].charAt(addressParts[i].length - 1))) {
+						gueup.value = addressParts[i]
+					}
+					else {
+						road.value += addressParts[i] + " "
+					}
+				}
 		    })
 		    
 		});

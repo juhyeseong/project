@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.javabang.model.MemberDTO;
 import com.javabang.model.RentDTO;
@@ -57,8 +56,8 @@ public class AjaxController {
 	}
 
 	@PostMapping("/rent/createRent")
-	public ModelAndView createRent(RentDTO dto) {
-		ModelAndView mav = new ModelAndView("alert");
+	public HashMap<String, String> createRent(RentDTO dto) {
+		HashMap<String, String> map = new HashMap<String, String>();
 		int row = 0;
 		String msg = null;
 		String url = null;
@@ -67,9 +66,9 @@ public class AjaxController {
 		msg = row != 0 ? "숙소 등록이 완료되었습니다 ~~ " : "숙소 등록에 실패하였습니다 ~~";
 		url = row != 0 ? "/member/mypage" : "/rent/hosting";
 
-		mav.addObject("msg", msg);
-		mav.addObject("url", url);
+		map.put("msg", msg);
+		map.put("url", url);
 		
-		return mav;
+		return map;
 	} 
 }
