@@ -149,10 +149,14 @@ public class MemberService {
 	//프로필 사진 수정
 	public int updateProfile(MemberDTO dto) throws Exception {
 
-		MultipartFile f = dto.getUpload();
-		File dest = new File(f.getOriginalFilename());
-		f.transferTo(dest);
+		MultipartFile file = dto.getUpload();
+		String ymd = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
+		String fileName = file.getOriginalFilename();
+		fileName = fileName.substring(0, fileName.lastIndexOf("."));
+		String ext = file.getContentType().substring(file.getContentType().indexOf("/") + 1);
+		File dest = new File(ymd + "_" + fileName + "." + ext);
 		
+		file.transferTo(dest);
 		
 		Session sess = null;
 		Channel channel = null;

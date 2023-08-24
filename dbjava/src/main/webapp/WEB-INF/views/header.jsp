@@ -411,11 +411,82 @@ legend{
   margin-right:200px;
 }
 
+/* hostManage style */
+.hostManage {
+	width: 1000px;
+	
+	padding: 20px 0px;
+}
+.hostRent {
+	border: 1px solid black;
+	border-radius: 20px;
+	
+	height: 500px;
+	margin-bottom: 20px;
+	
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.hostRentWrap {
+	width: 985px;
+	height: 485px;
+	
+	padding: 0px 2px;
+	
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: column;
+	
+	overflow-y: scroll;
+}
+.hostRentTop {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	
+	border-bottom: 1px solid black;
+	
+	padding: 0px 10px;
+}
+.hostRentTop button {
+	all: unset;
+	cursor: pointer;
+	
+	padding: 15px 30px;
+	
+	background-color: #00a4fe;
+	color: white;
+	font-size: 18px;
+	font-weight: bold;
+	
+	border-radius: 10px;
+}
+.hostReservation {
+	border: 1px solid black;
+	border-radius: 20px;
+	
+	height: 500px;
+	
+	display: flex;
+	flex-wrap: wrap;
+	
+	overflow-y: scroll;
+}
 
-/* host style */
+/* hosting style */
 .container {
 	width: 100%;
+	height: 78vh;
+	
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: center;
+	
 	position: relative;
+	
+	overflow-y: scroll;
 }
 .blackBtn {
 	all: unset;
@@ -430,11 +501,22 @@ legend{
 	font-size: 17px;
 }
 .btnSpace {
+	border-top: 1px solid black;
+	padding-right: 50px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+
+	width: 100%;
 	height: 80px;
 	
 	display: flex;
 	justify-content: flex-end;
 	align-items: center;
+	
+	background-color: white;
+	
+	position: fixed;
+	bottom: 0;
 }
 #start {
 	width: 1500px;
@@ -442,12 +524,15 @@ legend{
 }
 #host {
 	display: flex;
-	height: 760px;
+	height: 440px;
+	
+	margin: auto;
 }
 .hostLeft {
 	flex: 1;
 	
 	display: flex;
+	justify-content: center;
 	align-items: center;
 }
 .hostLeft h1 {
@@ -460,6 +545,7 @@ legend{
 	
 	display: flex;
 	flex-direction: column;
+	justify-content: center;
 }
 .hostInfo {
 	flex: 1;
@@ -487,10 +573,6 @@ legend{
 .hostInfo span {
 	font-size: 17px;
 }
-.main hr {
-	width: 1000px;
-	margin: 30px 0px;
-}
 #nextHost {
 	all: unset;
 	cursor: pointer;
@@ -506,7 +588,7 @@ legend{
 
 /* category style */
 #selectCategory {
-	height: 760px;
+	margin: auto;
 	padding-top: 20px;
 	
 	box-sizing: border-box;
@@ -555,8 +637,6 @@ legend{
 	margin: auto;
 }
 .roomTypeWrap {
-	height: 760px;
-	
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -599,8 +679,6 @@ legend{
 	margin: auto;
 }
 .rentCountWrap {
-	height: 760px;
-	
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -669,25 +747,18 @@ legend{
 }
 
 /* information style */
+#rentInformation {
+	margin: auto;
+}
 .rentInformationWrap {
 	width: 700px;
-	height: 760px;
 	margin: auto;
 	padding-top: 20px;
 }
 .rentInformationScroll {
-	width: 1500px;
-	max-height: 760px;
 	margin: auto;
 	
 	flex-wrap: wrap;
-	overflow-y: scroll;
-	
-	scrollbar-width: none;
-}
-::-webkit-scrollbar {
-	width: 0.1em;
-	background-color: transparent;
 }
 .rentInformationWrap h1 {
 	width: 830px;
@@ -727,12 +798,9 @@ legend{
 
 /* rentImg style */
 .rentImg {
-	height: 760px;
+	margin: auto;
 }
 .rentImgAdd {
-	width: 1500px;
-	margin: auto;
-	height: 760px;
 	padding-top: 20px;
 	box-sizing: border-box;
 	
@@ -741,14 +809,8 @@ legend{
 	align-items: center;
 }
 .rentImgWrap {
-	width: 702px;
 	margin: auto;
-}
-.rentImgScroll {
-	width: 1500px;
 	display: flex;
-	flex-wrap: wrap;
-	overflow-y: scroll;
 }
 .rentImgAdd h1 {
 	margin-top: 0px;
@@ -756,9 +818,9 @@ legend{
 }
 .mainImgSpace {
 	width: 700px;
-	height: 450px;
-
-	border: 1px dashed black;
+	height: 480px;
+	padding-top: 10px;
+	margin-right: 5px;
 	
 	display: flex;
 	flex-direction: column;
@@ -769,7 +831,7 @@ legend{
 }
 .mainInputSpace {
 	width: 699px;
-	height: 450px;
+	height: 479px;
 
 	border: 1px dashed black;
 	
@@ -781,7 +843,7 @@ legend{
 }
 .addMainImg {
 	max-width: 699px;
-	max-height: 449px;
+	max-height: 479px;
 	width: auto;
 	height: auto;
 	
@@ -804,7 +866,8 @@ legend{
 	height: 100px;
 }
 .subImgWrap {
-	width: 700px;
+	margin-left: 5px;
+	width: 670px;
 	
 	display: flex;
 	flex-wrap: wrap;
@@ -886,20 +949,30 @@ legend{
 }
 
 /* location style */
+#rentLocation {
+	width: 1600px;
+}
 .rentLocationScroll {
-	width: 1700px;
-	height: 740px;
 	margin: auto;
 	
 	display: flex;
 	flex-wrap: wrap;
-	
-	overflow-y: scroll;
 }
 .rentLocationWrap {
+	width: 1550px;
+	display: flex;
+	justify-content: space-between;
+}
+.rentLocationLeft {
 	width: 1000px;
-	height: 740px;
-	margin: auto;
+	float: left;
+}
+.rentLocationRight {
+	width: 500px;
+	
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
 }
 .rentLocationWrap h1 {
 	margin-bottom: 2px;
@@ -941,13 +1014,13 @@ legend{
 	border-radius: 10px;
 }
 #map {
-	width: 100%;
-	height: 400px;
+	width: 1000px;
+	height: 500px;
 }
 
 .locationValue select {
-	width: 500px;
-	height: 50px;
+	width: 508px;
+	height: 54px;
 	
 	font-size: 20px;
 	font-weight: bold;
@@ -1020,9 +1093,9 @@ legend{
 	<header>
         <div>
         	 <!-- <h1><a href="${cpath }">자바방</a></h1> -->
-        	<div class="title"><a href="${cpath }"><img src="http://192.168.64.200/javaBang.jpeg"></a></div>
+        	<div class="title"><a href="${cpath }"><img src="http://192.168.64.200/javaBang.png"></a></div>
 	        <div class="btn3">
-	        	<button><img src="http://192.168.64.200/search.jpeg" class="search"></button>
+	        	<button><img src="http://192.168.64.200/search.png" class="search"></button>
 	        </div>
 	        
 	        <ul>

@@ -1,6 +1,5 @@
 package com.javabang.controller;
 
-import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.util.UUID;
 
@@ -15,13 +14,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.javabang.component.HashComponent;
 import com.javabang.mail.MailComponent;
 import com.javabang.model.MemberDTO;
 import com.javabang.service.MemberService;
-import com.jcraft.jsch.SftpException;
 
 @Controller
 @RequestMapping("/member")
@@ -35,8 +32,7 @@ public class MemberController {
 
 	// 회원가입
 	@GetMapping("/join")
-	public void join() {
-	}
+	public void join() {}
 
 	@PostMapping("/join")
 	public String join(MemberDTO dto) throws NoSuchAlgorithmException {
@@ -177,7 +173,7 @@ public class MemberController {
 	@PostMapping("/updateBasicProfile/{idx}")
 	public String basicProfile(HttpSession session, @PathVariable("idx") int idx, MemberDTO dto) throws Exception {
 		// 여기에서 기본 이미지로 변경하는 로직을 수행합니다.
-		dto.setProfile("http://192.168.64.200/basicProfile.jpeg"); // 기본 이미지 URL로 설정
+		dto.setProfile("http://192.168.64.200/basicProfile.png"); // 기본 이미지 URL로 설정
 		int row = mservice.basicProfile(dto); // 기본 이미지로 변경 작업 수행
 		MemberDTO tmp = mservice.selectOne(idx);
 		session.setAttribute("login", tmp); // 로그인 정보를 변경된 MemberDTO로 업데이트

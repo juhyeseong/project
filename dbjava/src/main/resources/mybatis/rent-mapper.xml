@@ -10,6 +10,16 @@
 			values(#{member}, #{category}, #{roomType}, #{address}, #{detailAddress}, #{roomCount}, #{guestCount}, #{bedCount}, #{bathCount}, #{information}, #{title}, #{content}, #{price})
 	</insert>
 	
+	<select id="getRentIdx" parameterType="int">
+		select max(idx) from rent
+	</select>
+	
+	<insert id="fileInsert" parameterType="hashmap">
+		insert into
+			rent_img(rent, filePath)
+			values(#{rent}, #{filePath})
+	</insert>
+	
 	<select id="selectAll" resultType="rent">
 		select * from rent
 	</select>

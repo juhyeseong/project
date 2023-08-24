@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="../header.jsp"%>
+
 <script>
 	window.addEventListener("beforeunload", beforeUnloadHandler)
 	
@@ -29,7 +30,7 @@
 							</span>
 						</div>
 						<div class="infoImg">
-							<img src="http://192.168.64.200/infoImgOne.jpeg">
+							<img src="http://192.168.64.200/infoImgOne.png">
 						</div>
 					</div>
 					<div class="hostInfo">
@@ -39,7 +40,7 @@
 							</span>
 						</div>
 						<div class="infoImg">
-							<img src="http://192.168.64.200/infoImgTwo.jpeg">
+							<img src="http://192.168.64.200/infoImgTwo.png">
 						</div>
 					</div>
 					<div class="hostInfo">
@@ -49,7 +50,7 @@
 							</span>
 						</div>
 						<div class="infoImg">
-							<img src="http://192.168.64.200/infoImgThree.jpeg">
+							<img src="http://192.168.64.200/infoImgThree.png">
 						</div>
 					</div>
 				</div>
@@ -62,55 +63,55 @@
 			<div class="categoryItems">
 				<button class="categoryItem">
 					<div>
-						<img src="http://192.168.64.200/펜션.jpeg">
+						<img src="http://192.168.64.200/펜션.png">
 					</div>
 					<div>펜션</div>
 				</button>
 				<button class="categoryItem">
 					<div>
-						<img src="http://192.168.64.200/풀빌라.jpeg">
+						<img src="http://192.168.64.200/풀빌라.png">
 					</div>
 					<div>풀빌라</div>
 				</button>
 				<button class="categoryItem">
 					<div>
-						<img src="http://192.168.64.200/호텔.jpeg">
+						<img src="http://192.168.64.200/호텔.png">
 					</div>
 					<div>호텔</div>
 				</button>
 				<button class="categoryItem">
 					<div>
-						<img src="http://192.168.64.200/리조트.jpeg">
+						<img src="http://192.168.64.200/리조트.png">
 					</div>
 					<div>리조트</div>
 				</button>
 				<button class="categoryItem">
 					<div>
-						<img src="http://192.168.64.200/글램핑.jpeg">
+						<img src="http://192.168.64.200/글램핑.png">
 					</div>
 					<div>글램핑</div>
 				</button>
 				<button class="categoryItem">
 					<div>
-						<img src="http://192.168.64.200/캠핑.jpeg">
+						<img src="http://192.168.64.200/캠핑.png">
 					</div>
 					<div>캠핑</div>
 				</button>
 				<button class="categoryItem">
 					<div>
-						<img src="http://192.168.64.200/게스트하우스.jpeg">
+						<img src="http://192.168.64.200/게스트하우스.png">
 					</div>
 					<div>게스트하우스</div>
 				</button>
 				<button class="categoryItem">
 					<div>
-						<img src="http://192.168.64.200/한옥.jpeg">
+						<img src="http://192.168.64.200/한옥.png">
 					</div>
 					<div>한옥</div>
 				</button>
 				<button class="categoryItem">
 					<div>
-						<img src="http://192.168.64.200/료칸.jpeg">
+						<img src="http://192.168.64.200/료칸.png">
 					</div>
 					<div>료칸</div>
 				</button>
@@ -127,7 +128,7 @@
 						<span>게스트가 숙소 전체를 사용합니다</span>
 					</div>
 					<div>
-						<img src="http://192.168.64.200/독채.jpeg">
+						<img src="http://192.168.64.200/독채.png">
 					</div>
 				</button>
 				<button class="roomTypeItem">
@@ -136,7 +137,7 @@
 						<span>게스트가 묵을 숙소가 방이 하나인 타입입니다</span>
 					</div>
 					<div>
-						<img src="http://192.168.64.200/원룸.jpeg">
+						<img src="http://192.168.64.200/원룸.png">
 					</div>
 				</button>
 				<button class="roomTypeItem">
@@ -145,7 +146,7 @@
 						<span>게스트가 묵을 숙소가 방이 여러개인 타입입니다</span>
 					</div>
 					<div>
-						<img src="http://192.168.64.200/멀티룸.jpeg">
+						<img src="http://192.168.64.200/멀티룸.png">
 					</div>
 				</button>
 			</div>
@@ -228,49 +229,49 @@
 					<div class="rentInformationItems">
 						<button class="rentInformationItem">
 							<div>
-								<img src="http://192.168.64.200/무선 인터넷.jpeg">
+								<img src="http://192.168.64.200/무선 인터넷.png">
 							</div>
 							<div>무선 인터넷</div>
 						</button>
 						<button class="rentInformationItem">
 							<div>
-								<img src="http://192.168.64.200/TV.jpeg">
+								<img src="http://192.168.64.200/TV.png">
 							</div>
 							<div>TV</div>
 						</button>
 						<button class="rentInformationItem">
 							<div>
-								<img src="http://192.168.64.200/컴퓨터.jpeg">
+								<img src="http://192.168.64.200/컴퓨터.png">
 							</div>
 							<div>컴퓨터</div>
 						</button>
 						<button class="rentInformationItem">
 							<div>
-								<img src="http://192.168.64.200/주방.jpeg">
+								<img src="http://192.168.64.200/주방.png">
 							</div>
 							<div>주방</div>
 						</button>
 						<button class="rentInformationItem">
 							<div>
-								<img src="http://192.168.64.200/세탁기.jpeg">
+								<img src="http://192.168.64.200/세탁기.png">
 							</div>
 							<div>세탁기</div>
 						</button>
 						<button class="rentInformationItem">
 							<div>
-								<img src="http://192.168.64.200/에어컨.jpeg">
+								<img src="http://192.168.64.200/에어컨.png">
 							</div>
 							<div>에어컨</div>
 						</button>
 						<button class="rentInformationItem">
 							<div>
-								<img src="http://192.168.64.200/주변 무료 주차.jpeg">
+								<img src="http://192.168.64.200/주변 무료 주차.png">
 							</div>
 							<div>주변 무료 주차</div>
 						</button>
 						<button class="rentInformationItem">
 							<div>
-								<img src="http://192.168.64.200/주변 유료 주차.jpeg">
+								<img src="http://192.168.64.200/주변 유료 주차.png">
 							</div>
 							<div>주변 유료 주차</div>
 						</button>
@@ -281,61 +282,61 @@
 					<div class="rentInformationItems">
 						<button class="rentInformationItem">
 							<div>
-								<img src="http://192.168.64.200/수영장.jpeg">
+								<img src="http://192.168.64.200/수영장.png">
 							</div>
 							<div>수영장</div>
 						</button>
 						<button class="rentInformationItem">
 							<div>
-								<img src="http://192.168.64.200/욕조.jpeg">
+								<img src="http://192.168.64.200/욕조.png">
 							</div>
 							<div>욕조</div>
 						</button>
 						<button class="rentInformationItem">
 							<div>
-								<img src="http://192.168.64.200/바베큐 그릴.jpeg">
+								<img src="http://192.168.64.200/바베큐 그릴.png">
 							</div>
 							<div>바베큐 그릴</div>
 						</button>
 						<button class="rentInformationItem">
 							<div>
-								<img src="http://192.168.64.200/피아노.jpeg">
+								<img src="http://192.168.64.200/피아노.png">
 							</div>
 							<div>피아노</div>
 						</button>
 						<button class="rentInformationItem">
 							<div>
-								<img src="http://192.168.64.200/키즈.jpeg">
+								<img src="http://192.168.64.200/키즈.png">
 							</div>
 							<div>키즈</div>
 						</button>
 						<button class="rentInformationItem">
 							<div>
-								<img src="http://192.168.64.200/빔프로젝트.jpeg">
+								<img src="http://192.168.64.200/빔프로젝트.png">
 							</div>
 							<div>빔프로젝트</div>
 						</button>
 						<button class="rentInformationItem">
 							<div>
-								<img src="http://192.168.64.200/무료영화(OTT).jpeg">
+								<img src="http://192.168.64.200/무료영화(OTT).png">
 							</div>
 							<div>무료영화(OTT)</div>
 						</button>
 						<button class="rentInformationItem">
 							<div>
-								<img src="http://192.168.64.200/운동기구.jpeg">
+								<img src="http://192.168.64.200/운동기구.png">
 							</div>
 							<div>운동기구</div>
 						</button>
 						<button class="rentInformationItem">
 							<div>
-								<img src="http://192.168.64.200/계곡과 인접.jpeg">
+								<img src="http://192.168.64.200/계곡과 인접.png">
 							</div>
 							<div>계곡과 인접</div>
 						</button>
 						<button class="rentInformationItem">
 							<div>
-								<img src="http://192.168.64.200/해변과 인접.jpeg">
+								<img src="http://192.168.64.200/해변과 인접.png">
 							</div>
 							<div>해변과 인접</div>
 						</button>
@@ -346,19 +347,19 @@
 					<div class="rentInformationItems">
 						<button class="rentInformationItem">
 							<div>
-								<img src="http://192.168.64.200/화재경보기.jpeg">
+								<img src="http://192.168.64.200/화재경보기.png">
 							</div>
 							<div>화재경보기</div>
 						</button>
 						<button class="rentInformationItem">
 							<div>
-								<img src="http://192.168.64.200/구급상자.jpeg">
+								<img src="http://192.168.64.200/구급상자.png">
 							</div>
 							<div>구급상자</div>
 						</button>
 						<button class="rentInformationItem">
 							<div>
-								<img src="http://192.168.64.200/소화기.jpeg">
+								<img src="http://192.168.64.200/소화기.png">
 							</div>
 							<div>소화기</div>
 						</button>
@@ -371,15 +372,15 @@
 		<div id="rentImg" class="hidden">
 			<div class="rentImgAdd">
 				<div class="rentImgScroll">
+					<h1>사진을 넣어주세요</h1>
 					<div class="rentImgWrap">
-						<h1>사진을 넣어주세요</h1>
 						<div class="mainImgSpace">
 							<div class="mainInputSpace">
 								<input type="file" id="mainImg" class="fileImg" onchange="rentImgInputHandler(event)">
 								<div class="inputInfo">
-									<img src="http://192.168.64.200/picture.jpeg">
+									<img src="http://192.168.64.200/picture.png">
 									<h3>
-										여기다 대표 사진을 끌어다 놓으세요<br>
+										여기다 사진을 끌어다 놓으세요<br>
 									</h3>
 									<span>
 										또는 공간을 클릭하여<br>
@@ -399,7 +400,7 @@
 									<div class="subInputSpace">
 										<input type="file" class="fileImg" onchange="rentImgInputHandler(event)">
 										<div class="subInfo">
-											<img src="http://192.168.64.200/picture.jpeg">
+											<img src="http://192.168.64.200/picture.png">
 										</div>
 									</div>
 									<div class="subImg hidden">
@@ -411,7 +412,7 @@
 									<div class="subInputSpace">
 										<input type="file" class="fileImg" onchange="rentImgInputHandler(event)">
 										<div class="subInfo">
-											<img src="http://192.168.64.200/picture.jpeg">
+											<img src="http://192.168.64.200/picture.png">
 										</div>
 									</div>
 									<div class="subImg hidden">
@@ -423,7 +424,7 @@
 									<div class="subInputSpace">
 										<input type="file" class="fileImg" onchange="rentImgInputHandler(event)">
 										<div class="subInfo">
-											<img src="http://192.168.64.200/picture.jpeg">
+											<img src="http://192.168.64.200/picture.png">
 										</div>
 									</div>
 									<div class="subImg hidden">
@@ -435,7 +436,7 @@
 									<div class="subInputSpace">
 										<input type="file" class="fileImg" onchange="rentImgInputHandler(event)">
 										<div class="subInfo">
-											<img src="http://192.168.64.200/picture.jpeg">
+											<img src="http://192.168.64.200/picture.png">
 										</div>
 									</div>
 									<div class="subImg hidden">
@@ -464,93 +465,59 @@
 		<div id="rentLocation" class="hidden">
 			<div class="rentLocationScroll">
 				<div class="rentLocationWrap">
-					<h1>숙소의 위치를 알려주세요</h1>
-					<h4>
-						정확한 도로명 주소를 모를 경우 지도에 위치를 클릭해보세요 ~<br>
-						지도에서 알아서 도로명 주소를 알려줄거에요😉
-					</h4>
-					<div id="map"></div>
-					<div id="clickLatlng"></div>
-					<div class="locationSpace">
-						<div><h4>대략적인 주소를 아신다면 지번 주소로 검색해보세요 ~</h4></div>
-						<div class="searchLocationSpace">
-							<input type="text" class="inputLocation">
-							<button class="searchLocation">검색</button>
+					<div class="rentLocationLeft">
+						<h1>숙소의 위치를 알려주세요</h1>
+						<h4>
+							정확한 도로명 주소를 모를 경우 지도에 위치를 클릭해보세요 ~<br>
+							지도에서 알아서 도로명 주소를 알려줄거에요😉
+						</h4>
+						<div id="map"></div>
+						<div id="clickLatlng"></div>
+						<div class="locationSpace">
+							<div><h4>대략적인 주소를 아신다면 지번 주소로 검색해보세요 ~</h4></div>
+							<div class="searchLocationSpace">
+								<input type="text" class="inputLocation">
+								<button class="searchLocation">검색</button>
+							</div>
 						</div>
 					</div>
 					
-					<h2>숙소의 도로명 주소를 넣어주세요 ~</h2>
-					<div class="locationValue">
-						<select name="sido">
-							<option>시·도 선택</option>
-							<option value="강원특별자치도">강원특별자치도</option>
-							<option value="경기도">경기도</option>
-							<option value="경상남도">경상남도</option>
-							<option value="경상북도">경상북도</option>
-							<option value="광주광역시">광주광역시</option>
-							<option value="서울특별시">대구광역시</option>
-							<option value="서울특별시">대전광역시</option>
-							<option value="부산광역시">부산광역시</option>
-							<option value="서울특별시">서울특별시</option>
-							<option value="세종특별자치시">세종특별자치시</option>
-							<option value="울산광역시">울산광역시</option>
-							<option value="인천광역시">인천광역시</option>
-							<option value="전라남도">전라남도</option>
-							<option value="전라북도">전라북도</option>
-							<option value="제주특별자치도">제주특별자치도</option>
-							<option value="충청남도">충청남도</option>
-							<option value="충청북도">충청북도</option>
-						</select>
-						<input type="text" name="sigugun" placeholder="시·구·군">
-						<input type="text" name="gueup" placeholder="구·읍(해당하는 경우만)">
-						<input type="text" name="road" placeholder="도로명 주소">
-						<input type="text" name="detailAddress" placeholder="상세주소">
+					<div class="rentLocationRight">
+						<h2>숙소의 도로명 주소를 넣어주세요 ~</h2>
+						<div class="locationValue">
+							<select name="sido">
+								<option value="">시·도 선택</option>
+								<option value="강원특별자치도">강원특별자치도</option>
+								<option value="경기도">경기도</option>
+								<option value="경상남도">경상남도</option>
+								<option value="경상북도">경상북도</option>
+								<option value="광주광역시">광주광역시</option>
+								<option value="서울특별시">대구광역시</option>
+								<option value="서울특별시">대전광역시</option>
+								<option value="부산광역시">부산광역시</option>
+								<option value="서울특별시">서울특별시</option>
+								<option value="세종특별자치시">세종특별자치시</option>
+								<option value="울산광역시">울산광역시</option>
+								<option value="인천광역시">인천광역시</option>
+								<option value="전라남도">전라남도</option>
+								<option value="전라북도">전라북도</option>
+								<option value="제주특별자치도">제주특별자치도</option>
+								<option value="충청남도">충청남도</option>
+								<option value="충청북도">충청북도</option>
+							</select>
+							<input type="text" name="sigugun" placeholder="시·구·군">
+							<input type="text" name="gueup" placeholder="구·읍(해당하는 경우만)">
+							<input type="text" name="road" placeholder="도로명 주소">
+							<input type="text" name="detailAddress" placeholder="상세주소">
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 		<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=bc59ff8e2d08662445856ac71a77b312&libraries=services"></script>
-		
-		<hr>
-	
-		<!-- buttons -->
-		<div class="btnSpace">
-			<div id="hostBtn">
-				<button id="nextHost">시작하기</button>
-			</div>
-	
-			<div id="categoryBtn" class="hidden">
-				<button id="preCategory" class="blackBtn">이전</button>
-				<button id="nextCategory" class="blackBtn">다음</button>
-			</div>
-	
-			<div id="roomTypeBtn" class="hidden">
-				<button id="preRoomType" class="blackBtn">이전</button>
-				<button id="nextRoomType" class="blackBtn">다음</button>
-			</div>
-			<div id="rentCountBtn" class="hidden">
-				<button id="preRentCount" class="blackBtn">이전</button>
-				<button id="nextRentCount" class="blackBtn">다음</button>
-			</div>
-			<div id="rentInformationBtn" class="hidden">
-				<button id="preRentInformation" class="blackBtn">이전</button>
-				<button id="nextRentInformation" class="blackBtn">다음</button>
-			</div>
-			<div id="rentImgBtn" class="hidden">
-				<button id="preRentImg" class="blackBtn">이전</button>
-				<button id="nextRentImg" class="blackBtn">다음</button>
-			</div>
-			<div id="rentContentBtn" class="hidden">
-				<button id="preRentContent" class="blackBtn">이전</button>
-				<button id="nextRentContent" class="blackBtn">다음</button>
-			</div>
-			<div id="rentLocationBtn" class="hidden">
-				<button id="preRentLocation" class="blackBtn">이전</button>
-				<button id="nextHost" class="finish">완성</button>
-			</div>
-		</div>
 	</div>
-	
+<%@ include file="hostFooter.jsp" %>	
+
 	<script>
 		// host 변수
 		const start = document.getElementById('start')
@@ -925,7 +892,20 @@
 			const title = document.querySelector('input[name="title"]')
 			const price = document.querySelector('input[name="price"]')
 			const content = document.querySelector('textarea[name="content"]')
-
+			
+			if(title.value == '') {
+				alert('숙소 이름을 꼭 입력해주세요 !!')
+				return
+			}
+			if(price.value == '') {
+				alert('숙소 가격을 꼭 입력해주세요 !!')
+				return
+			}
+			if(content.value == '') {
+				alert('숙소 소개를 꼭 입력해주세요 !!')
+				return
+			}
+			
 			if(formData.get("title") != null) {
 				formData.delete("title")
 			}
@@ -965,6 +945,33 @@
 			const road = document.querySelector('input[name="road"]')
 			const detailAddress = document.querySelector('input[name="detailAddress"]')
 			address = sido.value + ' ' + sigugun.value + ' ' + gueup.value + ' ' + road.value
+			
+			if(sido.value == '') {
+				alert('시·도를 꼭 선택해주세요 !')
+				return
+			}
+			if(sigugun.value == '') {
+				alert('시·구·군을 꼭 입력해주세요 !')
+				return
+			}
+			if(road.value == '') {
+				alert('도로명 주소를 꼭 입력해주세요 !')
+				return
+			}
+			if(detailAddress.value == '') {
+				alert('상세주소를 꼭 입력해주세요 !')
+				return
+			}
+			
+			if(formData.get('address') != null) {
+				formData.delete("address")
+			}
+			if(formData.get('detailAddress') != null) {
+				formData.delete("detailAddress")
+			}
+			if(formData.get('member') != null) {
+				formData.delete("member")
+			}
 			
 			formData.append('address', address)
 			formData.append('detailAddress', detailAddress.value)

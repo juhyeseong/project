@@ -9,7 +9,7 @@
 		<form method="POST" enctype="multipart/form-data">
 			<img class="profileImg" src="${login.profile }"> <label
 				for="file-input" class="file-icon"> <img
-				src="http://192.168.64.200/camera.jpeg" alt="File Icon">
+				src="http://192.168.64.200/camera.png" alt="File Icon">
 			</label>
 			<p>
 				<input type="file" name="upload" id="file-input"
