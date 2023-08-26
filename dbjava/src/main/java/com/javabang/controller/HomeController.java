@@ -13,12 +13,13 @@ import com.javabang.service.RentService;
 @Controller
 public class HomeController {
 	
-	@Autowired RentService rservice;
+	@Autowired RentService rentService;
 	
+	// 홈 화면에서 등록한 숙소들 보이기
 	@RequestMapping("/")
 	public ModelAndView home() {
 		ModelAndView mav = new ModelAndView("/home");
-		List<RentDTO> list = rservice.selectAll();
+		List<RentDTO> list = rentService.selectAll();
     	mav.addObject("list", list);
 		return mav;
 	}

@@ -133,13 +133,13 @@ ul > li{
 .roomImgBox{
 /* 	border : 1px solid blue; */
 }
-.roomBig{
+.roomBig > img{
 /* 	border: 1px solid green; */
 	width:500px;
 	height:350px;
 }
 .roomSmall{
-/* 	border:1px solid purple; */
+/* 	border:1px solid purple;  */
 	display:flex;
 	justify-content:space-around;
 	width:500px;
@@ -147,8 +147,9 @@ ul > li{
 }
 .roomSmall > img {
 	width:120px;
-/* 	border:1px solid green; */
+	/* border:1px solid green;  */
 	height:86px;
+	margin:5px 10px;
 }
 .roomText{
 	width:360px;
@@ -178,6 +179,60 @@ ul > li{
  	width:150px;
     height:40px;
 }
+
+#root {
+	border: 2px solid black;
+	width: 500px;
+}
+
+ul.tab {
+	display: flex;
+	list-style: none;
+	padding-left: 0;
+	margin: 0;
+	height: 50px;
+}
+
+ul.tab>li {
+	text-align: center;
+	padding: 10px;
+	cursor: pointer;
+}
+
+ul.tab {
+	font-size: 24px;
+}
+
+div.box {
+	position: relative;
+	width: 100%;
+	height: 300px;
+}
+
+div.box>div {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 20px;
+	box-sizing: border-box;
+	padding: 20px;
+	font-size: 30px;
+}
+
+ul.tab>li.selected {
+	border-bottom: 0;
+}
+
+div.box>div {
+	display: none;
+}
+
+div.box>div.selected {
+	display: block;
+}
+
+
 /*login css*/
 .login{
     text-align: center;
@@ -1083,10 +1138,102 @@ legend{
 	right: 55px;
 	top: 15px;
 }
-/*review css*/
-.review{
-	margin:10px 150px;
+/*rent => room => review css*/
+.review {
+	width: 100%;
+	margin-left: auto;
+	margin-right: auto;
 }
+
+.reviewItem {
+	border: 1px solid;
+	display: flex;
+}
+
+.reviewProfileBox>img {
+	width: 200px;
+	height: 200px;
+	border-radius: 50%;
+}
+
+.reviewWrite {
+	width: 80%;
+	height: 80px; margin-left : auto;
+	margin-right: auto;
+	margin-left: auto;
+}
+
+.star {
+	font-size: 24px;
+	color: #ccc;
+	cursor: pointer;
+}
+
+.star.active {
+	color: #ffcc00;
+}
+.review {
+    width: 100%;
+    margin: 20px 0;
+}
+
+.reviewItem {
+    border: 1px solid #ddd;
+    display: flex;
+    margin: 10px 0;
+    padding: 10px;
+}
+
+.reviewProfileBox > img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.reviewProfileInfo {
+    flex: 1;
+}
+
+.reviewProfileInfo > p:nth-child(1) {
+    font-size: 18px;
+    font-weight: bold;
+    margin: 0;
+}
+
+.reviewProfileInfo > p.starPoint {
+    font-size: 16px;
+    margin: 5px 0;
+}
+
+.reviewProfileInfo > p:nth-child(3) {
+    font-size: 14px;
+    margin: 5px 0;
+}
+
+/* Style the "리뷰 작성" button */
+.reviewWrite input[type="submit"] {
+    background-color: #007BFF;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 10px;
+    border-radius: 5px;
+}
+
+.rating .star {
+    font-size: 24px;
+    color: #ccc;
+    cursor: pointer;
+    margin-right: 5px;
+}
+
+.rating .star.active {
+    color: #ffcc00;
+}
+
 </style>
 </head>
 <body>

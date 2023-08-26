@@ -16,12 +16,12 @@ import com.javabang.service.MemberService;
 @RequestMapping("/api")
 public class KakaoController {
 	
-	@Autowired MemberService service;
+	@Autowired MemberService memberService;
 	
 	@PostMapping("/kakaosignup")   //카카오 회원가입 + 로그인
 	public ModelAndView signup(MemberDTO dto, HttpSession session) {
 		ModelAndView mav = new ModelAndView();
-	   MemberDTO tmp = service.selectKakao(dto);
+	   MemberDTO tmp = memberService.selectKakao(dto);
 
 		if (tmp == null) {
 			mav.addObject("dto", dto);
@@ -30,7 +30,7 @@ public class KakaoController {
 		} 
 	 else {
 			session.setAttribute("login", tmp);
-			mav.setViewName("/home");
+			mav.setViewName("redirect:/");
 			return mav;
 		}
 	}

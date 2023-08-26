@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.javabang.model.RentDTO;
+import com.javabang.model.RentImgDTO;
 import com.javabang.repository.RentDAO;
 import com.jcraft.jsch.Channel;
 import com.jcraft.jsch.ChannelSftp;
@@ -96,6 +97,12 @@ public class RentService {
 	public RentDTO selectOne(int idx) {
 		
 		return rdao.selectOne(idx);
+	}
+
+
+	// 숙소 눌렀을 때 설명이미지 불러오기
+	public List<RentImgDTO> selectImg(int idx) {
+		return rdao.selectImg(idx);
 	}
 
 }

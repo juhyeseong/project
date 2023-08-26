@@ -17,9 +17,9 @@
 			<c:forEach var="dto" items="${list }">
 				<a href="${cpath }/rent/room/${dto.idx}">
 					<div class="room">
-						<img src="http://192.168.64.200/펜션.png" class="roomImg">
+						<img src="${dto.filePath }" class="roomImg">
 						<span>${dto.title }</span>
-						<span>${dto.price }\</span>
+						<span>${dto.price }원</span>
 					</div>
 				</a>
 			</c:forEach>

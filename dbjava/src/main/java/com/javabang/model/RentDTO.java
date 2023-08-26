@@ -10,7 +10,7 @@ public class RentDTO {
 	private int roomCount, guestCount, bedCount, bathCount, price, discount, state;
 	
 	private String filePath;
-	private List<MultipartFile> files;
+	private List<MultipartFile> files;	
 	
 	public int getIdx() {
 		return idx;

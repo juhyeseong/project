@@ -14,13 +14,13 @@ import com.javabang.service.MemberService;
 @Controller   
 @RequestMapping("/api")
 public class NaverController {
-	@Autowired MemberService service;
+	@Autowired MemberService memberService;
 	
 	@PostMapping("/naversignup")   //네이버 회원가입 + 로그인
 	public ModelAndView signup(MemberDTO dto, HttpSession session) {
 		
 		ModelAndView mav = new ModelAndView();
-		MemberDTO tmp = service.selectNaver(dto);
+		MemberDTO tmp = memberService.selectNaver(dto);
 
 			if (tmp == null) { 
 				mav.addObject("dto", dto);
@@ -29,7 +29,7 @@ public class NaverController {
 			} 
 		 else {
 				session.setAttribute("login", tmp);
-				mav.setViewName("/home");
+				mav.setViewName("redirect:/");
 				return mav;
 			}
 	}
