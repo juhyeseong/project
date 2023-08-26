@@ -6,7 +6,6 @@ import java.util.List;
 import org.springframework.stereotype.Repository;
 
 import com.javabang.model.RentDTO;
-import com.javabang.model.RentImgDTO;
 
 @Repository
 public interface RentDAO {
@@ -19,6 +18,12 @@ public interface RentDAO {
 	public List<RentDTO> selectAll();
 
 	public RentDTO selectOne(int idx);
+	
+	public List<RentDTO> selectHost(int member);
 
-	public List<RentImgDTO> selectImg(int idx);
+	public List<String> selectFilePath(int idx);
+	
+	public int updateRentTitle(RentDTO dto);
+	
+	public int updateRentContent(RentDTO dto);
 }

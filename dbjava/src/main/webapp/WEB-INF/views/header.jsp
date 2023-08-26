@@ -22,6 +22,17 @@ a{
 p{
     text-align:center;
 }
+.main {
+	width: 100%;
+	height: 80vh;
+	
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	
+	overflow-y: scroll;
+}
+
 /*로그인 버튼 + 마이페이지 버튼*/
 .login-btn{
 	background-color: #C2D6F0;
@@ -33,13 +44,26 @@ p{
 header {
     height: 100px;
 
-	background-color: #79DDD1;
+	background-color: white;
     font-family: "굴림";
     font-weight: bold;
     
     display: flex;
     justify-content: center;
     align-items: center;
+    
+    border-bottom: 1px solid gray;
+}
+header button {
+	all: unset;
+	padding: 12px 15px;
+	
+	background-color: #f8215c;
+	color: white;
+	
+	border-radius: 10px;
+	font-size: 12px;
+	font-weight: bold;
 }
 header > div {
 	width: 1300px;
@@ -123,6 +147,9 @@ ul > li{
 	
 }
 /*room.jsp */
+.menu2 > p{
+      font-size: 25px;
+}
 .roomExplain{
 	width:80%;
 	margin-left:auto;
@@ -466,34 +493,24 @@ legend{
   margin-right:200px;
 }
 
-/* hostManage style */
-.hostManage {
-	width: 1000px;
-	
-	padding: 20px 0px;
-}
-.hostRent {
-	border: 1px solid black;
-	border-radius: 20px;
-	
-	height: 500px;
-	margin-bottom: 20px;
-	
+/* Manage style */
+.manageHeader {
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	
+	height: 100px;
+	
+	font-size: 25px;
+	font-weight: bold;
 }
-.hostRentWrap {
-	width: 985px;
-	height: 485px;
-	
-	padding: 0px 2px;
-	
-	display: flex;
-	flex-wrap: wrap;
-	flex-direction: column;
-	
-	overflow-y: scroll;
+.manageHeader a {
+	margin: 0px 200px;
+}
+.hostManage {
+	width: 1800px;
+	margin: auto;
+	padding: 20px 0px;
 }
 .hostRentTop {
 	display: flex;
@@ -510,23 +527,209 @@ legend{
 	
 	padding: 15px 30px;
 	
-	background-color: #00a4fe;
+	background-color: black;
 	color: white;
 	font-size: 18px;
 	font-weight: bold;
 	
 	border-radius: 10px;
 }
-.hostReservation {
-	border: 1px solid black;
-	border-radius: 20px;
+.hostRentBottom .rentList {
+	margin: 10px auto;	
 	
-	height: 500px;
+	text-align: center;
+	font-size: 16px;
+	font-weight: bold;
+}
+.rentListHead {
+	border-bottom: 1px solid gray;
+	
+	padding: 20px;
 	
 	display: flex;
-	flex-wrap: wrap;
+	justify-content: space-around;
+}
+.rentListRow {
+	border-bottom: 1px solid gray;
 	
-	overflow-y: scroll;
+	padding: 20px;
+	
+	display: flex;
+	justify-content: space-around;
+}
+.rentListRow:hover {
+	background-color: #e4e4e4;
+}
+.rentList .category,
+.rentList .roomType,
+.rentList .discount,
+.rentList .rentUpdate,
+.rentList .rentState {
+	flex: 1;
+}
+.rentList .price,
+.rentList .title {
+	flex: 2;
+}
+.rentList .address {
+	flex: 4;
+}
+.hostReservation {
+	width: 1500px;
+	margin: auto;
+	padding: 20px 0px;
+}
+
+/* rentModify style */
+.rentModify {
+	width: 1300px;
+	
+	margin: auto;
+}
+.rentUpdateTop {
+	display: flex;
+	justify-content: flex-end;
+}
+.rentUpdateTop button {
+	all: unset;
+	cursor: pointer;
+	
+	margin: 20px;
+	padding: 12px 15px;
+	
+	border-radius: 10px;
+	color: white;
+	background-color: #f8215c;
+	
+	font-size: 17px;
+	font-weight: bold;
+}
+.rentUpdateTop > .running {
+	background-color: black;
+}
+.picture {
+	margin: 50px 0px;
+	
+	font-size: 25px;
+	font-weight: bold;
+}
+.picture img {
+	max-width: 255px;
+	max-height: 255px;
+}
+.pictureTop {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	
+	margin: 20px 0px;
+}
+.pictureTop a {
+	all: unset;
+	cursor: pointer;
+	
+	font-size: 19px;
+}
+.pictureTop a:hover {
+	text-decoration: underline;
+}
+.pictureValue {
+	display: flex;
+	align-items: center;
+}
+.pictureValue > div {
+	width: 255px;
+	height: 255px;
+	
+	border: 1px dashed black;
+	
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.rentBasicInfo {
+	margin: 50px 0px;
+}
+.basicInfo {
+	height: 100px;
+	border-bottom: 1px solid gray;
+}
+.basicInfoTop {
+	display: flex;
+	justify-content: space-between;
+	
+	font-size: 20px;
+	font-weight: bold;
+	
+	margin-bottom: 10px;
+}
+.basicInfoTop button {
+	all: unset;
+	cursor: pointer;
+}
+.basicInfoBottom {
+	font-size: 20px;
+}
+.basicInfoBottom textarea {
+	width: 700px;
+	border: 0px;
+	
+	font-size: 20px;
+	font-weight: bold;
+	
+	resize: none;
+}
+.basicModify textarea {
+	width: 700px;
+	height: 450px;
+	
+	font-size: 20px;
+	font-weight: bold;
+	
+	resize: none;
+}
+.basicModify {
+	height: 100px;
+	border-bottom: 1px solid gray;
+	
+	padding-bottom: 10px;
+}
+.contentModify {
+	height: 510px;
+}
+.basicModifyTop {
+	display: flex;
+	justify-content: space-between;
+
+	font-size: 20px;
+	font-weight: bold;
+	
+	margin-bottom: 10px;
+}
+.basicModify input {
+	width: 700px;
+	height: 50px;
+	
+	font-size: 20px;
+	margin-bottom: 10px;
+}
+.basicModify button {
+	background-color: black;
+	color: white;
+	
+	padding: 12px 17px;
+	margin-left: 20px;
+	
+	border-radius: 10px;
+	
+	font-size: 16px;
+}
+.contentSubmit {
+	margin-bottom: 10px;
+}
+.basicModifyTop button {
+	all: unset;
+	cursor: pointer;
 }
 
 /* hosting style */
@@ -637,7 +840,7 @@ legend{
 	margin-right: 30px;
 	
 	color: white;
-	background-color: hotpink;
+	background-color: #f8215c;
 	font-size: 17px;
 }
 
@@ -983,7 +1186,7 @@ legend{
 	align-items: center;
 }
 #rentContent input {
-	width: 500px;
+	width: 700px;
 	height: 50px;
 	
 	border-radius: 10px;
@@ -992,8 +1195,8 @@ legend{
 	font-weight: bold;
 }
 #rentContent textarea {
-	width: 500px;
-	height: 400px;
+	width: 700px;
+	height: 450px;
 	
 	border-radius: 10px;
 	
@@ -1247,13 +1450,13 @@ legend{
 	        
 	        <ul>
 	        	<c:if test="${not empty login }">
-	           		<li><a href="${cpath }/rent/hosting">숙소를 올려방~</a></li>
+	           		<li><a href="${cpath }/rent/rentManage/${login.idx }">호스트페이지</a></li>
 	            </c:if>
-	            <li><a href="${cpath }/member/${empty login ? 'login' : 'logout'}"><button class="login-btn">${empty login ? '로그인' : '로그아웃'}</button></a></li>
+	            <li><a href="${cpath }/member/${empty login ? 'login' : 'logout'}"><button>${empty login ? '로그인' : '로그아웃'}</button></a></li>
 	           
 	        </ul>
 	        <c:if test="${not empty login }">
-	       		<img src="${login.profile }"><h4>${login.userNick }님 환영합니다 !</h4> <a href="${cpath }/member/mypage/${login.idx}"><button class="login-btn">마이페이지</button></a>
+	       		<img src="${login.profile }"><h4>${login.userNick }님 환영합니다 !</h4> <a href="${cpath }/member/mypage/${login.idx}"><button>마이페이지</button></a>
 	       	</c:if>
         </div>
     </header>

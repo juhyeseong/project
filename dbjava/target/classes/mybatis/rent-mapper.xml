@@ -22,15 +22,39 @@
 	
 	<select id="selectAll" resultType="rent">
 	<!-- 	select R.*, I.filePath from rent R join (select rent, min(filePath) as filePath from rent_img group by rent ) I on r.idx = I.rent -->
-	SELECT R.*, I.filePath FROM rent R JOIN ( SELECT ri.rent, MIN(ri.idx) AS min_idx FROM rent_img ri GROUP BY ri.rent ) min_img ON R.idx = min_img.rent JOIN rent_img I ON min_img.min_idx = I.idx
+	SELECT
+		R.*, I.filePath
+		FROM rent R
+		JOIN (SELECT ri.rent, MIN(ri.idx) AS min_idx FROM rent_img ri GROUP BY ri.rent) min_img
+			ON R.idx = min_img.rent
+		JOIN rent_img I
+			ON min_img.min_idx = I.idx
 	</select>
+	
 	<select id="selectOne" parameterType="int" resultType="rent">
 		<!-- select r.*, i.filePath from rent R join Rent_img I on r.idx = i.rent where r.idx = #{idx} -->
 		select * from rent where idx = #{idx}	
 	</select>
-	<select id="selectImg" parameterType="int" resultType="rentImg">
-		select * from rent_img where rent = #{idx}
+	
+	<select id="selectHost" parameterType="int" resultType="rent">
+		select * from rent where member = #{member} order by idx desc
 	</select>
+	
+	<select id="selectFilePath" parameterType="int" resultType="string">
+		select filePath from rent_img where rent = #{idx} order by idx
+	</select>
+	
+	<update id="updateRentTitle" parameterType="rent">
+		update rent
+			set title = #{title}
+			where idx=#{idx}
+	</update>
+	
+	<update id="updateRentContent" parameterType="rent">
+		update rent
+			set content = #{content}
+		where idx = #{idx}
+	</update>
 </mapper>
 
 

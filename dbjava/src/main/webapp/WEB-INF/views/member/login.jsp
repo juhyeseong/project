@@ -45,7 +45,7 @@
 						type="hidden" name="gender" id="kakaogender" /> <input
 						type="hidden" name="email" id="kakaoemail" />
 					<button class="kakao">
-						<img src="http://192.168.64.200/kakaoLogo.jpeg"> 카카오 아이디로
+						<img src="http://192.168.64.200/kakaoLogo.png"> 카카오 아이디로
 						로그인
 					</button>
 				</form>

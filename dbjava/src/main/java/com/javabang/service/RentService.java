@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.javabang.model.RentDTO;
-import com.javabang.model.RentImgDTO;
 import com.javabang.repository.RentDAO;
 import com.jcraft.jsch.Channel;
 import com.jcraft.jsch.ChannelSftp;
@@ -24,7 +23,7 @@ import com.jcraft.jsch.SftpException;
 
 @Service
 public class RentService {
-	@Autowired private RentDAO rdao;
+	@Autowired private RentDAO rentDAO;
 	private String serverIp = "192.168.64.200";
 	private int serverPort = 22;
 	private String serverUser = "root";
@@ -35,8 +34,8 @@ public class RentService {
 		int row = 0;
 		int idx = 0;
 		
-		row += rdao.rentInsert(dto);
-		idx = rdao.getRentIdx();
+		row += rentDAO.rentInsert(dto);
+		idx = rentDAO.getRentIdx();
 		
 		for(MultipartFile file : dto.getFiles()) {
 			String ymd = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
@@ -79,7 +78,7 @@ public class RentService {
 				map.put("rent", idx);
 				map.put("filePath", filePath);
 				
-				row += rdao.fileInsert(map);
+				row += rentDAO.fileInsert(map);
 			} catch (JSchException | SftpException | IOException e) {
 				e.printStackTrace();
 			}
@@ -87,22 +86,38 @@ public class RentService {
 		
 		return row;
 	}
-
 	
 	public List<RentDTO> selectAll() {
-		return rdao.selectAll();
+		return rentDAO.selectAll();
 	}
-
 
 	public RentDTO selectOne(int idx) {
 		
-		return rdao.selectOne(idx);
+		return rentDAO.selectOne(idx);
 	}
 
-
-	// 숙소 눌렀을 때 설명이미지 불러오기
-	public List<RentImgDTO> selectImg(int idx) {
-		return rdao.selectImg(idx);
+	public List<RentDTO> selectHost(int member) {
+		List<RentDTO> list = rentDAO.selectHost(member);
+		
+		list.forEach(rent -> {
+			String title = rent.getTitle();
+			if(title.length() > 15) {
+				rent.setTitle(title.substring(0, 16) + "...");;
+			}
+		});
+		
+		return list;
 	}
 
+	public List<String> selectFilePath(int idx) {
+		return rentDAO.selectFilePath(idx);
+	}
+	
+	public int updateRentTitle(RentDTO dto) {
+		return rentDAO.updateRentTitle(dto);
+	}
+	
+	public int updateRentContent(RentDTO dto) {
+		return rentDAO.updateRentContent(dto);
+	}
 }

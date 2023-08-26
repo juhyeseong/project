@@ -17,12 +17,12 @@ import com.javabang.service.RentService;
 
 @RestController
 public class AjaxController {
-	@Autowired private MemberService mservice;
-	@Autowired private RentService rservice;
+	@Autowired private MemberService memberService;
+	@Autowired private RentService rentService;
 
 	@GetMapping("/getmail/{email}")
 	public HashMap<String, Object> getEmail(@RequestBody MemberDTO dto){
-		String email = mservice.getEmail(dto);
+		String email = memberService.getEmail(dto);
 		HashMap<String, Object> result = new HashMap<String, Object>();
 		result.put("email", email);
 		result.put("status", email != null);
@@ -30,14 +30,14 @@ public class AjaxController {
 	}
 	@GetMapping("/dupCheck/{userId}/")
 	public int dupCheck(@PathVariable("userId") String userId) {
-		int row = mservice.dupCheck(userId);
+		int row = memberService.dupCheck(userId);
 		return row;
 	}
 	
 	@GetMapping("/sendAuthNumber/{email}/")
 	public HashMap<String, Object> sendAuthNumber(@PathVariable("email") String email, HttpSession session) throws IOException {
 		System.out.println("email : " + email);
-		int row = mservice.sendAuthNumber(email);
+		int row = memberService.sendAuthNumber(email);
 		if(row != 0) {
 			session.setAttribute("authNumber", row);
 			session.setMaxInactiveInterval(180);
@@ -62,13 +62,26 @@ public class AjaxController {
 		String msg = null;
 		String url = null;
 		
-		row = rservice.rentInsert(dto);
+		row = rentService.rentInsert(dto);
 		msg = row != 0 ? "숙소 등록이 완료되었습니다 ~~ " : "숙소 등록에 실패하였습니다 ~~";
-		url = row != 0 ? "/member/mypage" : "/rent/hosting";
+		url = row != 0 ? "/rent/rentManage" : "/rent/hosting";
 
 		map.put("msg", msg);
 		map.put("url", url);
 		
 		return map;
 	} 
+	
+	@PostMapping("/rent/rentTitleUpdate")
+	public int rentTitleUpdate(@RequestBody RentDTO dto) {
+		int row = rentService.updateRentTitle(dto);
+		
+		return row;
+	}
+	
+	@PostMapping("/rent/rentContentUpdate")
+	public int rentContentUpdate(@RequestBody RentDTO dto) {
+		int row = rentService.updateRentContent(dto);
+		return row;
+	}
 }

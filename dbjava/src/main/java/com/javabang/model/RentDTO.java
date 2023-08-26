@@ -9,8 +9,9 @@ public class RentDTO {
 	private String category, roomType, address, detailAddress, information, title, content;
 	private int roomCount, guestCount, bedCount, bathCount, price, discount, state;
 	
+	private List<String> filePathList;
 	private String filePath;
-	private List<MultipartFile> files;	
+	private List<MultipartFile> files;
 	
 	public int getIdx() {
 		return idx;
@@ -54,7 +55,6 @@ public class RentDTO {
 	public void setInformation(String information) {
 		this.information = information;
 	}
-	
 	public String getTitle() {
 		return title;
 	}
@@ -108,6 +108,12 @@ public class RentDTO {
 	}
 	public void setState(int state) {
 		this.state = state;
+	}
+	public List<String> getFilePathList() {
+		return filePathList;
+	}
+	public void setFilePathList(List<String> filePathList) {
+		this.filePathList = filePathList;
 	}
 	public String getFilePath() {
 		return filePath;

@@ -23,8 +23,5 @@ public class HomeController {
     	mav.addObject("list", list);
 		return mav;
 	}
-	
-	@RequestMapping("/manage")
-	public void manage() {}
 }
 

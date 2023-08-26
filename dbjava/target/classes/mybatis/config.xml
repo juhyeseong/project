@@ -10,7 +10,6 @@
 	<typeAliases>
 		<typeAlias type="com.javabang.model.MemberDTO" alias="member" ></typeAlias>
 		<typeAlias type="com.javabang.model.RentDTO" alias="rent"></typeAlias>
-		<typeAlias type="com.javabang.model.RentImgDTO" alias="rentImg"></typeAlias>
 		<typeAlias type="com.javabang.model.ReviewDTO" alias="review"></typeAlias>
 	</typeAliases> 
 </configuration>
