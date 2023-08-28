@@ -36,7 +36,7 @@ public class MemberController {
 
 	@PostMapping("/join")
 	public String join(MemberDTO dto) throws NoSuchAlgorithmException {
-		int row = memberService.add(dto);
+		memberService.add(dto);
 		return "redirect:/member/login";
 	}
 
@@ -50,7 +50,6 @@ public class MemberController {
 			throws NoSuchAlgorithmException {
 		MemberDTO login = memberService.login(dto);
 		session.setAttribute("login", login);
-
 		return "redirect:/";
 	}
 
@@ -72,7 +71,7 @@ public class MemberController {
 
 	@PostMapping("/update/{idx}")
 	public String update(MemberDTO dto, HttpSession session) {
-		int row = memberService.update(dto);
+		memberService.update(dto);
 		MemberDTO tmp = memberService.selectOne(dto.getIdx());
 		session.setAttribute("login", tmp);
 		return "redirect:/";
@@ -89,7 +88,7 @@ public class MemberController {
 
 	@PostMapping("/modifyPassword/{idx}")
 	public String modifyPassword(MemberDTO dto) throws NoSuchAlgorithmException {
-		int row = memberService.modifyPassword(dto);
+		memberService.modifyPassword(dto);
 		return "redirect:/";
 	}
 
@@ -155,7 +154,7 @@ public class MemberController {
 
 	@PostMapping("/updateProfile/{idx}")
 	public String profile(HttpSession session, MemberDTO dto, @PathVariable("idx") int idx) throws Exception {
-		int row = memberService.updateProfile(dto);
+	    memberService.updateProfile(dto);
 		MemberDTO tmp = memberService.selectOne(idx);
 		session.setAttribute("login", tmp);
 		return "redirect:/member/mypage/" + idx;
@@ -174,7 +173,7 @@ public class MemberController {
 	public String basicProfile(HttpSession session, @PathVariable("idx") int idx, MemberDTO dto) throws Exception {
 		// 여기에서 기본 이미지로 변경하는 로직을 수행합니다.
 		dto.setProfile("http://192.168.64.200/basicProfile.png"); // 기본 이미지 URL로 설정
-		int row = memberService.basicProfile(dto); // 기본 이미지로 변경 작업 수행
+		memberService.basicProfile(dto); // 기본 이미지로 변경 작업 수행
 		MemberDTO tmp = memberService.selectOne(idx);
 		session.setAttribute("login", tmp); // 로그인 정보를 변경된 MemberDTO로 업데이트
 		return "redirect:/member/mypage/" + idx;

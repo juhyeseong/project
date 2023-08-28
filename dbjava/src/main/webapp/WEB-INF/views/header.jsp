@@ -107,7 +107,7 @@ ul > li{
 
 /*home css*/
 .homeMain {
-	width: 80%;
+	width: 95%;
 	height:100px;
 	margin-left: auto;
 	margin-right: auto;
@@ -139,7 +139,7 @@ ul > li{
 .room{
 	display: flex;
 	flex-direction: column;
-	margin:10px 15px;
+	margin:10px 40px;
 }
 .roomImg{
 	width:250px;
@@ -1365,11 +1365,15 @@ legend{
 	margin-right: auto;
 	margin-left: auto;
 }
+.rating{
+	margin-left:100px;
+}
 
 .star {
 	font-size: 24px;
 	color: #ccc;
 	cursor: pointer;
+
 }
 
 .star.active {

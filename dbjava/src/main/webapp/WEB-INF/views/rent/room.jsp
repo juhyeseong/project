@@ -32,7 +32,7 @@
       <div class="menu1 selected">객실안내 / 예약</div>
       <div class="menu2"><p>${dto.content }</p></div>
       <div class="menu3">
-         <form method="POST">
+         <form method="POST"  enctype="multipart/form-data">
             <div class="rating">
                <span class="star">&#9733;</span> <span class="star">&#9733;</span>
                <span class="star">&#9733;</span> <span class="star">&#9733;</span>
@@ -42,6 +42,7 @@
             </div>
             <p>
                <textarea class="reviewWrite" name="content"></textarea>
+               <input type="file" name="upload" multiple>
             </p>
             <p>
                <input type="submit" value="리뷰 작성">
@@ -58,10 +59,14 @@
                      <div class="reviewProfileInfo">
                         <p>${dto.userNick }</p>
                         <p class="starPoint">${dto.point }</p>
+                        <img src="${dto.filePath }" />
                         <p>${dto.content }</p>
                      </div>
                   </div>
                </c:forEach>
+         <%--       <c:forEach var="Img" items="${reviewImg }">
+              		<img src="${Img.filePath }">
+               </c:forEach>  --%>
             </div>
          </c:if>
       </div>
@@ -69,7 +74,7 @@
 </div>
 
 
-
+<!-- roomSmall 을 눌렀을 때 roomBig에 사진 크게 뜨게 하기 -->
 	<script>
 		const roomBigImg = document.querySelector('.roomBig > img')
 		const roomSmallImgs = document.querySelectorAll('.roomSmall > img')
@@ -172,5 +177,10 @@
 	}
 	window.addEventListener('load', printStars);
 	</script>
+	
+	<!--  리뷰글 창 새로고침 시 자꾸 추가 되는 거 방지 ajax -->
+	
+	
+
 </body>
 </html>

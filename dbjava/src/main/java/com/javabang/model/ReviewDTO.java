@@ -1,5 +1,9 @@
 package com.javabang.model;
 
+import java.util.List;
+
+import org.springframework.web.multipart.MultipartFile;
+
 public class ReviewDTO {
 	private int idx;
 	private int member;
@@ -10,6 +14,10 @@ public class ReviewDTO {
 	private String profile;
 	private String userNick;
 	
+	private String filePath;
+	private List<MultipartFile> upload;   // input type name="upload" 
+	
+
 	public int getIdx() {
 		return idx;
 	}
@@ -51,7 +59,20 @@ public class ReviewDTO {
 	}
 	public void setUserNick(String userNick) {
 		this.userNick = userNick;
+	}	
+
+	public List<MultipartFile> getUpload() {
+		return upload;
 	}
-	
+	public void setUpload(List<MultipartFile> upload) {
+		this.upload = upload;
+	}
+	public String getFilePath() {
+		return filePath;
+	}
+	public void setFilePath(String filePath) {
+		this.filePath = filePath;
+	}
+
 	
 }

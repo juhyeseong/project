@@ -14,4 +14,9 @@ public interface ReviewDAO {
 
 	int insertReview(HashMap<String, String> map);
 
+	int fileInsert(HashMap<String, Object> map2);
+
+
+
+
 }
