@@ -24,14 +24,12 @@
 </div>
 <div class="roomBtn">
    <ul class="tab">
-      <li class="selected">객실안내 / 예약</li>
-      <li>숙소정보</li>
+      <li class="selected">숙소정보</li>
       <li>리뷰</li>
    </ul>
    <div class="box">
-      <div class="menu1 selected">객실안내 / 예약</div>
-      <div class="menu2"><p>${dto.content }</p></div>
-      <div class="menu3">
+      <div class="menu1 selected">${dto.content }</div>
+      <div class="menu2">
          <form method="POST"  enctype="multipart/form-data">
             <div class="rating">
                <span class="star">&#9733;</span> <span class="star">&#9733;</span>
