@@ -7,14 +7,21 @@ import org.springframework.stereotype.Repository;
 
 import com.javabang.model.ReviewDTO;
 
+
 @Repository
 public interface ReviewDAO {
 
-	List<ReviewDTO> review(int idx);
+	List<ReviewDTO> reviewSelectAll(int idx);
 
-	int insertReview(HashMap<String, String> map);
+	int insertReview(ReviewDTO review);
 
-	int fileInsert(HashMap<String, Object> map2);
+	int fileInsert(HashMap<String, Object> map);
+
+	List<String> reviewFileSelectAll(int review);
+
+	List<ReviewDTO> selectReview(HashMap<String, String> map);
+
+	int selectIdx();
 
 
 

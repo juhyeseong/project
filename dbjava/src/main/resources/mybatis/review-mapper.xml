@@ -4,37 +4,29 @@
 	"https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 	
 <mapper namespace="com.javabang.repository.ReviewDAO">
-	<select id="review" parameterType="int" resultType="review">
-		<!-- select R.*, m.profile, m.userNick from review R join member M on r.member = m.idx where rent = #{idx} -->
-		select R.*, m.profile, m.userNick, i.filepath from review R 
-   			join member M on r.member = m.idx 
-    		join review_img I on i.review = r.idx
-        		where review = #{idx}
+	<select id="reviewSelectAll" parameterType="int" resultType="review">
+		select r.*, m.userNick, m.profile
+			from review r
+			join member m
+				on r.member = m.idx
+			where rent = #{idx}
 	</select>
 	
-	<insert id="insertReview" parameterType="hashmap">
-		insert into review (member, rent, content, point) values (${memberIdx}, ${rentIdx}, #{content}, ${point})
+	<select id="reviewFileSelectAll" parameterType="int" resultType="string">
+		select filePath from review_img
+			where review = #{review}
+	</select>
+	
+	<insert id="insertReview" parameterType="review">
+		insert into review (member, rent, content, point) values (${member}, ${rent}, #{content}, ${point})
 	</insert>
 	
-	<insert id="fileInsert" parameterType="hashmap">
-		insert into review_img(review, filePath) values(${review}, #{filePath})
+	<insert id="fileInsert" parameterType="hashmap">			
+			insert into review_img(review, filePath)
+			values(${review}, #{filePath})
 	</insert>
-
 	
-
+	<select id="selectIdx" resultType="int">
+		select max(idx) from review
+	</select>
 </mapper>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

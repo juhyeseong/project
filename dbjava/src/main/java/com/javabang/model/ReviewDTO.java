@@ -14,6 +14,7 @@ public class ReviewDTO {
 	private String profile;
 	private String userNick;
 	
+	private List<String> filePathList;
 	private String filePath;
 	private List<MultipartFile> upload;   // input type name="upload" 
 	
@@ -73,6 +74,10 @@ public class ReviewDTO {
 	public void setFilePath(String filePath) {
 		this.filePath = filePath;
 	}
-
-	
+	public List<String> getFilePathList() {
+		return filePathList;
+	}
+	public void setFilePathList(List<String> filePathList) {
+		this.filePathList = filePathList;
+	}
 }

@@ -23,7 +23,7 @@ public class RentController {
 	@Autowired
 	RentService rentService;
 	@Autowired
-	ReviewService reviewservice;
+	ReviewService reviewService;
 
 	@GetMapping("/hosting")
 	public void hosting() {
@@ -33,7 +33,8 @@ public class RentController {
 	public ModelAndView room(@PathVariable("idx") int idx) {
 		ModelAndView mav = new ModelAndView("/rent/room");
 		RentDTO dto = rentService.selectOne(idx);
-		List<ReviewDTO> reviewList = reviewservice.review(idx);
+     	List<ReviewDTO> reviewList = reviewService.reviewSelectAll(idx);
+     	
 		mav.addObject("dto", dto);
 		mav.addObject("reviewList", reviewList);
 		return mav;

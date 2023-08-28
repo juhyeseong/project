@@ -1,79 +1,102 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-   pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@include file="../header.jsp"%>
 
-<div class="roomExplain">
-   <div class="roomImgBox">
-      <div class="roomBig">
-         <img src="${dto.filePathList[0] }">
-      </div>
-      <div class="roomSmall">
-         <c:forEach var="filePath" items="${dto.filePathList }">
-            <img src="${filePath }">
-         </c:forEach>
-      </div>
-   </div>
+<style>
+	  .carousel {
+    display: flex; /* 이미지를 가로로 배열합니다. */
+    overflow: hidden;
+  }
 
-   <div class="roomText">
-      <p class="roomTitle">${dto.title }</p>
-      <p class="roomAddress">${dto.address }</p>
-      <p class="roomDetailAddress">${dto.detailAddress }</p>
-      <p class="roomPrice">${dto.price }원</p>
-   </div>
+  .reviewImgs {
+    width: 300px; /* 이미지 크기를 조절합니다. */
+    height: 300px;
+  }
+  .reviewProfileInfo {
+  	display: flex;
+  	flex-direction: column;
+  	align-items: flex-start;
+  }
+</style>
+
+<div class="roomExplain">
+	<div class="roomImgBox">
+		<div class="roomBig">
+			<img src="${dto.filePathList[0] }">
+		</div>
+		<div class="roomSmall">
+			<c:forEach var="filePath" items="${dto.filePathList }">
+				<img src="${filePath }">
+			</c:forEach>
+		</div>
+	</div>
+
+	<div class="roomText">
+		<p class="roomTitle">${dto.title }</p>
+		<p class="roomAddress">${dto.address }</p>
+		<p class="roomDetailAddress">${dto.detailAddress }</p>
+		<p class="roomPrice">${dto.price }원</p>
+	</div>
 
 </div>
 <div class="roomBtn">
-   <ul class="tab">
-      <li class="selected">숙소정보</li>
-      <li>리뷰</li>
-   </ul>
-   <div class="box">
-      <div class="menu1 selected">${dto.content }</div>
-      <div class="menu2">
-         <form method="POST"  enctype="multipart/form-data">
-            <div class="rating">
-               <span class="star">&#9733;</span> <span class="star">&#9733;</span>
-               <span class="star">&#9733;</span> <span class="star">&#9733;</span>
-               <span class="star">&#9733;</span> <input type="hidden" name="point"
-                  id="starRating" value="5">
-               <!-- 별점을 저장할 숨겨진 입력 필드 추가 -->
-            </div>
-            <p>
-               <textarea class="reviewWrite" name="content"></textarea>
-               <input type="file" name="upload" multiple>
-            </p>
-            <p>
-               <input type="submit" value="리뷰 작성">
-            </p>
-         </form>
+	<ul class="tab">
+		<li class="selected">숙소정보</li>
+		<li>리뷰</li>
+	</ul>
+	<div class="box">
+		<div class="menu1 selected">${dto.content }</div>
+		<div class="menu2">
+			<form method="POST" enctype="multipart/form-data">
+				<div class="rating">
+					<span class="star">&#9733;</span> <span class="star">&#9733;</span>
+					<span class="star">&#9733;</span> <span class="star">&#9733;</span>
+					<span class="star">&#9733;</span> <input type="hidden" name="point"
+						id="starRating" value="5">
+					<!-- 별점을 저장할 숨겨진 입력 필드 추가 -->
+				</div>
+				<p>
+					<textarea class="reviewWrite" name="content" required></textarea>
+					<input type="file" name="upload" required multiple>
+				</p>
+				<p>
+					<input type="submit" value="리뷰 작성">
+				</p>
+			</form>
 
-         <c:if test="${not empty reviewList }">
-            <div class="review">
-               <c:forEach var="dto" items="${reviewList}">
-                  <div class="reviewItem">
-                     <div class="reviewProfileBox">
-                        <img src="${dto.profile }">
-                     </div>
-                     <div class="reviewProfileInfo">
-                        <p>${dto.userNick }</p>
-                        <p class="starPoint">${dto.point }</p>
-                        <img src="${dto.filePath }" />
-                        <p>${dto.content }</p>
-                     </div>
-                  </div>
-               </c:forEach>
-         <%--       <c:forEach var="Img" items="${reviewImg }">
-              		<img src="${Img.filePath }">
-               </c:forEach>  --%>
-            </div>
-         </c:if>
-      </div>
-   </div>
+			<c:if test="${not empty reviewList }">
+				<div class="review">
+					<c:forEach var="dto" items="${reviewList}">
+						<div class="reviewItem">
+							<div class="reviewProfileBox">
+								<img src="${dto.profile }">
+							</div>
+							<div class="reviewProfileInfo">
+								<p>${dto.userNick }</p>
+								<p class="starPoint">${dto.point }</p>
+								<p>${dto.content }</p>
+								
+								 <div class="carousel-container">
+							        <div class="carousel">
+							            <c:forEach var="filePath" items="${dto.filePathList}">
+							                <img class="reviewImgs" src="${filePath}" />
+							            </c:forEach>
+							        </div>
+							        <button class="prevButton"><</button>
+							        <button class="nextButton">></button>
+							    </div>
+							</div>
+						</div>
+					</c:forEach>
+				</div>
+			</c:if>
+		</div>
+	</div>
 </div>
 
 
 <!-- roomSmall 을 눌렀을 때 roomBig에 사진 크게 뜨게 하기 -->
-	<script>
+<script>
 		const roomBigImg = document.querySelector('.roomBig > img')
 		const roomSmallImgs = document.querySelectorAll('.roomSmall > img')
 		
@@ -87,8 +110,8 @@
 	</script>
 
 
-	<!-- 탭 메뉴 -->
-	<script>
+<!-- 탭 메뉴 -->
+<script>
         // nodeList
         const tabList = document.querySelectorAll('ul.tab > li')
         const boxList = document.querySelectorAll('div.box > div')
@@ -107,7 +130,7 @@
         })
 	</script>
 
-	<script>
+<script>
 	tabList.forEach((element, index) => {
 	    element.onclick = function() {
 	
@@ -131,8 +154,8 @@
 	    }
 	})
 	</script>
-	<!-- 별점 스크립트 -->
-	<script>
+<!-- 별점 스크립트 -->
+<script>
 	//HTML에서 별점 아이콘들을 선택합니다.
 	const stars = document.querySelectorAll('.star');
 	
@@ -154,7 +177,7 @@
 	    });
 	});
 	</script>
-	<script>
+<script>
 	function printStars() {
 	    const starPointElements = document.querySelectorAll('.starPoint');
 	    
@@ -175,10 +198,61 @@
 	}
 	window.addEventListener('load', printStars);
 	</script>
-	
-	<!--  리뷰글 창 새로고침 시 자꾸 추가 되는 거 방지 ajax -->
-	
-	
+
+
+<!-- 리뷰 이미지 캐러셀 -->
+<script>
+  const reviewCarousels = document.querySelectorAll('.carousel'); // 모든 리뷰 캐러셀을 선택합니다.
+  const prevButtons = document.querySelectorAll('.prevButton'); // 모든 이전 버튼을 선택합니다.
+  const nextButtons = document.querySelectorAll('.nextButton'); // 모든 다음 버튼을 선택합니다.
+
+  // 캐러셀을 초기화하고 현재 페이지를 추적하는 변수를 추가합니다.
+  reviewCarousels.forEach((carousel, index) => {
+    let currentPage = 0;
+
+    // 페이지를 업데이트하고 보이지 않는 항목을 숨깁니다.
+    function updatePage() {
+      const itemsPerPage = 3; // 한 번에 보여줄 항목 수를 설정합니다.
+      const reviewItems = carousel.querySelectorAll('.reviewImgs');
+
+      reviewItems.forEach((item, itemIndex) => {
+        if (itemIndex >= currentPage * itemsPerPage && itemIndex < (currentPage + 1) * itemsPerPage) {
+          item.style.display = 'block';
+        } else {
+          item.style.display = 'none';
+        }
+      });
+    }
+
+    // 이전 페이지로 이동하는 함수
+    function prevPage() {
+      if (currentPage > 0) {
+        currentPage--;
+        updatePage();
+      }
+    }
+
+    // 다음 페이지로 이동하는 함수
+    function nextPage() {
+      const itemsPerPage = 3; // 한 번에 보여줄 항목 수를 설정합니다.
+      const reviewItems = carousel.querySelectorAll('.reviewImgs');
+      const totalPages = Math.ceil(reviewItems.length / itemsPerPage);
+
+      if (currentPage < totalPages - 1) {
+        currentPage++;
+        updatePage();
+      }
+    }
+
+    // 이전 버튼과 다음 버튼에 이벤트 리스너를 추가합니다.
+    prevButtons[index].addEventListener('click', prevPage);
+    nextButtons[index].addEventListener('click', nextPage);
+
+    // 초기 페이지를 업데이트합니다.
+    updatePage();
+  });
+</script>
+
 
 </body>
 </html>

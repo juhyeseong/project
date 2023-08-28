@@ -23,14 +23,13 @@ import com.javabang.repository.MemberDAO;
 import com.jcraft.jsch.Channel;
 import com.jcraft.jsch.ChannelSftp;
 import com.jcraft.jsch.JSch;
-import com.jcraft.jsch.JSchException;
 import com.jcraft.jsch.Session;
 
 import org.springframework.core.io.Resource;
 
 @Service
 public class MemberService {
-	@Autowired private MemberDAO memberDao;
+	@Autowired private MemberDAO memberDAO;
 	@Autowired private HashComponent hashComponent;
 	@Autowired private MailComponent mailComponent;
 	
@@ -59,7 +58,7 @@ public class MemberService {
 			java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
 			
 			dto.setBirth(sqlDate);
-			row = memberDao.add(dto);
+			row = memberDAO.add(dto);
 		} catch (ParseException e) {
 			System.err.println("dateFormat 예외 : "  + e);
 		}
@@ -71,14 +70,14 @@ public class MemberService {
 	public MemberDTO login(MemberDTO dto) throws NoSuchAlgorithmException  {
 		String hash = hashComponent.getHash(dto.getUserPw());
 		dto.setUserPw(hash);
-		MemberDTO login = memberDao.login(dto);
+		MemberDTO login = memberDAO.login(dto);
 		return login;
 	}
 
 	// 비밀번호 재설정
 	public int reset(MemberDTO dto) throws FileNotFoundException, IOException{
 		String userPw = (ran.nextInt(999999)+100000) + "";
-		int row = memberDao.reset(dto);
+		int row = memberDAO.reset(dto);
 		while(row != 0)
 		{
 			String content = "";
@@ -97,44 +96,44 @@ public class MemberService {
 
 	// 회원정보 수정 목록 하나만 불러오기
 	public MemberDTO selectOne(int idx) {
-		return memberDao.selectOne(idx);
+		return memberDAO.selectOne(idx);
 	}
 
 	// 회원정보수정
 	public int update(MemberDTO dto)  {
 
-		return memberDao.update(dto);
+		return memberDAO.update(dto);
 	}
 
 	// 회원탈퇴(삭제)
 	public int delete(int idx) {
-		return memberDao.delete(idx);
+		return memberDAO.delete(idx);
 	}
 
 	// 비밀번호 재설정 이메일 받기
 	public String getEmail(MemberDTO dto) {
 		
-		return memberDao.getMail(dto);
+		return memberDAO.getMail(dto);
 	}
 
 	public MemberDTO userCheck(MemberDTO dto) {
-		return memberDao.userCheck(dto);
+		return memberDAO.userCheck(dto);
 	}
 
 	public int updatePw(MemberDTO tmp) {
-		return memberDao.updatePw(tmp);
+		return memberDAO.updatePw(tmp);
 	}
 
 	public int modifyPassword(MemberDTO dto) throws NoSuchAlgorithmException {
 		String userPw = dto.getUserPw();
 		userPw = hashComponent.getHash(userPw);
 		dto.setUserPw(userPw);
-		return memberDao.updatePw(dto);
+		return memberDAO.updatePw(dto);
 	}
 
 	public int dupCheck(String userId) {
 		
-		return memberDao.selectCount(userId);
+		return memberDAO.selectCount(userId);
 	}
 
 	public int sendAuthNumber(String email) throws IOException {
@@ -186,33 +185,33 @@ public class MemberService {
 		filePath += "/" + dest.getName();
 		dto.setProfile(filePath);
 		dest.delete();
-		return memberDao.updateProfile(dto);
+		return memberDAO.updateProfile(dto);
 
 		}
 
 	public int basicProfile(MemberDTO dto) throws Exception {
 		
-		    return memberDao.basicProfile(dto);
+		    return memberDAO.basicProfile(dto);
 	}
 
 	public MemberDTO selectKakao(MemberDTO dto) {
 	
-		return memberDao.selectKakao(dto);
+		return memberDAO.selectKakao(dto);
 	}
 
 	public int insertKakao(MemberDTO dto) {
 		
-		return memberDao.insertKakao(dto);
+		return memberDAO.insertKakao(dto);
 	}
 
 	public MemberDTO selectNaver(MemberDTO dto) {
 		
-		return memberDao.selectNaver(dto);
+		return memberDAO.selectNaver(dto);
 	}
 
 	public MemberDTO findId(MemberDTO dto) {
 	
-		return memberDao.findId(dto);
+		return memberDAO.findId(dto);
 	}
 }
 		
