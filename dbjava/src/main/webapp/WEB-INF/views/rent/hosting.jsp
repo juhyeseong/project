@@ -865,14 +865,6 @@
 			createInput.type = 'file'
 			createInput.className = input.className
 			createInput.addEventListener("change", rentImgInputHandler)
-			let count = 0
-			
-			console.log('target', target)
-			console.log('img', img)
-			console.log('inputSpace', inputSpace)
-			console.log('input', input)
-			console.log('input.className', input.className)
-			console.log('createInput', createInput)
 			
 			inputSpace.removeChild(input)
 			inputSpace.appendChild(createInput)

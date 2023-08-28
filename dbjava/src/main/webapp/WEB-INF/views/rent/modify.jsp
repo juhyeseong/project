@@ -24,7 +24,7 @@
 				<a href="${cpath }/rent/fileUpdate/${rent.idx}">수정 ></a>
 			</div>
 			<div class="pictureValue">
-			<c:forEach var="filePath" items="${rent.filePath }">
+			<c:forEach var="filePath" items="${rent.filePathList }">
 				<div><img src="${filePath }"></div>
 			</c:forEach>
 			</div>
@@ -44,7 +44,7 @@
 					<span>숙소 제목</span>
 					<button>✖</button>
 				</div>
-				<input name="title" value="${rent.title }">
+				<input type="text" name="title" value="${rent.title }">
 				<button class="titleSubmit">저장하기</button>
 			</div>
 			<div class="basicInfo contentInfo">
@@ -64,20 +64,59 @@
 				<textarea class="contentValue">${rent.content }</textarea>
 				<button class="contentSubmit">저장하기</button>
 			</div>
-			<div class="basicInfo">
-				<div class="basicInfoTop">
-					<span>숙소 제목</span>
+			<div class="basicInfo priceInfo">
+				<div class="basicInfoTop priceInfoTop">
+					<span>숙소 가격</span>
 					<button>수정</button>
 				</div>
-				<div class="basicInfoBottom">${rent.title }</div>
+				<div class="basicInfoBottom commaPrice"></div>
 			</div>
-			<div class="basicModify hidden">
-				<div class="basicModifyTop">
-					<span>숙소 제목</span>
+			<div class="basicModify priceModify hidden">
+				<div class="basicModifyTop priceModifyTop">
+					<span>숙소 가격</span>
 					<button>✖</button>
 				</div>
-				<input name="title" value="${rent.title }">
-				<button>저장하기</button>
+				<input type="number" name="price" value="${rent.price }">
+				<button class="priceSubmit">저장하기</button>
+			</div>
+			
+			<div class="basicCount">
+				<h3>숙소 인원 및 공간</h3>
+				<span style="color: gray;">인원 및 공간의 경우 수정 시 자동 저장됩니다</span>
+				<div class="basicCountSpace">
+					<div class="basicCountLeft">게스트 수</div>
+					<div class="basicCountRight">
+						<button class="minus">➖</button>
+						<span>${rent.guestCount }</span>
+						<button class="plus">➕</button>
+					</div>
+				</div>
+				<div class="basicCountSpace">
+					<div class="basicCountLeft">침대 수</div>
+					<div class="basicCountRight">
+						<button class="minus">➖</button>
+						<span>${rent.bedCount }</span>
+						<button class="plus">➕</button>
+					</div>
+				</div>
+				<c:if test="${rent.roomType != '원룸' }">
+					<div class="basicCountSpace">
+						<div class="basicCountLeft">욕실 수</div>
+						<div class="basicCountRight">
+							<button class="minus">➖</button>
+							<span>${rent.bathCount }</span>
+							<button class="plus">➕</button>
+						</div>
+					</div>
+					<div class="basicCountSpace">
+						<div class="basicCountLeft">방 수</div>
+						<div class="basicCountRight">
+							<button class="minus">➖</button>
+							<span>${rent.roomCount }</span>
+							<button class="plus">➕</button>
+						</div>
+					</div>
+				</c:if>
 			</div>
 		</div>
 	</div>
@@ -101,6 +140,21 @@
 		textarea.style.height = (textarea.scrollHeight) + "px"
 		contentInfo.style.height = (textarea.scrollHeight) + 50 + "px"
 		
+		// price 변수
+		const priceInfo = document.querySelector('.priceInfo')
+		const priceModify = document.querySelector('.priceModify')
+		const priceModifyBtn = document.querySelector('.priceInfoTop > button')
+		const priceExit = document.querySelector('.priceModifyTop > button')
+		const priceSubmit = document.querySelector('.priceSubmit')
+		const commaPrice = document.querySelector('.commaPrice')
+		const price = ${rent.price }
+		const formatPrice = new Intl.NumberFormat().format(price)
+		
+		commaPrice.innerText = formatPrice + '원'
+		
+		// count 변수
+		const minusList = document.querySelectorAll('.minus')
+		const plusList = document.querySelectorAll('.plus')
 		
 		// title handler
 		function titleEnterHandler() {
@@ -131,7 +185,7 @@
 			fetch(url, opt)
 			.then(resp => resp.text())
 			.then(text => {
-				if(text != 0) {
+				if(text != 0 && text != null) {
 					alert('숙소 이름이 수정되었습니다 ~')
 					location.reload()
 				}
@@ -169,7 +223,7 @@
 			fetch(url, opt)
 			.then(resp => resp.text())
 			.then(text => {
-				if(text != 0) {
+				if(text != 0 && text != null) {
 					alert('숙소 정보가 수정되었습니다 ~')
 					location.reload()
 				}
@@ -179,6 +233,149 @@
 			})
 		}
 		
+		// price handler
+		function priceEnterHandler() {
+			priceInfo.classList.add('hidden')
+			priceModify.classList.remove('hidden')
+		}
+		
+		function priceExitHandler() {
+			priceInfo.classList.remove('hidden')
+			priceModify.classList.add('hidden')
+		}
+		
+		function priceSubmitHandler() {
+			const priceValue = document.querySelector('input[name="price"]').value
+			const opt = {
+				method: 'POST',
+				headers: {						
+					'Content-Type': 'application/json; charset=utf-8'
+				},
+				body: JSON.stringify({		
+					idx: idx,
+					price: priceValue
+				})
+			}
+			const url = cpath + '/rent/rentPriceUpdate'
+			
+			fetch(url, opt)
+			.then(resp => resp.text())
+			.then(text => {
+				if(text != 0 && text != null) {
+					alert('숙소 가격이 수정되었습니다 ~')
+					location.reload()
+				}
+				else {
+					alert('숙소 가격 수정에 실패했습니다.\n계속 실패할 경우 관리자에게 문의주세요 ~')
+				}
+			})
+		}
+		
+		// count handler
+		function minusHandler(event) {
+			const target = event.target
+			const column = target.parentNode.parentNode.children[0].innerText
+			let countValue = target.parentNode.children[1].innerText
+			if(countValue == 0) {
+				return
+			}
+			countValue = +countValue
+			
+			const url = cpath + '/rent/rentCountUpdateMinus'
+			const opt = {
+				method: 'POST',
+				headers: {						
+					'Content-Type': 'application/json; charset=utf-8'
+				},
+			}
+			
+			if(column === '게스트 수') {
+				opt.body = JSON.stringify({		
+					idx: idx,
+					guestCount: countValue
+				})
+			}
+			if(column === '침대 수') {
+				opt.body = JSON.stringify({		
+					idx: idx,
+					bedCount: countValue
+				})
+			}
+			if(column === '욕실 수') {
+				opt.body = JSON.stringify({		
+					idx: idx,
+					bathCount: countValue
+				})
+			}
+			if(column === '방 수') {
+				opt.body = JSON.stringify({		
+					idx: idx,
+					roomCount: countValue
+				})
+			}
+
+			fetch(url, opt)
+			.then(resp => resp.text())
+			.then(text => {
+				if(text != 0 && text != null) {
+					location.reload()
+				}
+				else {
+					alert('숙소 인원 및 공간 수정에 실패했습니다.\n계속 실패할 경우 관리자에게 문의주세요 ~')
+				}
+			})
+		}
+		
+		function plusHandler(event) {
+			const target = event.target
+			const column = target.parentNode.parentNode.children[0].innerText
+			let countValue = target.parentNode.children[1].innerText
+			countValue = +countValue + 1
+			
+			const url = cpath + '/rent/rentCountUpdatePlus'
+			const opt = {
+				method: 'POST',
+				headers: {						
+					'Content-Type': 'application/json; charset=utf-8'
+				},
+			}
+			
+			if(column === '게스트 수') {
+				opt.body = JSON.stringify({		
+					idx: idx,
+					guestCount: countValue
+				})
+			}
+			if(column === '침대 수') {
+				opt.body = JSON.stringify({		
+					idx: idx,
+					bedCount: countValue
+				})
+			}
+			if(column === '욕실 수') {
+				opt.body = JSON.stringify({		
+					idx: idx,
+					bathCount: countValue
+				})
+			}
+			if(column === '방 수') {
+				opt.body = JSON.stringify({		
+					idx: idx,
+					roomCount: countValue
+				})
+			}
+
+			fetch(url, opt)
+			.then(resp => resp.text())
+			.then(text => {
+				if(text != 0 && text != null) {
+					location.reload()
+				}
+				else {
+					alert('숙소 인원 및 공간 수정에 실패했습니다.\n계속 실패할 경우 관리자에게 문의주세요 ~')
+				}
+			})
+		}
 		// title event
 		titleModifyBtn.onclick = titleEnterHandler
 		titleExit.onclick = titleExitHandler
@@ -187,6 +384,13 @@
 		contentModifyBtn.onclick = contentEnterHandler
 		contentExit.onclick = contentExitHandler
 		contentSubmit.onclick = contentSubmitHandler
+		// price event
+		priceModifyBtn.onclick = priceEnterHandler
+		priceExit.onclick = priceExitHandler
+		priceSubmit.onclick = priceSubmitHandler
+		// count event
+		minusList.forEach(minus => minus.onclick = minusHandler)
+		plusList.forEach(plus => plus.onclick = plusHandler)
 	</script>
 </body>
 </html>

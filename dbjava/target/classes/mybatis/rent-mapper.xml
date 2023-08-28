@@ -33,7 +33,8 @@
 	
 	<select id="selectOne" parameterType="int" resultType="rent">
 		<!-- select r.*, i.filePath from rent R join Rent_img I on r.idx = i.rent where r.idx = #{idx} -->
-		select * from rent where idx = #{idx}	
+		select * from rent where idx = #{idx}
+			
 	</select>
 	
 	<select id="selectHost" parameterType="int" resultType="rent">
@@ -47,7 +48,7 @@
 	<update id="updateRentTitle" parameterType="rent">
 		update rent
 			set title = #{title}
-			where idx=#{idx}
+			where idx = #{idx}
 	</update>
 	
 	<update id="updateRentContent" parameterType="rent">
@@ -55,6 +56,50 @@
 			set content = #{content}
 		where idx = #{idx}
 	</update>
+	
+	<update id="updateRentPrice" parameterType="rent">
+		update rent
+			set price = #{price}
+		where idx = #{idx}
+	</update>
+	
+	<update id="updateRentCountMinus" parameterType="rent">
+		update rent
+		<if test="guestCount != 0">
+			set guestCount = #{guestCount} - 1
+		</if>
+		<if test="bedCount != 0">
+			set bedCount = #{bedCount} - 1
+		</if>
+		<if test="bathCount != 0">
+			set bathCount = #{bathCount} - 1
+		</if>
+		<if test="roomCount != 0">
+			set roomCount = #{roomCount} - 1
+		</if>
+		where idx = #{idx}
+	</update>
+	
+	<update id="updateRentCountPlus" parameterType="rent">
+		update rent
+		<if test="guestCount != 0">
+			set guestCount = #{guestCount}
+		</if>
+		<if test="bedCount != 0">
+			set bedCount = #{bedCount}
+		</if>
+		<if test="bathCount != 0">
+			set bathCount = #{bathCount}
+		</if>
+		<if test="roomCount != 0">
+			set roomCount = #{roomCount}
+		</if>
+		where idx = #{idx}
+	</update>
+	
+	<delete id="deleteRentFile" parameterType="hashmap">
+		delete rent_img where filePath = #{filePath}
+	</delete>
 </mapper>
 
 

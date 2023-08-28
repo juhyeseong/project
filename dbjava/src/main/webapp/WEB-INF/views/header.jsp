@@ -589,6 +589,8 @@ legend{
 .rentUpdateTop {
 	display: flex;
 	justify-content: flex-end;
+	
+	margin-top: 50px;
 }
 .rentUpdateTop button {
 	all: unset;
@@ -646,6 +648,12 @@ legend{
 	display: flex;
 	justify-content: center;
 	align-items: center;
+}
+.imgInfo {
+	margin-top: 0px;
+	margin-bottom: 20px;
+	
+	color: gray;
 }
 .rentBasicInfo {
 	margin: 50px 0px;
@@ -730,6 +738,73 @@ legend{
 .basicModifyTop button {
 	all: unset;
 	cursor: pointer;
+}
+.basicCount {
+	border-bottom: 1px solid black;
+	
+	margin: 30px 0px;
+}
+.basicCount h3 {
+	margin: 0px;
+}
+.basicCountSpace {
+	height: 81px;
+
+	display: flex;
+	justify-content: space-between;
+}
+.basicCountLeft {
+	flex: 1;
+	
+	display: flex;
+	align-items: center;
+	
+	font-size: 17px;
+	font-weight: bold;
+}
+.basicCountRight {
+	flex: 1;
+	
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+	
+	font-size: 16px;
+	font-weight: bold;
+}
+.basicCount button {
+	all: unset;
+	cursor: pointer;
+	
+	width: 35px;
+	height: 35px;
+	margin: 0px 20px;
+	
+	border: 1px solid black;
+	border-radius: 50%;
+	
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.preFileUpload {
+	display: flex;
+	justify-content: flex-end;
+	
+	padding: 10px;
+}
+.preFileUpload button {
+	cursor: pointer;
+
+	background-color: black;
+	color: white;
+	
+	padding: 12px 17px;
+	margin-left: 20px;
+	
+	border-radius: 10px;
+	
+	font-size: 16px;
 }
 
 /* hosting style */
@@ -1080,6 +1155,8 @@ legend{
 	padding-top: 10px;
 	margin-right: 5px;
 	
+	border: 1px dashed black;
+	
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -1090,8 +1167,6 @@ legend{
 .mainInputSpace {
 	width: 699px;
 	height: 479px;
-
-	border: 1px dashed black;
 	
 	display: flex;
 	justify-content: center;

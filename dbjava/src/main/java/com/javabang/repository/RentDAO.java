@@ -26,4 +26,14 @@ public interface RentDAO {
 	public int updateRentTitle(RentDTO dto);
 	
 	public int updateRentContent(RentDTO dto);
+
+	public int updateRentPrice(RentDTO dto);
+
+	public int updateRentCountMinus(RentDTO dto);
+
+	public int updateRentCountPlus(RentDTO dto);
+
+	public int updateRentFile(HashMap<String, Object> map);
+
+	public int deleteRentFile(HashMap<String, String> filePath);
 }

@@ -7,6 +7,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -39,8 +40,7 @@ public class RentService {
 		
 		for(MultipartFile file : dto.getFiles()) {
 			String ymd = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
-			String fileName = file.getOriginalFilename();
-			fileName = fileName.substring(0, fileName.lastIndexOf("."));
+			String fileName = UUID.randomUUID().toString();
 			String ext = file.getContentType().substring(file.getContentType().indexOf("/") + 1);
 			File dest = new File(ymd + "_" + fileName + "." + ext);
 			try {
@@ -92,8 +92,10 @@ public class RentService {
 	}
 
 	public RentDTO selectOne(int idx) {
+		RentDTO dto = rentDAO.selectOne(idx);
+		dto.setFilePathList(rentDAO.selectFilePath(idx));
 		
-		return rentDAO.selectOne(idx);
+		return dto;
 	}
 
 	public List<RentDTO> selectHost(int member) {
@@ -108,10 +110,6 @@ public class RentService {
 		
 		return list;
 	}
-
-	public List<String> selectFilePath(int idx) {
-		return rentDAO.selectFilePath(idx);
-	}
 	
 	public int updateRentTitle(RentDTO dto) {
 		return rentDAO.updateRentTitle(dto);
@@ -119,5 +117,77 @@ public class RentService {
 	
 	public int updateRentContent(RentDTO dto) {
 		return rentDAO.updateRentContent(dto);
+	}
+	
+	public int updateRentPrice(RentDTO dto) {
+		return rentDAO.updateRentPrice(dto);
+	}
+
+	public int updateRentCountMinus(RentDTO dto) {
+		return rentDAO.updateRentCountMinus(dto);
+	}
+
+	public int updateRentCountPlus(RentDTO dto) {
+		return rentDAO.updateRentCountPlus(dto);
+	}
+
+	public int insertRentFile(RentDTO dto) {
+		int row = 0;
+		
+		for(MultipartFile file : dto.getFiles()) {
+			System.out.println("for문 실행 !");
+			String ymd = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
+			String fileName = file.getOriginalFilename();
+			fileName = UUID.randomUUID().toString();
+			String ext = file.getContentType().substring(file.getContentType().indexOf("/") + 1);
+			File dest = new File(ymd + "_" + fileName + "." + ext);
+			try {
+				file.transferTo(dest);
+			} catch (IllegalStateException | IOException e) {
+				e.printStackTrace();
+			}
+			
+			Session session = null;
+			Channel channel = null;
+			JSch jsch = new JSch();
+			
+			try {
+				session = jsch.getSession(serverUser, serverIp, serverPort);
+				session.setPassword(serverPass);
+				session.setConfig("StrictHostKeyChecking", "no");
+				session.connect();
+				
+				channel = session.openChannel("sftp");
+				channel.connect();
+				
+				chSftp = (ChannelSftp)channel;
+	
+				FileInputStream fis = new FileInputStream(dest);
+				
+				chSftp.cd("/var/www/html");
+				chSftp.put(fis, dest.getName());
+				
+				fis.close();
+				chSftp.isClosed();
+
+				HashMap<String, Object> map = new HashMap<>();
+				String filePath = "http://192.168.64.200/" + dest.getName();
+				
+				map.put("rent", dto.getIdx());
+				map.put("filePath", filePath);
+				System.out.println("rent : " + map.get("rent"));
+				System.out.println("filePath : " + map.get("filePath"));
+				
+				row += rentDAO.fileInsert(map);
+			} catch (JSchException | SftpException | IOException e) {
+				e.printStackTrace();
+			}
+		};
+		
+		return row;
+	}
+
+	public int deleteRentFile(HashMap<String, String> filePath) {
+		return rentDAO.deleteRentFile(filePath);
 	}
 }

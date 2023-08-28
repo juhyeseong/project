@@ -82,6 +82,44 @@ public class AjaxController {
 	@PostMapping("/rent/rentContentUpdate")
 	public int rentContentUpdate(@RequestBody RentDTO dto) {
 		int row = rentService.updateRentContent(dto);
+		
+		return row;
+	}
+	
+	@PostMapping("/rent/rentPriceUpdate")
+	public int rentPriceUpdate(@RequestBody RentDTO dto) {
+		int row = rentService.updateRentPrice(dto);
+		
+		return row;
+	}
+	
+	@PostMapping("/rent/rentCountUpdateMinus")
+	public int rentCountUpdateMinus(@RequestBody RentDTO dto) {
+		int row = rentService.updateRentCountMinus(dto);
+		
+		return row;
+	}
+	
+	@PostMapping("/rent/rentCountUpdatePlus")
+	public int rentCountUpdatePlus(@RequestBody RentDTO dto) {
+		int row = rentService.updateRentCountPlus(dto);
+		
+		return row;
+	}
+	
+	@PostMapping("/rent/rentFileInsert")
+	public int rentFileInsert(RentDTO dto) {
+		System.out.println(dto.getFiles().get(0).getOriginalFilename());
+		System.out.println(dto.getIdx());
+		int row = rentService.insertRentFile(dto);
+		
+		return row;
+	}
+	
+	@PostMapping("/rent/rentDeleteFile")
+	public int rentDeleteFile(@RequestBody HashMap<String, String> filePath) {
+		int row = rentService.deleteRentFile(filePath);
+		
 		return row;
 	}
 }
