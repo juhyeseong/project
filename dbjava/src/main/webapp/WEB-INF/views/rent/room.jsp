@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@include file="../header.jsp"%>
-
 <style>
 	  .carousel {
     display: flex; /* 이미지를 가로로 배열합니다. */
@@ -19,17 +18,52 @@
   }
 </style>
 
+<script>
+	const cpath = '${cpath }'
+</script>
+
+
 <div class="roomExplain">
-	<div class="roomImgBox">
-		<div class="roomBig">
-			<img src="${dto.filePathList[0] }">
-		</div>
-		<div class="roomSmall">
-			<c:forEach var="filePath" items="${dto.filePathList }">
-				<img src="${filePath }">
-			</c:forEach>
-		</div>
-	</div>
+   <div class="roomImgBox">
+      <div class="roomBig">
+         <img src="${dto.filePathList[0] }">
+      </div>
+      <div class="roomSmall">
+         <c:forEach var="filePath" items="${dto.filePathList }">
+            <img src="${filePath }">
+         </c:forEach>
+      </div>
+   </div>
+   
+   <form method="POST" action="${cpath }/reservation/insertReservation">
+      <div class="reserveInfo">
+         <div class="reserveSpace">
+            <div class="roomText">
+               <p class="roomTitle">${dto.title }</p>
+               <p class="roomAddress">${dto.address } ${dto.detailAddress }</p>
+               <p class="roomPrice"></p>
+            </div>
+            <div class="reserveDate">
+               <div class="startDate">
+                  <input type="text" name="sDateString" id="sDateString" placeholder="체크인">
+               </div> 
+               <div class="endDate">
+                  <input type="text" name="eDateString" id="eDateString" placeholder="체크아웃">
+               </div>
+            </div>
+            <div class="reservePeople">
+               <input type="number" name="guestCount" placeholder="인원 수를 입력 해주세요">
+            </div>
+            <div class="reserveBtn"><input type="submit" value="예약하기"></div>
+            <div class="reserveCal"><span class="roomPrice"></span> X <span class="nightValue">박</span></div>
+            <div class="reserveTotal" id="totalPrice">원</div>
+            <input type="hidden" name="totalPrice">
+            <input type="hidden" name="member" value="${login.idx }">
+            <input type="hidden" name="rent" value="${dto.idx }">
+         </div>
+      </div>
+   </form>
+</div>
 
 	<div class="roomText">
 		<p class="roomTitle">${dto.title }</p>
@@ -94,6 +128,28 @@
 	</div>
 </div>
 
+
+<!-- JQuery 관련 -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+<script>
+      const roomPriceList = document.querySelectorAll('.roomPrice')
+      const price = ${dto.price }
+      const formatPrice = new Intl.NumberFormat().format(price)
+      let index = 0
+      
+      roomPriceList.forEach(roomPrice => {
+         if(index == 0) {
+            roomPrice.innerText = '₩ ' + formatPrice + ' / 박'
+         }
+         else {
+            roomPrice.innerText = formatPrice + '원'
+         }
+         index++
+      })
+</script>
 
 <!-- roomSmall 을 눌렀을 때 roomBig에 사진 크게 뜨게 하기 -->
 <script>
@@ -253,6 +309,78 @@
   });
 </script>
 
+<script>
+$.datepicker.setDefaults({
+     dateFormat: 'yy. mm. dd',
+     monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+     monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+     dayNames: ['일', '월', '화', '수', '목', '금', '토'],
+     dayNamesShort: ['일', '월', '화', '수', '목', '금', '토'],
+     dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
+     showMonthAfterYear: true,
+     yearSuffix: '년'
+});
+
+function totalPriceHandler(sDateString, eDateString) {
+   if(sDateString != '' && eDateString != '') {
+      sDateString = sDateString.replaceAll('. ', '-')
+      eDateString = eDateString.replaceAll('. ', '-')
+      const startDate = new Date(sDateString)
+      const endDate = new Date(eDateString)
+      const timeDifference = endDate - startDate
+      const daysDifference = Math.floor(timeDifference / (1000 * 60 * 60 * 24))
+        const nights = daysDifference
+        const nightValue = document.querySelector('.nightValue')
+        nightValue.innerText = nights + '박'
+        
+        const price = ${dto.price }
+        const totalPrice = document.querySelector('#totalPrice')
+        const totalPriceValue = document.querySelector('input[name="totalPrice"]')
+        totalPriceValue.value = price * nights
+        totalPrice.innerText = new Intl.NumberFormat().format(price * nights) + '원'
+   }
+}
+
+$(document).ready(function() {
+    // 시작 날짜 입력란에 달력을 연결합니다.
+    $("#sDateString").datepicker({
+        minDate: new Date(), // 오늘 이후의 날짜만 선택 가능하도록 설정
+        onSelect: function(selectedDate) {
+            $("#sDateString").datepicker("option", "minDate", selectedDate);
+            const sDateString = $("#sDateString").val();
+            const eDateString = $("#eDateString").val();
+            
+            totalPriceHandler(sDateString, eDateString);
+        }
+    });
+    
+    // 종료 날짜 입력란에 달력을 연결합니다.
+    $("#eDateString").datepicker({
+        minDate: new Date(), // 오늘 이후의 날짜만 선택 가능하도록 설정
+        beforeShow: function(input, inst) {
+            // 시작 날짜 이후의 날짜만 선택 가능하도록 설정
+            const minDate = $("#sDateString").datepicker("getDate");
+            if (minDate) {
+                $(this).datepicker("option", "minDate", minDate);
+            }
+        },
+        onSelect: function(selectedDate) {
+            const minDate = $("#sDateString").datepicker("getDate");
+            const endDate = $("#eDateString").datepicker("getDate");
+            if (minDate && endDate && endDate <= minDate) {
+                // 선택된 종료 날짜가 시작 날짜보다 작거나 같을 경우, 시작 날짜 다음날로 설정
+                const nextDay = new Date(minDate);
+                nextDay.setDate(minDate.getDate() + 1);
+                $("#eDateString").datepicker("setDate", nextDay);
+            }
+            const sDateString = $("#sDateString").val();
+            const eDateString = $("#eDateString").val();
+            
+            totalPriceHandler(sDateString, eDateString);
+        }
+    });
+});
+</script>
 
 </body>
 </html>

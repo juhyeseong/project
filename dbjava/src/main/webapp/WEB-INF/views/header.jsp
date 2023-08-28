@@ -158,6 +158,7 @@ ul > li{
 	display:flex;
 }
 .roomImgBox{
+	flex: 1;
 /* 	border : 1px solid blue; */
 }
 .roomBig > img{
@@ -193,6 +194,10 @@ ul > li{
 .roomPrice, .roomDetailAddress
 {
 	text-align: left;
+}
+.roomPrice {
+	font-size: 24px;
+	font-weight: bold;
 }
 .roomBtn{
 	margin:30px 150px;
@@ -1514,6 +1519,54 @@ legend{
 
 .rating .star.active {
     color: #ffcc00;
+}
+
+/* reservation style */
+.reserveInfo {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-end;	
+	border: 1px solid black;
+}
+.reserveSpace {
+	border: 2px solid red;
+	
+	
+	width: 520px;
+	height: 100%;
+}
+.reserveDate {
+	display: flex;
+	
+	margin: 10px;
+}
+.startDate {
+	flex: 1;
+
+}
+.endDate {
+	flex: 1;
+
+}
+.startDate > input {
+	width: 150px;
+}
+.endDate > input {
+	width: 150px;
+}
+.reservePeople {
+	border: 1px solid black;
+	margin: 10px;
+}
+.reserveBtn {
+	margin: 20px;
+}
+.reserveCal {
+	margin: 10px 30px;
+}
+.reserveTotal {
+	margin: 10px 30px;
 }
 
 </style>

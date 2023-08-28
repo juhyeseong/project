@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC 
+   "-//mybatis.org//DTD Mapper 3.0//EN" 
+   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+   
+<mapper namespace="com.javabang.repository.ReservationDAO">
+   <insert id="insertReservation" parameterType="reservation">
+      insert into
+         reservation(member, rent, startDate, endDate, guestCount, totalPrice)
+         values(#{member}, #{rent}, #{startDate}, #{endDate}, #{guestCount}, #{totalPrice})
+   </insert>
+</mapper>

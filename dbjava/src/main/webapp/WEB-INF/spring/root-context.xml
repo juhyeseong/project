@@ -12,7 +12,7 @@
 	<!-- Root Context: defines shared resources visible to all other web components -->
 	<bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
 	<property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"/>
-	<property name="jdbcUrl" value="jdbc:log4jdbc:oracle:thin:@192.168.64.100:1521:xe"/>
+	<property name="jdbcUrl" value="jdbc:log4jdbc:oracle:thin:@localhost:1521:xe"/>
 	<property name="username" value="c##rent"/>
 	<property name="password" value="rent"/>
 	</bean>
@@ -29,6 +29,7 @@
 				<value>classpath:mybatis/member-mapper.xml</value>
 				<value>classpath:mybatis/rent-mapper.xml</value>
 				<value>classpath:mybatis/review-mapper.xml</value>
+				<value>classpath:mybatis/reservation-mapper.xml</value>
 			</list>
 		</property>
 	</bean>
