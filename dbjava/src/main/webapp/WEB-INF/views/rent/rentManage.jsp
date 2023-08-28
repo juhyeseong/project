@@ -23,12 +23,12 @@
 					<c:forEach var="rent" items="${rentList }">
 						<div class="rentListRow">
 							<div class="title">${rent.title }</div>
-							<div class="price">${rent.price }원</div>
+							<div class="price">${rent.price }</div>
 							<div class="category">${rent.category }</div>
 							<div class="roomType">${rent.roomType }</div>
 							<div class="address">${rent.address } ${rent.detailAddress }</div>
 							<div class="discount">${rent.discount }%</div>
-							<div class="rentUpdate"><a href="${cpath }/rent/modify/${rent.idx }"><button>업데이트</button></a></div>
+							<div class="rentUpdate"><a href="${cpath }/rent/modify/${rent.idx }">업데이트</a></div>
 							<div class="rentState">
 								<c:if test="${rent.state == 0 }">등록 중</c:if>
 								<c:if test="${rent.state == 1 }">운영 중</c:if>
@@ -41,5 +41,15 @@
 			</div>
 		</div>
 	</div>
+	
+	<script>
+		const priceSpaceList = document.querySelectorAll('.rentListRow > .price')
+		
+		priceSpaceList.forEach(priceSpace => {
+			const formatPrice = new Intl.NumberFormat().format(priceSpace.innerText)
+			
+			priceSpace.innerText = formatPrice + '원'
+		})
+	</script>
 </body>
 </html>

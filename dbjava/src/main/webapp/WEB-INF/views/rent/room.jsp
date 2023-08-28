@@ -65,14 +65,6 @@
    </form>
 </div>
 
-	<div class="roomText">
-		<p class="roomTitle">${dto.title }</p>
-		<p class="roomAddress">${dto.address }</p>
-		<p class="roomDetailAddress">${dto.detailAddress }</p>
-		<p class="roomPrice">${dto.price }원</p>
-	</div>
-
-</div>
 <div class="roomBtn">
 	<ul class="tab">
 		<li class="selected">숙소정보</li>

@@ -154,20 +154,16 @@ ul > li{
 	width:80%;
 	margin-left:auto;
 	margin-right:auto;
-/* 	border : 1px solid red; */
 	display:flex;
 }
 .roomImgBox{
 	flex: 1;
-/* 	border : 1px solid blue; */
 }
 .roomBig > img{
-/* 	border: 1px solid green; */
 	width:500px;
 	height:350px;
 }
 .roomSmall{
-/* 	border:1px solid purple;  */
 	display:flex;
 	justify-content:space-around;
 	width:500px;
@@ -175,7 +171,6 @@ ul > li{
 }
 .roomSmall > img {
 	width:120px;
-	/* border:1px solid green;  */
 	height:86px;
 	margin:5px 10px;
 }
@@ -183,8 +178,6 @@ ul > li{
 	width:360px;
 	margin-left:auto;
 	margin-right:auto;
-/* 	border:1px solid black; */
-	
 }
 .roomTitle{
 	font-weight: bold;
@@ -532,7 +525,7 @@ legend{
 	
 	padding: 15px 30px;
 	
-	background-color: black;
+	background-color: #f8215c;
 	color: white;
 	font-size: 18px;
 	font-weight: bold;
@@ -572,6 +565,19 @@ legend{
 .rentList .rentState {
 	flex: 1;
 }
+.rentUpdate a {
+	all: unset;
+	cursor: pointer;
+	
+	padding: 10px 15px;
+	
+	background-color: black;
+	color: white;
+	
+	border-radius: 10px;
+	
+	font-weight: bold;
+}
 .rentList .price,
 .rentList .title {
 	flex: 2;
@@ -580,7 +586,7 @@ legend{
 	flex: 4;
 }
 .hostReservation {
-	width: 1500px;
+	width: 1800px;
 	margin: auto;
 	padding: 20px 0px;
 }
