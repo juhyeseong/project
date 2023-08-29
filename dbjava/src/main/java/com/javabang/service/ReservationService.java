@@ -3,6 +3,7 @@ package com.javabang.service;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -38,5 +39,9 @@ public class ReservationService {
 		}
 	
 		return row;
+	}
+	
+	public List<ReservationDTO> selectReservation(int rent) {
+	      return reservationDAO.selectReservation(rent);
 	}
 }

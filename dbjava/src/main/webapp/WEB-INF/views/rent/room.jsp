@@ -36,7 +36,7 @@
 		</div>
 	</div>
 
-	<form method="POST" action="${cpath }/reservation/insertReservation">
+	<form>
 		<div class="reserveInfo">
 			<div class="reserveSpace">
 				<div class="roomText">
@@ -44,15 +44,13 @@
 					<p class="roomAddress">${dto.address }${dto.detailAddress }</p>
 					<p class="roomPrice"></p>
 				</div>
+				<div class="reserveDate-container">
 				<div class="reserveDate">
-					<div class="startDate">
-						<input type="text" name="sDateString" id="sDateString"
-							placeholder="체크인">
-					</div>
-					<div class="endDate">
-						<input type="text" name="eDateString" id="eDateString"
-							placeholder="체크아웃">
-					</div>
+				  <label>체크인</label>
+				  <input type="text" name="sDateString" id="sDateString" placeholder="날짜 선택" autocomplete="off">
+				  <label>체크아웃</label>
+				  <input type="text" name="eDateString" id="eDateString" placeholder="날짜 선택" autocomplete="off">
+				</div>
 				</div>
 				<div class="reservePeople">
 					<input type="number" name="guestCount" placeholder="인원 수를 입력 해주세요">
@@ -64,9 +62,9 @@
 					<span class="roomPrice"></span> X <span class="nightValue">박</span>
 				</div>
 				<div class="reserveTotal" id="totalPrice">원</div>
-				<input type="hidden" name="totalPrice"> <input type="hidden"
-					name="member" value="${login.idx }"> <input type="hidden"
-					name="rent" value="${dto.idx }">
+				<input type="hidden" name="totalPrice"> 
+				<input type="hidden" name="member" value="${login.idx }"> 
+				<input type="hidden" name="rent" value="${dto.idx }">
 			</div>
 		</div>
 	</form>
@@ -168,10 +166,69 @@
             roomPrice.innerText = '₩ ' + formatPrice + ' / 박'
          }
          else {
-            roomPrice.innerText = formatPrice + '원'
+        	 roomPrice.innerText = '₩ ' + formatPrice
          }
          index++
       })
+</script>
+
+<script>
+   const submitBtn = document.querySelector('.reserveBtn > input[type="submit"]')   
+   const totalPrice = document.querySelector('input[name="totalPrice"]')
+   
+   function payHandler(event) {
+      event.preventDefault()
+      
+      const rent = document.querySelector('input[name="rent"]').value
+      const member = document.querySelector('input[name="member"]').value
+      const sDateString = document.querySelector('input[name="sDateString"]').value
+      const eDateString = document.querySelector('input[name="eDateString"]').value
+      const guestCount = document.querySelector('input[name="guestCount"]').value
+      
+      if(member == '') {
+          alert('로그인 후 이용해주세요 ~ ')
+          location.href = cpath + '/member/login'
+          return
+       }
+       if(sDateString == '' || eDateString == '') {
+          alert('체크인 또는 체크아웃 날짜를 선택해주세요 ~~')
+          return
+       }
+       if(guestCount == '') {
+          alert('인원 수를 정해주세요 ~')
+          return
+       }
+
+      const url = cpath + '/kakaopay'
+      const opt = {
+            method: 'POST',
+            headers: {                  
+               'Content-Type': 'application/json; charset=utf-8'
+            },
+            body: JSON.stringify({   
+               rent: rent,
+               member: member,
+               sDateString: sDateString,
+               eDateString: eDateString,
+               guestCount: guestCount,
+               totalPrice: totalPrice.value
+            })
+         }
+      
+      fetch(url, opt)
+      .then(resp => resp.json())
+      .then(json => {
+         console.log('json 실행')
+         const url = json.next_redirect_pc_url
+         console.log(json.next_redirect_pc_url)
+         location.href = url
+      })
+      .catch(error => {
+         console.log(error)
+      })
+   }
+   
+   submitBtn.onclick = payHandler
 </script>
 
 <!-- roomSmall 을 눌렀을 때 roomBig에 사진 크게 뜨게 하기 -->
@@ -367,19 +424,28 @@ function totalPriceHandler(sDateString, eDateString) {
 $(document).ready(function() {
     // 시작 날짜 입력란에 달력을 연결합니다.
     $("#sDateString").datepicker({
-        minDate: new Date(), // 오늘 이후의 날짜만 선택 가능하도록 설정
-        onSelect: function(selectedDate) {
-            $("#sDateString").datepicker("option", "minDate", selectedDate);
-            const sDateString = $("#sDateString").val();
-            const eDateString = $("#eDateString").val();
-            
-            totalPriceHandler(sDateString, eDateString);
-        }
-    });
+	    minDate: 0,  
+	    onSelect: function(selectedDate) {
+	        const startDate = $("#sDateString").datepicker("getDate");
+	        const endDate = $("#eDateString").datepicker("getDate");
+	
+	        // 선택된 시작 날짜가 종료 날짜보다 크거나 같을 경우, 종료 날짜 이전날로 설정
+	        if (endDate && startDate >= endDate) {
+	            const prevDay = new Date(endDate);
+	            prevDay.setDate(endDate.getDate() - 1);
+	            $("#sDateString").datepicker("setDate", prevDay);
+	        }
+	
+	        const sDateString = $("#sDateString").val();
+	        const eDateString = $("#eDateString").val();
+	
+	        totalPriceHandler(sDateString, eDateString);
+	    }
+	});
     
     // 종료 날짜 입력란에 달력을 연결합니다.
     $("#eDateString").datepicker({
-        minDate: new Date(), // 오늘 이후의 날짜만 선택 가능하도록 설정
+        minDate: 0, 
         beforeShow: function(input, inst) {
             // 시작 날짜 이후의 날짜만 선택 가능하도록 설정
             const minDate = $("#sDateString").datepicker("getDate");
@@ -388,12 +454,12 @@ $(document).ready(function() {
             }
         },
         onSelect: function(selectedDate) {
-            const minDate = $("#sDateString").datepicker("getDate");
+            const startDate = $("#sDateString").datepicker("getDate");
             const endDate = $("#eDateString").datepicker("getDate");
-            if (minDate && endDate && endDate <= minDate) {
+            if (startDate && endDate <= startDate) {
                 // 선택된 종료 날짜가 시작 날짜보다 작거나 같을 경우, 시작 날짜 다음날로 설정
-                const nextDay = new Date(minDate);
-                nextDay.setDate(minDate.getDate() + 1);
+                const nextDay = new Date(startDate);
+                nextDay.setDate(startDate.getDate() + 1);
                 $("#eDateString").datepicker("setDate", nextDay);
             }
             const sDateString = $("#sDateString").val();

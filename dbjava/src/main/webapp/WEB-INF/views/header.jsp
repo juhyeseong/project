@@ -567,33 +567,45 @@ legend{
 .rentList .roomType,
 .rentList .discount,
 .rentList .rentUpdate,
-.rentList .rentState {
-	flex: 1;
+.rentList .rentState,
+.rentList .reservation {
+   flex: 1;
 }
-.rentUpdate a {
-	all: unset;
-	cursor: pointer;
-	
-	padding: 10px 15px;
-	
-	background-color: black;
-	color: white;
-	
-	border-radius: 10px;
-	
-	font-weight: bold;
+.rentUpdate a,
+.reservation a {
+   all: unset;
+   cursor: pointer;
+   
+   padding: 10px 15px;
+   
+   background-color: black;
+   color: white;
+   
+   border-radius: 10px;
+   
+   font-weight: bold;
 }
 .rentList .price,
 .rentList .title {
 	flex: 2;
 }
 .rentList .address {
-	flex: 4;
+	flex: 3;
 }
 .hostReservation {
-	width: 1800px;
-	margin: auto;
-	padding: 20px 0px;
+   width: 1800px;
+   margin: auto;
+   padding: 20px 0px;
+}
+.rentList .date {
+   flex: 4;
+}
+.rentList .name,
+.rentList .guestCount {
+   flex: 1;
+}
+.rentList .phoneNum {
+   flex: 2;
 }
 
 /* rentModify style */
@@ -1555,56 +1567,57 @@ legend{
 	display: flex;
 	flex-direction: column;
 	align-items: flex-end;	
-	/* border: 1px solid black; */
 }
 .reserveSpace {
-/* 	border: 2px solid red; */
-	
-	
 	width: 520px;
 	height: 100%;
 }
-.reserveDate {
-	display: flex;
-	
-	margin: 10px;
-}
-.startDate {
-	flex: 1;
-
+  .reserveDate-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
 }
 
-.endDate {
-	flex: 1;
+  .reserveDate {
+    border: 1px solid #717171;
+    padding: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
 
-}
-.startDate > input {
-	width: 150px;
-	border-radius: 10px;
-    height:30px;
-}
-.endDate > input {
-	width: 150px;
-	border-radius: 10px;
-    height:30px;
+  .reserveDate input[type="text"] {
+    border: none;
+    outline: none;
+    font-size: 14px;
+    padding: 10px;
+    width: 160px;
 }
 .reservePeople {
-	/* border: 1px solid black; */
-	margin: 10px;
+	padding: 14px;
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+}
+
+.reservePeople input[type="number"] {
+	border: 1px solid #717171;
+	padding: 10px;
+	width: 160px;
+	font-size: 14px;
+}	
+.reserveBtn input[type="submit"]{
+	all: unset;
+	cursor: pointer;
 	
-}
-.reservePeople > input {
-	border-radius: 10px;
-    height:30px;
-}
-.reserveBtn input[type="submit"] {
-	width:100px;
-	height:30px;
-	margin: 20px;
-	background-color : #f8215c;
-	border : none;
-	color : white;
-	border-radius:10px;
+	width: 500px;
+	
+	border-radius: 5px;
+	padding: 15px 30px;
+	margin-right: 30px;
+	
+	color: white;
+	background-color: #f8215c;
+	font-size: 17px;
 }
 .reserveCal {
 	margin: 10px 30px;
@@ -1612,6 +1625,8 @@ legend{
 .reserveTotal {
 	margin: 10px 30px;
 }
+
+/* review style */
 .carousel {
 	display: flex; /* 이미지를 가로로 배열합니다. */
 	overflow: hidden;

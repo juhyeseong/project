@@ -9,4 +9,17 @@
          reservation(member, rent, startDate, endDate, guestCount, totalPrice)
          values(#{member}, #{rent}, #{startDate}, #{endDate}, #{guestCount}, #{totalPrice})
    </insert>
+   
+   <select id="selectReservation" parameterType="int" resultType="reservation">
+       select reservation.*,
+          member.userName,
+          member.phoneNum, 
+          rent.title
+          from reservation
+          join member
+              on member.idx = reservation.member
+          join rent
+              on rent.idx = reservation.rent
+          where rent = #{rent}
+   </select>
 </mapper>

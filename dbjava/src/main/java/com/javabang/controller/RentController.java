@@ -20,14 +20,11 @@ import com.javabang.service.ReviewService;
 @RequestMapping("/rent")
 public class RentController {
 
-	@Autowired
-	RentService rentService;
-	@Autowired
-	ReviewService reviewService;
+	@Autowired private RentService rentService;
+	@Autowired private ReviewService reviewService;
 
 	@GetMapping("/hosting")
-	public void hosting() {
-	}
+	public void hosting() {}
 
 	@GetMapping("/room/{idx}")
 	public ModelAndView room(@PathVariable("idx") int idx) {

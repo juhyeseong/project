@@ -1,5 +1,12 @@
 package com.javabang.controller;
+import java.io.BufferedReader;
+import java.io.DataOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.HashMap;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.javabang.model.MemberDTO;
 import com.javabang.model.RentDTO;
+import com.javabang.model.ReservationDTO;
 import com.javabang.service.MemberService;
 import com.javabang.service.RentService;
 import com.javabang.service.ReviewService;
@@ -150,4 +158,56 @@ public class AjaxController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to delete review.");
         }
     }
+    
+    @PostMapping("/kakaopay")
+	   public String kakaopay(@RequestBody ReservationDTO dto, HttpSession session) {
+	      String error = "";
+	      try {
+	         System.out.println("kakaopay메서드실행"); 
+	         URL address = new URL("https://kapi.kakao.com/v1/payment/ready");
+	         HttpURLConnection conn = (HttpURLConnection)address.openConnection();
+	         
+	         conn.setRequestMethod("POST");
+	         conn.setRequestProperty("Authorization", "KakaoAK ddcff91bf064995801a4097e87111b4a");
+	         conn.setRequestProperty("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
+	         conn.setDoOutput(true);
+	         
+	         String parameter = "cid=TC0ONETIME&partner_order_id=partner_order_id&partner_user_id=partner_user_id&item_name=예약&quantity=1&total_amount=1000&tax_free_amount=0&approval_url=http://localhost:8080/dbjava/reservation/insertReservation&fail_url=http://localhost:8080/dbjava/reservation/kakaopayFailed&cancel_url=http://localhost:8080/dbjava/rent/room/" + dto.getRent();
+	         OutputStream os = conn.getOutputStream();
+	         DataOutputStream outputData = new DataOutputStream(os);
+	         
+	         outputData.writeBytes(parameter);
+	         outputData.close();
+	                  
+	         int result = conn.getResponseCode();
+	         InputStream is;
+	         if(result == 200) {
+	            is = conn.getInputStream();
+	         }
+	         else {
+	            is = conn.getErrorStream();
+	         }
+	         InputStreamReader reader = new InputStreamReader(is);
+	         BufferedReader bReader = new BufferedReader(reader);
+
+	         String ret = bReader.readLine();
+	         System.out.println(ret);
+	         
+	         session.setAttribute("rent", dto.getRent());
+	         session.setAttribute("member", dto.getMember());
+	         session.setAttribute("sDateString", dto.getsDateString());
+	         session.setAttribute("eDateString", dto.geteDateString());
+	         session.setAttribute("guestCount", dto.getGuestCount());
+	         session.setAttribute("totalPrice", dto.getTotalPrice());
+	         
+	         return ret;
+	      } catch (IOException e) {
+	         e.printStackTrace();
+	         error = e.toString();
+	      }
+	      
+	      return error;
+	   }
+    
+    
 }
