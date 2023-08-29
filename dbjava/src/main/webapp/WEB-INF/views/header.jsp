@@ -14,7 +14,7 @@
 
 body {
 	margin: 0px;
-	width : 1500px;
+
 }
 a{
 	all: unset;
