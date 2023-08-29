@@ -96,27 +96,27 @@
 					평균 별점: <span id="averageRating"></span> / 5
 				</p>
 			</c:if>
-		
-			<form method="POST" enctype="multipart/form-data">
-				<div class="rating">
-					<span class="star">&#9733;</span> <span class="star">&#9733;</span>
-					<span class="star">&#9733;</span> <span class="star">&#9733;</span>
-					<span class="star">&#9733;</span> <input type="hidden" name="point"
-						id="starRating" value="5">
-					<!-- 별점을 저장할 숨겨진 입력 필드 추가 -->
-				</div>
-				<p>
-					<textarea class="reviewWrite" name="content" required></textarea>
-					<label for="file-input" class="file-icon2"> <img
-						src="http://192.168.64.200/camera.png" alt="File Icon">
-					</label> <input type="file" name="upload" required multiple id="file-input"
-						style="display: none;">
-				</p>
-				<p class = "reviewSubmit">
-					<input type="submit" value="리뷰 작성">
-				</p>
-			</form>
-
+			<c:if test="${not empty login}">
+				<form method="POST" enctype="multipart/form-data">
+					<div class="rating">
+						<span class="star">&#9733;</span> <span class="star">&#9733;</span>
+						<span class="star">&#9733;</span> <span class="star">&#9733;</span>
+						<span class="star">&#9733;</span> <input type="hidden" name="point"
+							id="starRating" value="5">
+						<!-- 별점을 저장할 숨겨진 입력 필드 추가 -->
+					</div>
+					<p>
+						<textarea class="reviewWrite" name="content" required></textarea>
+						<label for="file-input" class="file-icon2"> <img
+							src="http://192.168.64.200/camera.png" alt="File Icon">
+						</label> <input type="file" name="upload" required multiple id="file-input"
+							style="display: none;">
+					</p>
+					<p class = "reviewSubmit">
+						<input type="submit" value="리뷰 작성">
+					</p>
+				</form>
+			</c:if>
 			<c:if test="${not empty reviewList }">
 				<div class="review">
 					<c:forEach var="dto" items="${reviewList}">
