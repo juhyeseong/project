@@ -29,4 +29,8 @@
 	<select id="selectIdx" resultType="int">
 		select max(idx) from review
 	</select>
+	
+	<delete id="deleteReview" parameterType="hashmap">
+		delete from review where review.idx = ${reviewIdx} and review.member = ${memberIdx}
+	</delete>
 </mapper>

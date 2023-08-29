@@ -3,22 +3,29 @@ import java.io.IOException;
 import java.util.HashMap;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.javabang.model.MemberDTO;
 import com.javabang.model.RentDTO;
 import com.javabang.service.MemberService;
 import com.javabang.service.RentService;
+import com.javabang.service.ReviewService;
 
 
 @RestController
 public class AjaxController {
 	@Autowired private MemberService memberService;
 	@Autowired private RentService rentService;
+	@Autowired private ReviewService reviewService; 
+
 
 	@GetMapping("/getmail/{email}")
 	public HashMap<String, Object> getEmail(@RequestBody MemberDTO dto){
@@ -127,4 +134,20 @@ public class AjaxController {
 		
 		return row;
 	}
+	// 리뷰 삭제 
+
+
+    @DeleteMapping("review/delete/{reviewId}")
+    @ResponseBody
+    public ResponseEntity<String> deleteReview(@PathVariable("reviewId")int reviewId, HttpSession session) {
+        try {
+        	MemberDTO tmp = (MemberDTO) session.getAttribute("login");
+        	
+            // Call a service method to delete the review by its ID
+            reviewService.deleteReview(reviewId, tmp.getIdx());
+            return ResponseEntity.ok("Review deleted successfully.");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to delete review.");
+        }
+    }
 }

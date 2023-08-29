@@ -23,6 +23,8 @@ public interface ReviewDAO {
 
 	int selectIdx();
 
+	void deleteReview(HashMap<String, Integer> map);
+
 
 
 

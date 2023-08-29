@@ -1612,6 +1612,147 @@ legend{
 .reserveTotal {
 	margin: 10px 30px;
 }
+.carousel {
+	display: flex; /* 이미지를 가로로 배열합니다. */
+	overflow: hidden;
+}
+
+.reviewImgs {
+	width: 300px; /* 이미지 크기를 조절합니다. */
+	height: 300px;
+}
+
+.reviewProfileInfo {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	position: relative;
+}
+
+.reviewWriteBox {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.reviewWriteBtn {
+	all: unset;
+	padding: 12px 15px;
+	background-color: #f8215c;
+	color: white;
+	border-radius: 10px;
+	font-size: 12px;
+	font-weight: bold;
+}
+
+.prevButton, .nextButton {
+	all: unset; position : absolute;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 40px;
+	height: 40px;
+	background-color: #f8215c;
+	color: white;
+	border-radius: 50%;
+	position: absolute;
+}
+
+.prevButton {
+	top: 200px;
+	left: -50px;
+}
+
+.nextButton {
+	top: 200px;
+	right: 300px;
+}
+.deleteButton {
+	position: absolute;
+	top: 0;
+	right: 0;
+}
+/* admin page 공통 */
+
+	.adminMain {
+		border-radius: 12px;
+		width: 1400px;
+		height: 800px;
+		margin: 20px auto;
+		display: flex;
+		box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+	}
+
+	.adminLeft {
+		border-right: 2px solid #ddd;
+		flex: 1;
+		background-color: #f9f9f9;
+	}
+
+	.adminRight {
+		flex: 4;
+		padding: 20px;
+	}
+
+	.adminStatus {
+		border-bottom: 1px solid #ddd;
+		padding: 20px;
+		background-color: #fff;
+		box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+		height: 760px;
+	}
+
+	.addminProfile {
+		width: 100px;
+		height: 100px;
+		border-radius: 50%;
+		object-fit: cover;
+	}
+
+	.addminProfileBox {
+		padding: 20px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+
+	.adminList{
+		margin-top: 20px;
+		background-color: #f9f9f9;
+		padding: 10px;
+		height: 500px;
+	}
+
+	.adminList li {
+		padding: 10px;
+	
+	}
+
+	.reservationManagement{
+		display: flex;
+		flex-direction: column;
+		background-color: #fff;
+		border-radius: 6px;
+		box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+	}
+
+	.reservationManagementList {
+		padding: 10px;
+		border-bottom: 1px solid #ddd;
+		width: 120px;
+		cursor: pointer;
+	}
+
+	.reservationManagementList:hover {
+		background-color: #f1f1f1;
+	}
+	.adminTitle {
+		width:100%;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
 
 </style>
 </head>
@@ -1634,6 +1775,9 @@ legend{
 	        
 	        <c:if test="${not empty login }">
 	       		<img src="${login.profile }"><h4>${login.userNick }님 환영합니다 !</h4> <a href="${cpath }/member/mypage/${login.idx}"><button>마이페이지</button></a>
+	       	</c:if>
+	       	<c:if test="${login.userId == 'admin'}">
+	       		<a href="${cpath }/admin/adminPage/${login.idx}"><button>관리자 페이지</button></a>
 	       	</c:if>
         </div>
     </header>

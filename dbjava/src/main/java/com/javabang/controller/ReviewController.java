@@ -33,6 +33,4 @@ public class ReviewController {
 
 		return "redirect:/rent/room/" + idx;
 	}
-
-	
 }

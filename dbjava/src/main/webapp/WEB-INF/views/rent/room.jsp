@@ -82,6 +82,21 @@
 			<pre>${dto.content }</pre>
 		</div>
 		<div class="menu2">
+		
+			<c:set var="totalPoints" value="0" />
+			<c:set var="totalReviews" value="0" />
+
+			<c:forEach var="dto" items="${reviewList}">
+				<c:set var="totalPoints" value="${totalPoints + dto.point}" />
+				<c:set var="totalReviews" value="${totalReviews + 1}" />
+			</c:forEach>
+
+			<c:if test="${totalReviews > 0}">
+				<p>
+					평균 별점: <span id="averageRating"></span> / 5
+				</p>
+			</c:if>
+		
 			<form method="POST" enctype="multipart/form-data">
 				<div class="rating">
 					<span class="star">&#9733;</span> <span class="star">&#9733;</span>
@@ -122,6 +137,9 @@
 									</div>
 									<button class="prevButton"><</button>
 									<button class="nextButton">></button>
+									<c:if test="${login.idx == dto.member }">
+										<a href="${cpath}/review/delete/${dto.idx}" class="deleteButton" onclick="deleteReview(${dto.idx}); return false;">ⓧ</a>
+									</c:if>
 								</div>
 							</div>
 						</div>
@@ -385,6 +403,33 @@ $(document).ready(function() {
         }
     });
 });
+</script>
+<!--평균 별점 스크립트 -->
+<script>
+	const totalPoints = '${totalPoints}'
+	const totalReviews = '${totalReviews}'
+    const averageRating = totalPoints / totalReviews;
+    document.getElementById('averageRating').innerText = averageRating.toFixed(1);
+</script>
+
+<!-- delete 코드 수행시 리로드하는 스크립트 -->
+<script>
+function deleteReview(reviewId) {
+    if (confirm("이 리뷰를 삭제하시겠습니까?")) {
+        $.ajax({
+            url: `${cpath}/review/delete/`+reviewId,
+            type: "DELETE",
+            success: function(response) {
+              	console.log('리뷰 삭제 성공:', response);
+		        location.reload();
+            },
+            error: function(error) {
+                console.error("리뷰 삭제 오류:", error);
+            }
+        });
+    }
+}
+
 </script>
 
 </body>

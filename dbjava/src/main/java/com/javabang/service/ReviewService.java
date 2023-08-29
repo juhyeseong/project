@@ -101,4 +101,16 @@ public class ReviewService {
 		return row;
 	}
 
+
+	public void deleteReview(int reviewIdx, int memberIdx) {
+		
+		HashMap<String, Integer> map = new HashMap<String, Integer>();
+		
+		map.put("reviewIdx", reviewIdx);
+		map.put("memberIdx", memberIdx);
+		
+		reviewDAO.deleteReview(map);
+		
+	}
+
 }
