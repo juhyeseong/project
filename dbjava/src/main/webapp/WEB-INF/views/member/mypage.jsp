@@ -9,7 +9,6 @@
 		<table>
 			<tr>
 				<td colspan="2">
-					<!-- <img class="profileImg" src="http://192.168.64.200/basicProfile.jpeg" /> -->
 					<img class="profileImg" src="${one.profile }">
 				</td>
 			</tr>

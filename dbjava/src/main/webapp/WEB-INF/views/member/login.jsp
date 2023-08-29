@@ -30,10 +30,10 @@
 				<input type="submit" value="로그인">
 			</p>
 		</form>
-		<%-- 테스트 용으로 남겨둠 
-			 <p> <a href="http://developers.kakao.com/logout">카카오로그아웃</a> </p> 
- 		     <p><a href="https://nid.naver.com/nidlogin.logout?returl=${cpath }/dbjava/member/login">네이버 로그아웃</a></p> 
- 		  --%>
+
+			<%--  <p> <a href="http://developers.kakao.com/logout">카카오로그아웃</a> </p> 
+ 		     <p><a href="https://nid.naver.com/nidlogin.logout?returl=${cpath }/dbjava/member/login">네이버 로그아웃</a></p>  --%>
+ 		  
 
 		<p>or</p>
 		<div class="socialbox">

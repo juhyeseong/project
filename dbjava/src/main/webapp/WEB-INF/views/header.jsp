@@ -14,6 +14,7 @@
 
 body {
 	margin: 0px;
+	width : 1500px;
 }
 a{
 	all: unset;
@@ -31,13 +32,6 @@ p{
 	align-items: center;
 	
 	overflow-y: scroll;
-}
-
-/*로그인 버튼 + 마이페이지 버튼*/
-.login-btn{
-	background-color: #C2D6F0;
-	border:none;
-	height:23px;
 }
 
 /* header style */
@@ -96,13 +90,13 @@ header img {
 }
 ul {
     list-style: none;
-    
 	padding: 0px;
-    
     display: flex;
+    align-items: center;
 }
 ul > li{    
 	margin-left: 30px;
+
 }
 
 /*home css*/
@@ -140,6 +134,7 @@ ul > li{
 	display: flex;
 	flex-direction: column;
 	margin:10px 40px;
+	width:250px;
 }
 .roomImg{
 	width:250px;
@@ -204,6 +199,13 @@ ul > li{
  	width:150px;
     height:40px;
 }
+ .ellipsis {
+      white-space: nowrap;     /* 텍스트를 한 줄에 표시 */
+      overflow: hidden;        /* 너무 긴 텍스트는 숨김 처리 */
+      text-overflow: ellipsis; /* 너무 긴 텍스트일 경우 ...으로 대체 */
+      width: 250px;            /* 원하는 너비로 설정 */
+      display: inline-block;   /* 인라인 블록 요소로 표시 (원하는 텍스트 너비만큼만 차지하도록) */
+    }
 
 #root {
 	border: 2px solid black;
@@ -226,6 +228,7 @@ ul.tab>li {
 
 ul.tab {
 	font-size: 24px;
+	font-weight: bold;
 }
 
 div.box {
@@ -314,14 +317,16 @@ legend{
     margin-right:10px;
 }
 .login input[type="submit"]{
-    background-color: #C2D6F0;
+    background-color: #f8215c;
     border : none;
     width:500px;
     height:50px;
+    color : white;
 }
 .login p{
     word-spacing: 20px;
 }
+
 /*join css*/
 fieldset{
     width:600px;
@@ -349,6 +354,10 @@ legend{
     width: 500px;
     height: 50px;
     text-align: center;
+}
+.join > .phoneNum > input{
+	border-radius: 10px;
+ 
 }
 /*찜하기 css*/
 .fav{
@@ -411,7 +420,8 @@ legend{
     text-align: center;
 }
 .update input[type="submit"] {
-    background-color: #C2D6F0;
+    background-color: #f8215c;
+    color:white;
     border : none;
     width:500px;
     height:50px;
@@ -422,15 +432,17 @@ legend{
 }
 /* 마이페이지 정보수정 버튼 */
 .mypage{
-	width:550px;
-	height:40px;
+	width:450px;
+	height:50px;
 	line-height:40px;
 	text-align: center;
-	margin-left:450px;
+	margin-left:490px;
 	/* margin-left:auto; */
 	/* margin-right:auto; */
 	margin-top:30px;
-	border:3px solid #C2D6F0;
+	background-color: grey;
+	border-radius:10px;
+	color:white;
 }
 /* 회원정보 확인 css */
 .list{
@@ -458,22 +470,15 @@ legend{
 
 	border-radius: 70%;
 }
-/*기본 이미지로 변경 버튼*/
-.updateBasicProfile > a{
-    width:300px;
-	height:40px;
-	line-height:40px;
-	text-align: center;
-	border:3px solid #C2D6F0;
-	bottom:200px;
-}
 
 /*프로필 사진 변경 버튼*/
 .update-profile input[type="submit"]{
-    background-color: #C2D6F0;
+    background-color: #f8215c;
     border : none;
-    width:500px;
+    width:450px;
     height:50px;
+    border-radius:10px;
+    color:white;
 } 
 .update-profile input[type="button"]{
     background-color: #C2D6F0;
@@ -1399,11 +1404,12 @@ legend{
 }
 .goToLogin,
 .findId input[type="submit"] {
-    background-color: #C2D6F0;
+    background-color: #f8215c;
     border : none;
     width:500px;
     height:50px;
     border-radius:10px;
+    color:white;
 }
 .goToLoginLink{
 	display: flex;
@@ -1503,6 +1509,22 @@ legend{
     font-size: 14px;
     margin: 5px 0;
 }
+.file-icon2 {
+  display: inline-block;
+  cursor: pointer;
+}
+.file-icon2 img {
+  width: 60px;
+  height: 60px;
+}
+.reviewSubmit input[type="submit"] {
+	background-color: #f8215c;
+	color : white;
+	border-radius:10px;
+	border:none;
+	width:100px;
+	height:30px;
+}
 
 /* Style the "리뷰 작성" button */
 .reviewWrite input[type="submit"] {
@@ -1533,10 +1555,10 @@ legend{
 	display: flex;
 	flex-direction: column;
 	align-items: flex-end;	
-	border: 1px solid black;
+	/* border: 1px solid black; */
 }
 .reserveSpace {
-	border: 2px solid red;
+/* 	border: 2px solid red; */
 	
 	
 	width: 520px;
@@ -1551,22 +1573,38 @@ legend{
 	flex: 1;
 
 }
+
 .endDate {
 	flex: 1;
 
 }
 .startDate > input {
 	width: 150px;
+	border-radius: 10px;
+    height:30px;
 }
 .endDate > input {
 	width: 150px;
+	border-radius: 10px;
+    height:30px;
 }
 .reservePeople {
-	border: 1px solid black;
+	/* border: 1px solid black; */
 	margin: 10px;
+	
 }
-.reserveBtn {
+.reservePeople > input {
+	border-radius: 10px;
+    height:30px;
+}
+.reserveBtn input[type="submit"] {
+	width:100px;
+	height:30px;
 	margin: 20px;
+	background-color : #f8215c;
+	border : none;
+	color : white;
+	border-radius:10px;
 }
 .reserveCal {
 	margin: 10px 30px;
@@ -1593,6 +1631,7 @@ legend{
 	            <li><a href="${cpath }/member/${empty login ? 'login' : 'logout'}"><button>${empty login ? '로그인' : '로그아웃'}</button></a></li>
 	           
 	        </ul>
+	        
 	        <c:if test="${not empty login }">
 	       		<img src="${login.profile }"><h4>${login.userNick }님 환영합니다 !</h4> <a href="${cpath }/member/mypage/${login.idx}"><button>마이페이지</button></a>
 	       	</c:if>

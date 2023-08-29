@@ -33,6 +33,11 @@ public class AjaxController {
 		int row = memberService.dupCheck(userId);
 		return row;
 	}
+	@GetMapping("/dupCheck2/{userNick}")
+	public int dupCheck2(@PathVariable("userNick") String userNick) {
+		int row = memberService.dupCheck2(userNick);
+		return row;
+	}
 	
 	@GetMapping("/sendAuthNumber/{email}/")
 	public HashMap<String, Object> sendAuthNumber(@PathVariable("email") String email, HttpSession session) throws IOException {

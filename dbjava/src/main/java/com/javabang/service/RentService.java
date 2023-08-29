@@ -190,4 +190,8 @@ public class RentService {
 	public int deleteRentFile(HashMap<String, String> filePath) {
 		return rentDAO.deleteRentFile(filePath);
 	}
+	
+
+
+	  
 }

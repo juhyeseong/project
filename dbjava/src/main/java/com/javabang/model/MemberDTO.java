@@ -15,6 +15,7 @@ public class MemberDTO {
 	private String day;
 	private String userName;
 	private String phoneNum;
+	
 	private String profile;   // 프사 경로
 	private String gender;
 	
@@ -107,5 +108,7 @@ public class MemberDTO {
 	public void setUpload(MultipartFile upload) {
 		this.upload = upload;
 	}
+
+	
 	
 }

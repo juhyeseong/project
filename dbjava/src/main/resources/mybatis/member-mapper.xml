@@ -63,6 +63,10 @@
 <select id="findId" parameterType="member" resultType="member">
 	select * from member where userName = #{userName} and phoneNum=#{phoneNum}
 </select>
+<select id="selectCount2" resultType="int" parameterType="string">
+	select count(*) as cnt from member where userNick = #{userNick}
+
+</select>
 
 </mapper>
 

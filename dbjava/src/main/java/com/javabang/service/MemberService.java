@@ -213,6 +213,11 @@ public class MemberService {
 	
 		return memberDAO.findId(dto);
 	}
+
+	public int dupCheck2(String userNick) {
+		
+		return memberDAO.selectCount2(userNick);
+	}
 }
 		
 		

@@ -30,6 +30,7 @@
 				<value>classpath:mybatis/rent-mapper.xml</value>
 				<value>classpath:mybatis/review-mapper.xml</value>
 				<value>classpath:mybatis/reservation-mapper.xml</value>
+				<value>classpath:mybatis/category-mapper.xml</value>
 			</list>
 		</property>
 	</bean>

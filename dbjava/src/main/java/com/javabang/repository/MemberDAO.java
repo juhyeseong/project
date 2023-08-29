@@ -40,6 +40,8 @@ public interface MemberDAO {
 
   MemberDTO findId(MemberDTO dto);
 
+  int selectCount2(String userNick);
+
    
 
 }

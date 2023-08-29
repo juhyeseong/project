@@ -2,20 +2,21 @@
 	pageEncoding="UTF-8"%>
 <%@include file="../header.jsp"%>
 <style>
-	  .carousel {
-    display: flex; /* 이미지를 가로로 배열합니다. */
-    overflow: hidden;
-  }
+.carousel {
+	display: flex; /* 이미지를 가로로 배열합니다. */
+	overflow: hidden;
+}
 
-  .reviewImgs {
-    width: 300px; /* 이미지 크기를 조절합니다. */
-    height: 300px;
-  }
-  .reviewProfileInfo {
-  	display: flex;
-  	flex-direction: column;
-  	align-items: flex-start;
-  }
+.reviewImgs {
+	width: 300px; /* 이미지 크기를 조절합니다. */
+	height: 300px;
+}
+
+.reviewProfileInfo {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+}
 </style>
 
 <script>
@@ -24,45 +25,51 @@
 
 
 <div class="roomExplain">
-   <div class="roomImgBox">
-      <div class="roomBig">
-         <img src="${dto.filePathList[0] }">
-      </div>
-      <div class="roomSmall">
-         <c:forEach var="filePath" items="${dto.filePathList }">
-            <img src="${filePath }">
-         </c:forEach>
-      </div>
-   </div>
-   
-   <form method="POST" action="${cpath }/reservation/insertReservation">
-      <div class="reserveInfo">
-         <div class="reserveSpace">
-            <div class="roomText">
-               <p class="roomTitle">${dto.title }</p>
-               <p class="roomAddress">${dto.address } ${dto.detailAddress }</p>
-               <p class="roomPrice"></p>
-            </div>
-            <div class="reserveDate">
-               <div class="startDate">
-                  <input type="text" name="sDateString" id="sDateString" placeholder="체크인">
-               </div> 
-               <div class="endDate">
-                  <input type="text" name="eDateString" id="eDateString" placeholder="체크아웃">
-               </div>
-            </div>
-            <div class="reservePeople">
-               <input type="number" name="guestCount" placeholder="인원 수를 입력 해주세요">
-            </div>
-            <div class="reserveBtn"><input type="submit" value="예약하기"></div>
-            <div class="reserveCal"><span class="roomPrice"></span> X <span class="nightValue">박</span></div>
-            <div class="reserveTotal" id="totalPrice">원</div>
-            <input type="hidden" name="totalPrice">
-            <input type="hidden" name="member" value="${login.idx }">
-            <input type="hidden" name="rent" value="${dto.idx }">
-         </div>
-      </div>
-   </form>
+	<div class="roomImgBox">
+		<div class="roomBig">
+			<img src="${dto.filePathList[0] }">
+		</div>
+		<div class="roomSmall">
+			<c:forEach var="filePath" items="${dto.filePathList }">
+				<img src="${filePath }">
+			</c:forEach>
+		</div>
+	</div>
+
+	<form method="POST" action="${cpath }/reservation/insertReservation">
+		<div class="reserveInfo">
+			<div class="reserveSpace">
+				<div class="roomText">
+					<p class="roomTitle">${dto.title }</p>
+					<p class="roomAddress">${dto.address }${dto.detailAddress }</p>
+					<p class="roomPrice"></p>
+				</div>
+				<div class="reserveDate">
+					<div class="startDate">
+						<input type="text" name="sDateString" id="sDateString"
+							placeholder="체크인">
+					</div>
+					<div class="endDate">
+						<input type="text" name="eDateString" id="eDateString"
+							placeholder="체크아웃">
+					</div>
+				</div>
+				<div class="reservePeople">
+					<input type="number" name="guestCount" placeholder="인원 수를 입력 해주세요">
+				</div>
+				<div class="reserveBtn">
+					<input type="submit" value="예약하기">
+				</div>
+				<div class="reserveCal">
+					<span class="roomPrice"></span> X <span class="nightValue">박</span>
+				</div>
+				<div class="reserveTotal" id="totalPrice">원</div>
+				<input type="hidden" name="totalPrice"> <input type="hidden"
+					name="member" value="${login.idx }"> <input type="hidden"
+					name="rent" value="${dto.idx }">
+			</div>
+		</div>
+	</form>
 </div>
 
 <div class="roomBtn">
@@ -71,7 +78,9 @@
 		<li>리뷰</li>
 	</ul>
 	<div class="box">
-		<div class="menu1 selected">${dto.content }</div>
+		<div class="menu1 selected">
+			<pre>${dto.content }</pre>
+		</div>
 		<div class="menu2">
 			<form method="POST" enctype="multipart/form-data">
 				<div class="rating">
@@ -83,9 +92,12 @@
 				</div>
 				<p>
 					<textarea class="reviewWrite" name="content" required></textarea>
-					<input type="file" name="upload" required multiple>
+					<label for="file-input" class="file-icon2"> <img
+						src="http://192.168.64.200/camera.png" alt="File Icon">
+					</label> <input type="file" name="upload" required multiple id="file-input"
+						style="display: none;">
 				</p>
-				<p>
+				<p class = "reviewSubmit">
 					<input type="submit" value="리뷰 작성">
 				</p>
 			</form>
@@ -101,16 +113,16 @@
 								<p>${dto.userNick }</p>
 								<p class="starPoint">${dto.point }</p>
 								<p>${dto.content }</p>
-								
-								 <div class="carousel-container">
-							        <div class="carousel">
-							            <c:forEach var="filePath" items="${dto.filePathList}">
-							                <img class="reviewImgs" src="${filePath}" />
-							            </c:forEach>
-							        </div>
-							        <button class="prevButton"><</button>
-							        <button class="nextButton">></button>
-							    </div>
+
+								<div class="carousel-container">
+									<div class="carousel">
+										<c:forEach var="filePath" items="${dto.filePathList}">
+											<img class="reviewImgs" src="${filePath}" />
+										</c:forEach>
+									</div>
+									<button class="prevButton"><</button>
+									<button class="nextButton">></button>
+								</div>
 							</div>
 						</div>
 					</c:forEach>
@@ -123,7 +135,8 @@
 
 <!-- JQuery 관련 -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet"
+	href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 <script>

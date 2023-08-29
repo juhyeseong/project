@@ -17,6 +17,8 @@
 		<p>
 			<input type="text" name="userNick" placeholder="닉네임 입력"
 				value="${dto.userNick }" required>
+			<input type="button"
+				id="dupNickBtn" value="닉네임 중복확인"><br> <span id="dupMessage2"></span>
 		</p>
 
 		<p>
@@ -49,9 +51,9 @@
 				</c:forEach>
 			</select>
 		</p>
-		<p>
-			<input type="text" name="phoneNum" placeholder="전화번호 입력" required>
-		</p>
+		<p class="phoneNum">
+				<input type="text" name="phoneNum" placeholder="전화번호 입력" required>
+			</p>
 		<p>
 			<select name="gender" required>
 				<option value="male">남성</option>
@@ -136,5 +138,42 @@
 	dupCheckBtn.addEventListener('click', dupCheckHandler)
 	
 </script>
+
+<!-- 닉네임 중복확인 -->
+<script>
+const dupNickBtn = document.getElementById('dupNickBtn')
+
+async function dupNickHandler(){
+	const dupMessage2 = document.getElementById('dupMessage2')
+	const userNick = document.querySelector('input[name="userNick"]')
+	
+	if(userNick.value == ''){
+		dupNickBtn.focus()
+		alert('먼저 사용할 닉네임을 입력해주세요')
+		return
+	}
+	const url = '${cpath}/dupCheck2/' + userNick.value + '/'
+	const count2 = await fetch(url).then(resp => resp.text())
+	
+	if(isNaN(count2)){
+		alert('처리도중 문제가 발생했습니다 !')
+		userNick.focus()
+	}
+	else if(count2 == 0){
+		dupMessage2.innerText = '사용가능한 닉네임입니다.'
+		dupMessage2.style.color = 'grey'
+	}
+	else{
+		dupMessage2.innerText = '이미 사용중인 닉네임입니다.'
+		dupMessage2.style.color = 'pink'
+		userNick.select()
+	}
+	
+}
+
+dupNickBtn.addEventListener('click', dupNickHandler)
+
+
+</script> 
 </body>
 </html>
