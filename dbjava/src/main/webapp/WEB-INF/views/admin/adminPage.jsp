@@ -18,8 +18,14 @@
 						<ul class="reservationManagement">
 							<li class="reservationManagementList"><a href="${cpath }/admin/reservation">예약 현황</a></li>
 							<li class="reservationManagementList"><a href="${cpath }/admin/registration">숙소 등록 관리</a></li>
-							<li class="reservationManagementList"><a href="${cpath }/admin/payment">결제 내역</a></li>
+							<li class="reportingManagement"><a href="${cpath }/admin/reporting">숙소 신고 현황</a></li>
 						</ul>	
+					</li>
+					<li>
+						댓글 관리
+						<ul class="replyManagement">
+							<li>댓글 신고 현황</li>
+						</ul>
 					</li>
 				</ul>
 			</div>

@@ -2,8 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@ include file="../header.jsp" %>
 
-
-
 	<main class="adminMain">
 		<div class="adminLeft">
 			<div class="adminStatus">
@@ -18,9 +16,15 @@
 						숙박예약 관리
 						<ul class="reservationManagement">
 							<li class="reservationManagementList"><a href="${cpath }/admin/reservation">예약 현황</a></li>
-							<li class="reservationManagementList" style="background-color: #f1f1f1;"><a href="${cpath }/admin/registration">숙소 등록 관리</a></li>
-							<li class="reservationManagementList"><a href="${cpath }/admin/payment">결제 내역</a></li>
+							<li class="reservationManagementList" style="background-color: #AFAB99;"><a href="${cpath }/admin/registration">숙소 등록 관리</a></li>
+							<li class="reportingManagement"><a href="${cpath }/admin/reporting">숙소 신고 현황</a></li>
 						</ul>	
+					</li>
+					<li>
+						댓글 관리
+						<ul class="replyManagement">
+							<li>댓글 신고 현황</li>
+						</ul>
 					</li>
 				</ul>
 			</div>
@@ -64,7 +68,7 @@
 					        	</c:choose>
 					        	
 					        </td>
-					        <td>
+					        <td class="registrationBtnBox">
 					          <a href="${cpath }/admin/permit/${dto.idx}"><button class="registrationPermitBtn">수락</button></a>
 					          <a href="${cpath }/admin/cencel/${dto.idx}"><button class="registrationCencelBtn">취소</button></a>
 					        </td>

@@ -16,9 +16,9 @@
 					<li>
 						숙박예약 관리
 						<ul class="reservationManagement">
-							<li class="reservationManagementList" style="background-color: #AFAB99;"><a href="${cpath }/admin/reservation">예약 현황</a></li>
+							<li class="reservationManagementList"><a href="${cpath }/admin/reservation">예약 현황</a></li>
 							<li class="reservationManagementList"><a href="${cpath }/admin/registration">숙소 등록 관리</a></li>
-							<li class="reportingManagement"><a href="${cpath }/admin/reporting">숙소 신고 현황</a></li>
+							<li class="reportingManagement" style="background-color: #AFAB99;"><a href="${cpath }/admin/reporting">숙소 신고 현황</a></li>
 						</ul>	
 					</li>
 					<li>
@@ -31,7 +31,8 @@
 			</div>
 		</div>
 		<div class="adminRight">
-			<h2 class="adminTitle">예약 현황</h2>
+			<h2 class="adminTitle">숙소 신고 현황</h2>
+			
 			<div class="reservationBox">
 				<div id="searchFilter">
 					<form method="post">
@@ -48,10 +49,7 @@
 			                <th>예약자 ID</th>
 			                <th>예약자 성함</th>
 			                <th>예약룸</th>
-			                <th>방 타입</th>
-			                <th>체크인 날짜</th>
-			                <th>체크아웃 날짜</th>
-			                <th>가격</th>
+			                <th>신고 내용</th>
 			            </tr>
 			        </thead>
 			        <tbody>
@@ -61,10 +59,7 @@
 				            	<th>${dto.userId }</th>
 				            	<th>${dto.userName }</th>
 				            	<th><a href="${cpath }/rent/room/${dto.rent}">${dto.title }</a></th>
-				            	<th>${dto.roomType }</th>
-				            	<th>${dto.startDate }</th>
-				            	<th>${dto.endDate }</th>
-				            	<th style="text-align: right;"><fmt:formatNumber value="${dto.totalPrice}" groupingUsed="true" /> 원</th>
+				            	<th>${dto.content }</th>
 				            <tr>
 			            </c:forEach>
 			        </tbody>

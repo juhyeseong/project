@@ -55,6 +55,9 @@
 				<input type="hidden" name="member" value="${login.idx }"> 
 				<input type="hidden" name="rent" value="${dto.idx }">
 			</div>
+				<c:if test="${not empty login && count > 0}">	
+					<span class="roomReport">숙소 신고하기</span>
+				</c:if>
 		</div>
 	</form>
 </div>
@@ -140,7 +143,44 @@
 		</div>
 	</div>
 </div>
-
+<!-- 모달 창 -->
+<div class="modal" id="reportModal">
+    <div class="modal-content">
+        <span class="close" id="closeModal">&times;</span>
+        <h2>이 숙소를 신고하는 이유를 알려주세요</h2>
+        <p>이 내용은 호스트가 볼 수 없습니다</p>
+        <div class="reportBox">
+	        <form method="post" id="reportForm" action="${cpath }/admin/userReport">
+	         <input type="hidden" name="rent" value="${dto.idx }">
+	         <input type="hidden" name="member" value="${login.idx }">
+		      <div class="reportRow">
+		      		<label for="reportOne">부정확하거나 틀린 정보가 있어요</label>
+		      		<input type="radio" id="reportOne" name="reportType" value="부정확하거나 틀린 정보가 있어요">
+		      </div>
+		      <div class="reportRow">
+		      		<label for="reportTwo">실제 숙소가 아닙니다</label>
+		      		<input type="radio" id="reportTwo" name="reportType" value="실제 숙소가 아닙니다">
+		      </div>
+		      <div class="reportRow">
+		      		<label for="reportThree">사기입니다</label>
+		      		<input type="radio" id="reportThree" name="reportType" value="사기입니다">
+		      </div>
+		      <div class="reportRow">
+		      		<label for="reportFour">불쾌합니다</label>
+		      		<input type="radio" id="reportFour" name="reportType" value="불쾌합니다">
+		      </div>
+		      <div class="reportRow">
+		      		<label for="reportFive">기타</label>
+		      		<input type="radio" id="reportFive" name="reportType" value="기타">
+		      </div>
+		      <div class="reportContent">
+		      		<textarea name="content"></textarea>
+		      </div>
+		      	<button type="submit">신고하기</button>
+		    </form>
+        </div>
+    </div>
+</div>
 
 
 <!-- JQuery 관련 -->
@@ -530,6 +570,29 @@ function deleteReview(reviewId) {
     }
 }
 
+</script>
+<!-- 숙소 신고 모달창 -->
+<script>
+//모달 열기
+const roomReportButton = document.querySelector('.roomReport');
+const reportModal = document.getElementById('reportModal');
+const closeModal = document.getElementById('closeModal');
+
+roomReportButton.addEventListener('click', () => {
+    reportModal.style.display = 'block';
+});
+
+// 모달 닫기
+closeModal.addEventListener('click', () => {
+    reportModal.style.display = 'none';
+});
+
+// 모달 외부 클릭으로 닫기
+window.addEventListener('click', (event) => {
+    if (event.target === reportModal) {
+        reportModal.style.display = 'none';
+    }
+});
 </script>
 
 </body>

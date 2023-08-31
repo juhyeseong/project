@@ -27,7 +27,7 @@
 	</select>
 	
 	<select id="selectAllReservation" resultType="reservation">
-		select RV.*, M.userName, M.userId, RE.roomtype from reservation RV 
+		select RV.*, M.userName, M.userId, RE.roomtype, RE.title from reservation RV 
    			join member M on RV.member = M.idx
     		join rent RE on RV.rent = RE.idx
 	</select>
@@ -37,5 +37,23 @@
    			join member M on RV.member = M.idx
     		join rent RE on RV.rent = RE.idx where M.userId like '%${search}%'
 	</select> 
+	
+	<insert id="insertReport" parameterType="report">
+		insert into report 
+			(member, rent, reportType, content) 
+			values (#{member}, #{rent}, #{reportType}, #{content})
+	</insert>
+	
+	<select id="selectAllReport" resultType="report">
+		select RP.*, M.userId,M.userName, M.userNick, RE.title from report RP 
+			join member M on RP.member = M.idx
+			join rent RE on RP.rent = RE.idx
+	</select>
+	
+	<select id="selectAllReportSearch" resultType="report">
+		select RP.*, M.userId,M.userName, M.userNick, RE.title from report RP 
+			join member M on RP.member = M.idx
+			join rent RE on RP.rent = RE.idx where M.userId like '%${search}%'
+	</select>
 	
 </mapper>

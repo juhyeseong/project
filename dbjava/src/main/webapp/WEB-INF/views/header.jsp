@@ -1557,6 +1557,52 @@ legend{
 	height:30px;
 }
 
+	/* Report Box 전체에 대한 스타일 */
+.reportBox {
+  width: 400px;
+  height: 300px;
+  margin: auto;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* 각각의 row에 대한 스타일 */
+.reportRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+
+/* 라벨에 대한 스타일 */
+.reportRow label {
+  font-size: 16px;
+}
+
+/* 라디오 버튼에 대한 스타일 */
+.reportRow input[type="radio"] {
+  width: 20px;
+  height: 20px;
+}
+
+/* 신고하기 버튼에 대한 스타일 */
+button {
+  width: 100%;
+  padding: 10px;
+  background-color: #f8215c;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+
+
+
+
 /* Style the "리뷰 작성" button */
 .reviewWrite{
  	resize: none;
@@ -1668,6 +1714,9 @@ legend{
 .reserveTotal {
 	margin: 10px 30px;
 }
+.roomReport {
+	cursor: pointer;
+}
 
 /* review style */
 .carousel {
@@ -1737,199 +1786,209 @@ legend{
 }
 /* admin page 공통 */
 
-	.adminMain {
-		border-radius: 12px;
-		width: 1400px;
-		height: 800px;
-		margin: 20px auto;
-		display: flex;
-		box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-	}
+.adminMain {
+	border-radius: 12px;
+	width: 1400px;
+	height: 800px;
+	margin: 20px auto;
+	display: flex;
+	box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
 
-	.adminLeft {
-		border-right: 2px solid #ddd;
-		flex: 1;
-		background-color: #f9f9f9;
-	}
+.adminLeft {
+	border-right: 2px solid #ddd;
+	flex: 1;
+	background-color: #f9f9f9;
+}
 
-	.adminRight {
-		flex: 4;
-		padding: 20px;
-	}
+.adminRight {
+	flex: 4;
+	padding: 20px;
+}
 
-	.adminStatus {
-		border-bottom: 1px solid #ddd;
-		padding: 20px;
-		background-color: #fff;
-		box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-		height: 760px;
-	}
+.adminStatus {
+	border-bottom: 1px solid #ddd;
+	padding: 20px;
+	background-color: #fff;
+	box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+	height: 760px;
+}
 
-	.addminProfile {
-		width: 100px;
-		height: 100px;
-		border-radius: 50%;
-		object-fit: cover;
-	}
+.addminProfile {
+	width: 100px;
+	height: 100px;
+	border-radius: 50%;
+	object-fit: cover;
+}
 
-	.addminProfileBox {
-		padding: 20px;
-		display: flex;
-		justify-content: center;
-		align-items: center;
-	}
+.addminProfileBox {
+	padding: 20px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
 
-	.adminList{
-		margin-top: 20px;
-		background-color: #f9f9f9;
-		padding: 10px;
-		height: 500px;
-	}
+.adminList{
+	margin-top: 20px;
+	background-color: #f9f9f9;
+	padding: 10px;
+	height: 500px;
+}
 
-	.adminList li {
-		padding: 10px;
-	
-	}
+.adminList li {
+	padding: 10px;
 
-	.reservationManagement{
-		display: flex;
-		flex-direction: column;
-		background-color: #fff;
-		border-radius: 6px;
-		box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-	}
+}
 
-	.reservationManagementList {
-		padding: 10px;
-		border-bottom: 1px solid #ddd;
-		width: 120px;
-		cursor: pointer;
-	}
+.reservationManagement{
+	display: flex;
+	flex-direction: column;
+	background-color: #fff;
+	border-radius: 6px;
+	box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
 
-	.reservationManagementList:hover {
-		background-color: #f1f1f1;
-	}
-	.adminTitle {
-		width:100%;
-		display: flex;
-		justify-content: center;
-		align-items: center;
-	}
+.reservationManagementList {
+	padding: 10px;
+	border-bottom: 1px solid #ddd;
+	width: 120px;
+	cursor: pointer;
+}
+
+.reservationManagementList:hover {
+	background-color: #f1f1f1;
+}
+.adminTitle {
+	width:100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
 /* admin -> reservation*/
 
 .adminTitle {
-	    font-size: 24px;
-	    margin-bottom: 20px;
-	}
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+#searchFilter {
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+}
+
+#searchBar {
+    padding: 10px;
+}
+
+#dateFilter, #statusFilter {
+    padding: 10px;
+}
+
+.reservationTable {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.reservationTable > thead th {
+    padding: 10px;
+    border-bottom: 2px solid #ccc;
+}
+
+.reservationTable > tbody tr {
+    border-bottom: 1px solid #ccc;
+}
+
+.reservationTable > tbody td {
+    padding: 10px;
+}
+.searchBtn, 
+.resetBtn {
+	all: unset;
+	padding: 12px 15px;
 	
-	#searchFilter {
-	    margin-bottom: 20px;
-	    display: flex;
-	    align-items: center;
-	}
+	background-color: #f8215c;
+	color: white;
 	
-	#searchBar {
-	    padding: 10px;
-	}
-	
-	#dateFilter, #statusFilter {
-	    padding: 10px;
-	}
-	
-	.reservationTable {
-	    width: 100%;
-	    border-collapse: collapse;
-	}
-	
-	.reservationTable > thead th {
-	    padding: 10px;
-	    border-bottom: 2px solid #ccc;
-	}
-	
-	.reservationTable > tbody tr {
-	    border-bottom: 1px solid #ccc;
-	}
-	
-	.reservationTable > tbody td {
-	    padding: 10px;
-	}
-	.searchBtn, 
-	.resetBtn {
-		all: unset;
-		padding: 12px 15px;
-		
-		background-color: #f8215c;
-		color: white;
-		
-		border-radius: 10px;
-		font-size: 12px;
-		font-weight: bold;
-		margin-left: 10px;
-	}
-	.reservationBox {
-		height: 625px;
-		padding: 10px;
-		border: 1px solid rgba(0,0,0,0.2); 
-		overflow: auto; 
-	}
-	
-	/* admin -> registration */
-	 /* Style the table */
-    .registrationTable {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 20px;
-    }
-    /* Table header */
-    .registrationTable > thead th {
-      background-color: #f1f1f1;
-      padding: 10px;
-      text-align: left;
-      border-bottom: 2px solid #ddd;
-    }
-    /* Table rows */
-    .registrationTable > tbody tr:nth-child(even) {
-      background-color: #f4f4f4;
-    }
-    .registrationTable > tbody td {
-      padding: 8px;
-      text-align: left;
-      border-bottom: 1px solid #ddd;
-    }
-    /* Action buttons */
-    .registrationBtn {
-      padding: 5px 10px;
-      margin: 2px;
-      cursor: pointer;
-    }
-    
-    /* Paging Container */
-	.paging {
-	  text-align: center;
-	  margin-top: 20px;
-	  margin-bottom: 20px;
-	}
-	
-	/* Paging Links */
-	.paging a {
-	  margin: 0 5px;  /* Margin between links */
-	  text-decoration: none;  /* Remove underline */
-	  color: #333;  /* Text color */
-	  transition: background-color 0.3s ease-in-out;  /* Transition for hover effect */
-	}
-	
-	/* Hover effect for paging links */
-	.paging a:hover {
-	  background-color: #f1f1f1;
-	  color: #333;
-	}
-	
-	/* Active Page (if you can dynamically set a class for the active page) */
-	.paging a.active {
-	  background-color: #4CAF50;
-	  color: white;
-	  border: 1px solid #4CAF50;
-	}
+	border-radius: 10px;
+	font-size: 12px;
+	font-weight: bold;
+	margin-left: 10px;
+}
+.reservationBox {
+	height: 625px;
+	padding: 10px;
+	border: 1px solid rgba(0,0,0,0.2); 
+	overflow: auto; 
+}
+
+/* admin -> registration */
+ /* Style the table */
+.registrationTable {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+/* Table header */
+.registrationTable > thead th {
+  background-color: #f1f1f1;
+  padding: 10px;
+  text-align: left;
+  border-bottom: 2px solid #ddd;
+}
+/* Table rows */
+.registrationTable > tbody tr:nth-child(even) {
+  background-color: #f4f4f4;
+}
+.registrationTable > tbody td {
+  padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+/* Action buttons */
+.registrationBtn {
+  padding: 5px 10px;
+  margin: 2px;
+  cursor: pointer;
+}
+
+   /* Paging Container */
+.paging {
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+/* Paging Links */
+.paging a {
+  margin: 0 5px;  /* Margin between links */
+  text-decoration: none;  /* Remove underline */
+  color: #333;  /* Text color */
+  transition: background-color 0.3s ease-in-out;  /* Transition for hover effect */
+}
+
+/* Hover effect for paging links */
+.paging a:hover {
+  background-color: #f1f1f1;
+  color: #333;
+}
+
+/* Active Page (if you can dynamically set a class for the active page) */
+.paging a.active {
+  background-color: #4CAF50;
+  color: white;
+  border: 1px solid #4CAF50;
+}
+.registrationPermitBtn,
+.registrationCencelBtn {
+   all: unset;
+   cursor: pointer;
+   padding: 1px 10px;
+   background-color: black;
+   color: white;
+   border-radius: 10px;
+   font-weight: bold;
+}
 	
 /*home.jsp 에 필터기능 모달*/
 /* 모달 스타일 */
@@ -1953,7 +2012,9 @@ legend{
   width: 50%;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
-
+.modal-content > h2 {
+	text-align: center;
+}
 /* 모달 닫기 버튼 스타일 */
 .close {
   color: #aaa;
