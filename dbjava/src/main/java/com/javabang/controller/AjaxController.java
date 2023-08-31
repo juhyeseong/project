@@ -207,5 +207,11 @@ public class AjaxController {
 	      return error;
 	   }
     
-    
+    @GetMapping("/reservation/selectGuestCount/{idx}")
+    public int selectGuestCount(@PathVariable("idx") int idx) {
+       System.out.println("idx : " + idx);
+       int guestCount = rentService.selectGuestCount(idx);
+       
+        return guestCount;
+    }
 }

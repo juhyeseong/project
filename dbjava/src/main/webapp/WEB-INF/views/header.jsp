@@ -178,6 +178,8 @@ header img {
 	
 }
 .roomSmall > img {
+	cursor: pointer;
+
 	width:120px;
 	height:86px;
 	margin:5px 10px;
@@ -1613,18 +1615,38 @@ legend{
     padding: 10px;
     width: 160px;
 }
-.reservePeople {
-	padding: 14px;
-	display: flex;
-	justify-content: flex-start;
-	align-items: center;
+.reserveGuest {
+   display: flex;
+   align-items: center;
+   
+   height: 80px;
 }
-
-.reservePeople input[type="number"] {
-	border: 1px solid #717171;
-	padding: 10px;
-	width: 160px;
-	font-size: 14px;
+.reserveGuest div {
+   flex: 1;
+   
+   margin-left: 10px;
+   
+   font-size: 20px;
+   font-weight: bold;
+}
+.reserveGuestCount {
+   display: flex;
+   justify-content: flex-end;
+}
+.reserveGuestCount input[type="button"] {
+   all: unset;
+   cursor: pointer;
+   
+   width: 35px;
+   height: 35px;
+   margin: 0px 20px;
+   
+   border: 1px solid black;
+   border-radius: 50%;
+   
+   display: flex;
+   justify-content: center;
+   align-items: center;
 }	
 .reserveBtn input[type="submit"]{
 	all: unset;

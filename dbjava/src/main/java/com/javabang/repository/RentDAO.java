@@ -40,4 +40,6 @@ public interface RentDAO {
 	public List<RentDTO> filterPension(String category);
 
 	public List<RentDTO> filterPoolVilla(String category);
+	
+	public int selectGuestCount(int idx);
 }

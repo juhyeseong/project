@@ -44,4 +44,8 @@ public class ReservationService {
 	public List<ReservationDTO> selectReservation(int rent) {
 	      return reservationDAO.selectReservation(rent);
 	}
+
+	public List<ReservationDTO> selectReservationDate(int rent) {
+	      return reservationDAO.selectReservationDate(rent);
+	}
 }

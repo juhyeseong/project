@@ -25,7 +25,7 @@ public class ReservationController {
 	   public ModelAndView reservationManage(@PathVariable("idx") int rent) {
 	      ModelAndView mav = new ModelAndView("reservation/reservationManage");
 	      List<ReservationDTO> list = reservationService.selectReservation(rent);
-	        
+	      
 	      mav.addObject("reservationList", list);
 	            
 	      return mav;

@@ -36,9 +36,14 @@
 				  <input type="text" name="eDateString" id="eDateString" placeholder="날짜 선택" autocomplete="off">
 				</div>
 				</div>
-				<div class="reservePeople">
-					<input type="number" name="guestCount" placeholder="인원 수를 입력 해주세요">
-				</div>
+				<div class="reserveGuest">
+                <div>게스트 수</div> 
+                <div class="reserveGuestCount">
+                  <input class="minusBtn" type="button" value="➖">
+                  <span class="guestCountValue">1</span>
+                  <input class="plusBtn" type="button" value="➕">
+                </div>
+            	</div>
 				<div class="reserveBtn">
 					<input type="submit" value="예약하기">
 				</div>
@@ -142,34 +147,63 @@
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 <script>
-      const roomPriceList = document.querySelectorAll('.roomPrice')
-      const price = ${dto.price }
-      const formatPrice = new Intl.NumberFormat().format(price)
-      let index = 0
-      
-      roomPriceList.forEach(roomPrice => {
-         if(index == 0) {
-            roomPrice.innerText = '₩ ' + formatPrice + ' / 박'
-         }
-         else {
-        	 roomPrice.innerText = '₩ ' + formatPrice
-         }
-         index++
-      })
+const roomPriceList = document.querySelectorAll('.roomPrice')
+const price = ${dto.price }
+const formatPrice = new Intl.NumberFormat().format(price)
+let index = 0
+const minus = document.querySelector('.minusBtn')
+const plus = document.querySelector('.plusBtn')
+
+roomPriceList.forEach(roomPrice => {
+   if(index == 0) {
+      roomPrice.innerText = '₩ ' + formatPrice + ' / 박'
+   }
+   else {
+      roomPrice.innerText = '₩ ' + formatPrice
+   }
+   index++
+})
+
+function minusBtnHandler(event) {
+   const guestCount = event.target.parentNode.children[1]
+   const guestCountValue = +guestCount.innerText
+   
+   if(guestCountValue - 1 > 0) {
+      guestCount.innerText = guestCountValue - 1
+   }
+}
+
+function plusBtnHandler(event) {
+   const rent = document.querySelector('input[name="rent"]')
+   const guestCount = event.target.parentNode.children[1]
+   const guestCountValue = +guestCount.innerText
+   const url = cpath + '/reservation/selectGuestCount/' + rent.value
+   
+   fetch(url)
+   .then(resp => resp.text())
+   .then(text => {
+      if(guestCountValue + 1 <= text) {
+         guestCount.innerText = guestCountValue + 1
+      }
+   })
+}
+
+minus.onclick = minusBtnHandler
+plus.onclick = plusBtnHandler
 </script>
 
 <script>
    const submitBtn = document.querySelector('.reserveBtn > input[type="submit"]')   
    const totalPrice = document.querySelector('input[name="totalPrice"]')
    
-   function payHandler(event) {
+function payHandler(event) {
       event.preventDefault()
       
       const rent = document.querySelector('input[name="rent"]').value
       const member = document.querySelector('input[name="member"]').value
       const sDateString = document.querySelector('input[name="sDateString"]').value
       const eDateString = document.querySelector('input[name="eDateString"]').value
-      const guestCount = document.querySelector('input[name="guestCount"]').value
+      const guestCount = document.querySelector('.guestCountValue').innerText
       
       if(member == '') {
           alert('로그인 후 이용해주세요 ~ ')
@@ -216,6 +250,7 @@
    
    submitBtn.onclick = payHandler
 </script>
+
 
 <!-- roomSmall 을 눌렀을 때 roomBig에 사진 크게 뜨게 하기 -->
 <script>
@@ -407,55 +442,61 @@ function totalPriceHandler(sDateString, eDateString) {
    }
 }
 
+const reservationList = ${reservationList }
 $(document).ready(function() {
     // 시작 날짜 입력란에 달력을 연결합니다.
     $("#sDateString").datepicker({
-	    minDate: 0,  
-	    onSelect: function(selectedDate) {
-	        const startDate = $("#sDateString").datepicker("getDate");
-	        const endDate = $("#eDateString").datepicker("getDate");
-	
-	        // 선택된 시작 날짜가 종료 날짜보다 크거나 같을 경우, 종료 날짜 이전날로 설정
-	        if (endDate && startDate >= endDate) {
-	            const prevDay = new Date(endDate);
-	            prevDay.setDate(endDate.getDate() - 1);
-	            $("#sDateString").datepicker("setDate", prevDay);
-	        }
-	
-	        const sDateString = $("#sDateString").val();
-	        const eDateString = $("#eDateString").val();
-	
-	        totalPriceHandler(sDateString, eDateString);
-	    }
-	});
+       minDate: 0,  
+       beforeShowDay:  function(date) {
+           const selectedDate = $("#eDateString").datepicker("getDate");
+           const rent = document.querySelector('input[name="rent"]').value;
+           const url = cpath + '/reservation/selectReservation/' + rent;
+         
+         if (date >= selectedDate && selectedDate != null) {
+            return [false, "unselectable"];
+         }
+         for (const reservation of reservationList) {
+             const startDate = new Date(reservation.startDate)
+             const endDate = new Date(reservation.endDate)
+             
+             if(startDate <= date && date < endDate) {
+                return [false, "unselectable"]
+             }
+          }
+
+           return [true, ""];
+         }
+   });
     
     // 종료 날짜 입력란에 달력을 연결합니다.
     $("#eDateString").datepicker({
-        minDate: 0, 
-        beforeShow: function(input, inst) {
-            // 시작 날짜 이후의 날짜만 선택 가능하도록 설정
-            const minDate = $("#sDateString").datepicker("getDate");
-            if (minDate) {
-                $(this).datepicker("option", "minDate", minDate);
-            }
-        },
-        onSelect: function(selectedDate) {
-            const startDate = $("#sDateString").datepicker("getDate");
-            const endDate = $("#eDateString").datepicker("getDate");
-            if (startDate && endDate <= startDate) {
-                // 선택된 종료 날짜가 시작 날짜보다 작거나 같을 경우, 시작 날짜 다음날로 설정
-                const nextDay = new Date(startDate);
-                nextDay.setDate(startDate.getDate() + 1);
-                $("#eDateString").datepicker("setDate", nextDay);
-            }
-            const sDateString = $("#sDateString").val();
-            const eDateString = $("#eDateString").val();
-            
-            totalPriceHandler(sDateString, eDateString);
+        minDate: 0,
+        beforeShowDay: function(date) {
+           const selectedDate = $("#sDateString").datepicker("getDate");
+           
+           if(date <= selectedDate) {
+              return [false, "unselectable"];
+           }
+
+           for (const reservation of reservationList) {
+             const startDate = new Date(reservation.startDate)
+             const endDate = new Date(reservation.endDate)
+             
+             
+             if(startDate < date && date < endDate) {
+                return [false, "unselectable"]
+             }
+             if(selectedDate < date && endDate > selectedDate && endDate <= date) {
+                return [false, "unselectable"]
+             }
+          }
+           
+           return [true, ""]
         }
     });
 });
 </script>
+
 <!--평균 별점 스크립트 -->
 <script>
 	const totalPoints = '${totalPoints}'

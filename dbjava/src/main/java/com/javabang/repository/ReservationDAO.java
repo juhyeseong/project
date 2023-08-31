@@ -13,4 +13,6 @@ public interface ReservationDAO {
 	
 	List<ReservationDTO> selectReservation(int rent);
 	
+	List<ReservationDTO> selectReservationDate(int rent);
+
 }

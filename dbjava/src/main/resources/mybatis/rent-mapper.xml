@@ -121,6 +121,10 @@
 		JOIN rent_img I
 			ON min_img.min_idx = I.idx where category = #{category}
 	</select>
+	
+	<select id="selectGuestCount" parameterType="int" resultType="int">
+         select guestCount from rent where idx = #{idx}
+    </select>
 </mapper>
 
 

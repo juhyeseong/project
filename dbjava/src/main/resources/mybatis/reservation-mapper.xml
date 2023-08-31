@@ -22,4 +22,11 @@
               on rent.idx = reservation.rent
           where rent = #{rent}
    </select>
+   
+   <select id="selectReservationDate" parameterType="int" resultType="reservation">
+         select startDate, endDate
+            from reservation
+            where rent = #{rent}
+            order by idx
+   </select>
 </mapper>

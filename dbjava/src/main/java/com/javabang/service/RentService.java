@@ -14,7 +14,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.javabang.model.RentDTO;
+import com.javabang.model.ReservationDTO;
 import com.javabang.repository.RentDAO;
+import com.javabang.repository.ReservationDAO;
 import com.jcraft.jsch.Channel;
 import com.jcraft.jsch.ChannelSftp;
 import com.jcraft.jsch.JSch;
@@ -24,7 +26,10 @@ import com.jcraft.jsch.SftpException;
 
 @Service
 public class RentService {
+	
 	@Autowired private RentDAO rentDAO;
+	@Autowired private ReservationDAO reservationDAO;
+	
 	private String serverIp = "192.168.64.200";
 	private int serverPort = 22;
 	private String serverUser = "root";
@@ -201,12 +206,12 @@ public class RentService {
 		
 		return rentDAO.filterPoolVilla(category);
 	}
-
 	
-
-
-
-
-
-	  
+	public int selectGuestCount(int idx) {
+	      return rentDAO.selectGuestCount(idx);
+	}
+	
+	public List<ReservationDTO> selectReservationDate(int rent) {
+	      return reservationDAO.selectReservationDate(rent);
+	}
 }

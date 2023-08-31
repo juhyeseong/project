@@ -6,17 +6,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.javabang.model.RentDTO;
+import com.javabang.model.ReservationDTO;
 import com.javabang.model.ReviewDTO;
 import com.javabang.service.RentService;
+import com.javabang.service.ReservationService;
 import com.javabang.service.ReviewService;
 
 @Controller
@@ -25,19 +24,29 @@ public class RentController {
 
 	@Autowired private RentService rentService;
 	@Autowired private ReviewService reviewService;
+	@Autowired private ReservationService reservationService;
 
 	@GetMapping("/hosting")
 	public void hosting() {}
 
 	@GetMapping("/room/{idx}")
 	public ModelAndView room(@PathVariable("idx") int idx) {
-		ModelAndView mav = new ModelAndView("/rent/room");
-		RentDTO dto = rentService.selectOne(idx);
-     	List<ReviewDTO> reviewList = reviewService.reviewSelectAll(idx);
-     	
-		mav.addObject("dto", dto);
-		mav.addObject("reviewList", reviewList);
-		return mav;
+	      ModelAndView mav = new ModelAndView("/rent/room");
+	      RentDTO dto = rentService.selectOne(idx);
+	        List<ReviewDTO> reviewList = reviewService.reviewSelectAll(idx);
+	        List<ReservationDTO> reservationList = reservationService.selectReservationDate(idx);
+	        ObjectMapper mapper = new ObjectMapper();
+	        try {
+	         String json = mapper.writeValueAsString(reservationList);
+
+	         mav.addObject("dto", dto);
+	         mav.addObject("reviewList", reviewList);
+	         mav.addObject("reservationList", json);
+	      } catch (JsonProcessingException e) {
+	         e.printStackTrace();
+	      }
+	        
+	      return mav;
 	}
 	
 	@GetMapping("/rentManage/{member}")
