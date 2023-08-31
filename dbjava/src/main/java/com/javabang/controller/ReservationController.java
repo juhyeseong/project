@@ -83,4 +83,7 @@ public class ReservationController {
       
       return mav;
    }
+   
+   @GetMapping("/hostReservation")
+   public void hostReservation() {}
 }

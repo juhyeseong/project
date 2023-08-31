@@ -1592,7 +1592,7 @@ legend{
 	align-items: flex-end;	
 }
 .reserveSpace {
-	width: 520px;
+	width: 600px;
 	height: 100%;
 }
   .reserveDate-container {
