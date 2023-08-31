@@ -108,7 +108,4 @@ public class MemberDTO {
 	public void setUpload(MultipartFile upload) {
 		this.upload = upload;
 	}
-
-	
-	
 }

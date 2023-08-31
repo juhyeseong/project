@@ -52,7 +52,7 @@
 			</select>
 		</p>
 		<p class="phoneNum">
-				<input type="text" name="phoneNum" placeholder="전화번호 입력" required>
+				<input type="tel" name="phoneNum" placeholder="전화번호 입력" required>
 			</p>
 		<p>
 			<select name="gender" required>

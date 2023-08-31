@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <c:set var="cpath" value="${pageContext.request.contextPath }"/>
 <!DOCTYPE html>
 <html>
@@ -10,6 +11,10 @@
 .title > a > img{
 	height: 130px;
 	width: 140px;
+}
+/*header */
+.header{
+	width: 1400px;
 }
 
 body {
@@ -88,13 +93,13 @@ header img {
 .search {
     width: 40px;
 }
-ul {
+.host {
     list-style: none;
 	padding: 0px;
     display: flex;
     align-items: center;
 }
-ul > li{    
+.host > li{    
 	margin-left: 30px;
 
 }
@@ -125,6 +130,14 @@ ul > li{
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
+}
+.categorieImgBox > .filter {
+	background-color : white;
+	border : 2px solid black;
+	border-radius : 10px;
+	height:50px;
+	width:60px;
+	font-size:15px;
 }
 .roomBox{
 	display: flex;
@@ -340,10 +353,11 @@ legend{
     text-align: center;
 }
 .join input[type="submit"] {
-    background-color: #C2D6F0;
+    background-color: #f8215c;
     border : none;
     width:500px;
     height:50px;
+    color:white;
 }
 .join input {
     border-radius: 10px;
@@ -397,10 +411,11 @@ legend{
     text-align: center;
 }
 .resetPassword input[type="submit"] {
-    background-color: #C2D6F0;
+    background-color: #f8215c;
     border : none;
     width:500px;
     height:50px;
+    color:white;
 }
 /*정보수정 css*/
 fieldset{
@@ -456,7 +471,7 @@ legend{
 	float : left;
 }
 .list-info{
-	margin-left:250px;
+	margin-left:450px;
 }
 .hidden{
 	display: none;
@@ -481,7 +496,7 @@ legend{
     color:white;
 } 
 .update-profile input[type="button"]{
-    background-color: #C2D6F0;
+    background-color: #f8215c;
     border : none;
     width:500px;
     height:50px;
@@ -1768,19 +1783,67 @@ legend{
 		justify-content: center;
 		align-items: center;
 	}
+/*home.jsp 에 필터기능 모달*/
+/* 모달 스타일 */
+.modal {
+  display: none; /* 초기에는 숨김 상태로 설정 */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* 배경에 반투명한 레이어 추가 */
+  z-index: 1; /* 다른 요소 위에 표시 */
+}
+
+/* 모달 내용 스타일 */
+.modal-content {
+  background-color: #fff;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 50%;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+/* 모달 닫기 버튼 스타일 */
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+
+/*home.jsp ->모달창 -> 숙소보러가기 버튼*/
+.seeFilter{
+	background-color: #f8215c;
+	border-radius:10px;
+    border : none;
+    width:120px;
+    height:30px;
+    color:white;
+}
 
 </style>
 </head>
 <body>
 	<header>
-        <div>
+        <div class="header">
         	 <!-- <h1><a href="${cpath }">자바방</a></h1> -->
         	<div class="title"><a href="${cpath }"><img src="http://192.168.64.200/javaBang.png"></a></div>
 	        <div class="btn3">
 	        	<button><img src="http://192.168.64.200/search.png" class="search"></button>
 	        </div>
 	        
-	        <ul>
+	        <ul class="host">
 	        	<c:if test="${not empty login }">
 	           		<li><a href="${cpath }/rent/rentManage/${login.idx }">호스트페이지</a></li>
 	            </c:if>

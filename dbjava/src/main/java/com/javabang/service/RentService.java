@@ -190,7 +190,22 @@ public class RentService {
 	public int deleteRentFile(HashMap<String, String> filePath) {
 		return rentDAO.deleteRentFile(filePath);
 	}
+
+	// 카테고리 - 펜션
+	public List<RentDTO> filterPension(String category) {
+		return rentDAO.filterPension(category);
+	}
+
+	// 카테고리 - 풀빌라
+	public List<RentDTO> filterPoolVilla(String category) {
+		
+		return rentDAO.filterPoolVilla(category);
+	}
+
 	
+
+
+
 
 
 	  

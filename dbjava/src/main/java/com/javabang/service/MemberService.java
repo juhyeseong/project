@@ -11,6 +11,7 @@ import java.util.Date;
 import java.util.Random;
 import java.util.Scanner;
 
+import org.junit.internal.matchers.SubstringMatcher;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -52,6 +53,21 @@ public class MemberService {
 		
 		String dateString = dto.getYear() + "-" + dto.getMonth() + "-" + dto.getDay();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		
+		if(dto.getPhoneNum().contains("-") == false) {
+			String phoneNum = dto.getPhoneNum();
+			String hyphen = "";
+			
+			for(int i = 0; i < phoneNum.length(); i++) {
+				if(i == 2 || i == 6) {
+					hyphen += phoneNum.charAt(i) + "-";
+				}
+				else {
+					hyphen += phoneNum.charAt(i);
+				}
+			}
+			dto.setPhoneNum(hyphen);
+		}
 		
 		try {
 			Date utilDate = sdf.parse(dateString);
@@ -218,6 +234,9 @@ public class MemberService {
 		
 		return memberDAO.selectCount2(userNick);
 	}
+
+
+	
 }
 		
 		

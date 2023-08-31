@@ -3,16 +3,11 @@
 <%@ include file="../header.jsp"%>
 <script src='https://code.jquery.com/jquery-3.1.1.min.js'></script>
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
-<script
-	src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.0.js"
-	charset="utf-8"></script>
+<script src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.0.js" charset="utf-8"></script>
 
 <!-- 네이버로그인에 필요한 js -->
-<script type="text/javascript"
-	src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js"
-	charset="utf-8"></script>
-<script type="text/javascript"
-	src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 
 <div class="login">
 	<fieldset>
@@ -31,7 +26,7 @@
 			</p>
 		</form>
 
-			<%--  <p> <a href="http://developers.kakao.com/logout">카카오로그아웃</a> </p> 
+		<%--   <p> <a href="http://developers.kakao.com/logout">카카오로그아웃</a> </p> 
  		     <p><a href="https://nid.naver.com/nidlogin.logout?returl=${cpath }/dbjava/member/login">네이버 로그아웃</a></p>  --%>
  		  
 

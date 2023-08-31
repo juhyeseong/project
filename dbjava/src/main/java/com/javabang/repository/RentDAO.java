@@ -36,4 +36,8 @@ public interface RentDAO {
 	public int updateRentFile(HashMap<String, Object> map);
 
 	public int deleteRentFile(HashMap<String, String> filePath);
+
+	public List<RentDTO> filterPension(String category);
+
+	public List<RentDTO> filterPoolVilla(String category);
 }
