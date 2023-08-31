@@ -6,8 +6,8 @@
 <mapper namespace="com.javabang.repository.RentDAO">
 	<insert id="rentInsert" parameterType="rent">
 		insert into
-			rent(member, category, roomType, address, detailAddress, roomCount, guestCount, bedCount, bathCount, information, title, content, price)
-			values(#{member}, #{category}, #{roomType}, #{address}, #{detailAddress}, #{roomCount}, #{guestCount}, #{bedCount}, #{bathCount}, #{information}, #{title}, #{content}, #{price})
+			rent(member, category, roomType, address, detailAddress, roomCount, guestCount, bedCount, bathCount, information, title, contactNum, content, price)
+			values(#{member}, #{category}, #{roomType}, #{address}, #{detailAddress}, #{roomCount}, #{guestCount}, #{bedCount}, #{bathCount}, #{information}, #{title}, #{contactNum}, #{content}, #{price})
 	</insert>
 	
 	<select id="getRentIdx" parameterType="int">

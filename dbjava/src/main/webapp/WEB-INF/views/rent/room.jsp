@@ -178,7 +178,7 @@
             <div class="reportContent">
                   <textarea name="content"></textarea>
             </div>
-               <button type="submit">신고하기</button>
+               <button class="reportBtn" type="submit">신고하기</button>
           </form>
         </div>
     </div>

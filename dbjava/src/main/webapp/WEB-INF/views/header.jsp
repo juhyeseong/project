@@ -1316,7 +1316,7 @@ legend{
 }
 #rentContent textarea {
 	width: 700px;
-	height: 450px;
+	height: 330px;
 	
 	border-radius: 10px;
 	
@@ -1588,7 +1588,7 @@ legend{
 }
 
 /* 신고하기 버튼에 대한 스타일 */
-button {
+.reportBtn {
   width: 100%;
   padding: 10px;
   background-color: #f8215c;
@@ -1598,10 +1598,6 @@ button {
   cursor: pointer;
   font-size: 18px;
 }
-
-
-
-
 
 /* Style the "리뷰 작성" button */
 .reviewWrite{
