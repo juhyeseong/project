@@ -117,7 +117,20 @@ public class MemberService {
 
 	// 회원정보수정
 	public int update(MemberDTO dto)  {
-
+		if(dto.getPhoneNum().contains("-") == false) {
+			String phoneNum = dto.getPhoneNum();
+			String hyphen = "";
+			
+			for(int i = 0; i < phoneNum.length(); i++) {
+				if(i == 2 || i == 6) {
+					hyphen += phoneNum.charAt(i) + "-";
+				}
+				else {
+					hyphen += phoneNum.charAt(i);
+				}
+			}
+			dto.setPhoneNum(hyphen);
+		}
 		return memberDAO.update(dto);
 	}
 

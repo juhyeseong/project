@@ -43,63 +43,66 @@ public class ReviewService {
 		
 		return list;
 	}
-
+	
 	
 	public int insertReview(ReviewDTO review) {
-		int row = 0;
+	    int row = 0;
 
-		row += reviewDAO.insertReview(review);
-		review.setIdx(reviewDAO.selectIdx());
-		
-		for(MultipartFile file : review.getUpload()) {
-			String ymd = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
-			String fileName = UUID.randomUUID().toString();
-			String ext = file.getContentType().substring(file.getContentType().indexOf("/") + 1);
-			File dest = new File(ymd + "_" + fileName + "." + ext);
-			try {
-				file.transferTo(dest);
-			} catch (IllegalStateException | IOException e) {
-				e.printStackTrace();
-			}
-			Session session = null;
-			Channel channel = null;
-			JSch jsch = new JSch();
-			
-			try {
-				session = jsch.getSession(serverUser, serverIp, serverPort);
-				session.setPassword(serverPass);
-				session.setConfig("StrictHostKeyChecking", "no");
-				session.connect();
-				
-				channel = session.openChannel("sftp");
-				channel.connect();
-				
-				chSftp = (ChannelSftp)channel;
-	
-				FileInputStream fis = new FileInputStream(dest);
-				
-				chSftp.cd("/var/www/html");
-				chSftp.put(fis, dest.getName());
-				
-				fis.close();
-				chSftp.isClosed();
-				
-				HashMap<String, Object> map = new HashMap<>();
-				String filePath = "http://192.168.64.200/" + dest.getName();
-				System.out.println("review.IDX : " + review.getIdx());
-				map.put("review", review.getIdx());
-				map.put("filePath", filePath);
-				
-				System.out.println("review : " + map.get("review"));
-				System.out.println("filePath : " + map.get("filePath"));
-				
-				row += reviewDAO.fileInsert(map);
-			} catch (JSchException | SftpException | IOException e) {
-				e.printStackTrace();
-			}
-		}
-		return row;
+	    row += reviewDAO.insertReview(review);
+	    review.setIdx(reviewDAO.selectIdx());
+	    
+	    for (MultipartFile file : review.getUpload()) {
+	        if (!file.isEmpty()) { // 파일이 비어있지 않은 경우에만 처리
+	            String ymd = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
+	            String fileName = UUID.randomUUID().toString();
+	            String ext = file.getContentType().substring(file.getContentType().indexOf("/") + 1);
+	            File dest = new File(ymd + "_" + fileName + "." + ext);
+	            try {
+	                file.transferTo(dest);
+	            } catch (IllegalStateException | IOException e) {
+	                e.printStackTrace();
+	            }
+	            Session session = null;
+	            Channel channel = null;
+	            JSch jsch = new JSch();
+	            
+	            try {
+	                session = jsch.getSession(serverUser, serverIp, serverPort);
+	                session.setPassword(serverPass);
+	                session.setConfig("StrictHostKeyChecking", "no");
+	                session.connect();
+	                
+	                channel = session.openChannel("sftp");
+	                channel.connect();
+	                
+	                chSftp = (ChannelSftp) channel;
+
+	                FileInputStream fis = new FileInputStream(dest);
+	                
+	                chSftp.cd("/var/www/html");
+	                chSftp.put(fis, dest.getName());
+	                
+	                fis.close();
+	                chSftp.isClosed();
+	                
+	                HashMap<String, Object> map = new HashMap<>();
+	                String filePath = "http://192.168.64.200/" + dest.getName();
+	     
+	                map.put("review", review.getIdx());
+	                map.put("filePath", filePath);
+	                
+	                
+	                row += reviewDAO.fileInsert(map);
+	            } catch (JSchException | SftpException | IOException e) {
+	                e.printStackTrace();
+	            }
+	        }
+	    }
+	    return row;
 	}
+
+	
+	
 
 
 	public void deleteReview(int reviewIdx, int memberIdx) {

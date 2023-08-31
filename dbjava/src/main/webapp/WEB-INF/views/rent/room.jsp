@@ -96,7 +96,7 @@
 						<textarea class="reviewWrite" name="content" required></textarea>
 						<label for="file-input" class="file-icon2"> <img
 							src="http://192.168.64.200/camera.png" alt="File Icon">
-						</label> <input type="file" name="upload" required multiple id="file-input"
+						</label> <input type="file" name="upload" multiple id="file-input"
 							style="display: none;">
 					</p>
 					<p class = "reviewSubmit">
@@ -122,8 +122,11 @@
 											<img class="reviewImgs" src="${filePath}" />
 										</c:forEach>
 									</div>
-									<button class="prevButton"><</button>
-									<button class="nextButton">></button>
+									<c:if test="${not empty dto.filePathList }">
+									    <button class="prevButton"><</button>
+									    <button class="nextButton">></button>
+									</c:if>
+
 									<c:if test="${login.idx == dto.member }">
 										<a href="${cpath}/review/delete/${dto.idx}" class="deleteButton" onclick="deleteReview(${dto.idx}); return false;">ⓧ</a>
 									</c:if>
@@ -300,7 +303,7 @@ function payHandler(event) {
 	        boxList[index].classList.add('selected')
 	
 	        // 추가: 선택된 탭의 글자 색상을 변경한다
-	        tabList[index].style.color = "red"; // 선택한 탭 색상
+	        tabList[index].style.color = "#f8215c"; // 선택한 탭 색상
 	 
 	        // 나머지 탭의 글자 색상을 원래 색상으로 변경한다
 	        tabList.forEach((e, i) => {
@@ -358,7 +361,7 @@ function payHandler(event) {
 
 
 <!-- 리뷰 이미지 캐러셀 -->
-<script>
+ <script>
   const reviewCarousels = document.querySelectorAll('.carousel'); // 모든 리뷰 캐러셀을 선택합니다.
   const prevButtons = document.querySelectorAll('.prevButton'); // 모든 이전 버튼을 선택합니다.
   const nextButtons = document.querySelectorAll('.nextButton'); // 모든 다음 버튼을 선택합니다.
@@ -389,6 +392,8 @@ function payHandler(event) {
       }
     }
 
+    
+
     // 다음 페이지로 이동하는 함수
     function nextPage() {
       const itemsPerPage = 3; // 한 번에 보여줄 항목 수를 설정합니다.
@@ -408,7 +413,9 @@ function payHandler(event) {
     // 초기 페이지를 업데이트합니다.
     updatePage();
   });
-</script>
+</script> 
+
+
 
 <script>
 $.datepicker.setDefaults({

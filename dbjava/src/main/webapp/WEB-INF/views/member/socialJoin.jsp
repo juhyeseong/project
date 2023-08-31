@@ -6,7 +6,7 @@
 	<fieldset>
 		<legend>소셜 로그인 회원가입</legend>
 		<p>
-			<input type="text" name="userId" placeholder="아이디 입력"
+			<input class="joinUserId" type="text" name="userId" placeholder="아이디 입력"
 				value="${dto.userId }" required readonly> <input
 				id="dupCheckBtn" type="button" value="중복확인"> <br> <span
 				id="dupMessage"></span>
@@ -15,7 +15,7 @@
 			<input type="password" name="userPw" placeholder="비밀번호 입력" required>
 		</p>
 		<p>
-			<input type="text" name="userNick" placeholder="닉네임 입력"
+			<input class="joinUserNick" type="text" name="userNick" placeholder="닉네임 입력"
 				value="${dto.userNick }" required>
 			<input type="button"
 				id="dupNickBtn" value="닉네임 중복확인"><br> <span id="dupMessage2"></span>
@@ -58,14 +58,18 @@
 			</select>
 		</p>
 		<p>
-			<input type="submit" value="회원가입">
+			<input class="submitBtn" type="submit" value="회원가입">
 		</p>
 	</fieldset>
 </form>
 <script>
 	const sendAuthNumber = document.getElementById('sendAuthNumber')
+	
+	let cnt = 0 ;
+	
 	async function sendAuthNumberHandler() {
 		const email = document.querySelector('input[name="email"]')
+		const submitButton = document.querySelector('.submitBtn');
 		
 		const url = '${cpath}/sendAuthNumber/' + email.value + '/'
 		const json = await fetch(url).then(resp => resp.json())
@@ -73,7 +77,7 @@
 		
 		if(json.success == 1) {
 			document.querySelector('p.hidden').classList.remove('hidden')
-			document.querySelector('input[type="submit"]').disable = 'disabled'
+
 		}
 	}
 	sendAuthNumber.onclick = sendAuthNumberHandler
@@ -81,6 +85,7 @@
 	const checkAuthNumber = document.getElementById('checkAuthNumber')
 	async function checkAuthNumberHandler(){
 		const authNumber = document.querySelector('input[name="authNumber"]')
+		const submitButton = document.querySelector('.submitBtn');
 		if(authNumber.value == '') {
 			return
 		}
@@ -88,13 +93,20 @@
 		const row = await fetch(url).then(resp => resp.text())
 		const authMessage = document.getElementById('authMessage')
 		if(row != 0) {
-			document.querySelector('input[type="submit"]').removeAttribute('disabled')
+/* 			document.querySelector('input[type="submit"]').removeAttribute('disabled') */
 			authMessage.innerText = '인증 성공'
 			authMessage.style.color = 'grey'
+			cnt += 1;
+			console.log("count : " +cnt)
+		if (cnt >= 3 ) {
+		    document.querySelector('.submitBtn').removeAttribute('disabled');
+		}
 		}
 		else { 
 			authMessage.innerText = '인증 실패'
 			authMessage.style.color = 'pink'
+		    submitButton.setAttribute('disabled', 'disabled'); // 제출 버튼 비활성화
+
 		}
 	}
 	checkAuthNumber.onclick = checkAuthNumberHandler
@@ -103,10 +115,10 @@
 
 <script>
 	const dupCheckBtn = document.getElementById('dupCheckBtn')
-	
+	const userId = document.querySelector('.joinUserId')
 	async function dupCheckHandler(){
 		const dupMessage = document.getElementById('dupMessage')
-		const userId = document.querySelector('input[name="userId"]')
+		const submitButton = document.querySelector('.submitBtn');
 		
 		if(userId.value == ''){
 			dupCheckBtn.focus()
@@ -121,25 +133,33 @@
 			userId.focus()
 		}
 		else if(count == 0){
-			dupMessage.innerText = '사용가능한 아이디입니다.'
-			dupMessage.style.color = 'grey'
+			dupMessage.innerText = '사용가능한 아이디입니다.';
+	        dupMessage.style.color = 'grey';
+	        cnt += 1;
+	        console.log("count : " +cnt)
+	        if (cnt >= 3 ) {
+		   		document.querySelector('input[type="submit"]').removeAttribute('disabled');
+			}
 		}
 		else{
-			dupMessage.innerText = '이미 사용중인 아이디입니다.'
-			dupMessage.style.color = 'pink'
-			userId.select()
+			dupMessage.innerText = '이미 사용중인 아이디입니다.';
+	        dupMessage.style.color = 'pink';
+	        submitButton.setAttribute('disabled', 'disabled'); // 제출 버튼 비활성화
 		}
+		
 	}
+	
 	dupCheckBtn.addEventListener('click', dupCheckHandler)
+	
 </script>
 
 <!-- 닉네임 중복확인 -->
 <script>
-const dupNickBtn = document.getElementById('dupNickBtn')
-
+const dupNickBtn = document.getElementById('dupNickBtn');
+const userNick = document.querySelector('.joinUserNick');
 async function dupNickHandler(){
 	const dupMessage2 = document.getElementById('dupMessage2')
-	const userNick = document.querySelector('input[name="userNick"]')
+	const submitButton = document.querySelector('input[type="submit"]');
 	
 	if(userNick.value == ''){
 		dupNickBtn.focus()
@@ -154,19 +174,24 @@ async function dupNickHandler(){
 		userNick.focus()
 	}
 	else if(count2 == 0){
-		dupMessage2.innerText = '사용가능한 닉네임입니다.'
-		dupMessage2.style.color = 'grey'
+		dupMessage2.innerText = '사용가능한 닉네임입니다.';
+        dupMessage2.style.color = 'grey';
+        cnt += 1;
+        console.log("count : " +cnt)
+      	if (cnt >= 3 ) {
+		    document.querySelector('input[type="submit"]').removeAttribute('disabled');
+		}
 	}
 	else{
-		dupMessage2.innerText = '이미 사용중인 닉네임입니다.'
-		dupMessage2.style.color = 'pink'
-		userNick.select()
+		dupMessage2.innerText = '이미 사용중인 닉네임입니다.';
+        dupMessage2.style.color = 'pink';
+        submitButton.setAttribute('disabled', 'disabled'); // 제출 버튼 비활성화
+
 	}
 	
 }
 
 dupNickBtn.addEventListener('click', dupNickHandler)
-
 
 </script> 
 </body>
