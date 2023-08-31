@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.javabang.model.RentDTO;
 import com.javabang.model.ReservationDTO;
+import com.javabang.service.RentService;
 import com.javabang.service.ReservationService;
 
 @Controller
@@ -20,14 +22,16 @@ import com.javabang.service.ReservationService;
 public class ReservationController {
 	
 	@Autowired private ReservationService reservationService;
+	@Autowired private RentService rentService;
 	
 	@GetMapping("/reservationManage/{idx}")
 	   public ModelAndView reservationManage(@PathVariable("idx") int rent) {
 	      ModelAndView mav = new ModelAndView("reservation/reservationManage");
+	      int idx = rent;
 	      List<ReservationDTO> list = reservationService.selectReservation(rent);
 	      
 	      mav.addObject("reservationList", list);
-	            
+	      mav.addObject("rent", idx);
 	      return mav;
 	  }
    
@@ -71,6 +75,7 @@ public class ReservationController {
       
      return mav;
    }
+
    
    @GetMapping("/kakaopayFailed")
    public ModelAndView kakaopayFailed(HttpSession session) {
@@ -81,9 +86,40 @@ public class ReservationController {
       mav.addObject("url", url);
       mav.addObject("msg", msg);
       
+      return mav;	
+   }
+   
+   @GetMapping("/hostReservation/{idx}")
+   public ModelAndView hostReservation(@PathVariable("idx") int idx) {
+      ModelAndView mav = new ModelAndView("reservation/hostReservation");
+      RentDTO rent = rentService.selectOne(idx);
+      
+      mav.addObject("rent", rent);
+      
       return mav;
    }
    
-   @GetMapping("/hostReservation")
-   public void hostReservation() {}
+   @PostMapping("/hostReservation/{idx}")
+   public ModelAndView hostReservation(@PathVariable("idx") int idx, ReservationDTO dto) {
+       ModelAndView mav = new ModelAndView("alert");
+       dto.setRent(idx);
+       int row = reservationService.insertReservation(dto);
+       String msg = row != 0 ? "예약이 완료되었습니다 ~" : "예약에 실패하셨습니다 ~\n 계속 실패할 경우 관리자에게 문의주세요";
+       String url = row != 0 ? "/" : "redirect:/rent/rentManage/";
+      
+      mav.addObject("msg", msg);
+      mav.addObject("url", url);
+        
+      return mav;
+   }
+   
+   @GetMapping("/reservationList/{member}")
+   public ModelAndView reservationList(@PathVariable("member") int member) {
+      ModelAndView mav = new ModelAndView("reservation/reservationList");
+      List<ReservationDTO> list = reservationService.selectReservationList(member);
+      
+      mav.addObject("list", list);
+      
+      return mav;
+   }
 }

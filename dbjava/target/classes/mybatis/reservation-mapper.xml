@@ -4,6 +4,7 @@
    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
    
 <mapper namespace="com.javabang.repository.ReservationDAO">
+  
    <insert id="insertReservation" parameterType="reservation">
       insert into
          reservation(member, rent, startDate, endDate, guestCount, totalPrice)
@@ -21,6 +22,7 @@
           join rent
               on rent.idx = reservation.rent
           where rent = #{rent}
+          order by startDate
    </select>
    
    <select id="selectReservationDate" parameterType="int" resultType="reservation">
@@ -29,4 +31,19 @@
             where rent = #{rent}
             order by idx
    </select>
+   
+   <select id="selectOne" parameterType="int" resultType="reservation">
+         select * from reservation
+            where idx = #{idx}
+   </select>
+   
+   <select id="selectReservationList" parameterType="int" resultType="reservation">
+         select reservation.*, rent.title, rent.contactNum as phoneNum
+            from reservation
+            join rent
+               on rent.idx = reservation.rent
+            where reservation.member = #{member}
+   </select>
+   
+   
 </mapper>

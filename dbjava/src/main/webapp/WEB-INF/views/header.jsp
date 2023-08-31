@@ -1664,6 +1664,9 @@ button {
 .reserveGuest {
    display: flex;
    align-items: center;
+   justify-content: center;
+   width: 500px;
+   padding-left: 60px;
    
    height: 80px;
 }
@@ -1694,6 +1697,9 @@ button {
    justify-content: center;
    align-items: center;
 }	
+.reserveBtn {
+	padding-left: 50px;
+}
 .reserveBtn input[type="submit"]{
 	all: unset;
 	cursor: pointer;
@@ -1707,6 +1713,8 @@ button {
 	color: white;
 	background-color: #f8215c;
 	font-size: 17px;
+	
+	text-align: center;
 }
 .reserveCal {
 	margin: 10px 30px;
@@ -1717,7 +1725,15 @@ button {
 .roomReport {
 	cursor: pointer;
 }
-
+/* hostReservation*/
+.hostReserve {
+   display: flex;
+   flex-direction; column;
+   justify-content: center;
+   align-items: center;
+   
+   margin: 0px auto;
+}
 /* review style */
 .carousel {
 	display: flex; /* 이미지를 가로로 배열합니다. */

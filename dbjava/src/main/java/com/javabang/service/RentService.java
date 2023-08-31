@@ -40,6 +40,21 @@ public class RentService {
 		int row = 0;
 		int idx = 0;
 		
+		if(dto.getContactNum().contains("-") == false) {
+	         String phoneNum = dto.getContactNum();
+	         String hyphen = "";
+	         
+	         for(int i = 0; i < phoneNum.length(); i++) {
+	            if(i == 2 || i == 6) {
+	               hyphen += phoneNum.charAt(i) + "-";
+	            }
+	            else {
+	               hyphen += phoneNum.charAt(i);
+	            }
+	         }
+	         dto.setContactNum(hyphen);
+	    }
+		
 		row += rentDAO.rentInsert(dto);
 		idx = rentDAO.getRentIdx();
 		

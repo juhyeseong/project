@@ -109,8 +109,17 @@
 		JOIN (SELECT ri.rent, MIN(ri.idx) AS min_idx FROM rent_img ri GROUP BY ri.rent) min_img
 			ON R.idx = min_img.rent
 		JOIN rent_img I
-			ON min_img.min_idx = I.idx where category = #{category} 
-			and R.state = 1
+			ON min_img.min_idx = I.idx where category = #{category}
+	</select>
+	
+	<select id="filterPoolVilla" parameterType="string" resultType="rent">
+	SELECT
+		R.*, I.filePath
+		FROM rent R
+		JOIN (SELECT ri.rent, MIN(ri.idx) AS min_idx FROM rent_img ri GROUP BY ri.rent) min_img
+			ON R.idx = min_img.rent
+		JOIN rent_img I
+			ON min_img.min_idx = I.idx where category = #{category}
 	</select>
 	
 	<select id="selectGuestCount" parameterType="int" resultType="int">

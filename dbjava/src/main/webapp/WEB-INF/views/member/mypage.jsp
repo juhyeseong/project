@@ -53,7 +53,7 @@
 		<a href="${cpath }/member/updateProfile/${one.idx}">프로필사진 수정</a>
 	</div>
 	<div class="mypage">
-		<a href="${cpath }/member/reservation/${one.idx}">예약내역 확인하기</a>
+		<a href="${cpath }/reservation/reservationList/${one.idx}">예약내역 확인하기</a>
 	</div>
 	<div class="mypage">
 		<a href="${cpath }/member/review/${one.idx}">내가 쓴 리뷰 보기</a>

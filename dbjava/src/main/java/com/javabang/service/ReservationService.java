@@ -8,13 +8,14 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.javabang.model.RentDTO;
 import com.javabang.model.ReservationDTO;
 import com.javabang.repository.ReservationDAO;
 
 @Service
 public class ReservationService {
-	@Autowired private ReservationDAO reservationDAO;
 	
+	@Autowired private ReservationDAO reservationDAO;
 	
 	public int insertReservation(ReservationDTO dto) {
 		int row = 0;
@@ -30,9 +31,6 @@ public class ReservationService {
 			
 			dto.setStartDate(startSqlDate);
 			dto.setEndDate(endSqlDate);
-			System.out.println(dto.getStartDate());
-			System.out.println();
-			System.out.println(dto.getEndDate());
 			row += reservationDAO.insertReservation(dto);
 		} catch (ParseException e) {
 			e.printStackTrace();
@@ -47,5 +45,13 @@ public class ReservationService {
 
 	public List<ReservationDTO> selectReservationDate(int rent) {
 	      return reservationDAO.selectReservationDate(rent);
+	}
+
+	public RentDTO selectOneRent(int idx) {
+		return reservationDAO.selectOneRent(idx);
+	}
+	
+	public List<ReservationDTO> selectReservationList(int member) {
+		return reservationDAO.selectReservationList(member);
 	}
 }
