@@ -83,7 +83,7 @@ public class AjaxController {
 		String url = null;
 		
 		row = rentService.rentInsert(dto);
-		msg = row != 0 ? "숙소 등록이 완료되었습니다 ~~ " : "숙소 등록에 실패하였습니다 ~~";
+		msg = row != 0 ? "숙소 등록이 완료되었습니다 ~~ 관리자가 등록 수락할때까지 기다려주세요!! " : "숙소 등록에 실패하였습니다 ~~";
 		url = row != 0 ? "/rent/rentManage" : "/rent/hosting";
 
 		map.put("msg", msg);
@@ -143,8 +143,6 @@ public class AjaxController {
 		return row;
 	}
 	// 리뷰 삭제 
-
-
     @DeleteMapping("review/delete/{reviewId}")
     @ResponseBody
     public ResponseEntity<String> deleteReview(@PathVariable("reviewId")int reviewId, HttpSession session) {

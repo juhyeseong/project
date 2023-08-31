@@ -1,23 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@include file="../header.jsp"%>
-<style>
-.carousel {
-	display: flex; /* 이미지를 가로로 배열합니다. */
-	overflow: hidden;
-}
 
-.reviewImgs {
-	width: 300px; /* 이미지 크기를 조절합니다. */
-	height: 300px;
-}
-
-.reviewProfileInfo {
-	display: flex;
-	flex-direction: column;
-	align-items: flex-start;
-}
-</style>
 
 <script>
 	const cpath = '${cpath }'
@@ -142,11 +126,13 @@
 							</div>
 						</div>
 					</c:forEach>
+					<div class="reviewSpace"><hr></div>
 				</div>
 			</c:if>
 		</div>
 	</div>
 </div>
+
 
 
 <!-- JQuery 관련 -->
@@ -482,16 +468,16 @@ $(document).ready(function() {
 <script>
 function deleteReview(reviewId) {
     if (confirm("이 리뷰를 삭제하시겠습니까?")) {
-        $.ajax({
-            url: `${cpath}/review/delete/`+reviewId,
-            type: "DELETE",
-            success: function(response) {
-              	console.log('리뷰 삭제 성공:', response);
-		        location.reload();
-            },
-            error: function(error) {
-                console.error("리뷰 삭제 오류:", error);
-            }
+    	fetch(`${cpath}/review/delete/` + reviewId, {
+            method: 'DELETE'
+        })
+        .then(response => response.text())
+        .then(data => {
+            alert('리뷰 삭제 성공');
+            location.reload();
+        })
+        .catch(error => {
+            alert('리뷰 삭제 실패')
         });
     }
 }

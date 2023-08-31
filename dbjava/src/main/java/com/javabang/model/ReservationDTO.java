@@ -7,6 +7,11 @@ public class ReservationDTO {
 	   private String sDateString, eDateString, userName, phoneNum, title;
 	   private Date startDate, endDate;
 	   
+	   /* admin의 reservation에서 들고 오기위한 필드 */
+	   private String roomType;
+	   private String userId;
+	   
+	   
 	   public ReservationDTO(int rent, int member, String sDateString, String eDateString, int guestCount, int totalPrice) {
 	      this.rent = rent;
 	      this.member = member;
@@ -15,6 +20,8 @@ public class ReservationDTO {
 	      this.guestCount = guestCount;
 	      this.totalPrice = totalPrice;
 	   }
+	   
+	   
 	   
 	   public ReservationDTO() {}
 	   
@@ -96,4 +103,29 @@ public class ReservationDTO {
 	   public void setTitle(String title) {
 	      this.title = title;
 	   }
+
+
+
+	public String getRoomType() {
+		return roomType;
+	}
+
+
+
+	public void setRoomType(String roomType) {
+		this.roomType = roomType;
+	}
+
+
+
+	public String getUserId() {
+		return userId;
+	}
+
+
+
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
+
 }

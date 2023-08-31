@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ include file="../header.jsp" %>
 
+
 	<main class="adminMain">
 		<div class="adminLeft">
 			<div class="adminStatus">
@@ -25,6 +26,45 @@
 		</div>
 		<div class="adminRight">
 			<h2 class="adminTitle">예약 현황</h2>
+			
+			<div class="reservationBox">
+				<div id="searchFilter">
+					<form method="post">
+					        <input type="text" name="search" id="searchBar" placeholder="예약자 ID로 검색">
+		
+				    		<button class="searchBtn">검색</button>
+					</form>
+					<a href="${cpath }/admin/reservation"><button class="resetBtn">초기화</button></a>
+	    		</div>	
+			    <table class="reservationTable">
+			        <thead>
+			            <tr>
+			                <th>예약 번호</th>
+			                <th>예약자 ID</th>
+			                <th>예약자 성함</th>
+			                <th>방 타입</th>
+			                <th>체크인 날짜</th>
+			                <th>체크아웃 날짜</th>
+			                <th>가격</th>
+			            </tr>
+			        </thead>
+			        <tbody>
+			            <c:forEach var="dto" items="${list }">
+				            <tr>
+				            	<th>${dto.idx }</th>
+				            	<th>${dto.userId }</th>
+				            	<th>${dto.userName }</th>
+				            	<th>${dto.roomType }</th>
+				            	<th>${dto.startDate }</th>
+				            	<th>${dto.endDate }</th>
+				            	<th style="text-align: right;"><fmt:formatNumber value="${dto.totalPrice}" groupingUsed="true" /> 원</th>
+				            <tr>
+			            </c:forEach>
+			       
+			        </tbody>
+			    </table>
+			</div>
+		   
 		</div>
 	</main>
 </body>

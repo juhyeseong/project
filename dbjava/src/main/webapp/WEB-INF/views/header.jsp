@@ -1501,6 +1501,7 @@ legend{
 .review {
     width: 100%;
     margin: 20px 0;
+    margin-bottom: 30px;
 }
 
 .reviewItem {
@@ -1508,6 +1509,7 @@ legend{
     display: flex;
     margin: 10px 0;
     padding: 10px;
+    position: relative;
 }
 
 .reviewProfileBox > img {
@@ -1554,6 +1556,10 @@ legend{
 }
 
 /* Style the "리뷰 작성" button */
+.reviewWrite{
+ 	resize: none;
+ }
+ 
 .reviewWrite input[type="submit"] {
     background-color: #007BFF;
     color: #fff;
@@ -1657,6 +1663,10 @@ legend{
 	flex-direction: column;
 	align-items: flex-start;
 	position: relative;
+}
+.reviewSpace {
+	display:block;
+    margin-top: 30px;
 }
 
 .reviewWriteBox {
@@ -1783,6 +1793,122 @@ legend{
 		justify-content: center;
 		align-items: center;
 	}
+/* admin -> reservation*/
+
+.adminTitle {
+	    font-size: 24px;
+	    margin-bottom: 20px;
+	}
+	
+	#searchFilter {
+	    margin-bottom: 20px;
+	    display: flex;
+	    align-items: center;
+	}
+	
+	#searchBar {
+	    padding: 10px;
+	}
+	
+	#dateFilter, #statusFilter {
+	    padding: 10px;
+	}
+	
+	.reservationTable {
+	    width: 100%;
+	    border-collapse: collapse;
+	}
+	
+	.reservationTable > thead th {
+	    padding: 10px;
+	    border-bottom: 2px solid #ccc;
+	}
+	
+	.reservationTable > tbody tr {
+	    border-bottom: 1px solid #ccc;
+	}
+	
+	.reservationTable > tbody td {
+	    padding: 10px;
+	}
+	.searchBtn, 
+	.resetBtn {
+		all: unset;
+		padding: 12px 15px;
+		
+		background-color: #f8215c;
+		color: white;
+		
+		border-radius: 10px;
+		font-size: 12px;
+		font-weight: bold;
+		margin-left: 10px;
+	}
+	.reservationBox {
+		height: 625px;
+		padding: 10px;
+		border: 1px solid rgba(0,0,0,0.2); 
+		overflow: auto; 
+	}
+	
+	/* admin -> registration */
+	 /* Style the table */
+    .registrationTable {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+    /* Table header */
+    .registrationTable > thead th {
+      background-color: #f1f1f1;
+      padding: 10px;
+      text-align: left;
+      border-bottom: 2px solid #ddd;
+    }
+    /* Table rows */
+    .registrationTable > tbody tr:nth-child(even) {
+      background-color: #f4f4f4;
+    }
+    .registrationTable > tbody td {
+      padding: 8px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+    /* Action buttons */
+    .registrationBtn {
+      padding: 5px 10px;
+      margin: 2px;
+      cursor: pointer;
+    }
+    
+    /* Paging Container */
+	.paging {
+	  text-align: center;
+	  margin-top: 20px;
+	  margin-bottom: 20px;
+	}
+	
+	/* Paging Links */
+	.paging a {
+	  margin: 0 5px;  /* Margin between links */
+	  text-decoration: none;  /* Remove underline */
+	  color: #333;  /* Text color */
+	  transition: background-color 0.3s ease-in-out;  /* Transition for hover effect */
+	}
+	
+	/* Hover effect for paging links */
+	.paging a:hover {
+	  background-color: #f1f1f1;
+	  color: #333;
+	}
+	
+	/* Active Page (if you can dynamically set a class for the active page) */
+	.paging a.active {
+	  background-color: #4CAF50;
+	  color: white;
+	  border: 1px solid #4CAF50;
+	}
+	
 /*home.jsp 에 필터기능 모달*/
 /* 모달 스타일 */
 .modal {

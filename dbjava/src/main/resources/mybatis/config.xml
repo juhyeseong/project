@@ -12,6 +12,7 @@
 		<typeAlias type="com.javabang.model.RentDTO" alias="rent"></typeAlias>
 		<typeAlias type="com.javabang.model.ReviewDTO" alias="review"></typeAlias>
 		<typeAlias type="com.javabang.model.ReservationDTO" alias="reservation"></typeAlias>
+		<typeAlias type="com.javabang.model.PagingDTO" alias="paging"></typeAlias>
 	</typeAliases> 
 </configuration>
 
