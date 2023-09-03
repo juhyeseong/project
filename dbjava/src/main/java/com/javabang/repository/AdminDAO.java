@@ -8,6 +8,7 @@ import com.javabang.model.PagingDTO;
 import com.javabang.model.RentDTO;
 import com.javabang.model.ReportDTO;
 import com.javabang.model.ReservationDTO;
+import com.javabang.model.ReviewReportDTO;
 
 @Repository
 public interface AdminDAO {
@@ -29,6 +30,12 @@ public interface AdminDAO {
 	List<ReportDTO> selectAllReport();
 
 	List<ReportDTO> selectAllReportSearch(String search);
+
+	int insertReviewReport(ReviewReportDTO dto);
+
+	List<ReviewReportDTO> selectAllReviewReport();
+
+	List<ReviewReportDTO> selectAllReviewReportSearch(String search);
 
 
 

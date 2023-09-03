@@ -17,14 +17,19 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.javabang.model.MemberDTO;
 import com.javabang.model.RentDTO;
+import com.javabang.model.ReportDTO;
 import com.javabang.model.ReservationDTO;
+import com.javabang.model.ReviewReportDTO;
 import com.javabang.service.MemberService;
 import com.javabang.service.RentService;
+import com.javabang.service.ReportService;
 import com.javabang.service.ReviewService;
 
 
@@ -33,6 +38,7 @@ public class AjaxController {
 	@Autowired private MemberService memberService;
 	@Autowired private RentService rentService;
 	@Autowired private ReviewService reviewService; 
+	@Autowired private ReportService reportService;
 
 
 	@GetMapping("/getmail/{email}")
@@ -213,5 +219,24 @@ public class AjaxController {
        int guestCount = rentService.selectGuestCount(idx);
        
         return guestCount;
+    }
+    
+    // report의 개별 정보를 불러오는 메서드
+    @GetMapping("/admin/reportOne/{idx}")
+    public ReportDTO reportOne(@PathVariable("idx") int idx) {
+    	ReportDTO dto = reportService.selectOneReport(idx);
+    	System.out.println("dto.idx : " + dto.getIdx());
+    	System.out.println("dto.reportType : " + dto.getReportType());
+    	System.out.println("dto.content : " + dto.getContent());
+    	return dto;
+    }
+    // reviewReport의 개별 정보를 불러오는 메서드
+    @GetMapping("/admin/reviewReportOne/{idx}")
+    public ReviewReportDTO reviewReportOne(@PathVariable("idx") int idx) {
+    	ReviewReportDTO dto = reportService.selectOneReviewReport(idx);
+    	System.out.println("dto.idx : " + dto.getIdx());
+    	System.out.println("dto.reportType : " + dto.getReportType());
+    	System.out.println("dto.content : " + dto.getContent());
+    	return dto;
     }
 }

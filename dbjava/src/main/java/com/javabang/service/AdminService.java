@@ -9,6 +9,7 @@ import com.javabang.model.PagingDTO;
 import com.javabang.model.RentDTO;
 import com.javabang.model.ReportDTO;
 import com.javabang.model.ReservationDTO;
+import com.javabang.model.ReviewReportDTO;
 import com.javabang.repository.AdminDAO;
 
 @Service
@@ -70,6 +71,7 @@ public class AdminService {
 		List<ReservationDTO> list = adminDAO.selectAllReservationSearch(search);
 		
 		for(ReservationDTO dto : list) {
+			System.out.println("dto.getTitle : " + dto.getTitle());
 			if (dto.getTitle().length() >= 10) {
 				String titleSh = dto.getTitle().substring(0, 10);
 				titleSh += "...";
@@ -91,5 +93,18 @@ public class AdminService {
 
 	public List<ReportDTO> selectAllReport(String search) {
 		return adminDAO.selectAllReportSearch(search);
+	}
+
+	public int insertReviewReport(ReviewReportDTO dto) {
+		return adminDAO.insertReviewReport(dto);
+	}
+
+	public List<ReviewReportDTO> selectAllReviewReport() {
+		return adminDAO.selectAllReviewReport();
+	}
+
+	public List<ReviewReportDTO> selectAllReviewReport(String search) {
+		// TODO Auto-generated method stub
+		return adminDAO.selectAllReviewReportSearch(search);
 	}
 }

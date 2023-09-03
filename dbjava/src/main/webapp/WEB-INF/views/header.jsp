@@ -1571,6 +1571,7 @@ legend{
 	border:none;
 	width:100px;
 	height:30px;
+	cursor: pointer;
 }
 
 	/* Report Box 전체에 대한 스타일 */
@@ -1614,7 +1615,11 @@ legend{
   cursor: pointer;
   font-size: 18px;
 }
-
+.reportContent > textarea {
+	width: 100%;
+	height: 50px;
+	resize: none;
+ }
 /* Style the "리뷰 작성" button */
 .reviewWrite{
  	resize: none;
@@ -1641,7 +1646,13 @@ legend{
 .rating .star.active {
     color: #ffcc00;
 }
-
+.reviewReport {
+	position: absolute;
+	top:0;
+	right: 0;
+	font-size: 14px;
+	cursor: pointer;
+}
 /* reservation style */
 .reserveInfo {
 	flex: 1;
@@ -1796,6 +1807,7 @@ legend{
 	color: white;
 	border-radius: 50%;
 	position: absolute;
+	cursor: pointer;
 }
 
 .prevButton {
@@ -1861,6 +1873,7 @@ legend{
 	background-color: #f9f9f9;
 	padding: 10px;
 	height: 500px;
+	list-style: none;
 }
 
 .adminList li {
@@ -1868,7 +1881,8 @@ legend{
 
 }
 
-.reservationManagement{
+.reservationManagement,
+.reviewManagement {
 	display: flex;
 	flex-direction: column;
 	background-color: #fff;
@@ -1876,14 +1890,16 @@ legend{
 	box-shadow: 0 2px 4px rgba(0,0,0,0.05);
 }
 
-.reservationManagementList {
+.reservationManagementList,
+.reviewManagementList {
 	padding: 10px;
 	border-bottom: 1px solid #ddd;
 	width: 120px;
 	cursor: pointer;
 }
 
-.reservationManagementList:hover {
+.reservationManagementList:hover,
+.reviewManagementList:hover {
 	background-color: #f1f1f1;
 }
 .adminTitle {
@@ -2083,17 +2099,17 @@ label {
 }
 /* 모달 닫기 버튼 스타일 */
 .close {
-  color: #aaa;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
+	color: #aaa;
+	float: right;
+	font-size: 28px;
+	font-weight: bold;
 }
 
 .close:hover,
 .close:focus {
-  color: black;
-  text-decoration: none;
-  cursor: pointer;
+	color: black;
+	text-decoration: none;
+	cursor: pointer;
 }
 
 
@@ -2159,6 +2175,71 @@ label {
 .hidden{
 	display: none;
 }
+/* admin -> reporting */
+.reportsBox {
+	width: 1030px;
+	height: 800px;
+	display: flex;
+	flex-wrap: wrap;
+	overflowY: auto;
+	gap: 20px;
+}
+
+.reportSimpleRow {
+	background-color: #f7f7f7; 
+	border: 1px solid #ccc;
+	box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+	border-radius: 10px;
+	width: 200px;
+	height: 300px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	padding: 20px; 
+	cursor: pointer; 
+	transition: background-color 0.3s, box-shadow 0.3s;
+}
+ .reportSimpleRow:hover {
+	background-color: #e6e6e6; 
+	box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); 
+}
+.reportSimpleRow p {
+	margin: 1px 0; 
+	padding: 8px; 
+	text-align: center; 
+	width: 100%;
+}
+
+.reportSimpleRow a {
+	color: #007bff; 
+	text-decoration: none;
+}
+.reportDetailBox {
+	width: 500px;
+	display: flex;
+	flex-direction: column;
+	
+}
+.reportDetail {
+	border: 1px solid rgba(0,0,0,0.3); 
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	padding: 0 10px;
+	height: 
+}
+#modalContent {
+	width: 100%;
+	margin-left: auto;
+	margin-right: auto;
+	height: 150px;
+	resize: none
+}
+.reportDetail p {
+	margin: 5px 0;
+}
+
 </style>
 </head>
 <body>

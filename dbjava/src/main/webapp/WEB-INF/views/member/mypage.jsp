@@ -56,7 +56,7 @@
 		<a href="${cpath }/reservation/reservationList/${one.idx}">예약내역 확인하기</a>
 	</div>
 	<div class="mypage">
-		<a href="${cpath }/member/review/${one.idx}">내가 쓴 리뷰 보기</a>
+		<a href="${cpath }/member/myReview/${one.idx}">내가 쓴 리뷰 보기</a>
 	</div>
 </div>
 </body>

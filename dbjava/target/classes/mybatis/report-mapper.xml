@@ -11,6 +11,22 @@
 		    join rent re on re.idx = rv.rent
 		        where m.idx=#{memberIdx} and rv.rent=#{rentIdx}
 	</select>
+		
+	<select id="selectOneReport" parameterType="int" resultType="report">
+		select rt.*, m.userId, m.userName, re.title from report rt
+	        join member m on m.idx = rt.member
+	        join rent re on re.idx = rt.rent 
+	            where rt.idx = #{idx}
+	</select>
+	
+	<select id="selectOneReviewReport" parameterType="int" resultType="reviewReport">
+		SELECT rr.*,m.userId, m.userName, r.content as reviewContent, member_of_review.userId as reviewWriterId, member_of_review.userName as reviewWriterName
+			FROM reviewReport rr
+			JOIN member m ON m.idx = rr.member
+			JOIN review r ON r.idx = rr.review
+			JOIN member member_of_review ON member_of_review.idx = r.member
+				where rr.idx = #{idx};
+	</select>
 </mapper>
 
 

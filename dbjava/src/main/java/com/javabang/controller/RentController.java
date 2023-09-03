@@ -47,6 +47,7 @@ public class RentController {
 	        if(session.getAttribute("login") != null) {
 	        	tmp = (MemberDTO) session.getAttribute("login");
 		        count = reportService.usedCount(idx, tmp.getIdx());
+		        System.out.println("count : " + count);
 	        }
 	        
 	        ObjectMapper mapper = new ObjectMapper();

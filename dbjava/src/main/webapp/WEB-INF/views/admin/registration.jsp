@@ -15,15 +15,15 @@
 					<li>
 						숙박예약 관리
 						<ul class="reservationManagement">
-							<li class="reservationManagementList"><a href="${cpath }/admin/reservation">예약 현황</a></li>
-							<li class="reservationManagementList" style="background-color: #AFAB99;"><a href="${cpath }/admin/registration">숙소 등록 관리</a></li>
-							<li class="reportingManagement"><a href="${cpath }/admin/reporting">숙소 신고 현황</a></li>
+							<a href="${cpath }/admin/reservation"><li class="reservationManagementList">예약 현황</li></a>
+							<a href="${cpath }/admin/registration"><li class="reservationManagementList" style="background-color: #AFAB99;">숙소 등록 관리</li></a>
+							<a href="${cpath }/admin/reporting"><li class="reservationManagementList">숙소 신고 현황</li></a>
 						</ul>	
 					</li>
 					<li>
 						댓글 관리
-						<ul class="replyManagement">
-							<li>댓글 신고 현황</li>
+						<ul class="reviewManagement">
+							<a href="${cpath }/admin/reviewReporting"><li class="reviewManagementList">댓글 신고 현황</li></a>
 						</ul>
 					</li>
 				</ul>
