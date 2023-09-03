@@ -123,7 +123,7 @@
          <div class="roomTypeWrap">
             <h1>게스트가 사용할 숙소 유형</h1>
             <button class="roomTypeItem">
-               <div class="roomInfo">
+               <div class="roomTypeInfo">
                   <h3>독채</h3>
                   <span>게스트가 숙소 전체를 사용합니다</span>
                </div>
@@ -132,7 +132,7 @@
                </div>
             </button>
             <button class="roomTypeItem">
-               <div class="roomInfo">
+               <div class="roomTypeInfo">
                   <h3>원룸</h3>
                   <span>게스트가 묵을 숙소가 방이 하나인 타입입니다</span>
                </div>
@@ -141,7 +141,7 @@
                </div>
             </button>
             <button class="roomTypeItem">
-               <div class="roomInfo">
+               <div class="roomTypeInfo">
                   <h3>멀티룸</h3>
                   <span>게스트가 묵을 숙소가 방이 여러개인 타입입니다</span>
                </div>

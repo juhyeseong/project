@@ -1109,7 +1109,7 @@ legend{
 	display: flex;
 	justify-content: space-between;
 }
-.roomInfo {
+.roomTypeInfo {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -2131,15 +2131,14 @@ legend{
  }
 
 .roomInfo{
-		display:none;
-	}
+	display:none;
+}
 .roomCategory{
-		display:none;
-	} 
+	display:none;
+} 
 .seeFilter{
-		margin-left:650px;
-		
-	}
+	margin-left:650px;
+}
 	/* Hover effect for the button */
 .seeFilter:hover {
     background-color : black;
@@ -2268,7 +2267,6 @@ label {
 	text-align: center; 
 	width: 100%;
 }
-
 .reportSimpleRow a {
 	color: #007bff; 
 	text-decoration: none;
