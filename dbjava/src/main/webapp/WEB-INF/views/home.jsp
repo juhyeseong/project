@@ -1,39 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="header.jsp" %>
 
-<style>
-	.roomInfo{
-		display:none;
-	}
-	.seeFilter{
-		margin-left:650px;
-		
-	}
-	/* Hover effect for the button */
-.seeFilter:hover {
-    background-color : black;
-}
-/* Style for the range input */
-input[type="range"] {
-    width: 100%;
-}
-
-/* Style for the filter checkboxes */
-input[type="checkbox"] {
-    margin-right: 10px;
-    width:30px;
-    height:30px;
-}
-/* Style for the label */
-label {
-    display: block;
-    margin-top: 10px;
-    font-weight: bold;
-}
-
-
-</style>
-
 
 	<main class="homeMain">
 		<div class="categories">
@@ -46,7 +13,7 @@ label {
                 <div class="categorieImgBox"><a href="${cpath }/rent/category/게스트하우스"><img src="http://192.168.64.200/게스트하우스.png" class="categoryImg"><p>게스트하우스</p></a></div>
                 <div class="categorieImgBox"><a href="${cpath }/rent/category/한옥"><img src="http://192.168.64.200/한옥.png" class="categoryImg"><p>한옥</p></a></div>
                 <div class="categorieImgBox"> <a href="${cpath }/rent/category/료칸"><img src="http://192.168.64.200/료칸.png" class="categoryImg"><p>료칸</p></a></div>
-      			<div class="categorieImgBox"> <button class="filter">필터</button></div>
+      			<div class="categorieImgBox"> <button class="filter">필터✔️</button></div>
         </div>
 		<div class="roomBox">
 			<c:forEach var="dto" items="${list }">
@@ -68,21 +35,48 @@ label {
 	<div id="myModal" class="modal">
 	    <div class="modal-content">
 	        <span class="close">×</span>
-	        <p>가격 범위 지정하기</p>
-	        <label for="priceRange">가격 범위</label>
-	        <input type="range" id="priceRange" min="13000" max="290000" step="10">
-	        <span id="priceRangeValue"></span>
-		      <p>편의시설</p>
+			<p> - 가격 - </p>
+				<input type="radio" name="priceSort" id="lowPriceRadio" value="low" onclick="sortRooms()">🔻최저가 순
+				<input type="radio" name="priceSort" id="highPriceRadio" value="high" onclick="sortRooms()">🔺최고가 순
+		      <p> - 편의시설 - </p>
 		       <span>필수</span> 
 		       		<br>
-				       <input type="checkbox" name="information" value="무선 인터넷"  onchange="applyFilter()" class="infoCheckbox"> 무선인터넷 
-				       <input type="checkbox" name="information" value="주방" onchange="applyFilter()" class="infoCheckbox"> 주방 
-				       <input type="checkbox" name="information" value="세탁기" onchange="applyFilter()" class="infoCheckbox"> 세탁기
-				       <input type="checkbox" name="information" value="에어컨" onchange="applyFilter()" class="infoCheckbox"> 에어컨 
-				       <input type="checkbox" name="information" value="TV" onchange="applyFilter()"  class="infoCheckbox"> TV 
-				       <input type="checkbox" name="information" value="세탁기" onchange="applyFilter()" class="infoCheckbox"> 세탁기
-				       <input type="checkbox" name="information" value="주변 무료 주차" onchange="applyFilter()" class="infoCheckbox"> 주변 무료 주차 
-				       <input type="checkbox" name="information" value="주변 유료 주차" onchange="applyFilter()" class="infoCheckbox"> 주변 유료 주차 
+		       		<div class="checkBoxContainer">
+		       			<div class="checkBox1">
+					       <input type="checkbox" name="information"  value="무선 인터넷"   class="infoCheckbox"> 무선 인터넷 📶 <br>
+					       <input type="checkbox" name="information" value="주방" class="infoCheckbox"> 주방 🥄 <br>
+					       <input type="checkbox" name="information" value="세탁기"  class="infoCheckbox"> 세탁기 👚  <br>
+					       <input type="checkbox" name="information" value="에어컨" class="infoCheckbox"> 에어컨 ❄️ <br>
+				     	  </div>
+					       <div class="checkBox2">
+						       <input type="checkbox" name="information" value="TV"   class="infoCheckbox"> TV 📺 <br>
+						       <input type="checkbox" name="information" value="세탁기"  class="infoCheckbox"> 컴퓨터 🖥️ <br>
+						       <input type="checkbox" name="information" value="주변 무료 주차"  class="infoCheckbox"> 주변 무료 주차 🚗 <br>
+						       <input type="checkbox" name="information" value="주변 유료 주차"   class="infoCheckbox"> 주변 유료 주차 💰<br>
+					       </div>
+				       </div>
+				      <p> - 그 밖의 편의시설 - </p>
+				      <div class="checkBoxContainer">
+		       			<div class="checkBox1">
+					       <input type="checkbox" name="information"  value="수영장"   class="infoCheckbox"> 수영장 🏊🏻 <br>
+					       <input type="checkbox" name="information" value="욕조" class="infoCheckbox"> 욕조 🛁<br>
+					       <input type="checkbox" name="information" value="피아노"  class="infoCheckbox"> 피아노🎹 <br>
+				     	  </div>
+					       <div class="checkBox2">
+						       <input type="checkbox" name="information" value="바베큐 그릴" class="infoCheckbox"> 바베큐 그릴 🍖<br>
+							   <input type="checkbox" name="information" value="키즈"   class="infoCheckbox"> 키즈 🧒🏻 <br>
+						       <input type="checkbox" name="information" value="무료영화 OTT"  class="infoCheckbox"> 무료영화 OTT 🍿 <br>
+					       </div>
+					       <div class="checkBox3">
+						       <input type="checkbox" name="information" value="운동기구"  class="infoCheckbox"> 운동기구 🎾<br>
+						       <input type="checkbox" name="information" value="계곡과 인접"   class="infoCheckbox"> 계곡과 인접 ⛰️ <br>
+						       <input type="checkbox" name="information" value="해변과 인접"   class="infoCheckbox"> 해변과 인접 🏖️<br>
+						    </div>
+				       </div>
+				       <p> - 안전관련 물품 - </p>
+				      	   <input type="checkbox" name="information"  value="수영장"   class="infoCheckbox"> 구급상자 🚑 <br>
+					       <input type="checkbox" name="information" value="욕조" class="infoCheckbox"> 화재 경보기 🚒<br>
+					       <input type="checkbox" name="information" value="피아노"  class="infoCheckbox"> 소화기🧯 <br>
 				     <br><br>          
 	        <button onclick="applyFilter()" class="seeFilter">숙소 보러가기 !</button>
 	    </div>
@@ -115,24 +109,23 @@ label {
             modal.style.display = "none";
         }
     }
-    var priceRange = document.getElementById("priceRange");
-    var priceRangeValue = document.getElementById("priceRangeValue");
-
-    priceRange.oninput = function() {
-        var selectedPrice = priceRange.value;
-        priceRangeValue.innerHTML = "13000원 - " + selectedPrice + "원";
-    } 
- 
 
     // 필터를 적용하는 함수
     function applyFilter() {
-        var maxPrice = priceRange.value;
         var roomElements = document.querySelectorAll('.room'); // 모든 room elements를 가져옴
-        var selectedAmenities = getSelectedAmenities()
+        var selectedAmenities = getSelectedAmenities()    // 편의시설 요소들을 가져옴
+        var checkboxes = document.querySelectorAll('.infoCheckbox')		// 여러개 체크박스들을 모두 가져옴
+        var selectedFilters = []						// 선택된 체크박스 값을 저장할 배열을 만듦
+        var priceSort = getSelectedPriceSort();
+        
+        // 체크박스를 순회하면서 선택된 체크박스 값을 배열에 추가
+        checkboxes.forEach(function (checkbox){
+        	if(checkbox.checked){
+        		selectedFilters.push(checkbox.value)
+        	}
+        })
         
         roomElements.forEach(function(room) {
-            var priceElement = room.querySelector('.roomPrice'); // 가격 정보가 있는 roomPrice 클래스
-            var price = parseInt(priceElement.textContent.replace(/[^0-9]/g, ''), 10); // 숫자만 추출
 
             var amenitiesElement = room.querySelector('.roomInfo')
             var amenities = amenitiesElement.textContent
@@ -142,15 +135,38 @@ label {
             	return amenities.indexOf(amenity) !== -1
             })
            
-            if(price <= maxPrice && hasSelectedAmenities) {
+            if(hasSelectedAmenities) {
                 room.style.display = 'block'; // 조건에 맞으면 보임
             } else {
                 room.style.display = 'none'; // 조건에 안 맞으면 숨김
             }
-            
+     
             
         });
+     // 가격 정렬
+        if (priceSort === 'low') {
+            // 최저가 순으로 정렬
+            var sortedRooms = Array.from(roomElements).sort(function (a, b) {
+                var priceA = parseInt(a.querySelector('.roomPrice').textContent.replace(/[^\d]/g, ''));
+                var priceB = parseInt(b.querySelector('.roomPrice').textContent.replace(/[^\d]/g, ''));
+                return priceA - priceB;
+            });
+        } else if (priceSort === 'high') {
+            // 최고가 순으로 정렬
+            var sortedRooms = Array.from(roomElements).sort(function (a, b) {
+                var priceA = parseInt(a.querySelector('.roomPrice').textContent.replace(/[^\d]/g, ''));
+                var priceB = parseInt(b.querySelector('.roomPrice').textContent.replace(/[^\d]/g, ''));
+                return priceB - priceA;
+            });
+        }
 
+        // 정렬된 방을 다시 추가
+        var roomContainer = document.querySelector('.roomBox');
+        roomContainer.innerHTML = '';
+        sortedRooms.forEach(function (room) {
+            roomContainer.appendChild(room);
+        });
+    
         // 모달을 닫음
         modal.style.display = "none";
     } 
@@ -167,6 +183,24 @@ label {
     	}
     	return selectedAmenities
     }
+	 // 가격 정렬 방식을 가져오는 함수
+    function getSelectedPriceSort() {
+        var lowPriceRadio = document.getElementById('lowPriceRadio');
+        if (lowPriceRadio.checked) {
+            return 'low';
+        }
+
+        var highPriceRadio = document.getElementById('highPriceRadio');
+        if (highPriceRadio.checked) {
+            return 'high';
+        }
+
+        // 기본값: 최저가 정렬
+        return 'low';
+    }
+    
+   
+ 
 
  
 </script>

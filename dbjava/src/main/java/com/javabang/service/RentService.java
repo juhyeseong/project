@@ -229,4 +229,11 @@ public class RentService {
 	public List<ReservationDTO> selectReservationDate(int rent) {
 	      return reservationDAO.selectReservationDate(rent);
 	}
+
+	
+	// 검색어 
+	public List<RentDTO> search(String search) {
+		
+		return rentDAO.find(search);
+	}
 }

@@ -14,7 +14,12 @@
 }
 /*header */
 .header{
-	width: 1400px;
+	width: 100%;
+	height:100px;
+	position: fixed;
+    background-color: #fff;
+    transition: background-color 0.3s; /* 배경색 변화에 애니메이션 적용 */
+    
 }
 
 body {
@@ -51,7 +56,7 @@ header {
     justify-content: center;
     align-items: center;
     
-    border-bottom: 1px solid gray;
+/*     border-bottom: 1px solid gray; */
 }
 header button {
 	all: unset;
@@ -78,13 +83,27 @@ header img {
 	border-radius: 50%;
 }
 
-.btn3 > button{
+ .btn3 > input[type="submit"]{
     all: unset;
     cursor: pointer;
     
     border: none;
-    width: 500px;
+    width: 90px;
     padding: 0; 
+    margin-left:20px;
+    
+    text-align: right;
+    font: inherit;
+    background: none;
+} 
+.showInput > input[type="button"] {
+	all: unset;
+    cursor: pointer;
+    
+    border: none;
+    width: 90px;
+    padding: 0; 
+    margin-left:20px;
     
     text-align: right;
     font: inherit;
@@ -136,7 +155,7 @@ header img {
 	border : 2px solid black;
 	border-radius : 10px;
 	height:50px;
-	width:60px;
+	width:70px;
 	font-size:15px;
 }
 .roomBox{
@@ -474,9 +493,6 @@ legend{
 }
 .list-info{
 	margin-left:450px;
-}
-.hidden{
-	display: none;
 }
 .info{
 	word-spacing:50px;
@@ -2018,14 +2034,52 @@ legend{
 /* 모달 내용 스타일 */
 .modal-content {
   background-color: #fff;
-  margin: 15% auto;
+  margin: 10% auto;
   padding: 20px;
   border: 1px solid #888;
-  width: 50%;
+  width:70%;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
 .modal-content > h2 {
 	text-align: center;
+}
+ /* 글씨 스타일 */
+ .modal-content p {
+     font-size: 15px; /* 글씨 크기 조절 */
+     font-weight: bold; /* 글씨 굵게 */
+     text-align: left;
+ }
+
+    /* 라디오 버튼 스타일 */
+ .modal-content input[type="radio"] {
+     width: 20px; /* 라디오 버튼 크기 조절 */
+     height: 20px;
+ }
+
+.roomInfo{
+		display:none;
+	}
+.roomCategory{
+		display:none;
+	} 
+.seeFilter{
+		margin-left:650px;
+		
+	}
+	/* Hover effect for the button */
+.seeFilter:hover {
+    background-color : black;
+}
+/* Style for the filter checkboxes */
+input[type="checkbox"] {
+    margin-right: 10px;
+    width:30px;
+    height:30px;
+}
+/* Style for the label */
+label {
+    display: block;
+    margin-top: 10px;
 }
 /* 모달 닫기 버튼 스타일 */
 .close {
@@ -2052,18 +2106,74 @@ legend{
     height:30px;
     color:white;
 }
+/*홈화면 검색어 input css*/
+.btn3 {
+  display: flex; /* Flexbox 레이아웃을 사용하여 내부 요소를 나란히 배치 */
+}
+.showInput {
+	width: 360px;
 
+	display: flex;
+	justify-content: flex-end;
+}
+.hiddenInput {
+	all: unset;
+	cursor: pointer;
+	
+	background: none;
+}
+#searchInput{
+	border-radius:10px;
+	width:300px;
+}
+#inputButton {
+ background-image: url('http://192.168.64.200/search.png'); /* 돋보기 아이콘 이미지 경로를 지정해야 합니다. */
+  background-size: cover; /* 이미지를 버튼에 맞게 크기 조정합니다. */
+  background-repeat: no-repeat; /* 이미지 반복을 비활성화합니다. */
+  width: 40px; /* 버튼의 너비를 이미지 크기에 맞게 조절하세요. */
+  height: 40px; /* 버튼의 높이를 이미지 크기에 맞게 조절하세요. */
+  border: none; /* 버튼 테두리를 제거합니다. */
+  cursor: pointer; /* 커서 모양을 포인터로 변경합니다. */
+}
+#showInputButton {
+  background-image: url('http://192.168.64.200/search.png'); /* 돋보기 아이콘 이미지 경로를 지정해야 합니다. */
+  background-size: cover; /* 이미지를 버튼에 맞게 크기 조정합니다. */
+  background-repeat: no-repeat; /* 이미지 반복을 비활성화합니다. */
+  width: 40px; /* 버튼의 너비를 이미지 크기에 맞게 조절하세요. */
+  height: 40px; /* 버튼의 높이를 이미지 크기에 맞게 조절하세요. */
+  border: none; /* 버튼 테두리를 제거합니다. */
+  cursor: pointer; /* 커서 모양을 포인터로 변경합니다. */
+}
+/*필터 모달 창 체크박스*/
+.checkBoxContainer {
+    display: flex;
+    justify-content: space-between; 
+    width: 60%; 
+}
+.checkBoxContainer .checkBox1,
+.checkBoxContainer .checkBox2 {
+    flex: 1; /* 가로로 확장되도록 flex 속성을 사용합니다. */
+}
+
+/* hidden */
+.hidden{
+	display: none;
+}
 </style>
 </head>
 <body>
 	<header>
         <div class="header">
-        	 <!-- <h1><a href="${cpath }">자바방</a></h1> -->
         	<div class="title"><a href="${cpath }"><img src="http://192.168.64.200/javaBang.png"></a></div>
-	        <div class="btn3">
-	        	<button><img src="http://192.168.64.200/search.png" class="search"></button>
-	        </div>
-	        
+	       
+	       <form method="GET"  action="${cpath }/search"> 
+		        <div class="btn3 hidden">
+		        	<input type="search" name="search" id="searchInput">
+		        	<input type="submit" id ="inputButton" value="">
+		        	<input class="hiddenInput" type="button" value="❌">
+		        </div>
+		        <div class="showInput"><input type="button"  id="showInputButton"></div>
+	        </form>
 	        <ul class="host">
 	        	<c:if test="${not empty login }">
 	           		<li><a href="${cpath }/rent/rentManage/${login.idx }">호스트페이지</a></li>
@@ -2080,5 +2190,48 @@ legend{
 	       	</c:if>
         </div>
     </header>
+    
+    
+    <!-- 스크롤하면 헤더 색상 변경하기 -->
+    <script>
+    	const showInputBtn = document.getElementById('showInputButton')
+    	const hiddenInputBtn = document.querySelector('.hiddenInput')
+        // JavaScript 코드로 스크롤 이벤트를 감지
+        window.addEventListener("scroll", function() {
+            const header = document.querySelector(".header")
+
+            // 스크롤 위치가 헤더의 높이 이상이면 배경색을 변경
+            if (window.scrollY > header.offsetHeight) {
+                header.style.backgroundColor = '#eee' // 원하는 배경색으로 변경
+            } else {
+                header.style.backgroundColor = '#fff' // 초기 배경색으로 복원
+            }
+        });
+    	
+    	function showInputHandler(event) {
+    		const target = event.target
+    		const showInput = target.parentNode
+    		const btn3 = showInput.parentNode.children[0]
+    		
+    		btn3.classList.remove('hidden')
+    		showInput.classList.add('hidden')
+    	}
+    	
+    	function hiddenInputHandler(event) {
+    		const target = event.target
+    		const btn3 = target.parentNode
+    		const showInput = btn3.parentNode.children[1]
+    		
+    		btn3.classList.add('hidden')
+    		showInput.classList.remove('hidden')
+    	}
+    	
+    	showInputBtn.onclick = showInputHandler
+    	hiddenInputBtn.onclick = hiddenInputHandler
+    </script>
+    
+
+    
+    
 </body>
 </html>

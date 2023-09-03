@@ -68,7 +68,7 @@
 <script>
 	const sendAuthNumber = document.getElementById('sendAuthNumber')
 	
-	let cnt = 0 ;
+	let cnt = 0 ;     // 인증 성공을 카운트하는 변수 , 초기값 0 으로 설정
 	
 	async function sendAuthNumberHandler() {
 		const email = document.querySelector('input[name="email"]')
@@ -131,21 +131,21 @@
 		const url = '${cpath}/dupCheck/' + userId.value + '/'
 		const count = await fetch(url).then(resp => resp.text())
 		
-		if(isNaN(count)){
-			alert('처리도중 문제가 발생했습니다 !')
-			userId.focus()
+		if(isNaN(count)){           //count 가 숫자가 아니면
+			alert('처리도중 문제가 발생했습니다 !')       // 경고메시지 표시
+			userId.focus()         // 입력필드에 포커스
 		}
-		else if(count == 0){
-			dupMessage.innerText = '사용가능한 아이디입니다.';
-	        dupMessage.style.color = 'grey';
+		else if(count == 0){     // 0인 경우
+			dupMessage.innerText = '사용가능한 아이디입니다.';    // 가능 메시지 표시
+	        dupMessage.style.color = 'grey'; 
 	        cnt += 1;
 	        console.log("count : " +cnt)
-	        if (cnt >= 3 ) {
-		   		document.querySelector('input[type="submit"]').removeAttribute('disabled');
+	        if (cnt >= 3 ) {     // cnt 3보다 크거나 같으면 
+		   		document.querySelector('input[type="submit"]').removeAttribute('disabled');       // 제출버튼 활성화
 			}
 		}
-		else{
-			dupMessage.innerText = '이미 사용중인 아이디입니다.';
+		else{         // 이도 저도 아닌 경우, 이미 사용중인 아이디 메시지 띄우기
+			dupMessage.innerText = '이미 사용중인 아이디입니다.'; 
 	        dupMessage.style.color = 'pink';
 	        submitButton.setAttribute('disabled', 'disabled'); // 제출 버튼 비활성화
 		}

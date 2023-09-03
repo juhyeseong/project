@@ -4,7 +4,9 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.javabang.model.RentDTO;
@@ -21,6 +23,15 @@ public class HomeController {
 		ModelAndView mav = new ModelAndView("/home");
 		List<RentDTO> list = rentService.selectAll();
     	mav.addObject("list", list);
+		return mav;
+	}
+	
+	// 검색어
+	@GetMapping("/search")
+	public ModelAndView search (@RequestParam("search") String search) {
+		ModelAndView mav = new ModelAndView("home");
+		List<RentDTO> list = rentService.search(search);
+		mav.addObject("list", list);
 		return mav;
 	}
 }
