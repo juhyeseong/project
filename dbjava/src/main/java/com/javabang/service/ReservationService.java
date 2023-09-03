@@ -54,4 +54,8 @@ public class ReservationService {
 	public List<ReservationDTO> selectReservationList(int member) {
 		return reservationDAO.selectReservationList(member);
 	}
+
+	public int deleteReservation(int reservationIdx) {
+		return reservationDAO.deleteReservation(reservationIdx);
+	}
 }

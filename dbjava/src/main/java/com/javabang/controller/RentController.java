@@ -25,7 +25,6 @@ import com.javabang.service.ReviewService;
 @Controller
 @RequestMapping("/rent")
 public class RentController {
-
 	@Autowired private RentService rentService;
 	@Autowired private ReviewService reviewService;
 	@Autowired private ReservationService reservationService;
@@ -47,7 +46,6 @@ public class RentController {
 	        if(session.getAttribute("login") != null) {
 	        	tmp = (MemberDTO) session.getAttribute("login");
 		        count = reportService.usedCount(idx, tmp.getIdx());
-		        System.out.println("count : " + count);
 	        }
 	        
 	        ObjectMapper mapper = new ObjectMapper();
@@ -92,12 +90,25 @@ public class RentController {
 		ObjectMapper obm = new ObjectMapper();
 		try {
 			String listToJson = obm.writeValueAsString(rent.getFilePathList());
+			
 			mav.addObject("rent", rent);
 			mav.addObject("listToJson", listToJson);
 		} catch (JsonProcessingException e) {
 			e.printStackTrace();
 		}
 		
+		return mav;
+	}
+	
+	@GetMapping("/rentDelete/{idx}/{member}")
+	public ModelAndView rentDelete(@PathVariable("idx") int idx, @PathVariable("member") int member) {
+		ModelAndView mav = new ModelAndView("alert");
+		int row = rentService.deleteRent(idx);
+		String msg = row != 0 ? "숙소가 삭제되었습니다!" : "숙소 삭제에 실패했습니다";
+		String url = row != 0 ? "/rent/rentManage/" + idx : "/rent/modify/" + member;
+		
+		mav.addObject("msg", msg);
+		mav.addObject("url", url);
 		
 		return mav;
 	}
@@ -110,6 +121,4 @@ public class RentController {
 		mav.addObject("pensionList", pensionList);
 		return mav;
 	}
-	
-	
 }

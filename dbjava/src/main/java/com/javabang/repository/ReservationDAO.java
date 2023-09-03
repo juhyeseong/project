@@ -19,4 +19,6 @@ public interface ReservationDAO {
 	RentDTO selectOneRent(int idx);
 
 	List<ReservationDTO> selectReservationList(int member);
+
+	int deleteReservation(int reservationIdx);
 }

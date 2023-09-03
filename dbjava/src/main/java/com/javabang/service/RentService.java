@@ -26,7 +26,6 @@ import com.jcraft.jsch.SftpException;
 
 @Service
 public class RentService {
-	
 	@Autowired private RentDAO rentDAO;
 	@Autowired private ReservationDAO reservationDAO;
 	
@@ -230,10 +229,12 @@ public class RentService {
 	      return reservationDAO.selectReservationDate(rent);
 	}
 
-	
 	// 검색어 
 	public List<RentDTO> search(String search) {
-		
 		return rentDAO.find(search);
+	}
+
+	public int deleteRent(int idx) {
+		return rentDAO.deleteRent(idx);
 	}
 }

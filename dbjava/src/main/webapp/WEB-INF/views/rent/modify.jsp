@@ -1,9 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="../manageHeader.jsp" %>
-	<script>
-		const cpath = '${cpath }'
-	</script>
 	<div class="rentModify">
 		<div class="rentUpdateTop">
 			<c:if test="${rent.state == 0 }">
@@ -16,7 +13,7 @@
 				<button class="operate">운영모드</button>
 			</c:if>
 		
-			<a href="${cpath }/rent/rentDelete"><button>삭제</button></a>
+			<a class="deleteRent"><button>삭제</button></a>
 		</div>
 		<div class="picture">
 			<div class="pictureTop">
@@ -122,13 +119,16 @@
 	</div>
 	
 	<script>
+		// el tag 변수
+		const cpath = '${cpath }'
+		const idx = ${rent.idx }
+		const member = ${login.idx }
 		// title 변수
 		const titleInfo = document.querySelector('.titleInfo')
 		const titleModify = document.querySelector('.titleModify')
 		const titleModifyBtn = document.querySelector('.titleInfoTop > button')
 		const titleExit = document.querySelector('.titleModifyTop > button')
 		const titleSubmit = document.querySelector('.titleSubmit')
-		const idx = ${rent.idx }
 		
 		// content 변수
 		const contentInfo = document.querySelector('.contentInfo')
@@ -155,6 +155,19 @@
 		// count 변수
 		const minusList = document.querySelectorAll('.minus')
 		const plusList = document.querySelectorAll('.plus')
+		
+		// delete button
+		const deleteRentBtn = document.querySelector('.deleteRent')
+		
+		function confirmDelete(event) {
+			event.preventDefault()
+			
+			if(confirm('숙소를 정말 삭제하시겠습니까 ? ')) {
+				location.href = cpath + '/rent/rentDelete/' + idx + "/" + member
+			}
+		}
+		
+		deleteRentBtn.onclick = confirmDelete
 		
 		// title handler
 		function titleEnterHandler() {

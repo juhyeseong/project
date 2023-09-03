@@ -12,16 +12,7 @@
 	height: 130px;
 	width: 140px;
 }
-/*header */
-.header{
-	width: 100%;
-	height:100px;
-	position: fixed;
-    background-color: #fff;
-    transition: background-color 0.3s; /* 배경색 변화에 애니메이션 적용 */
-    
-}
-
+/* all style */
 body {
 	margin: 0px;
 
@@ -45,6 +36,15 @@ p{
 }
 
 /* header style */
+.header{
+	width: 100%;
+	height:100px;
+	
+    background-color: #fff;
+    transition: background-color 0.3s; /* 배경색 변화에 애니메이션 적용 */
+    
+	position: fixed;
+}
 header {
     height: 100px;
 
@@ -55,19 +55,18 @@ header {
     display: flex;
     justify-content: center;
     align-items: center;
-    
-/*     border-bottom: 1px solid gray; */
 }
 header button {
 	all: unset;
+	
 	padding: 12px 15px;
 	
 	background-color: #f8215c;
 	color: white;
-	
-	border-radius: 10px;
 	font-size: 12px;
 	font-weight: bold;
+	
+	border-radius: 10px;
 }
 header > div {
 	width: 1300px;
@@ -87,7 +86,6 @@ header img {
     all: unset;
     cursor: pointer;
     
-    border: none;
     width: 90px;
     padding: 0; 
     margin-left:20px;
@@ -95,12 +93,13 @@ header img {
     text-align: right;
     font: inherit;
     background: none;
+    
+    border: none;
 } 
 .showInput > input[type="button"] {
 	all: unset;
     cursor: pointer;
     
-    border: none;
     width: 90px;
     padding: 0; 
     margin-left:20px;
@@ -108,19 +107,22 @@ header img {
     text-align: right;
     font: inherit;
     background: none;
+    
+    border: none;
 }
 .search {
     width: 40px;
 }
 .host {
     list-style: none;
+    
 	padding: 0px;
+	
     display: flex;
     align-items: center;
 }
 .host > li{    
 	margin-left: 30px;
-
 }
 
 /*home css*/
@@ -132,10 +134,12 @@ header img {
 }
 
 .categories {
+	padding: 20px 0px;
+	
 	display: flex;
 	justify-content: space-around;
 	align-items: center;
-	padding: 20px 0px;
+	
 	border-bottom: 1px dashed; 
 }
 
@@ -151,22 +155,25 @@ header img {
 	justify-content: center;
 }
 .categorieImgBox > .filter {
+	width:70px;
+	height:50px;
+	
 	background-color : white;
+	font-size:15px;
+	
 	border : 2px solid black;
 	border-radius : 10px;
-	height:50px;
-	width:70px;
-	font-size:15px;
 }
 .roomBox{
 	display: flex;
 	flex-wrap: wrap;
 }
 .room{
+	width:250px;
+	margin:10px 40px;
+	
 	display: flex;
 	flex-direction: column;
-	margin:10px 40px;
-	width:250px;
 }
 .roomImg{
 	width:250px;
@@ -175,26 +182,40 @@ header img {
 }
 /*room.jsp */
 .menu2 > p{
-      font-size: 25px;
+    font-size: 25px;
 }
 .roomExplain{
 	width:80%;
-	margin-left:auto;
-	margin-right:auto;
+	margin: auto;
+	
 	display:flex;
+	justify-content: center;
 }
-.roomImgBox{
+.roomImgBox {
+	padding-left: 30px;
+	
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+}
+.roomImgBox,
+.reservationInfo {
 	flex: 1;
+}
+.reservationInfo {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-end;
 }
 .roomBig > img{
 	width:500px;
 	height:350px;
 }
 .roomSmall{
-	display:flex;
-	justify-content:space-around;
 	width:500px;
 	
+	display:flex;
+	justify-content:space-around;
 }
 .roomSmall > img {
 	cursor: pointer;
@@ -205,16 +226,13 @@ header img {
 }
 .roomText{
 	width:360px;
-	margin-left:auto;
-	margin-right:auto;
 }
 .roomTitle{
 	font-weight: bold;
 	font-size: 30px;
 }
 .roomTitle, .roomAddress,
-.roomPrice, .roomDetailAddress
-{
+.roomPrice, .roomDetailAddress {
 	text-align: left;
 }
 .roomPrice {
@@ -222,42 +240,48 @@ header img {
 	font-weight: bold;
 }
 .roomBtn{
-	margin:30px 150px;
+	width: 1599PX;
+	margin: 40px auto;
 }
 
 .roomBtn > button{
- 	background-color: #C2D6F0;
- 	margin-right:20px;
- 	border: none;
- 	border-radius:5px;
  	width:150px;
     height:40px;
+ 	margin-right:20px;
+ 	
+ 	background-color: #C2D6F0;
+ 	border: none;
+ 	border-radius:5px;
 }
  .ellipsis {
-      white-space: nowrap;     /* 텍스트를 한 줄에 표시 */
-      overflow: hidden;        /* 너무 긴 텍스트는 숨김 처리 */
-      text-overflow: ellipsis; /* 너무 긴 텍스트일 경우 ...으로 대체 */
-      width: 250px;            /* 원하는 너비로 설정 */
-      display: inline-block;   /* 인라인 블록 요소로 표시 (원하는 텍스트 너비만큼만 차지하도록) */
-    }
-
+    width: 250px;            /* 원하는 너비로 설정 */
+    white-space: nowrap;     /* 텍스트를 한 줄에 표시 */
+    overflow: hidden;        /* 너무 긴 텍스트는 숨김 처리 */
+    text-overflow: ellipsis; /* 너무 긴 텍스트일 경우 ...으로 대체 */
+    display: inline-block;   /* 인라인 블록 요소로 표시 (원하는 텍스트 너비만큼만 차지하도록) */
+}
 #root {
-	border: 2px solid black;
 	width: 500px;
+	border: 2px solid black;
+	
 }
 
 ul.tab {
-	display: flex;
 	list-style: none;
+	
+	height: 50px;
 	padding-left: 0;
 	margin: 0;
-	height: 50px;
+	
+	display: flex;
 }
 
 ul.tab>li {
-	text-align: center;
-	padding: 10px;
 	cursor: pointer;
+	
+	padding: 10px;
+	
+	text-align: center;
 }
 
 ul.tab {
@@ -267,18 +291,21 @@ ul.tab {
 
 div.box {
 	position: relative;
+	
 	width: 100%;
 	height: 300px;
 }
 
 div.box>div {
 	position: absolute;
+	
 	width: 100%;
 	height: 100%;
+	padding: 20px;
 	top: 0;
 	left: 20px;
+	
 	box-sizing: border-box;
-	padding: 20px;
 	font-size: 30px;
 }
 
@@ -308,9 +335,10 @@ legend{
     font-size: 30px;
 }
 .login input {
-    border-radius: 10px;
     width:500px;
     height:50px;
+    
+    border-radius: 10px;
 }
 .login legend {
     margin-bottom: 40px;
@@ -319,8 +347,6 @@ legend{
 .socialbox{
 	display:flex;
 }
-
-
 
 .kakao{
     width:250px;
@@ -347,15 +373,18 @@ legend{
 .kakao > img{
 	width:37px;
 	height:33px;
-	border-radius:50%;
     margin-right:10px;
+    
+	border-radius:50%;
 }
 .login input[type="submit"]{
-    background-color: #f8215c;
-    border : none;
     width:500px;
     height:50px;
+    
+    background-color: #f8215c;
     color : white;
+    
+    border : none;
 }
 .login p{
     word-spacing: 20px;
@@ -374,25 +403,28 @@ legend{
     text-align: center;
 }
 .join input[type="submit"] {
-    background-color: #f8215c;
-    border : none;
     width:500px;
     height:50px;
+    
+    background-color: #f8215c;
     color:white;
+    
+    border : none;
 }
 .join input {
-    border-radius: 10px;
     width:500px;
     height:50px;
+    
+    border-radius: 10px;
 }
 .join select {
     width: 500px;
     height: 50px;
+    
     text-align: center;
 }
 .join > .phoneNum > input{
 	border-radius: 10px;
- 
 }
 /*찜하기 css*/
 .fav{
@@ -400,14 +432,17 @@ legend{
 	
 }
 .fav-btn{
+    cursor: pointer;
     position: absolute;
+    
+    padding: 5px 10px;
     top: 10px; /* 버튼을 이미지 위로 위치시키려면 적절한 값으로 조정 */
     right: 10px; /* 버튼을 이미지 오른쪽에 위치시키려면 적절한 값으로 조정 */
-    border: none;
+    
     background: none;
     color: white;
-    padding: 5px 10px;
-    cursor: pointer;
+    
+    border: none;
    
 }
 .fav-btn > img{
@@ -424,19 +459,22 @@ legend{
     font-size:30px;
 }
 .resetPassword input {
-    border-radius: 10px;
     width:500px;
     height:50px;
+    
+    border-radius: 10px;
 }
 .resetPassword{
     text-align: center;
 }
 .resetPassword input[type="submit"] {
-    background-color: #f8215c;
-    border : none;
     width:500px;
     height:50px;
+    
+    background-color: #f8215c;
     color:white;
+    
+    border : none;
 }
 /*정보수정 css*/
 fieldset{
@@ -456,11 +494,13 @@ legend{
     text-align: center;
 }
 .update input[type="submit"] {
-    background-color: #f8215c;
-    color:white;
-    border : none;
     width:500px;
     height:50px;
+    
+    background-color: #f8215c;
+    color:white;
+    
+    border : none;
 }
 
 .update > fieldset > p {
@@ -470,15 +510,15 @@ legend{
 .mypage{
 	width:450px;
 	height:50px;
+	margin-top:30px;
+	margin-left:490px;
 	line-height:40px;
 	text-align: center;
-	margin-left:490px;
-	/* margin-left:auto; */
-	/* margin-right:auto; */
-	margin-top:30px;
+	
 	background-color: grey;
-	border-radius:10px;
 	color:white;
+	
+	border-radius:10px;
 }
 /* 회원정보 확인 css */
 .list{
@@ -506,36 +546,41 @@ legend{
 
 /*프로필 사진 변경 버튼*/
 .update-profile input[type="submit"]{
-    background-color: #f8215c;
-    border : none;
     width:450px;
     height:50px;
-    border-radius:10px;
+    
+    background-color: #f8215c;
     color:white;
+    
+    border : none;
+    border-radius:10px;
 } 
 .update-profile input[type="button"]{
-    background-color: #f8215c;
-    border : none;
     width:500px;
     height:50px;
+    
+    background-color: #f8215c;
+    
+    border : none;
 } 
 .file-icon {
-  display: inline-block;
-  cursor: pointer;
+	cursor: pointer;
+	  
+	display: inline-block;
 }
 .file-icon img {
-  width: 60px;
-  height: 60px;
-  margin-right:200px;
+	width: 60px;
+	height: 60px;
+	margin-right:200px;
 }
 
 /* Manage style */
 .manageHeader {
+	height: 100px;
+	
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	
-	height: 100px;
 	
 	font-size: 25px;
 	font-weight: bold;
@@ -549,13 +594,13 @@ legend{
 	padding: 20px 0px;
 }
 .hostRentTop {
+	padding: 0px 10px;	
+	
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
 	
 	border-bottom: 1px solid black;
-	
-	padding: 0px 10px;
 }
 .hostRentTop button {
 	all: unset;
@@ -578,20 +623,21 @@ legend{
 	font-weight: bold;
 }
 .rentListHead {
-	border-bottom: 1px solid gray;
-	
 	padding: 20px;
 	
 	display: flex;
 	justify-content: space-around;
+	
+	border-bottom: 1px solid gray;
 }
 .rentListRow {
-	border-bottom: 1px solid gray;
-	
 	padding: 20px;
 	
 	display: flex;
 	justify-content: space-around;
+	align-items: center;
+	
+	border-bottom: 1px solid gray;
 }
 .rentListRow:hover {
 	background-color: #e4e4e4;
@@ -613,10 +659,9 @@ legend{
    
    background-color: black;
    color: white;
+   font-weight: bold;
    
    border-radius: 10px;
-   
-   font-weight: bold;
 }
 .rentList .price,
 .rentList .title {
@@ -631,20 +676,33 @@ legend{
    padding: 20px 0px;
 }
 .rentList .date {
-   flex: 4;
+   flex: 3;
 }
 .rentList .name,
-.rentList .guestCount {
+.rentList .guestCount,
+.rentList .cancel {
    flex: 1;
 }
-.rentList .phoneNum {
+.rentList .phoneNum,
+.rentList .totalPrice {
    flex: 2;
+}
+.cancel button {
+	all: unset;
+    cursor: pointer;
+   
+    padding: 10px 15px;
+   
+    background-color: black;
+    color: white;
+    font-weight: bold;
+   
+    border-radius: 10px;
 }
 
 /* rentModify style */
 .rentModify {
 	width: 1300px;
-	
 	margin: auto;
 }
 .rentUpdateTop {
@@ -660,12 +718,12 @@ legend{
 	margin: 20px;
 	padding: 12px 15px;
 	
-	border-radius: 10px;
 	color: white;
 	background-color: #f8215c;
-	
 	font-size: 17px;
 	font-weight: bold;
+	
+	border-radius: 10px;
 }
 .rentUpdateTop > .running {
 	background-color: black;
@@ -681,11 +739,11 @@ legend{
 	max-height: 255px;
 }
 .pictureTop {
+	margin: 20px 0px;
+	
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	
-	margin: 20px 0px;
 }
 .pictureTop a {
 	all: unset;
@@ -1664,20 +1722,24 @@ legend{
 	width: 600px;
 	height: 100%;
 }
-  .reserveDate-container {
+.reserveDate {
+	width: 545px;
+    padding: 10px;
+    
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
-    padding: 10px;
-}
-
-  .reserveDate {
+    
     border: 1px solid #717171;
-    padding: 10px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    
+    font-size: 16px;
+    font-weight: bold;
 }
-
-  .reserveDate input[type="text"] {
+.reserveDate > label {
+	margin: 0px;
+}
+.reserveDate input[type="text"] {
     border: none;
     outline: none;
     font-size: 14px;
@@ -1685,13 +1747,12 @@ legend{
     width: 160px;
 }
 .reserveGuest {
+   width: 585px;
+   height: 80px;
+   
    display: flex;
    align-items: center;
-   justify-content: center;
-   width: 500px;
-   padding-left: 60px;
-   
-   height: 80px;
+   justify-content: space-between;
 }
 .reserveGuest div {
    flex: 1;
@@ -1719,15 +1780,12 @@ legend{
    display: flex;
    justify-content: center;
    align-items: center;
-}	
-.reserveBtn {
-	padding-left: 50px;
 }
 .reserveBtn input[type="submit"]{
 	all: unset;
 	cursor: pointer;
 	
-	width: 500px;
+	width: 510px;
 	
 	border-radius: 5px;
 	padding: 15px 30px;
@@ -2310,9 +2368,5 @@ label {
     	showInputBtn.onclick = showInputHandler
     	hiddenInputBtn.onclick = hiddenInputHandler
     </script>
-    
-
-    
-    
 </body>
 </html>

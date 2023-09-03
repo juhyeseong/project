@@ -1,4 +1,5 @@
 package com.javabang.controller;
+
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -9,6 +10,8 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.HashMap;
 import javax.servlet.http.HttpSession;
+
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,11 +20,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.ModelAndView;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.javabang.model.CancelPayDTO;
 import com.javabang.model.MemberDTO;
 import com.javabang.model.RentDTO;
 import com.javabang.model.ReportDTO;
@@ -30,6 +34,7 @@ import com.javabang.model.ReviewReportDTO;
 import com.javabang.service.MemberService;
 import com.javabang.service.RentService;
 import com.javabang.service.ReportService;
+import com.javabang.service.ReservationService;
 import com.javabang.service.ReviewService;
 
 
@@ -39,24 +44,28 @@ public class AjaxController {
 	@Autowired private RentService rentService;
 	@Autowired private ReviewService reviewService; 
 	@Autowired private ReportService reportService;
-
+	@Autowired private ReservationService reservationService;
 
 	@GetMapping("/getmail/{email}")
 	public HashMap<String, Object> getEmail(@RequestBody MemberDTO dto){
 		String email = memberService.getEmail(dto);
 		HashMap<String, Object> result = new HashMap<String, Object>();
+		
 		result.put("email", email);
 		result.put("status", email != null);
+		
 		return result;
 	}
 	@GetMapping("/dupCheck/{userId}/")
 	public int dupCheck(@PathVariable("userId") String userId) {
 		int row = memberService.dupCheck(userId);
+		
 		return row;
 	}
 	@GetMapping("/dupCheck2/{userNick}")
 	public int dupCheck2(@PathVariable("userNick") String userNick) {
 		int row = memberService.dupCheck2(userNick);
+		
 		return row;
 	}
 	
@@ -69,8 +78,10 @@ public class AjaxController {
 			session.setMaxInactiveInterval(180);
 		}
 		HashMap<String, Object> result = new HashMap<>();
+		
 		result.put("success", row > 0 ? 1 : 0);
 		result.put("message", row > 0 ? "인증번호가 발송 되었습니다 !" : "인증번호 발송에 실패했습니다 !");
+		
 		return result;
 	}
 	
@@ -135,8 +146,6 @@ public class AjaxController {
 	
 	@PostMapping("/rent/rentFileInsert")
 	public int rentFileInsert(RentDTO dto) {
-		System.out.println(dto.getFiles().get(0).getOriginalFilename());
-		System.out.println(dto.getIdx());
 		int row = rentService.insertRentFile(dto);
 		
 		return row;
@@ -163,55 +172,100 @@ public class AjaxController {
         }
     }
     
-    @PostMapping("/kakaopay")
-	   public String kakaopay(@RequestBody ReservationDTO dto, HttpSession session) {
-	      String error = "";
-	      try {
-	         System.out.println("kakaopay메서드실행"); 
-	         URL address = new URL("https://kapi.kakao.com/v1/payment/ready");
-	         HttpURLConnection conn = (HttpURLConnection)address.openConnection();
-	         
-	         conn.setRequestMethod("POST");
-	         conn.setRequestProperty("Authorization", "KakaoAK ddcff91bf064995801a4097e87111b4a");
-	         conn.setRequestProperty("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
-	         conn.setDoOutput(true);
-	         
-	         String parameter = "cid=TC0ONETIME&partner_order_id=partner_order_id&partner_user_id=partner_user_id&item_name=예약&quantity=1&total_amount=1000&tax_free_amount=0&approval_url=http://localhost:8080/dbjava/reservation/insertReservation&fail_url=http://localhost:8080/dbjava/reservation/kakaopayFailed&cancel_url=http://localhost:8080/dbjava/rent/room/" + dto.getRent();
-	         OutputStream os = conn.getOutputStream();
-	         DataOutputStream outputData = new DataOutputStream(os);
-	         
-	         outputData.writeBytes(parameter);
-	         outputData.close();
-	                  
-	         int result = conn.getResponseCode();
-	         InputStream is;
-	         if(result == 200) {
-	            is = conn.getInputStream();
-	         }
-	         else {
-	            is = conn.getErrorStream();
-	         }
-	         InputStreamReader reader = new InputStreamReader(is);
-	         BufferedReader bReader = new BufferedReader(reader);
+    @PostMapping("/insertReservation")
+    public int insertReservation(@RequestBody ReservationDTO dto) {
+      System.out.println(dto.getMerchant_uid());
+      int row = reservationService.insertReservation(dto);
+      
+      return row;
+    }
+    
+    @GetMapping("/getToken")
+    public String getToken() {
+    	try {
+			URL address = new URL("https://api.iamport.kr/users/getToken");
+			HttpURLConnection conn = (HttpURLConnection)address.openConnection();
+			
+			conn.setRequestMethod("POST");
+			conn.setRequestProperty("Content-type", "application/json;charset=utf-8");
+			conn.setDoOutput(true);
+			
+			JSONObject parameter = new JSONObject();
+			parameter.put("imp_key", "8530611174254580");
+			parameter.put("imp_secret", "hTbpc9aZp7XTjcf0UjzBHbHaDo1BrDrv7oL3xSxofuOp8ZUSnTftZYz94JYCfCjfFKyiRT9muytuIXGD");
+			OutputStream os = conn.getOutputStream();
+			DataOutputStream outputData = new DataOutputStream(os);
+			
+			outputData.writeBytes(parameter.toString());
+			outputData.close();
+			
+			int result = conn.getResponseCode();
+			InputStream is;
+			if(result == 200) {
+				is = conn.getInputStream();
+			}
+			else {
+				is = conn.getErrorStream();
+			}
+			InputStreamReader reader = new InputStreamReader(is);
+			BufferedReader bReader = new BufferedReader(reader);
+			
+			String ref = bReader.readLine();
+			
+			return ref;
+    	} catch (IOException e) {
+			e.printStackTrace();
+		}
+    	
+    	return "";
+    }
+    
+    @PostMapping("/cancelPay")
+    public int cancelPay(@RequestBody CancelPayDTO dto) {
+		int row = 0;
+		
+    	try {
+			URL address = new URL("https://api.iamport.kr/payments/cancel");
+			HttpURLConnection conn = (HttpURLConnection)address.openConnection();
+			
+			conn.setRequestMethod("POST");
+			conn.setRequestProperty("Content-Type", "application/json;charset=utf-8");
+			conn.setRequestProperty("Authorization", dto.getAccess_token());
+			conn.setDoOutput(true);
 
-	         String ret = bReader.readLine();
-	         System.out.println(ret);
-	         
-	         session.setAttribute("rent", dto.getRent());
-	         session.setAttribute("member", dto.getMember());
-	         session.setAttribute("sDateString", dto.getsDateString());
-	         session.setAttribute("eDateString", dto.geteDateString());
-	         session.setAttribute("guestCount", dto.getGuestCount());
-	         session.setAttribute("totalPrice", dto.getTotalPrice());
-	         
-	         return ret;
-	      } catch (IOException e) {
-	         e.printStackTrace();
-	         error = e.toString();
-	      }
-	      
-	      return error;
-	   }
+			JSONObject parameter = new JSONObject();
+			parameter.put("merchant_uid", dto.getMerchant_uid());
+			parameter.put("amount", dto.getCancel_request_amount());
+			OutputStream os = conn.getOutputStream();
+			DataOutputStream outputData = new DataOutputStream(os);
+			
+			outputData.writeBytes(parameter.toString());
+			outputData.close();
+			
+			int result = conn.getResponseCode();
+			InputStream is;
+			if(result == 200) {
+				is = conn.getInputStream();
+			}
+			else {
+				is = conn.getErrorStream();
+			}
+			InputStreamReader reader = new InputStreamReader(is);
+			BufferedReader bReader = new BufferedReader(reader);
+			String ref = bReader.readLine();
+			ObjectMapper mapper = new ObjectMapper();
+			JsonNode element = mapper.readTree(ref);
+			int code = Integer.parseInt(element.get("code").toString());
+			
+			if(code == 0) {
+				row += reservationService.deleteReservation(dto.getReservationIdx());
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		return row;
+    }
     
     @GetMapping("/reservation/selectGuestCount/{idx}")
     public int selectGuestCount(@PathVariable("idx") int idx) {
@@ -225,18 +279,15 @@ public class AjaxController {
     @GetMapping("/admin/reportOne/{idx}")
     public ReportDTO reportOne(@PathVariable("idx") int idx) {
     	ReportDTO dto = reportService.selectOneReport(idx);
-    	System.out.println("dto.idx : " + dto.getIdx());
-    	System.out.println("dto.reportType : " + dto.getReportType());
-    	System.out.println("dto.content : " + dto.getContent());
+    	
     	return dto;
     }
+    
     // reviewReport의 개별 정보를 불러오는 메서드
     @GetMapping("/admin/reviewReportOne/{idx}")
     public ReviewReportDTO reviewReportOne(@PathVariable("idx") int idx) {
     	ReviewReportDTO dto = reportService.selectOneReviewReport(idx);
-    	System.out.println("dto.idx : " + dto.getIdx());
-    	System.out.println("dto.reportType : " + dto.getReportType());
-    	System.out.println("dto.content : " + dto.getContent());
+    	
     	return dto;
     }
 }

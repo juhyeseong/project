@@ -44,4 +44,6 @@ public interface RentDAO {
 	public int selectGuestCount(int idx);
 
 	public List<RentDTO> find(String search);
+
+	public int deleteRent(int idx);
 }

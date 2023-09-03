@@ -21,15 +21,15 @@
 	</insert>
 	
 	<select id="selectAll" resultType="rent">
-	<!-- 	select R.*, I.filePath from rent R join (select rent, min(filePath) as filePath from rent_img group by rent ) I on r.idx = I.rent -->
-	SELECT
-		R.*, I.filePath
-		FROM rent R
-		JOIN (SELECT ri.rent, MIN(ri.idx) AS min_idx FROM rent_img ri GROUP BY ri.rent) min_img
-			ON R.idx = min_img.rent
-		JOIN rent_img I
-			ON min_img.min_idx = I.idx
-			where R.state = 1
+		<!-- 	select R.*, I.filePath from rent R join (select rent, min(filePath) as filePath from rent_img group by rent ) I on r.idx = I.rent -->
+		SELECT
+			R.*, I.filePath
+			FROM rent R
+			JOIN (SELECT ri.rent, MIN(ri.idx) AS min_idx FROM rent_img ri GROUP BY ri.rent) min_img
+				ON R.idx = min_img.rent
+			JOIN rent_img I
+				ON min_img.min_idx = I.idx
+				where R.state = 1
 	</select>
 	
 	<select id="selectOne" parameterType="int" resultType="rent">
@@ -130,9 +130,11 @@
 		ON min_img.min_idx = I.idx
 		WHERE R.state = 1
 		AND R.title LIKE '%${title}%'
-    	
     </select>
     
+    <delete id="deleteRent" parameterType="int">
+    	delete rent where idx = #{idx}
+    </delete>
 </mapper>
 
 

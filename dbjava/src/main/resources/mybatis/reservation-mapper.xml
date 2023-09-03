@@ -7,8 +7,8 @@
   
    <insert id="insertReservation" parameterType="reservation">
       insert into
-         reservation(member, rent, startDate, endDate, guestCount, totalPrice)
-         values(#{member}, #{rent}, #{startDate}, #{endDate}, #{guestCount}, #{totalPrice})
+         reservation(member, rent, startDate, endDate, guestCount, totalPrice, merchant_uid)
+         values(#{member}, #{rent}, #{startDate}, #{endDate}, #{guestCount}, #{totalPrice}, #{merchant_uid})
    </insert>
    
    <select id="selectReservation" parameterType="int" resultType="reservation">
@@ -45,5 +45,7 @@
             where reservation.member = #{member}
    </select>
    
-   
+   <delete id="deleteReservation" parameterType="int">
+   		delete reservation where idx = #{reservationIdx}
+   </delete>
 </mapper>

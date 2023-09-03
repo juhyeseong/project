@@ -25,7 +25,7 @@
 			JOIN member m ON m.idx = rr.member
 			JOIN review r ON r.idx = rr.review
 			JOIN member member_of_review ON member_of_review.idx = r.member
-				where rr.idx = #{idx};
+				where rr.idx = #{idx}
 	</select>
 </mapper>
 
