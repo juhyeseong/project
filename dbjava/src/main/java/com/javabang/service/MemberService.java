@@ -10,6 +10,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Random;
 import java.util.Scanner;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -178,7 +179,7 @@ public class MemberService {
 
 		MultipartFile file = dto.getUpload();
 		String ymd = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
-		String fileName = file.getOriginalFilename();
+		String fileName = UUID.randomUUID().toString();
 		fileName = fileName.substring(0, fileName.lastIndexOf("."));
 		String ext = file.getContentType().substring(file.getContentType().indexOf("/") + 1);
 		File dest = new File(ymd + "_" + fileName + "." + ext);

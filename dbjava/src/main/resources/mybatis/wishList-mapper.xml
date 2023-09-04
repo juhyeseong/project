@@ -18,6 +18,14 @@
 	<delete id="deleteWishList" parameterType="wishList">
 		delete wishList where rent = #{rent} and member = #{member}
 	</delete>
+	
+	<select id="selectMyWishList" parameterType="int" resultType="wishList">
+		select W.*, R.title, R.price
+			from wishList W
+			join rent R
+				on R.idx = W.rent
+			where W.member = #{member}
+	</select>
 </mapper>
 
 

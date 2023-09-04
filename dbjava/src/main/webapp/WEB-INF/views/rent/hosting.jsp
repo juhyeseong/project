@@ -822,8 +822,8 @@
                 const img = imgSpace.children[1]
                
                 inputSpace.classList.add('hidden')
-               img.classList.remove('hidden')
-               img.children[1].src = e.target.result
+                img.classList.remove('hidden')
+                img.children[1].src = e.target.result
              };
           }
       }

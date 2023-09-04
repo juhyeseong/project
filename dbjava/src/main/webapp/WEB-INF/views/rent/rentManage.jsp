@@ -24,7 +24,7 @@
                <c:forEach var="rent" items="${rentList }">
                   <div class="rentListRow">
                      <div class="title">${rent.title }</div>
-                     <div class="price">${rent.price }</div>
+                     <div class="price"><fmt:formatNumber value="${rent.price }" groupingUsed="true"/>원</div>
                      <div class="category">${rent.category }</div>
                      <div class="roomType">${rent.roomType }</div>
                      <div class="address">${rent.address } ${rent.detailAddress }</div>
@@ -43,25 +43,5 @@
          </div>
       </div>
    </div>
-   
-   <script>
-      const priceSpaceList = document.querySelectorAll('.rentListRow > .price')
-      
-      priceSpaceList.forEach(priceSpace => {
-         const formatPrice = new Intl.NumberFormat().format(priceSpace.innerText)
-         
-         priceSpace.innerText = formatPrice + '원'
-      })
-   </script>
-	
-	<script>
-		const priceSpaceList = document.querySelectorAll('.rentListRow > .price')
-		
-		priceSpaceList.forEach(priceSpace => {
-			const formatPrice = new Intl.NumberFormat().format(priceSpace.innerText)
-			
-			priceSpace.innerText = formatPrice + '원'
-		})
-	</script>
 </body>
 </html>

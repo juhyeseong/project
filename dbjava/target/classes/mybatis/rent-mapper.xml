@@ -135,6 +135,25 @@
     <delete id="deleteRent" parameterType="int">
     	delete rent where idx = #{idx}
     </delete>
+    
+    <select id="selectOneFile" parameterType="int">
+    	select
+		    filePath
+		    from rent_img
+		    where idx = (select min(idx) from rent_img where rent = #{rent})
+    </select>
+    
+    <update id="restMode" parameterType="int">
+    	update rent
+    		set state = 2
+    		where idx = #{idx}
+    </update>
+    
+    <update id="operateMode" parameterType="int">
+    	update rent
+    		set state = 1
+    		where idx = #{idx}
+    </update>
 </mapper>
 
 

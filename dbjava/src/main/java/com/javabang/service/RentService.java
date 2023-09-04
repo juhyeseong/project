@@ -222,11 +222,11 @@ public class RentService {
 	}
 	
 	public int selectGuestCount(int idx) {
-	      return rentDAO.selectGuestCount(idx);
+	    return rentDAO.selectGuestCount(idx);
 	}
 	
 	public List<ReservationDTO> selectReservationDate(int rent) {
-	      return reservationDAO.selectReservationDate(rent);
+	    return reservationDAO.selectReservationDate(rent);
 	}
 
 	// 검색어 
@@ -236,5 +236,13 @@ public class RentService {
 
 	public int deleteRent(int idx) {
 		return rentDAO.deleteRent(idx);
+	}
+
+	public void restMode(int idx) {
+		rentDAO.restMode(idx);
+	}
+
+	public void operateMode(int idx) {
+		rentDAO.operateMode(idx);
 	}
 }

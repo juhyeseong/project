@@ -1,12 +1,10 @@
 package com.javabang.model;
 
-import java.util.List;
-
 public class WishListDTO {
 	private int idx, member, rent;
 	private String title, price;
 	
-	private List<String> filePath;
+	private String filePath;
 
 	public int getIdx() {
 		return idx;
@@ -38,10 +36,10 @@ public class WishListDTO {
 	public void setPrice(String price) {
 		this.price = price;
 	}
-	public List<String> getFilePath() {
+	public String getFilePath() {
 		return filePath;
 	}
-	public void setFilePath(List<String> filePath) {
+	public void setFilePath(String filePath) {
 		this.filePath = filePath;
 	}
 }

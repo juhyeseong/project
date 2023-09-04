@@ -301,4 +301,14 @@ public class AjaxController {
 	public void deleteWishList(@RequestBody WishListDTO dto) {
 		wishListService.deleteWishList(dto);
 	}
+	
+	@GetMapping("/rent/restMode/{idx}")
+	public void restMode(@PathVariable("idx") int idx) {
+		rentService.restMode(idx);
+	}
+	
+	@GetMapping("/rent/operateMode/{idx}")
+	public void operateMode(@PathVariable("idx") int idx) {
+		rentService.operateMode(idx);
+	}
 }

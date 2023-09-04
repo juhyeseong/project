@@ -66,7 +66,7 @@
 					<span>숙소 가격</span>
 					<button>수정</button>
 				</div>
-				<div class="basicInfoBottom commaPrice"></div>
+				<div class="basicInfoBottom commaPrice"><fmt:formatNumber value="${rent.price }" groupingUsed="true"/>원</div>
 			</div>
 			<div class="basicModify priceModify hidden">
 				<div class="basicModifyTop priceModifyTop">
@@ -121,8 +121,8 @@
 	<script>
 		// el tag 변수
 		const cpath = '${cpath }'
-		const idx = ${rent.idx }
-		const member = ${login.idx }
+		const idx = '${rent.idx }'
+		const member = '${login.idx }'
 		// title 변수
 		const titleInfo = document.querySelector('.titleInfo')
 		const titleModify = document.querySelector('.titleModify')
@@ -148,13 +148,14 @@
 		const priceSubmit = document.querySelector('.priceSubmit')
 		const commaPrice = document.querySelector('.commaPrice')
 		const price = ${rent.price }
-		const formatPrice = new Intl.NumberFormat().format(price)
-		
-		commaPrice.innerText = formatPrice + '원'
 		
 		// count 변수
 		const minusList = document.querySelectorAll('.minus')
 		const plusList = document.querySelectorAll('.plus')
+		
+		// mode 변수
+		const rest = document.querySelector('.rest')
+		const operate = document.querySelector('.operate')
 		
 		// delete button
 		const deleteRentBtn = document.querySelector('.deleteRent')
@@ -389,6 +390,22 @@
 				}
 			})
 		}
+		
+		// mode handler
+		function restHandler() {
+			const url = cpath + '/rent/restMode/' + idx
+			
+			fetch(url)
+			location.reload()
+		}
+		
+		function operateHandler() {
+			const url = cpath + '/rent/operateMode/' + idx
+			
+			fetch(url)
+			location.reload()
+		}
+		
 		// title event
 		titleModifyBtn.onclick = titleEnterHandler
 		titleExit.onclick = titleExitHandler
@@ -404,6 +421,13 @@
 		// count event
 		minusList.forEach(minus => minus.onclick = minusHandler)
 		plusList.forEach(plus => plus.onclick = plusHandler)
+		// mode event
+		if(rest != null) {
+			rest.onclick = restHandler
+		}
+		if(operate != null) {
+			operate.onclick = operateHandler
+		}
 	</script>
 </body>
 </html>

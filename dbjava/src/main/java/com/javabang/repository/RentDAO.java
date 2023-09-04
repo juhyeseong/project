@@ -46,4 +46,10 @@ public interface RentDAO {
 	public List<RentDTO> find(String search);
 
 	public int deleteRent(int idx);
+
+	public String selectOneFile(int rent);
+
+	public void restMode(int idx);
+
+	public void operateMode(int idx);
 }

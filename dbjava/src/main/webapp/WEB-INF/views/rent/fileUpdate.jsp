@@ -14,11 +14,11 @@
                         <div class="inputInfo">
                            <img src="http://192.168.64.200/picture.png">
                            <h3>
-                              여기다 사진을 끌어다 놓으세요<br>
+                           	      여기다 사진을 끌어다 놓으세요<br>
                            </h3>
                            <span>
-                              또는 공간을 클릭하여<br>
-                              업로드할 사진을 선택해주세요
+				                              또는 공간을 클릭하여<br>
+				                              업로드할 사진을 선택해주세요
                               <br><br>
                            </span>
                         </div>
@@ -36,11 +36,11 @@
                         <div class="inputInfo">
                            <img src="http://192.168.64.200/picture.png">
                            <h3>
-                              여기다 사진을 끌어다 놓으세요<br>
+                              	여기다 사진을 끌어다 놓으세요<br>
                            </h3>
                            <span>
-                              또는 공간을 클릭하여<br>
-                              업로드할 사진을 선택해주세요
+				                              또는 공간을 클릭하여<br>
+				                              업로드할 사진을 선택해주세요
                               <br><br>
                            </span>
                         </div>
@@ -116,8 +116,8 @@
                 const img = imgSpace.children[1]
                
                 inputSpace.classList.add('hidden')
-               img.classList.remove('hidden')
-               img.children[1].src = e.target.result
+                img.classList.remove('hidden')
+                img.children[1].src = e.target.result
              };
              
              const url = cpath + '/rent/rentFileInsert'

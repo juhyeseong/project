@@ -139,7 +139,16 @@ header img {
 	margin-left: auto;
 	margin-right: auto;
 }
-
+.wishListInfo {
+	margin-bottom: 30px;
+	margin-left: 40px;
+}
+.wishListInfo h1 {
+	margin-bottom: 5px;
+}
+.wishListInfo span {
+	color: gray;
+}
 .categories {
 	padding: 20px 0px;
 	
@@ -564,8 +573,8 @@ legend{
 	padding-left: 170px;
 }
 .profileImg {
-    width:250px;
-	height:250px; 
+    width: 250px;
+	height: 250px; 
 
 	border-radius: 70%;
 }
@@ -584,6 +593,8 @@ legend{
 
 /*프로필 사진 변경 버튼*/
 .update-profile input[type="submit"]{
+	cursor: pointer;
+
     width:450px;
     height:50px;
     
@@ -593,14 +604,6 @@ legend{
     border : none;
     border-radius:10px;
 } 
-.update-profile input[type="button"]{
-    width:500px;
-    height:50px;
-    
-    background-color: #f8215c;
-    
-    border : none;
-} 
 .file-icon {
 	cursor: pointer;
 	  
@@ -609,7 +612,12 @@ legend{
 .file-icon img {
 	width: 60px;
 	height: 60px;
-	margin-right:200px;
+}
+.profileSpace {
+	display: flex;
+	justify-content: center;
+	
+	padding-left: 50px;
 }
 
 /* Manage style */
@@ -751,7 +759,6 @@ legend{
 }
 .rentUpdateTop button {
 	all: unset;
-	cursor: pointer;
 	
 	margin: 20px;
 	padding: 12px 15px;
@@ -762,6 +769,10 @@ legend{
 	font-weight: bold;
 	
 	border-radius: 10px;
+}
+.rentUpdateTop > .rest,
+.rentUpdateTop > .operate {
+	cursor: pointer;
 }
 .rentUpdateTop > .running {
 	background-color: black;

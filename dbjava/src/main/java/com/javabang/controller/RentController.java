@@ -118,7 +118,9 @@ public class RentController {
 	public ModelAndView pension(@PathVariable("category") String category) {
 		ModelAndView mav = new ModelAndView("home");
 		List<RentDTO> rentList = rentService.filterPension(category);
+		
 		mav.addObject("rentList", rentList);
+		
 		return mav;
 	}
 }
