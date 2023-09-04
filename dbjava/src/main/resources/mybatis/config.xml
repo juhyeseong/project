@@ -15,6 +15,7 @@
 		<typeAlias type="com.javabang.model.PagingDTO" alias="paging"></typeAlias>
 		<typeAlias type="com.javabang.model.ReportDTO" alias="report"></typeAlias>
 		<typeAlias type="com.javabang.model.ReviewReportDTO" alias="reviewReport"></typeAlias>
+		<typeAlias type="com.javabang.model.WishListDTO" alias="wishList"></typeAlias>
 	</typeAliases> 
 </configuration>
 

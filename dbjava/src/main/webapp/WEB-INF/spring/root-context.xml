@@ -33,6 +33,7 @@
 				<value>classpath:mybatis/category-mapper.xml</value>
 				<value>classpath:mybatis/admin-mapper.xml</value>
 				<value>classpath:mybatis/report-mapper.xml</value>
+				<value>classpath:mybatis/wishList-mapper.xml</value>
 			</list>
 		</property>
 	</bean>

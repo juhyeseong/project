@@ -31,11 +31,13 @@ import com.javabang.model.RentDTO;
 import com.javabang.model.ReportDTO;
 import com.javabang.model.ReservationDTO;
 import com.javabang.model.ReviewReportDTO;
+import com.javabang.model.WishListDTO;
 import com.javabang.service.MemberService;
 import com.javabang.service.RentService;
 import com.javabang.service.ReportService;
 import com.javabang.service.ReservationService;
 import com.javabang.service.ReviewService;
+import com.javabang.service.WishListService;
 
 
 @RestController
@@ -45,7 +47,8 @@ public class AjaxController {
 	@Autowired private ReviewService reviewService; 
 	@Autowired private ReportService reportService;
 	@Autowired private ReservationService reservationService;
-
+	@Autowired private WishListService wishListService;
+	
 	@GetMapping("/getmail/{email}")
 	public HashMap<String, Object> getEmail(@RequestBody MemberDTO dto){
 		String email = memberService.getEmail(dto);
@@ -290,4 +293,14 @@ public class AjaxController {
     	
     	return dto;
     }
+    
+    @PostMapping("/wishList/createWishList")
+	public void createWishList(@RequestBody WishListDTO dto) {
+		wishListService.createWishList(dto);
+	}
+	
+	@PostMapping("/wishList/deleteWishList")
+	public void deleteWishList(@RequestBody WishListDTO dto) {
+		wishListService.deleteWishList(dto);
+	}
 }

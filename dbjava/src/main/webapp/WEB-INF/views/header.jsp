@@ -147,14 +147,13 @@ header img {
 	width: 30px;
 	height: 30px;
 } 
-
-.categorieImgBox {
+.categoryImgBox > a {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
 }
-.categorieImgBox > .filter {
+.categoryImgBox > .filter {
 	width:70px;
 	height:50px;
 	
@@ -175,9 +174,23 @@ header img {
 	display: flex;
 	flex-direction: column;
 }
+.roomItemInfo {
+	width: 250px;
+
+	display: flex;
+}
+.roomItemInfo div {
+	flex: 1;
+}
+.wish {
+	cursor: pointer;
+
+	width: 30px;
+	height: 30px;
+}
 .roomImg{
-	width:250px;
-	height:250px;
+	width: 280px;
+	height: 280px;
 	
 }
 /*room.jsp */
@@ -506,12 +519,43 @@ legend{
 .update > fieldset > p {
 	word-spacing:10px;
 }
-/* 마이페이지 정보수정 버튼 */
+
+/* 회원정보 확인 css */
+.mypageSpace {
+	width: 100%;
+	height: 70vh;
+	
+	display: flex;
+	align-items: center;
+}
+.listSpace {
+	display: flex;
+}
+.listSpace > div {
+	width: 500px;
+	
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+.list-info{
+	width: 1000px;
+	margin: auto;
+}
+.list-info > h2 {
+	padding-left: 170px;
+}
+.profileImg {
+    width:250px;
+	height:250px; 
+
+	border-radius: 70%;
+}
 .mypage{
 	width:450px;
 	height:50px;
 	margin-top:30px;
-	margin-left:490px;
 	line-height:40px;
 	text-align: center;
 	
@@ -519,29 +563,6 @@ legend{
 	color:white;
 	
 	border-radius:10px;
-}
-/* 회원정보 확인 css */
-.list{
-	margin-top:100px;
-}
-.list > h2{
-	margin-left:100px;
-}
-.list > table{
-	margin-left:100px;
-	float : left;
-}
-.list-info{
-	margin-left:450px;
-}
-.info{
-	word-spacing:50px;
-}
-.profileImg {
-    width:250px;
-	height:250px; 
-
-	border-radius: 70%;
 }
 
 /*프로필 사진 변경 버튼*/

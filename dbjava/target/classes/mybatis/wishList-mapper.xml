@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC 
+	"-//mybatis.org//DTD Mapper 3.0//EN" 
+	"https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="com.javabang.repository.WishListDAO">
+	<select id="countWish" parameterType="int" resultType="int">
+		select count(*) from wishList
+			where rent = #{rent} and member = #{member}
+	</select>
+	
+	<insert id="createWishList" parameterType="wishList">
+		insert into
+			wishList(rent, member)
+			values(#{rent}, #{member})
+	</insert>
+	
+	<delete id="deleteWishList" parameterType="wishList">
+		delete wishList where rent = #{rent} and member = #{member}
+	</delete>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

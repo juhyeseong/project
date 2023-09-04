@@ -7,7 +7,7 @@ import org.springframework.web.multipart.MultipartFile;
 public class RentDTO {
    private int idx, member;
    private String category, roomType, address, detailAddress, information, title, content, contactNum;
-   private int roomCount, guestCount, bedCount, bathCount, price, discount, state;
+   private int roomCount, guestCount, bedCount, bathCount, price, discount, state, wishCount;
    
    private List<String> filePathList;
    private String filePath;
@@ -133,4 +133,10 @@ public class RentDTO {
    public void setContactNum(String contactNum) {
       this.contactNum = contactNum;
    }
+	public int getWishCount() {
+		return wishCount;
+	}
+	public void setWishCount(int wishCount) {
+		this.wishCount = wishCount;
+	}
 }
