@@ -1,6 +1,7 @@
 package com.javabang.controller;
 
 import java.security.NoSuchAlgorithmException;
+import java.util.List;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
@@ -22,7 +23,9 @@ import org.springframework.web.servlet.ModelAndView;
 import com.javabang.component.HashComponent;
 import com.javabang.mail.MailComponent;
 import com.javabang.model.MemberDTO;
+import com.javabang.model.ReviewDTO;
 import com.javabang.service.MemberService;
+import com.javabang.service.ReviewService;
 
 @Controller
 @RequestMapping("/member")
@@ -33,6 +36,8 @@ public class MemberController {
 	private MailComponent mailComponent;
 	@Autowired
 	private HashComponent hashComponent;
+	@Autowired
+	private ReviewService reviewService;
 
 	// 회원가입
 	@GetMapping("/join")
@@ -62,10 +67,6 @@ public class MemberController {
 		      return script;
 		}
 	}
-	
-
-	
-	
 
 	// 로그아웃
 	@GetMapping("/logout")
@@ -222,6 +223,17 @@ public class MemberController {
 	@GetMapping("myReview/{idx}")
 	public ModelAndView myReview(@PathVariable("idx") int idx) {
 		ModelAndView mav = new ModelAndView("member/myReview");
+		List<ReviewDTO> list = reviewService.selectAllMyReview(idx);
+		
+		mav.addObject("list", list);
+		return mav;
+	}
+	// 유저별 작성한 리뷰보기(검색)
+	@PostMapping("myReview/{idx}")
+	public ModelAndView myReview(@PathVariable("idx") int idx, @RequestParam String search) {
+		ModelAndView mav = new ModelAndView("member/myReview");
+		List<ReviewDTO> list = reviewService.selectAllMyReviewSearch(idx, search);
+		mav.addObject("list", list);
 		return mav;
 	}
 }

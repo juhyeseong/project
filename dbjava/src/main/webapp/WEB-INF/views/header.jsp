@@ -1580,15 +1580,19 @@ legend{
 	margin-left: auto;
 	margin-right: auto;
 }
-
+.reviewContentBox {
+	width:100%;
+	display: flex;
+}
 .reviewItem {
 	border: 1px solid;
 	display: flex;
+	position: relative;
 }
 
 .reviewProfileBox>img {
-	width: 200px;
-	height: 200px;
+	max-width: 150px;
+	max-height: 150px;
 	border-radius: 50%;
 }
 
@@ -1613,13 +1617,14 @@ legend{
 	color: #ffcc00;
 }
 .review {
-    width: 100%;
+    width: 95%;
     margin: 20px 0;
     margin-bottom: 30px;
 }
 
 .reviewItem {
     border: 1px solid #ddd;
+    width: 100%;
     display: flex;
     margin: 10px 0;
     padding: 10px;
@@ -1634,9 +1639,20 @@ legend{
 }
 
 .reviewProfileInfo {
-    flex: 1;
+    flex: 8;
+}
+.reviewImgsBox {
+	flex: 4;
+	position: relative;
+	display: flex;
+	justify-content: center;
 }
 
+.reviewImgBox {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
 .reviewProfileInfo > p:nth-child(1) {
     font-size: 18px;
     font-weight: bold;
@@ -1653,12 +1669,12 @@ legend{
     margin: 5px 0;
 }
 .file-icon2 {
-  display: inline-block;
-  cursor: pointer;
+	display: inline-block;
+	cursor: pointer;
 }
 .file-icon2 img {
-  width: 60px;
-  height: 60px;
+	width: 60px;
+	height: 60px;
 }
 .reviewSubmit input[type="submit"] {
 	background-color: #f8215c;
@@ -1672,44 +1688,44 @@ legend{
 
 	/* Report Box 전체에 대한 스타일 */
 .reportBox {
-  width: 400px;
-  height: 300px;
-  margin: auto;
-  border: 1px solid #ccc;
-  border-radius: 10px;
-  padding: 20px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	width: 400px;
+	height: 300px;
+	margin: auto;
+	border: 1px solid #ccc;
+	border-radius: 10px;
+	padding: 20px;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 /* 각각의 row에 대한 스타일 */
 .reportRow {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 15px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-bottom: 15px;
 }
 
 /* 라벨에 대한 스타일 */
 .reportRow label {
-  font-size: 16px;
+	font-size: 16px;
 }
 
 /* 라디오 버튼에 대한 스타일 */
 .reportRow input[type="radio"] {
-  width: 20px;
-  height: 20px;
+	width: 20px;
+	height: 20px;
 }
 
 /* 신고하기 버튼에 대한 스타일 */
 .reportBtn {
-  width: 100%;
-  padding: 10px;
-  background-color: #f8215c;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 18px;
+	width: 100%;
+	padding: 10px;
+	background-color: #f8215c;
+	color: white;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	font-size: 18px;
 }
 .reportContent > textarea {
 	width: 100%;
@@ -1744,8 +1760,8 @@ legend{
 }
 .reviewReport {
 	position: absolute;
-	top:0;
-	right: 0;
+	top: 10px;
+	right: 10px;
 	font-size: 14px;
 	cursor: pointer;
 }
@@ -1868,7 +1884,11 @@ legend{
 	display: flex;
 	flex-direction: column;
 	align-items: flex-start;
-	position: relative;
+}
+.reviewProfileInfo textarea {
+	width: 850px;
+	height: 200px;
+	border: 0px;
 }
 .reviewSpace {
 	display:block;
@@ -1893,7 +1913,7 @@ legend{
 }
 
 .prevButton, .nextButton {
-	all: unset; position : absolute;
+	all: unset; 
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -1907,18 +1927,19 @@ legend{
 }
 
 .prevButton {
-	top: 200px;
-	left: -50px;
+	position: absolute;
+	top: 150px;
+	left: 0px;
 }
-
-.nextButton {
-	top: 200px;
-	right: 300px;
+.nextButton  {
+	position: absolute;
+	top: 150px;
+	right: 0px;
 }
 .deleteButton {
 	position: absolute;
-	top: 0;
-	right: 0;
+	top: 10px;
+	right: 10px;
 }
 /* admin page 공통 */
 
@@ -2154,12 +2175,12 @@ legend{
 }
 /* 모달 내용 스타일 */
 .modal-content {
-  background-color: #fff;
-  margin: 10% auto;
-  padding: 30px;
-  border: 1px solid #888;
-  width:60%;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+	background-color: #fff;
+	margin: 10% auto;
+	padding: 20px;
+	border: 1px solid #888;
+	width:70%;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
 .modal-content2 {
   background-color: #fff;
@@ -2376,7 +2397,144 @@ label {
 .reportDetail p {
 	margin: 5px 0;
 }
+/* member -> myReview */
+.myReviewMain {
+    width: 70%;
+    height: 700px;
+    margin: 0 auto;
+    border-radius: 8px;
+    box-shadow: 3px 4px 10px rgba(0,0,0,0.5);
+    background-color: #ffffff;
+    padding: 20px;
+}
 
+.myReviewBox {
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.myReviewTitle {
+    padding: 10px;
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+}
+
+.searchBox {
+    margin: 10px 0;
+}
+
+#searchBar {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.searchBtn, .resetBtn {
+    padding: 10px 20px;
+    border: none;
+    background-color: #f8215c;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.myReviewsListBox {
+    width: 100%;
+    height: 560px;
+    padding: 30px;
+    box-sizing: border-box;
+    overflow-y: auto;
+    border-top: 1px solid #e5e5e5;
+
+}
+
+.myReviewRow {
+    width: 100%;
+    padding: 0 30px;
+    box-sizing: border-box;
+    height: 150px;
+    display: flex;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #e5e5e5;
+    padding-bottom: 20px;
+}
+
+.myReviewContentBox {
+    flex: 3;
+    padding: 15px;
+    box-sizing: border-box;
+}
+
+.myReviewPictureBox {
+    flex: 2;
+    padding: 15px;
+    box-sizing: border-box;
+    display: flex;
+  	align-items: center;
+  	justify-content: center;
+}
+
+.myReviewStars {
+    font-size: 18px;
+    font-weight: bold;
+    color: #FFA500; /* Orange */
+}
+
+.myReviewContent {
+    margin-top: 10px;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.myReviewPicture {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+    width: 200px;
+    height: 150px;
+    position: relative;
+}
+.myReviewImgs{
+    max-width: 150px;
+    max-height: 150px; 
+    box-sizing: border-box;
+}
+.btnShape {
+	all: unset;
+	width: 20px;
+	height: 20px;
+	border-radius:50%;
+	background-color: black;
+	color: white;
+	
+	display: flex;
+	justify-content: center;
+	align-content: center;
+	cursor: pointer;
+}
+
+.myReviewPicture > .prevBtn {
+	position: absolute;
+	left: 0;
+}
+.myReviewPicture > .nextBtn {
+	position: absolute;
+	right: 0;
+}
+.deleteReviewBtn {
+	cursor: pointer;
+}
+.myReviewTextarea {
+	width: 520px;
+	height: 70px;
+	resize: none;
+	border: 0px;
+	font-size: 13px;
+}
 </style>
 </head>
 <body>

@@ -116,4 +116,17 @@ public class ReviewService {
 		
 	}
 
+
+	public List<ReviewDTO> selectAllMyReview(int idx) {
+		return reviewDAO.selectAllMyReview(idx);
+	}
+
+
+	public List<ReviewDTO> selectAllMyReviewSearch(int idx, String search) {
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("idx", Integer.toString(idx));
+		map.put("search", search);
+		return reviewDAO.selectAllMyReviewSearch(map);
+	}
+
 }

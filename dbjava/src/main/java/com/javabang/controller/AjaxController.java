@@ -167,7 +167,6 @@ public class AjaxController {
         try {
         	MemberDTO tmp = (MemberDTO) session.getAttribute("login");
         	
-            // Call a service method to delete the review by its ID
             reviewService.deleteReview(reviewId, tmp.getIdx());
             return ResponseEntity.ok("Review deleted successfully.");
         } catch (Exception e) {
@@ -272,7 +271,6 @@ public class AjaxController {
     
     @GetMapping("/reservation/selectGuestCount/{idx}")
     public int selectGuestCount(@PathVariable("idx") int idx) {
-       System.out.println("idx : " + idx);
        int guestCount = rentService.selectGuestCount(idx);
        
         return guestCount;
