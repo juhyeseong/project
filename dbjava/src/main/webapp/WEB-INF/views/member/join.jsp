@@ -38,21 +38,21 @@
 		</p>
 
 		<p>
-			<input type="text" name="year" placeholder="생년 입력" required>
+			<input type="text" name="year" placeholder="태어난 년도" required>
 			<select name="month" required>
-				<option value="">생월 선택</option>
+				<option value="">태어난 달 선택</option>
 				<c:forEach var="i" begin="1" end="12" step="1">
 					<option value="${i }">${i }월</option>
 				</c:forEach>
 			</select> <select name="day" required>
-				<option value="">생일 선택</option>
+				<option value="">태어난 날 선택</option>
 				<c:forEach var="i" begin="1" end="31" step="1">
 					<option value="${i }">${i }일</option>
 				</c:forEach>
 			</select>
 		</p>
 		<p class="phoneNum">
-				<input type="tel" name="phoneNum" placeholder="전화번호 입력" required>
+				<input type="tel" name="phoneNum" placeholder="ex ) 01012345678" required>
 			</p>
 		<p>
 			<select name="gender" required>
@@ -65,6 +65,11 @@
 		</p>
 	</fieldset>
 </form>
+
+<!-- 회원가입 성공 or 실패 시 alert 창 띄우기 -->
+<script>
+	document.querySelector('.join').addEventListener('submit')
+</script>
 <script>
 	const sendAuthNumber = document.getElementById('sendAuthNumber')
 	

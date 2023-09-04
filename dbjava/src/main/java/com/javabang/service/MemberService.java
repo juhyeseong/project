@@ -247,8 +247,6 @@ public class MemberService {
 		return memberDAO.selectCount2(userNick);
 	}
 
-
-	
 }
 		
 		

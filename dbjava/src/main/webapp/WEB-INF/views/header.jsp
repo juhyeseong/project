@@ -11,6 +11,7 @@
 .title > a > img{
 	height: 130px;
 	width: 140px;
+	margin-left:80px;
 }
 /* all style */
 body {
@@ -44,6 +45,7 @@ p{
     transition: background-color 0.3s; /* 배경색 변화에 애니메이션 적용 */
     
 	position: fixed;
+	z-index: 999;
 }
 header {
     height: 100px;
@@ -117,12 +119,17 @@ header img {
     list-style: none;
     
 	padding: 0px;
+	margin-right:30px;
 	
     display: flex;
     align-items: center;
 }
 .host > li{    
-	margin-left: 30px;
+	margin-left: 50px;
+}
+
+.myPageBtn{
+	margin-right: 90px;
 }
 
 /*home css*/
@@ -154,6 +161,16 @@ header img {
 	justify-content: center;
 }
 .categoryImgBox > .filter {
+	width:70px;
+	height:50px;
+	
+	background-color : white;
+	font-size:15px;
+	
+	border : 2px solid black;
+	border-radius : 10px;
+}
+.categoryImgBox > .locationFilter{
 	width:70px;
 	height:50px;
 	
@@ -2125,14 +2142,31 @@ legend{
   background-color: rgba(0, 0, 0, 0.5); /* 배경에 반투명한 레이어 추가 */
   z-index: 1; /* 다른 요소 위에 표시 */
 }
-
+.modal2 {
+  display: none; /* 초기에는 숨김 상태로 설정 */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* 배경에 반투명한 레이어 추가 */
+  z-index: 1; /* 다른 요소 위에 표시 */
+}
 /* 모달 내용 스타일 */
 .modal-content {
   background-color: #fff;
   margin: 10% auto;
-  padding: 20px;
+  padding: 30px;
   border: 1px solid #888;
-  width:70%;
+  width:60%;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+.modal-content2 {
+  background-color: #fff;
+  margin: 10% auto;
+  padding: 30px;
+  border: 1px solid #888;
+  width:60%;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
 .modal-content > h2 {
@@ -2140,6 +2174,11 @@ legend{
 }
  /* 글씨 스타일 */
  .modal-content p {
+     font-size: 15px; /* 글씨 크기 조절 */
+     font-weight: bold; /* 글씨 굵게 */
+     text-align: left;
+ } 
+.modal-content2 p {
      font-size: 15px; /* 글씨 크기 조절 */
      font-weight: bold; /* 글씨 굵게 */
      text-align: left;
@@ -2157,16 +2196,14 @@ legend{
 .roomCategory{
 	display:none;
 } 
-.seeFilter{
-	margin-left:650px;
-}
+
 	/* Hover effect for the button */
 .seeFilter:hover {
     background-color : black;
 }
 /* Style for the filter checkboxes */
 input[type="checkbox"] {
-    margin-right: 10px;
+    margin-right: 8px;
     width:30px;
     height:30px;
 }
@@ -2189,6 +2226,19 @@ label {
 	text-decoration: none;
 	cursor: pointer;
 }
+.close2 {
+	color: #aaa;
+	float: right;
+	font-size: 28px;
+	font-weight: bold;
+}
+
+.close2:hover,
+.close2:focus {
+	color: black;
+	text-decoration: none;
+	cursor: pointer;
+}
 
 
 /*home.jsp ->모달창 -> 숙소보러가기 버튼*/
@@ -2197,7 +2247,7 @@ label {
 	border-radius:10px;
     border : none;
     width:120px;
-    height:30px;
+    height:40px;
     color:white;
 }
 /*홈화면 검색어 input css*/
@@ -2239,16 +2289,26 @@ label {
   cursor: pointer; /* 커서 모양을 포인터로 변경합니다. */
 }
 /*필터 모달 창 체크박스*/
-.checkBoxContainer {
+
+.checkBoxContainer2 {
     display: flex;
     justify-content: space-between; 
-    width: 60%; 
+    width: 90%; 
 }
 .checkBoxContainer .checkBox1,
 .checkBoxContainer .checkBox2 {
     flex: 1; /* 가로로 확장되도록 flex 속성을 사용합니다. */
 }
-
+.checkBox1{
+	height: 35px;
+}
+.checkBox2{
+	display:inline-block;
+}
+.checkInfo{
+		width:35px;
+		height: 30px;
+	}
 /* hidden */
 .hidden{
 	display: none;
@@ -2341,7 +2401,7 @@ label {
 	        </ul>
 	        
 	        <c:if test="${not empty login }">
-	       		<img src="${login.profile }"><h4>${login.userNick }님 환영합니다 !</h4> <a href="${cpath }/member/mypage/${login.idx}"><button>마이페이지</button></a>
+	       		<img src="${login.profile }"><h4>${login.userNick }님 환영합니다 !</h4> <a href="${cpath }/member/mypage/${login.idx}"><button class="myPageBtn">마이페이지</button></a>
 	       	</c:if>
 	       	<c:if test="${login.userId == 'admin'}">
 	       		<a href="${cpath }/admin/adminPage/${login.idx}"><button>관리자 페이지</button></a>

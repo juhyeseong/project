@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -48,12 +49,23 @@ public class MemberController {
 	public void login() {}
 
 	@PostMapping("/login")
-	public String login(MemberDTO dto, HttpSession session, HttpServletRequest request)
+	public String login(MemberDTO dto, HttpSession session, HttpServletRequest request, @RequestParam("userId") String userId, @RequestParam("userPw")String userPw)
 			throws NoSuchAlgorithmException {
 		MemberDTO login = memberService.login(dto);
-		session.setAttribute("login", login);
-		return "redirect:/";
+		
+		if(userId.equals(userId) == userPw.equals(userPw)) {
+			session.setAttribute("login", login);
+			return "redirect:/";
+		}
+		else {
+			 String script = "<script>alert('아이디 또는 비밀번호를 다시 입력해주세요'); window.location.href='/login';</script>";
+		      return script;
+		}
 	}
+	
+
+	
+	
 
 	// 로그아웃
 	@GetMapping("/logout")

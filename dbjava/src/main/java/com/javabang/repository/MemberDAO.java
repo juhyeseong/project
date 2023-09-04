@@ -8,8 +8,9 @@ import com.javabang.model.MemberDTO;
 public interface MemberDAO {
 
    int add(MemberDTO dto);
-
+ 
    MemberDTO login(MemberDTO dto);
+   
 
    int reset(MemberDTO dto);   // 비밀번호 재설정
 
@@ -42,6 +43,5 @@ public interface MemberDAO {
 
   int selectCount2(String userNick);
 
-   
 
 }

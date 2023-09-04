@@ -116,9 +116,9 @@ public class RentController {
 	// 카테고리
 	@GetMapping("/category/{category}")
 	public ModelAndView pension(@PathVariable("category") String category) {
-		ModelAndView mav = new ModelAndView("rent/category");
-		List<RentDTO> pensionList = rentService.filterPension(category);
-		mav.addObject("pensionList", pensionList);
+		ModelAndView mav = new ModelAndView("home");
+		List<RentDTO> rentList = rentService.filterPension(category);
+		mav.addObject("rentList", rentList);
 		return mav;
 	}
 }
