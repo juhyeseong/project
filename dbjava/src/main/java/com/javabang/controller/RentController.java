@@ -1,5 +1,6 @@
 package com.javabang.controller;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -21,6 +22,7 @@ import com.javabang.model.ReviewDTO;
 import com.javabang.service.RentService;
 import com.javabang.service.ReservationService;
 import com.javabang.service.ReviewService;
+import com.javabang.service.WishListService;
 
 @Controller
 @RequestMapping("/rent")
@@ -29,7 +31,7 @@ public class RentController {
 	@Autowired private ReviewService reviewService;
 	@Autowired private ReservationService reservationService;
 	@Autowired private ReportService reportService;
-
+	@Autowired private WishListService wishListService;
 
 	@GetMapping("/hosting")
 	public void hosting() {}
@@ -115,9 +117,23 @@ public class RentController {
 	
 	// 카테고리
 	@GetMapping("/category/{category}")
-	public ModelAndView pension(@PathVariable("category") String category) {
+	public ModelAndView pension(@PathVariable("category") String category, HttpSession session) {
 		ModelAndView mav = new ModelAndView("home");
 		List<RentDTO> rentList = rentService.filterPension(category);
+		
+		rentList.forEach(rent -> {
+			HashMap<String, Object> map = new HashMap<>();
+			MemberDTO login = (MemberDTO)session.getAttribute("login");
+			
+			if(login != null) {
+				map.put("rent", rent.getIdx());
+				map.put("member", login.getIdx());
+				rent.setWishCount(wishListService.countWish(map));
+			}
+			else {
+				rent.setWishCount(0);
+			}
+		});
 		
 		mav.addObject("rentList", rentList);
 		
