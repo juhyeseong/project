@@ -4,8 +4,8 @@
 	<script>
 		const msg = '${msg}'
 		const cpath = '${cpath }'
-		const url = '${url }'
-		
+		const url = '${url }' 
+
 		alert(msg)
 		location.href = cpath + url
 	</script>

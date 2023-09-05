@@ -293,63 +293,58 @@
 	
 	    // 필터를 적용하는 함수
 	    function applyFilter() {
-	        var roomElements = document.querySelectorAll('.room'); // 모든 room elements를 가져옴
-	        var selectedAmenities = getSelectedAmenities()    // 편의시설 요소들을 가져옴
-	        var checkboxes = document.querySelectorAll('.infoCheckbox')		// 여러개 체크박스들을 모두 가져옴
-	        var selectedFilters = []						  // 선택된 체크박스 값을 저장할 배열을 만듦
-	        var priceSort = getSelectedPriceSort();
+	        var roomElements = document.querySelectorAll('.room') // 모든 room클래스를 가져와서 roomElements 에 저장
+	        var selectedAmenities = getSelectedAmenities()    // 편의시설 요소들을 가져와서 selectedAmenities 에 저장
+	    
+	        var priceSort = getSelectedPriceSort()
 	        
-	        // 체크박스를 순회하면서 선택된 체크박스 값을 배열에 추가
-	        checkboxes.forEach(function (checkbox){
-	        	if(checkbox.checked){
-	        		selectedFilters.push(checkbox.value)
-	        	}
-	        })
 	        
 	        roomElements.forEach(function(room) {
+	
 	            var amenitiesElement = room.querySelector('.roomInfo')
-	            var amenities = amenitiesElement.textContent
+	            var amenities = amenitiesElement.textContent    // .roomInfo 에 있는 텍스트 콘텐트를 amenities 에 저장
 	            
 	            // 선택된 편의시설이 있는지 확인
-	            var hasSelectedAmenities = selectedAmenities.every(function (amenity) {
-	            	return amenities.indexOf(amenity) !== -1
+	            var hasSelectedAmenities = selectedAmenities.every(function (amenity) {   // every  함수를 이용하여 모든 선택된 편의시설이 해당 시설에 있는 지 확인
+	            	return amenities.indexOf(amenity) !== -1   // 조건이 맞으면 true, 아니면 false
 	            })
 	           
 	            if(hasSelectedAmenities) {
-	                room.style.display = 'block'; // 조건에 맞으면 보임
+	                room.style.display = 'block' // 조건에 맞으면 보임
 	            } else {
-	                room.style.display = 'none'; // 조건에 안 맞으면 숨김
+	                room.style.display = 'none' // 조건에 안 맞으면 숨김
 	            }
 	        });
 	     // 가격 정렬
 	        if (priceSort === 'low') {
 	            // 최저가 순으로 정렬
 	            var sortedRooms = Array.from(roomElements).sort(function (a, b) {
-	                var priceA = parseInt(a.querySelector('.roomPrice').textContent.replace(/[^\d]/g, ''));
-	                var priceB = parseInt(b.querySelector('.roomPrice').textContent.replace(/[^\d]/g, ''));
-	                return priceA - priceB;
+	                var priceA = parseInt(a.querySelector('.roomPrice').textContent.replace(/[^\d]/g, ''))
+	                var priceB = parseInt(b.querySelector('.roomPrice').textContent.replace(/[^\d]/g, ''))
+	                return priceA - priceB
 	            });
 	        } else if (priceSort === 'high') {
 	            // 최고가 순으로 정렬
 	            var sortedRooms = Array.from(roomElements).sort(function (a, b) {
-	                var priceA = parseInt(a.querySelector('.roomPrice').textContent.replace(/[^\d]/g, ''));
-	                var priceB = parseInt(b.querySelector('.roomPrice').textContent.replace(/[^\d]/g, ''));
-	                return priceB - priceA;
+	                var priceA = parseInt(a.querySelector('.roomPrice').textContent.replace(/[^\d]/g, ''))
+	                var priceB = parseInt(b.querySelector('.roomPrice').textContent.replace(/[^\d]/g, ''))
+	                return priceB - priceA
 	            });
 	        }
 	
 	        // 정렬된 방을 다시 추가
 	        var roomContainer = document.querySelector('.roomBox');
-	        roomContainer.innerHTML = '';
+	        roomContainer.innerHTML = ''
 	        sortedRooms.forEach(function (room) {
-	            roomContainer.appendChild(room);
+	            roomContainer.appendChild(room)
 	        });
 	    
 	        // 모달을 닫음
-	        modal.style.display = "none";
+	        modal.style.display = "none"
 	    } 
 	    
 	    // 선택된 편의시설을 가져오는 함수
+	    // <input type="checkbox" name="information" value="무선 인터넷" class="infoCheckbox">
 	    function getSelectedAmenities(){
 	    	var amenities = document.getElementsByName("information")
 	    	var selectedAmenities = []
@@ -365,104 +360,19 @@
 	    function getSelectedPriceSort() {
 	        var lowPriceRadio = document.getElementById('lowPriceRadio');
 	        if (lowPriceRadio.checked) {
-	            return 'low';
+	            return 'low'
 	        }
 	
 	        var highPriceRadio = document.getElementById('highPriceRadio');
 	        if (highPriceRadio.checked) {
-	            return 'high';
+	            return 'high'
 	        }
 	
 	        // 기본값: 최저가 정렬
-	        return 'low';
+	        return 'low'
 	    }
 		 
-		    // 필터를 적용하는 함수
-		    function applyFilter() {
-		        var roomElements = document.querySelectorAll('.room') // 모든 room elements를 가져옴
-		        var selectedAmenities = getSelectedAmenities()    // 편의시설 요소들을 가져옴
-		        var checkboxes = document.querySelectorAll('.infoCheckbox')		// 여러개 체크박스들을 모두 가져옴
-		        var selectedFilters = []						// 선택된 체크박스 값을 저장할 배열을 만듦
-		        var priceSort = getSelectedPriceSort()
-		        
-		        // 체크박스를 순회하면서 선택된 체크박스 값을 배열에 추가
-		        checkboxes.forEach(function (checkbox){
-		        	if(checkbox.checked){
-		        		selectedFilters.push(checkbox.value)
-		        	}
-		        })
-		        
-		        roomElements.forEach(function(room) {
-		
-		            var amenitiesElement = room.querySelector('.roomInfo')
-		            var amenities = amenitiesElement.textContent
-		            
-		            // 선택된 편의시설이 있는지 확인
-		            var hasSelectedAmenities = selectedAmenities.every(function (amenity) {
-		            	return amenities.indexOf(amenity) !== -1
-		            })
-		           
-		            if(hasSelectedAmenities) {
-		                room.style.display = 'block' // 조건에 맞으면 보임
-		            } else {
-		                room.style.display = 'none' // 조건에 안 맞으면 숨김
-		            }
-		        });
-		     // 가격 정렬
-		        if (priceSort === 'low') {
-		            // 최저가 순으로 정렬
-		            var sortedRooms = Array.from(roomElements).sort(function (a, b) {
-		                var priceA = parseInt(a.querySelector('.roomPrice').textContent.replace(/[^\d]/g, ''))
-		                var priceB = parseInt(b.querySelector('.roomPrice').textContent.replace(/[^\d]/g, ''))
-		                return priceA - priceB
-		            });
-		        } else if (priceSort === 'high') {
-		            // 최고가 순으로 정렬
-		            var sortedRooms = Array.from(roomElements).sort(function (a, b) {
-		                var priceA = parseInt(a.querySelector('.roomPrice').textContent.replace(/[^\d]/g, ''))
-		                var priceB = parseInt(b.querySelector('.roomPrice').textContent.replace(/[^\d]/g, ''))
-		                return priceB - priceA
-		            });
-		        }
-		
-		        // 정렬된 방을 다시 추가
-		        var roomContainer = document.querySelector('.roomBox');
-		        roomContainer.innerHTML = ''
-		        sortedRooms.forEach(function (room) {
-		            roomContainer.appendChild(room)
-		        });
-		    
-		        // 모달을 닫음
-		        modal.style.display = "none"
-		    } 
-		    
-		    // 선택된 편의시설을 가져오는 함수
-		    function getSelectedAmenities(){
-		    	var amenities = document.getElementsByName("information")
-		    	var selectedAmenities = []
-		    	
-		    	for(var i = 0; i < amenities.length; i++){
-		    		if(amenities[i].checked){
-		    			selectedAmenities.push(amenities[i].value)
-		    		}
-		    	}
-		    	return selectedAmenities
-		    }
-			 // 가격 정렬 방식을 가져오는 함수
-		    function getSelectedPriceSort() {
-		        var lowPriceRadio = document.getElementById('lowPriceRadio');
-		        if (lowPriceRadio.checked) {
-		            return 'low'
-		        }
-		
-		        var highPriceRadio = document.getElementById('highPriceRadio');
-		        if (highPriceRadio.checked) {
-		            return 'high'
-		        }
-		
-		        // 기본값: 최저가 정렬
-		        return 'low'
-		    }
+		   
 			 
 			// location search handler
 			function selectedLocationHandler(event) {

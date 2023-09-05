@@ -68,7 +68,26 @@
 
 <!-- 회원가입 성공 or 실패 시 alert 창 띄우기 -->
 <script>
-	document.querySelector('.join').addEventListener('submit')
+	document.querySelector('.join').addEventListener('submit', function(event){
+		event.preventDefault()
+		const formData = new FormData(event.target)
+		fetch('${cpath}/member/join', {
+			method: 'POST',
+			body : formData,
+		})
+		.then(response => {
+			if(response.ok){
+				alert('회원가입 성공 !')
+				window.location.href = '${cpath}/member/login'
+			}
+			else{
+				alert('회원가입 실패. . ')
+			}
+		})
+		.catch(error => {
+			alert('회원가입 중 오류가 발생했습니다')
+		})
+	})
 </script>
 <script>
 	const sendAuthNumber = document.getElementById('sendAuthNumber')
@@ -200,9 +219,6 @@ async function dupNickHandler(){
 }
 
 dupNickBtn.addEventListener('click', dupNickHandler)
-
-
-
 
 </script> 
 </body>

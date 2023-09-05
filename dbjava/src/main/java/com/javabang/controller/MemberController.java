@@ -51,18 +51,21 @@ public class MemberController {
 	public void login() {}
 
 	@PostMapping("/login")
-	public String login(MemberDTO dto, HttpSession session, HttpServletRequest request, @RequestParam("userId") String userId, @RequestParam("userPw")String userPw)
-			throws NoSuchAlgorithmException {
+	public ModelAndView login(MemberDTO dto, HttpSession session) throws NoSuchAlgorithmException {
 		MemberDTO login = memberService.login(dto);
+		ModelAndView mav = new ModelAndView("alert");
 		
-		if(userId.equals(userId) == userPw.equals(userPw)) {
+		if(login != null && login.getUserPw().equals(dto.getUserPw())){
 			session.setAttribute("login", login);
-			return "redirect:/";
+			mav.addObject("msg", login.getUserNick() + "님 환영합니다 ~ ");
+			mav.addObject("url", "/");
 		}
 		else {
-			 String script = "<script>alert('아이디 또는 비밀번호를 다시 입력해주세요'); window.location.href='/login';</script>";
-		      return script;
+			mav.addObject("msg", "로그인 실패 ! 아이디 또는 비밀번호가 올바르지 않습니다");
+			mav.addObject("url", "/member/login");
 		}
+		
+		return mav;
 	}
 
 	// 로그아웃
