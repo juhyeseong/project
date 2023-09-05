@@ -1,188 +1,221 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ include file="header.jsp" %>
-	<div class="homeMain">
-		<div class="categories">
-            	<div class="categoryImgBox">
-            		<a href="${cpath }/rent/category/펜션">
-            			<img src="http://192.168.64.200/펜션.png" class="categoryImg" style="background-color : grey;">
-            			펜션
-            		</a>
-            	</div>
-            	<div class="categoryImgBox">
-            		<a href="${cpath }/rent/category/풀빌라">
-            			<img src="http://192.168.64.200/풀빌라.png" class="categoryImg">
-            			풀빌라
-            		</a>
-            	</div>
-                <div class="categoryImgBox">
-	                <a href="${cpath }/rent/category/호텔">
-	                	<img src="http://192.168.64.200/호텔.png" class="categoryImg">
-	                	호텔
-	                </a>
-	            </div>
-                <div class="categoryImgBox">
-                	<a href="${cpath }/rent/category/리조트">
-                		<img src="http://192.168.64.200/리조트.png" class="categoryImg">
-                		리조트
-                	</a>
-                </div>
-                <div class="categoryImgBox">
-                	<a href="${cpath }/rent/category/글램핑">
-                		<img src="http://192.168.64.200/글램핑.png" class="categoryImg">
-                		글램핑
-                	</a>
-                </div>
-                <div class="categoryImgBox">
-                	<a href="${cpath }/rent/category/캠핑">
-                		<img src="http://192.168.64.200/캠핑.png" class="categoryImg">
-                		캠핑
-                	</a>
-                </div>
-                <div class="categoryImgBox">
-               		<a href="${cpath }/rent/category/게스트하우스">
-               			<img src="http://192.168.64.200/게스트하우스.png" class="categoryImg">
-               			게스트하우스
-               		</a>
-               	</div>
-                <div class="categoryImgBox">
-                	<a href="${cpath }/rent/category/한옥">
-                		<img src="http://192.168.64.200/한옥.png" class="categoryImg">
-                		한옥
-                	</a>
-                </div>
-                <div class="categoryImgBox">
-                	<a href="${cpath }/rent/category/료칸">
-                		<img src="http://192.168.64.200/료칸.png" class="categoryImg">
-                		료칸
-                	</a>
-                </div>
-      			<div class="categoryImgBox">
-      				<button class="filter">필터✔️</button>
-      				<button class="locationFilter">위치📍</button>
-      			</div>
-        </div>
-		<div class="roomBox">
-			<c:forEach var="dto" items="${rentList }">
-					<div class="room">
-						<a href="${cpath }/rent/room/${dto.idx}">
-							<img src="${dto.filePath }" class="roomImg">
-						</a>
-						<div class="roomItemInfo">
-							<div>
-								<span class="ellipsis">${dto.title}</span>
-								<span class="roomPrice"><fmt:formatNumber value="${dto.price }" groupingUsed="true" />원</span> 
-							    <span class="roomInfo">${dto.information }</span> 
-							</div>
-							<div>
-								<c:if test="${dto.wishCount == 0 }">
-									<img class="wish" src="http://192.168.64.200/blankHeart.png">
-								</c:if>
-								<c:if test="${dto.wishCount != 0 }">
-									<img class="wish" src="http://192.168.64.200/heart.png">
-								</c:if>
-							</div>
-							<input type="hidden" value="${dto.wishCount }">
-							<input type="hidden" value="${dto.idx }">
-						</div>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ include file="header.jsp"%>
+<div class="homeMain">
+	<div class="categories">
+		<div class="categoryImgBox">
+			<a href="${cpath }/rent/category/펜션"> <img
+				src="http://192.168.64.200/펜션.png" class="categoryImg"
+				style="background-color: grey;"> 펜션
+			</a>
+		</div>
+		<div class="categoryImgBox">
+			<a href="${cpath }/rent/category/풀빌라"> <img
+				src="http://192.168.64.200/풀빌라.png" class="categoryImg"> 풀빌라
+			</a>
+		</div>
+		<div class="categoryImgBox">
+			<a href="${cpath }/rent/category/호텔"> <img
+				src="http://192.168.64.200/호텔.png" class="categoryImg"> 호텔
+			</a>
+		</div>
+		<div class="categoryImgBox">
+			<a href="${cpath }/rent/category/리조트"> <img
+				src="http://192.168.64.200/리조트.png" class="categoryImg"> 리조트
+			</a>
+		</div>
+		<div class="categoryImgBox">
+			<a href="${cpath }/rent/category/글램핑"> <img
+				src="http://192.168.64.200/글램핑.png" class="categoryImg"> 글램핑
+			</a>
+		</div>
+		<div class="categoryImgBox">
+			<a href="${cpath }/rent/category/캠핑"> <img
+				src="http://192.168.64.200/캠핑.png" class="categoryImg"> 캠핑
+			</a>
+		</div>
+		<div class="categoryImgBox">
+			<a href="${cpath }/rent/category/게스트하우스"> <img
+				src="http://192.168.64.200/게스트하우스.png" class="categoryImg">
+				게스트하우스
+			</a>
+		</div>
+		<div class="categoryImgBox">
+			<a href="${cpath }/rent/category/한옥"> <img
+				src="http://192.168.64.200/한옥.png" class="categoryImg"> 한옥
+			</a>
+		</div>
+		<div class="categoryImgBox">
+			<a href="${cpath }/rent/category/료칸"> <img
+				src="http://192.168.64.200/료칸.png" class="categoryImg"> 료칸
+			</a>
+		</div>
+		<div class="categoryImgBox">
+			<button class="filter">필터✔️</button>
+			<button class="locationFilter">위치📍</button>
+		</div>
+	</div>
+	<div class="roomBox">
+		<c:forEach var="dto" items="${rentList }">
+			<div class="room">
+				<a href="${cpath }/rent/room/${dto.idx}"> <img
+					src="${dto.filePath }" class="roomImg">
+				</a>
+				<div class="roomItemInfo">
+					<div>
+						<span class="ellipsis">${dto.title}</span>
+						<span class="roomPrice"><fmt:formatNumber value="${dto.price }" groupingUsed="true" />원</span>
+						<span class="roomInfo">${dto.information }</span>
+						<span class="roomLocation">${dto.address }</span>
 					</div>
-			</c:forEach>
-		</div>		
+					<div>
+						<c:if test="${dto.wishCount == 0 }">
+							<img class="wish" src="http://192.168.64.200/blankHeart.png">
+						</c:if>
+						<c:if test="${dto.wishCount != 0 }">
+							<img class="wish" src="http://192.168.64.200/heart.png">
+						</c:if>
+					</div>
+					<input type="hidden" value="${dto.wishCount }"> <input
+						type="hidden" value="${dto.idx }">
+				</div>
+			</div>
+		</c:forEach>
 	</div>
- 
-	<!-- 필터 모달 부분 -->
-	<div id="myModal" class="modal">
-	    <div class="modal-content">
-	        <span class="close">×</span>
-			<p> - 가격 - </p>
-				<input type="radio" name="priceSort" id="lowPriceRadio" value="low" onclick="sortRooms()"> ▼ 최저가 순
-				<input type="radio" name="priceSort" id="highPriceRadio" value="high" onclick="sortRooms()"> ▲ 최고가 순
-		      <p> - 편의시설 - </p>
-		       <span>필수</span> 
-		       		<br>
-		       		<div class="checkBoxContainer1">
-		       			<div class="checkBox1">
-		       				<label>
-						       <input type="checkbox" name="information"  value="무선 인터넷"   class="infoCheckbox"> 
-			                        <img src="http://192.168.64.200/무선 인터넷.png" class="checkInfo"> 무선인터넷
-						       <input type="checkbox" name="information" value="주방" class="infoCheckbox"> 
-		                       		 <img src="http://192.168.64.200/주방.png" class="checkInfo"> 주방
-						       <input type="checkbox" name="information" value="세탁기"  class="infoCheckbox">   
-			                        <img src="http://192.168.64.200/세탁기.png" class="checkInfo"> 세탁기
-						       <input type="checkbox" name="information" value="에어컨" class="infoCheckbox"> 
-			                        <img src="http://192.168.64.200/에어컨.png" class="checkInfo"> 에어컨
-		                      </label>
-				     	  </div>
-					       <div class="checkBox2">
-					          <label>
-							       <input type="checkbox" name="information" value="TV"   class="infoCheckbox"> 
-			                        	<img src="http://192.168.64.200/TV.png" class="checkInfo"> TV
-							       <input type="checkbox" name="information" value="세탁기"  class="infoCheckbox"> 
-				                        <img src="http://192.168.64.200/컴퓨터.png" class="checkInfo"> 컴퓨터
-							       <input type="checkbox" name="information" value="주변 무료 주차"  class="infoCheckbox"> 
-				                        <img src="http://192.168.64.200/주변 무료 주차.png" class="checkInfo"> 주변 무료 주차
-							       <input type="checkbox" name="information" value="주변 유료 주차"   class="infoCheckbox"> 
-				                        <img src="http://192.168.64.200/주변 유료 주차.png" class="checkInfo"> 주변 유료 주차
-			                    </label>
-					       </div>
-				       </div>
-				      <p> - 그 밖의 편의시설 - </p>
-				      <div class="checkBoxContainer2">
-		       			<div class="checkBox1">
-					       <input type="checkbox" name="information"  value="수영장"   class="infoCheckbox">
-					       		<img src="http://192.168.64.200/수영장.png" class="checkInfo"> 수영장 <br>
-					       <input type="checkbox" name="information" value="욕조" class="infoCheckbox"> 
-					       		<img src="http://192.168.64.200/욕조.png" class="checkInfo">욕조 <br>
-					       <input type="checkbox" name="information" value="피아노"  class="infoCheckbox"> 
-					       		<img src="http://192.168.64.200/피아노.png" class="checkInfo"> 피아노 <br>
-				     	  </div>
-					       <div class="checkBox2">
-						       <input type="checkbox" name="information" value="바베큐 그릴" class="infoCheckbox"> 
-						       		<img src="http://192.168.64.200/바베큐 그릴.png" class="checkInfo">바베큐 그릴<br>
-							   <input type="checkbox" name="information" value="키즈"   class="infoCheckbox"> 
-							   		<img src="http://192.168.64.200/키즈.png" class="checkInfo">키즈  <br>
-						       <input type="checkbox" name="information" value="무료영화 OTT"  class="infoCheckbox"> 
-						       		<img src="http://192.168.64.200/무료영화(OTT).png" class="checkInfo">무료영화 OTT <br>
-					       </div>
-					       <div class="checkBox3">
-						       <input type="checkbox" name="information" value="운동기구"  class="infoCheckbox"> 
-						       		<img src="http://192.168.64.200/운동기구.png" class="checkInfo"> 운동기구<br>
-						       <input type="checkbox" name="information" value="계곡과 인접"   class="infoCheckbox"> 
-						       		<img src="http://192.168.64.200/계곡과 인접.png" class="checkInfo"> 계곡과 인접  <br>
-						       <input type="checkbox" name="information" value="해변과 인접"   class="infoCheckbox"> 
-						       		<img src="http://192.168.64.200/해변과 인접.png" class="checkInfo"> 해변과 인접<br>
-						    </div>
-				       </div>
-				       <p> - 안전관련 물품 - </p>
-				      	   <input type="checkbox" name="information"  value="구급상자"   class="infoCheckbox"> 
-				      	   		<img src="http://192.168.64.200/구급상자.png" class="checkInfo">구급상자 <br>
-					       <input type="checkbox" name="information" value="화재 경보기" class="infoCheckbox">
-					       		<img src="http://192.168.64.200/화재경보기.png" class="checkInfo"> 화재 경보기<br>
-					       <input type="checkbox" name="information" value="소화기"  class="infoCheckbox"> 
-					       		<img src="http://192.168.64.200/소화기.png" class="checkInfo">소화기 <br>
-				     <br><br>          
-	        <button onclick="applyFilter()" class="seeFilter">숙소 보러가기 !</button>
-	    </div>
+</div>
+
+<!-- 필터 모달 부분 -->
+<div id="myModal" class="modal">
+	<div class="modal-content">
+		<span class="close">×</span>
+		<p>- 가격 -</p>
+		<input type="radio" name="priceSort" id="lowPriceRadio" value="low"
+			onclick="sortRooms()"> ▼ 최저가 순 <input type="radio"
+			name="priceSort" id="highPriceRadio" value="high"
+			onclick="sortRooms()"> ▲ 최고가 순
+		<p>- 편의시설 -</p>
+		<span>필수</span> <br>
+		<div class="checkBoxContainer1">
+			<div class="checkBox1">
+				<label> <input type="checkbox" name="information"
+					value="무선 인터넷" class="infoCheckbox"> <img
+					src="http://192.168.64.200/무선 인터넷.png" class="checkInfo">
+					무선인터넷 <input type="checkbox" name="information" value="주방"
+					class="infoCheckbox"> <img
+					src="http://192.168.64.200/주방.png" class="checkInfo"> 주방 <input
+					type="checkbox" name="information" value="세탁기" class="infoCheckbox">
+					<img src="http://192.168.64.200/세탁기.png" class="checkInfo">
+					세탁기 <input type="checkbox" name="information" value="에어컨"
+					class="infoCheckbox"> <img
+					src="http://192.168.64.200/에어컨.png" class="checkInfo"> 에어컨
+				</label>
+			</div>
+			<div class="checkBox2">
+				<label> <input type="checkbox" name="information" value="TV"
+					class="infoCheckbox"> <img
+					src="http://192.168.64.200/TV.png" class="checkInfo"> TV <input
+					type="checkbox" name="information" value="세탁기" class="infoCheckbox">
+					<img src="http://192.168.64.200/컴퓨터.png" class="checkInfo">
+					컴퓨터 <input type="checkbox" name="information" value="주변 무료 주차"
+					class="infoCheckbox"> <img
+					src="http://192.168.64.200/주변 무료 주차.png" class="checkInfo">
+					주변 무료 주차 <input type="checkbox" name="information" value="주변 유료 주차"
+					class="infoCheckbox"> <img
+					src="http://192.168.64.200/주변 유료 주차.png" class="checkInfo">
+					주변 유료 주차
+				</label>
+			</div>
+		</div>
+		<p>- 그 밖의 편의시설 -</p>
+		<div class="checkBoxContainer2">
+			<div class="checkBox1">
+				<input type="checkbox" name="information" value="수영장"
+					class="infoCheckbox"> <img
+					src="http://192.168.64.200/수영장.png" class="checkInfo"> 수영장 <br>
+				<input type="checkbox" name="information" value="욕조"
+					class="infoCheckbox"> <img
+					src="http://192.168.64.200/욕조.png" class="checkInfo">욕조 <br>
+				<input type="checkbox" name="information" value="피아노"
+					class="infoCheckbox"> <img
+					src="http://192.168.64.200/피아노.png" class="checkInfo"> 피아노 <br>
+			</div>
+			<div class="checkBox2">
+				<input type="checkbox" name="information" value="바베큐 그릴"
+					class="infoCheckbox"> <img
+					src="http://192.168.64.200/바베큐 그릴.png" class="checkInfo">바베큐
+				그릴<br> <input type="checkbox" name="information" value="키즈"
+					class="infoCheckbox"> <img
+					src="http://192.168.64.200/키즈.png" class="checkInfo">키즈 <br>
+				<input type="checkbox" name="information" value="무료영화 OTT"
+					class="infoCheckbox"> <img
+					src="http://192.168.64.200/무료영화(OTT).png" class="checkInfo">무료영화
+				OTT <br>
+			</div>
+			<div class="checkBox3">
+				<input type="checkbox" name="information" value="운동기구"
+					class="infoCheckbox"> <img
+					src="http://192.168.64.200/운동기구.png" class="checkInfo"> 운동기구<br>
+				<input type="checkbox" name="information" value="계곡과 인접"
+					class="infoCheckbox"> <img
+					src="http://192.168.64.200/계곡과 인접.png" class="checkInfo"> 계곡과
+				인접 <br> <input type="checkbox" name="information"
+					value="해변과 인접" class="infoCheckbox"> <img
+					src="http://192.168.64.200/해변과 인접.png" class="checkInfo"> 해변과
+				인접<br>
+			</div>
+		</div>
+		<p>- 안전관련 물품 -</p>
+		<input type="checkbox" name="information" value="구급상자"
+			class="infoCheckbox"> <img
+			src="http://192.168.64.200/구급상자.png" class="checkInfo">구급상자 <br>
+		<input type="checkbox" name="information" value="화재 경보기"
+			class="infoCheckbox"> <img
+			src="http://192.168.64.200/화재경보기.png" class="checkInfo"> 화재 경보기<br>
+		<input type="checkbox" name="information" value="소화기"
+			class="infoCheckbox"> <img
+			src="http://192.168.64.200/소화기.png" class="checkInfo">소화기 <br>
+		<br>
+		<br>
+		<button onclick="applyFilter()" class="seeFilter">숙소 보러가기 !</button>
 	</div>
-	
-	<!-- 위치 모달 부분 -->
-	<div id="myModal2" class="modal2">
-	    <div class="modal-content2">
-	        <span class="close2">×</span>
-			<p> - 위치 - </p>
-				
-				     <br><br>          
-	        <button onclick="applyFilter2()" class="seeFilter">숙소 보러가기 !</button>
-	    </div>
+</div>
+
+<!-- 위치 모달 부분 -->
+<div id="myModal2" class="modal2">
+	<div class="modal-content2">
+		<span class="close2">×</span>
+		<p>- 위치 -</p>
+		<div class="locationList">
+			<button>강원특별자치도</button>
+			<button>경기도</button>
+			<button>경상남도</button>
+			<button>경상북도</button>
+			<button>광주광역시</button>
+			<button>대구광역시</button>
+			<button>대전광역시</button>
+			<button>부산광역시</button>
+			<button>서울특별시</button>
+			<button>세종특별자치시</button>
+			<button>울산광역시</button>
+			<button>인천광역시</button>
+			<button>전라남도</button>
+			<button>전라북도</button>
+			<button>제주특별자치도</button>
+			<button>충청남도</button>
+			<button>충청북도</button>
+		</div>
+		<button onclick="searchLocation()" class="seeFilter">숙소 보러가기 !</button>
 	</div>
-	
-	<!-- 필터 모달을 처리하는 JavaScript -->
-	<script>
+</div>
+
+<!-- 필터 모달을 처리하는 JavaScript -->
+<script>
 	    // 모달을 열 버튼 가져오기
 	    var filterButton = document.querySelector(".filter")
 	    var filterButton2 = document.querySelector(".locationFilter")
 	
 	    // 모달 가져오기
-	    var modal = document.getElementById("myModal");
+	    var modal = document.getElementById("myModal")
 	    var modal2 = document.getElementById("myModal2")
 	
 	    // 모달을 닫는 <span> 요소 가져오기
@@ -193,6 +226,9 @@
 	    const wishBtnList = document.querySelectorAll('.wish')
 	    const loginIdx = '${login.idx }'
 	    const cpath = '${cpath }'
+	    
+	    // 지역검색 변수
+	    const locationBtnList = document.querySelectorAll('.locationList button')
 
 	    // 사용자가 버튼을 클릭하면 모달을 엽니다
 	    filterButton.onclick = function() {
@@ -260,7 +296,7 @@
 	        var roomElements = document.querySelectorAll('.room'); // 모든 room elements를 가져옴
 	        var selectedAmenities = getSelectedAmenities()    // 편의시설 요소들을 가져옴
 	        var checkboxes = document.querySelectorAll('.infoCheckbox')		// 여러개 체크박스들을 모두 가져옴
-	        var selectedFilters = []						// 선택된 체크박스 값을 저장할 배열을 만듦
+	        var selectedFilters = []						  // 선택된 체크박스 값을 저장할 배열을 만듦
 	        var priceSort = getSelectedPriceSort();
 	        
 	        // 체크박스를 순회하면서 선택된 체크박스 값을 배열에 추가
@@ -271,7 +307,6 @@
 	        })
 	        
 	        roomElements.forEach(function(room) {
-	
 	            var amenitiesElement = room.querySelector('.roomInfo')
 	            var amenities = amenitiesElement.textContent
 	            
@@ -285,8 +320,6 @@
 	            } else {
 	                room.style.display = 'none'; // 조건에 안 맞으면 숨김
 	            }
-	     
-	            
 	        });
 	     // 가격 정렬
 	        if (priceSort === 'low') {
@@ -343,9 +376,7 @@
 	        // 기본값: 최저가 정렬
 	        return 'low';
 	    }
-	</script>
-	<script>
-		
+		 
 		    // 필터를 적용하는 함수
 		    function applyFilter() {
 		        var roomElements = document.querySelectorAll('.room') // 모든 room elements를 가져옴
@@ -376,8 +407,6 @@
 		            } else {
 		                room.style.display = 'none' // 조건에 안 맞으면 숨김
 		            }
-		     
-		            
 		        });
 		     // 가격 정렬
 		        if (priceSort === 'low') {
@@ -435,7 +464,57 @@
 		        return 'low'
 		    }
 			 
+			// location search handler
+			function selectedLocationHandler(event) {
+				const target = event.target
+				const selectedList = document.querySelectorAll('.locationSelected')
+				let isEqual = false
+				
+				if(target.classList.contains('locationSelected') == true) {
+					isEqual = true
+				}
+				
+				if(isEqual) {
+					target.classList.remove('locationSelected')
+				}
+				else {
+					target.classList.add('locationSelected')
+				}
+			}
+			
+			function searchLocation() {
+				const locationSelectedList = document.querySelectorAll('.locationSelected')
+				const locationList = document.querySelectorAll('.roomLocation')
+				
+				console.log('함수 실행')
+				
+				locationList.forEach(location => {
+					const room = location.parentNode.parentNode.parentNode
+					let selected = false
+					
+					locationSelectedList.forEach(locationSelected => {
+						console.log('includes', location.innerText.includes(locationSelected.innerText))
+						if(location.innerText.includes(locationSelected.innerText)) {
+							selected = true
+						}
+					})
+					
+					if(selected == false) {
+						room.style.display = 'none'
+					}
+					else {
+						room.style.display = 'block'
+					}
+				})
+				
+				modal2.style.display = 'none'
+			}
+			
+			// 찜 event
 		    wishBtnList.forEach(wishBtn => wishBtn.onclick = wishHandler)
+		    
+		    // location search event
+		    locationBtnList.forEach(locationBtn => locationBtn.onclick = selectedLocationHandler)
 	</script>
 </body>
 </html>

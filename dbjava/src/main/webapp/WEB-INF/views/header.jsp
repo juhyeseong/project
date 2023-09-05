@@ -170,6 +170,8 @@ header img {
 	justify-content: center;
 }
 .categoryImgBox > .filter {
+	cursor: pointer;
+	
 	width:70px;
 	height:50px;
 	
@@ -180,6 +182,8 @@ header img {
 	border-radius : 10px;
 }
 .categoryImgBox > .locationFilter{
+	cursor: pointer;
+
 	width:70px;
 	height:50px;
 	
@@ -348,15 +352,15 @@ div.box>div {
 	font-size: 30px;
 }
 
-ul.tab>li.selected {
+ul.tab > li.selected {
 	border-bottom: 0;
 }
 
-div.box>div {
+div.box > div {
 	display: none;
 }
 
-div.box>div.selected {
+div.box > div.selected {
 	display: block;
 }
 
@@ -1118,7 +1122,7 @@ legend{
 	font-size: 20px;
 	font-weight: bold;
 	
-	border: 1px solid gray;
+	border: 2px solid gray;
 	border-radius: 10px;
 }
 .categoryItem:hover {
@@ -1152,7 +1156,7 @@ legend{
 	margin-bottom: 20px;
 	padding-left: 30px;
 	
-	border: 1px solid gray;
+	border: 2px solid gray;
 	border-radius: 10px;
 	
 	display: flex;
@@ -1283,7 +1287,7 @@ legend{
 	font-size: 17px;
 	font-weight: bold;
 	
-	border: 1px solid gray;
+	border: 2px solid gray;
 	border-radius: 10px;
 }
 .rentInformationItem:hover {
@@ -2184,6 +2188,35 @@ legend{
   background-color: rgba(0, 0, 0, 0.5); /* 배경에 반투명한 레이어 추가 */
   z-index: 1; /* 다른 요소 위에 표시 */
 }
+
+/* 위치 모달 style */
+.locationList {
+	width: 520px;
+	margin: 40px auto;
+	margin-top: 40px;
+	
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.locationList button {
+	cursor: pointer;
+
+	width: 150px;
+	height: 50px;
+	margin: 10px;
+	
+	font-size: 17px;
+	background-color: black;
+	color: white;
+	
+	border-radius: 10px;
+	border: none;
+}
+.locationList > .locationSelected {
+	background-color: #f8215c;
+}
+
 /* 모달 내용 스타일 */
 .modal-content {
 	background-color: #fff;
@@ -2204,34 +2237,27 @@ legend{
 .modal-content > h2 {
 	text-align: center;
 }
- /* 글씨 스타일 */
- .modal-content p {
-     font-size: 15px; /* 글씨 크기 조절 */
-     font-weight: bold; /* 글씨 굵게 */
-     text-align: left;
- } 
-.modal-content2 p {
-     font-size: 15px; /* 글씨 크기 조절 */
-     font-weight: bold; /* 글씨 굵게 */
-     text-align: left;
- }
-
-    /* 라디오 버튼 스타일 */
- .modal-content input[type="radio"] {
-     width: 20px; /* 라디오 버튼 크기 조절 */
-     height: 20px;
- }
-
-.roomInfo{
-	display:none;
-}
-.roomCategory{
-	display:none;
+/* 글씨 스타일 */
+.modal-content p {
+    font-size: 15px; /* 글씨 크기 조절 */
+    font-weight: bold; /* 글씨 굵게 */
+    text-align: left;
 } 
+.modal-content2 p {
+    font-size: 15px; /* 글씨 크기 조절 */
+    font-weight: bold; /* 글씨 굵게 */
+    text-align: left;
+}
+/* 라디오 버튼 스타일 */
+.modal-content input[type="radio"] {
+    width: 20px; /* 라디오 버튼 크기 조절 */
+    height: 20px;
+}
 
-	/* Hover effect for the button */
-.seeFilter:hover {
-    background-color : black;
+.roomInfo,
+.roomCategory,
+.roomLocation {
+	display:none;
 }
 /* Style for the filter checkboxes */
 input[type="checkbox"] {
@@ -2275,6 +2301,8 @@ label {
 
 /*home.jsp ->모달창 -> 숙소보러가기 버튼*/
 .seeFilter{
+	cursor: pointer;
+
 	background-color: #f8215c;
 	border-radius:10px;
     border : none;
