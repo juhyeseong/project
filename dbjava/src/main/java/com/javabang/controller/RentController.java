@@ -107,7 +107,7 @@ public class RentController {
 		ModelAndView mav = new ModelAndView("alert");
 		int row = rentService.deleteRent(idx);
 		String msg = row != 0 ? "숙소가 삭제되었습니다!" : "숙소 삭제에 실패했습니다";
-		String url = row != 0 ? "/rent/rentManage/" + idx : "/rent/modify/" + member;
+		String url = row != 0 ? "/rent/rentManage/" + member : "/rent/modify/" + idx;
 		
 		mav.addObject("msg", msg);
 		mav.addObject("url", url);
