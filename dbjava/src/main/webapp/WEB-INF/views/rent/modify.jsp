@@ -392,17 +392,17 @@
 		}
 		
 		// mode handler
-		function restHandler() {
+		async function restHandler() {
 			const url = cpath + '/rent/restMode/' + idx
 			
-			fetch(url)
+			await fetch(url)
 			location.reload()
 		}
 		
-		function operateHandler() {
+		async function operateHandler() {
 			const url = cpath + '/rent/operateMode/' + idx
 			
-			fetch(url)
+			await fetch(url)
 			location.reload()
 		}
 		

@@ -8,7 +8,6 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -50,12 +49,27 @@ public class HomeController {
 	
 	// 검색어
 	@GetMapping("/search")
-	public ModelAndView search (@RequestParam("search") String search) {
+	public ModelAndView search (@RequestParam("search") String search, HttpSession session) {
 		ModelAndView mav = new ModelAndView("home");
 		List<RentDTO> rentList = rentService.search(search);
+		
+		rentList.forEach(rent -> {
+			HashMap<String, Object> map = new HashMap<>();
+			MemberDTO login = (MemberDTO)session.getAttribute("login");
+			
+			if(login != null) {
+				map.put("rent", rent.getIdx());
+				map.put("member", login.getIdx());
+				rent.setWishCount(wishListService.countWish(map));
+			}
+			else {
+				rent.setWishCount(0);
+			}
+		});
+		
 		mav.addObject("rentList", rentList);
+		
 		return mav;
 	}
-	
 }
 

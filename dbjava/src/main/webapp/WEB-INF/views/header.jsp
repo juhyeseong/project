@@ -214,8 +214,10 @@ header img {
 	flex: 1;
 }
 .wish {
+	all: unset;
 	cursor: pointer;
-
+}
+.wish img {
 	width: 30px;
 	height: 30px;
 }

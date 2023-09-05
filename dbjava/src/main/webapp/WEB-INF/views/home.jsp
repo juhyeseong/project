@@ -70,10 +70,10 @@
 					</div>
 					<div>
 						<c:if test="${dto.wishCount == 0 }">
-							<img class="wish" src="http://192.168.64.200/blankHeart.png">
+							<button class="wish"><img src="http://192.168.64.200/blankHeart.png"></button>
 						</c:if>
 						<c:if test="${dto.wishCount != 0 }">
-							<img class="wish" src="http://192.168.64.200/heart.png">
+							<button class="wish"><img src="http://192.168.64.200/heart.png"></button>
 						</c:if>
 					</div>
 					<input type="hidden" value="${dto.wishCount }"> <input
@@ -90,9 +90,9 @@
 		<span class="close">×</span>
 		<p>- 가격 -</p>
 		<input type="radio" name="priceSort" id="lowPriceRadio" value="low"
-			onclick="sortRooms()"> ▼ 최저가 순 <input type="radio"
+			> ▼ 최저가 순 <input type="radio"
 			name="priceSort" id="highPriceRadio" value="high"
-			onclick="sortRooms()"> ▲ 최고가 순
+			> ▲ 최고가 순
 		<p>- 편의시설 -</p>
 		<span>필수</span> <br>
 		<div class="checkBoxContainer1">
@@ -260,8 +260,11 @@
 	    wishBtnList.forEach(wishBtn => wishBtn.onclick = wishHandler)
 	    
 	 // 찜 handler
-	    function wishHandler(event) {
-	    	const target = event.target
+	    async function wishHandler(event) {
+	    	let target = event.target
+	    	while(target.classList.contains('wish') == false) {
+	    		target = target.parentNode
+	    	}
 	    	const wishCount = target.parentNode.parentNode.children[2]
 	    	const rentIdx = target.parentNode.parentNode.children[3]
 	    	const opt = {
@@ -278,14 +281,14 @@
 	    	if(wishCount.value == 0 && loginIdx != '') {
 	    		const url = cpath + '/wishList/createWishList'
 	    		
-	    		fetch(url, opt)
+	    		await fetch(url, opt)
 		    	location.reload()
 	    	}
 	    	if(wishCount.value != 0 && loginIdx != '') {
 	    		const url = cpath + '/wishList/deleteWishList'
 	    		
 	    		
-	    		fetch(url, opt)
+	    		await fetch(url, opt)
 	    		location.reload()
 	    	}
 	    	
@@ -372,59 +375,59 @@
 	        return 'low'
 	    }
 		 
-		   
-			 
-			// location search handler
-			function selectedLocationHandler(event) {
-				const target = event.target
-				const selectedList = document.querySelectorAll('.locationSelected')
-				let isEqual = false
-				
-				if(target.classList.contains('locationSelected') == true) {
-					isEqual = true
-				}
-				
-				if(isEqual) {
-					target.classList.remove('locationSelected')
-				}
-				else {
-					target.classList.add('locationSelected')
-				}
+	 	// location search handler
+		function selectedLocationHandler(event) {
+			const target = event.target
+			const selectedList = document.querySelectorAll('.locationSelected')
+			let isEqual = false
+			
+			if(target.classList.contains('locationSelected') == true) {
+				isEqual = true
 			}
 			
-			function searchLocation() {
-				const locationSelectedList = document.querySelectorAll('.locationSelected')
-				const locationList = document.querySelectorAll('.roomLocation')
-				
-				console.log('함수 실행')
-				
+			if(isEqual) {
+				target.classList.remove('locationSelected')
+			}
+			else {
+				target.classList.add('locationSelected')
+			}
+		}
+		
+		function searchLocation() {
+			const locationSelectedList = document.querySelectorAll('.locationSelected')
+			const locationList = document.querySelectorAll('.roomLocation')
+			
+			if(locationSelectedList.length == 0) {
 				locationList.forEach(location => {
 					const room = location.parentNode.parentNode.parentNode
-					let selected = false
 					
-					locationSelectedList.forEach(locationSelected => {
-						console.log('includes', location.innerText.includes(locationSelected.innerText))
-						if(location.innerText.includes(locationSelected.innerText)) {
-							selected = true
-						}
-					})
-					
-					if(selected == false) {
-						room.style.display = 'none'
-					}
-					else {
-						room.style.display = 'block'
+					room.style.display = 'block'
+				})
+			}
+			
+			locationList.forEach(location => {
+				const room = location.parentNode.parentNode.parentNode
+				let selected = false
+				
+				locationSelectedList.forEach(locationSelected => {
+					if(location.innerText.includes(locationSelected.innerText)) {
+						selected = true
 					}
 				})
 				
-				modal2.style.display = 'none'
-			}
+				if(selected == false) {
+					room.style.display = 'none'
+				}
+				else {
+					room.style.display = 'block'
+				}
+			})
 			
-			// 찜 event
-		    wishBtnList.forEach(wishBtn => wishBtn.onclick = wishHandler)
-		    
-		    // location search event
-		    locationBtnList.forEach(locationBtn => locationBtn.onclick = selectedLocationHandler)
+			modal2.style.display = 'none'
+		}
+	    
+	    // location search event
+	    locationBtnList.forEach(locationBtn => locationBtn.onclick = selectedLocationHandler)
 	</script>
 </body>
 </html>
