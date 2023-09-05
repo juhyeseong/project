@@ -52,8 +52,10 @@
 						<p>예약 번호 : <span class="reportIdx">${dto.idx }</span></p>
 						<p>예약자 ID : ${dto.userId }</p>
 						<p>예약자 성함 : ${dto.userName }</p>
-						<p>예약룸 : ${dto.title }</a></p>
-						<p>신고 타입 : <br>${dto.reportType }
+						<p>예약룸 : <br>${dto.title }</a></p>
+						<p>신고 타입 : <br>${dto.reportType }</p>
+						<br>
+						<p class="reportViewText">눌러서 상세내용 보기</p>
 					</div>			
 				</c:forEach>
 			</div>

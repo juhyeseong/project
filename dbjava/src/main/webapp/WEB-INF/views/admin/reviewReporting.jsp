@@ -52,7 +52,7 @@
 						<p>---------------------------</p>
 						<p>신고된 리뷰 작성자 ID : <br>${dto.reviewWriterId }</p>
 						<p>신고된 리뷰 작성자 이름 : <br>${dto.reviewWriterName }</p>
-						<p>눌러서 상세내용 보기</p>
+						<p class="reportViewText">눌러서 상세내용 보기</p>
 					</div>			
 				</c:forEach>
 			</div>
@@ -70,8 +70,11 @@
 			<p id="modalUserId">신고자 ID : </p>
 			<p id="modalUserName">신고자 성함 : </p>
 			<p id="modalReportType">신고 타입 : </p>
-			<p>---------------------------------------------------------------------</p>
-			<p id="modalReviewWriterId">신고된 리뷰 작성자 ID : </p>
+			<p>------------------------------------------------------------------------------------</p>
+			<div class="reportWriterId">
+				<p id="modalReviewWriterId">신고된 리뷰 작성자 ID : </p>
+				<button class="reviewBlock" data-review-id="">블락하기</button>
+			</div>
 			<p id="modalReviewWriterName">신고된 리뷰 작성자 이름 :</p> 
 			<p>신고 내용</p>
 			<textarea id="modalContent" readonly></textarea>
@@ -104,6 +107,7 @@ roomReportButtons.forEach((roomReportButton) => {
 		    document.getElementById('modalReviewWriterId').textContent = "신고된 리뷰 작성자 ID: " + data.reviewWriterId;
 		    document.getElementById('modalReviewWriterName').textContent = "신고된 리뷰 작성자 이름: " + data.reviewWriterName;
 		    document.getElementById('modalContent').textContent = "신고 내용: " + data.content;
+		    document.querySelector('.reviewBlock').setAttribute('data-review-id', data.reviewIdx);
 	    })
 	    .catch(error => console.error('Error : ',error)) 
 	})
@@ -121,6 +125,33 @@ window.addEventListener('click', (event) => {
     }
 })
 </script>
+
+<!-- 리뷰 블락하기 스크립트 -->
+<script>
+//댓글 블락을 위한 새로운 코드
+document.querySelector('.reviewBlock').addEventListener('click', function() {
+    const reviewId = this.getAttribute('data-review-id');
+    const blockUrl = `${cpath}/admin/blockReview/` + reviewId;
+    
+    fetch(blockUrl, {
+        method: 'POST',
+    })
+    .then(res => res.text())
+    .then(data => {
+        if (data == 1) {
+            alert('댓글을 성공적으로 블락했습니다.');
+        } else {
+            alert('댓글 블락에 실패했습니다.');
+        }
+    })
+    .catch(error => {
+        alert('오류가 발생했습니다.');
+        console.error('Error:', error);
+    });
+});
+	
+</script>
+
 </main>
 </body>
 </html>

@@ -88,11 +88,35 @@ public class AdminService {
 	}
 
 	public List<ReportDTO> selectAllReport() {
-		return adminDAO.selectAllReport();
+		
+		List<ReportDTO> list = adminDAO.selectAllReport();
+		
+		for(ReportDTO dto : list) {
+			if (dto.getTitle().length() >= 20) {
+				String titleSh = dto.getTitle().substring(0, 20);
+				titleSh += "...";
+				System.out.println("titleSh : " + titleSh);
+				dto.setTitle(titleSh);
+			}
+		}
+		
+		return list;
 	}
 
 	public List<ReportDTO> selectAllReport(String search) {
-		return adminDAO.selectAllReportSearch(search);
+		
+		List<ReportDTO> list = adminDAO.selectAllReportSearch(search);
+		
+		for(ReportDTO dto : list) {
+			if (dto.getTitle().length() >= 20) {
+				String titleSh = dto.getTitle().substring(0, 20);
+				titleSh += "...";
+				System.out.println("titleSh : " + titleSh);
+				dto.setTitle(titleSh);
+			}
+		}
+		
+		return list;
 	}
 
 	public int insertReviewReport(ReviewReportDTO dto) {

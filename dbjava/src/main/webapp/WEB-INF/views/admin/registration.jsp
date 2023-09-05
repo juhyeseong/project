@@ -47,7 +47,7 @@
 				    <tbody>
 				    	<c:forEach var="dto" items="${list }">
 					      <tr>
-					        <td>${dto.idx }</td>
+					        <td style="text-align: center;">${dto.idx }</td>
 					        <td><a href="${cpath }/rent/room/${dto.idx}">${dto.title }</a></td>
 					        <td>
 					        	${dto.address }

@@ -10,6 +10,7 @@ public class ReviewDTO {
 	private int rent;
 	private String content;
 	private int point;
+	private int reportStatus;
 	
 	private String profile;
 	private String userNick;
@@ -79,5 +80,11 @@ public class ReviewDTO {
 	}
 	public void setFilePathList(List<String> filePathList) {
 		this.filePathList = filePathList;
+	}
+	public int getReportStatus() {
+		return reportStatus;
+	}
+	public void setReportStatus(int reportStatus) {
+		this.reportStatus = reportStatus;
 	}
 }

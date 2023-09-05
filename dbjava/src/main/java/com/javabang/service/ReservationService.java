@@ -40,7 +40,13 @@ public class ReservationService {
 	}
 	
 	public List<ReservationDTO> selectReservation(int rent) {
-	      return reservationDAO.selectReservation(rent);
+	      List<ReservationDTO> list = reservationDAO.selectReservation(rent);
+	      
+	      for(ReservationDTO dto : list) {
+	    	  dto.setTitle(dto.getTitle().substring(0, 20)+"...");
+	      }
+	      
+	      return list;
 	}
 
 	public List<ReservationDTO> selectReservationDate(int rent) {

@@ -66,7 +66,7 @@
 	   </ul>
 	   <div class="box">
 	      <div class="menu1 selected">
-	         <pre>${dto.content }</pre>
+	         <textarea class="roomContent" readonly>${dto.content }</textarea>
 	      </div>
 	      <div class="menu2">
 	      
@@ -80,7 +80,7 @@
 	
 	         <c:if test="${totalReviews > 0}">
 	            <p>
-	               평균 별점: <span id="averageRating"></span> / 5
+	               평균 별점: <span id="averageRating"></span> / 5.0
 	            </p>
 	         </c:if>
 	         <c:if test="${not empty login}">
@@ -107,40 +107,83 @@
 	         <c:if test="${not empty reviewList }">
 	            <div class="review">
 	               <c:forEach var="dto" items="${reviewList}">
-	                  <div class="reviewItem">
-	                     <div class="reviewProfileBox">
-	                        <img src="${dto.profile }">
-	                     </div>
-	                     <div class="reviewContentBox">
-		                     <div class="reviewProfileInfo">
-		                        <p>${dto.userNick }</p>
-		                        <p class="starPoint">${dto.point }</p>
-		                        <textarea>${dto.content }</textarea>
+	                  <c:if test="${dto.reportStatus == 0 }">
+		                  <div class="reviewItem">
+		                     <div class="reviewProfileBox">
+		                        <img src="${dto.profile }">
 		                     </div>
-		                     <div class="reviewImgsBox">
-		                        <div class="carousel-container">
-		                           <div class="carousel reviewImgBox">
-									<c:if test="${not empty dto.filePathList }">
-										<c:forEach var="filePath" items="${dto.filePathList}">
-											<img class="reviewImgs" src="${filePath}" />
-										</c:forEach>
-									<c:if test="${dto.filePathList.size() >= 2}">
-										<button class="prevButton"><</button>
-										<button class="nextButton">></button>
-									</c:if>
-									</c:if>
-		                           </div>
-		                        </div>
+		                     <div class="reviewContentBox">
+			                     <div class="reviewProfileInfo">
+			                        <p>${dto.userNick }</p>
+			                        <p class="starPoint">${dto.point }</p>
+			                        <textarea readonly>${dto.content }</textarea>
+			                     </div>
+			                     <div class="reviewImgsBox">
+			                        <div class="carousel-container">
+			                           <div class="carousel reviewImgBox">
+										<c:if test="${not empty dto.filePathList }">
+											<c:forEach var="filePath" items="${dto.filePathList}">
+												<img class="reviewImgs" src="${filePath}" />
+											</c:forEach>
+										<c:if test="${dto.filePathList.size() >= 2}">
+											<button class="prevButton"><</button>
+											<button class="nextButton">></button>
+										</c:if>
+										</c:if>
+			                           </div>
+			                        </div>
+			                     </div>
+								<c:if test="${login != null && login.idx != dto.member}">
+									<span class="reviewReport" data-review-idx="${dto.idx}">신고하기</span>
+								</c:if>
+								<c:if test="${login.idx == dto.member }">
+								<a href="${cpath}/review/delete/${dto.idx}" class="deleteButton" onclick="deleteReview(${dto.idx}); return false;">ⓧ</a>
+								</c:if>
 		                     </div>
-							<c:if test="${login != null && login.idx != dto.member}">
-								<span class="reviewReport" data-review-idx="${dto.idx}">댓글 신고하기</span>
-							</c:if>
-							<c:if test="${login.idx == dto.member }">
-							<a href="${cpath}/review/delete/${dto.idx}" class="deleteButton" onclick="deleteReview(${dto.idx}); return false;">ⓧ</a>
-							</c:if>
-
-	                     </div>
-	                  </div>
+		                  </div>
+	                  </c:if>
+	                  <c:if test="${dto.reportStatus == 1 }">
+	                  	<div class="reviewItem">
+	                  		<div class="reviewItem blur">
+		                     <div class="reviewProfileBox">
+		                        <img src="${dto.profile }">
+		                     </div>
+		                     <div class="reviewContentBox">
+			                     <div class="reviewProfileInfo">
+			                        <p>${dto.userNick }</p>
+			                        <p class="starPoint">${dto.point }</p>
+			                        <textarea readonly>${dto.content }</textarea>
+			                     </div>
+			                     <div class="reviewImgsBox">
+			                        <div class="carousel-container">
+			                           <div class="carousel reviewImgBox">
+										<c:if test="${not empty dto.filePathList }">
+											<c:forEach var="filePath" items="${dto.filePathList}">
+												<img class="reviewImgs" src="${filePath}" />
+											</c:forEach>
+										<c:if test="${dto.filePathList.size() >= 2}">
+											<button class="prevButton"><</button>
+											<button class="nextButton">></button>
+										</c:if>
+										</c:if>
+			                           </div>
+			                        </div>
+			                     </div>
+								<c:if test="${login != null && login.idx != dto.member}">
+									<span class="reviewReport" data-review-idx="${dto.idx}">신고하기</span>
+								</c:if>
+								<c:if test="${login.idx == dto.member }">
+								<a href="${cpath}/review/delete/${dto.idx}" class="deleteButton" onclick="deleteReview(${dto.idx}); return false;">ⓧ</a>
+								</c:if>
+		                     </div>
+		                  </div>
+							<div class="overlay">
+								<div class="overlayBlur">
+									<span>이 댓글은 관리자에 의해 블락처리 되었습니다.</span>
+								</div>
+							</div>
+	                  	</div>
+	                  </c:if>
 	               </c:forEach>
 	               <div class="reviewSpace"><hr></div>
 	            </div>
@@ -150,8 +193,8 @@
 	</div>
 	
 	<!-- 숙소 신고 모달 창 -->
-	<div class="modal" id="reportModal">
-	    <div class="modal-content modalSize">
+	<div class="reportModal" id="reportModal">
+	    <div class="reportModal-content modalSize">
 	        <span class="close" id="closeModal">&times;</span>
 	        <h2>이 숙소를 신고하는 이유를 알려주세요</h2>
 	        <p class="modalP">이 내용은 호스트가 볼 수 없습니다</p>
@@ -188,8 +231,8 @@
 	    </div>
 	</div>
 	<!-- 댓글 신고 모달 창 -->
-	<div class="modal" id="reviewReportModal">
-	    <div class="modal-content modalSize">
+	<div class="reportModal" id="reviewReportModal">
+	    <div class="reportModal-content modalSize">
 	        <span class="close" id="reviewCloseModal">&times;</span>
 	        <h2>이 댓글을 신고하는 이유를 알려주세요</h2>
 	        <p class="modalP">이 내용은 호스트가 볼 수 없습니다</p>
@@ -487,58 +530,6 @@
 
 	<!-- 리뷰 이미지 캐러셀 -->
 	<script>
-		/* const reviewCarousels = document.querySelectorAll('.carousel') // 모든 리뷰 캐러셀을 선택합니다.
-		const prevButtons = document.querySelectorAll('.prevButton') // 모든 이전 버튼을 선택합니다.
-		const nextButtons = document.querySelectorAll('.nextButton') // 모든 다음 버튼을 선택합니다.
-	
-		// 캐러셀을 초기화하고 현재 페이지를 추적하는 변수를 추가합니다.
-		reviewCarousels.forEach((carousel, index) => {
-		let currentPage = 0
-	
-	    // 페이지를 업데이트하고 보이지 않는 항목을 숨깁니다.
-	    function updatePage() {
-			const itemsPerPage = 1 // 한 번에 보여줄 항목 수를 설정합니다.
-			const reviewItems = carousel.querySelectorAll('.reviewImgs')
-			
-			reviewItems.forEach((item, itemIndex) => {
-				if(itemIndex >= currentPage * itemsPerPage && itemIndex < (currentPage + 1) * itemsPerPage) {
-					item.style.display = 'block'
-				}
-				else {
-					item.style.display = 'none'
-				}
-			})
-	    }
-	
-	    // 이전 페이지로 이동하는 함수
-	    function prevPage() {
-			if(currentPage > 0) {
-				currentPage--
-				updatePage()
-			}
-	    }
-	
-	    // 다음 페이지로 이동하는 함수
-		function nextPage() {
-			const itemsPerPage = 1 // 한 번에 보여줄 항목 수를 설정합니다.
-			const reviewItems = carousel.querySelectorAll('.reviewImgs')
-			const totalPages = Math.ceil(reviewItems.length / itemsPerPage)
-			
-			if(currentPage < totalPages - 1) {
-				currentPage++
-				updatePage()
-			}
-		}
-	
-	    // 이전 버튼과 다음 버튼에 이벤트 리스너를 추가합니다.
-	    if(prevButtons != null && nextButtons != null) {
-	       prevButtons.forEach(prevButton => prevButton.onclick = prevPage)
-	       nextButtons.forEach(nextButton => nextButton.onclick = nextPage)
-	    }
-	
-	    // 초기 페이지를 업데이트합니다.
-	    updatePage()
-	  }) */
 	  const reviewCarousels = document.querySelectorAll('.carousel') // 모든 리뷰 캐러셀을 선택합니다.
 
 	    // 캐러셀을 초기화하고 현재 페이지를 추적하는 변수를 추가합니다.
@@ -784,5 +775,6 @@
 		    }
 		})
 	</script>
+
 </body>
 </html>

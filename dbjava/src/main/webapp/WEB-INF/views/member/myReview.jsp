@@ -34,8 +34,10 @@
 					<div class="myReviewPictureBox">
 						<div class="myReviewPicture carousel">
 							<c:if test="${dto.filePath != null}">
-								<button class="prevBtn btnShape"><</button>
-								<button class="nextBtn btnShape">></button>
+								<c:if test="${fn:contains(dto.filePath, ',')}">
+									<button class="prevBtn btnShape"><</button>
+									<button class="nextBtn btnShape">></button>
+								</c:if>
 								<c:forTokens var="picture" items="${dto.filePath }" delims=",">
 									<div class="myReviewImgsBox">
 										<img class="myReviewImgs" src="${picture }" />

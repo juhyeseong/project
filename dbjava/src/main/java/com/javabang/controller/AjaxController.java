@@ -30,6 +30,7 @@ import com.javabang.model.MemberDTO;
 import com.javabang.model.RentDTO;
 import com.javabang.model.ReportDTO;
 import com.javabang.model.ReservationDTO;
+import com.javabang.model.ReviewDTO;
 import com.javabang.model.ReviewReportDTO;
 import com.javabang.model.WishListDTO;
 import com.javabang.service.MemberService;
@@ -310,5 +311,14 @@ public class AjaxController {
 	@GetMapping("/rent/operateMode/{idx}")
 	public void operateMode(@PathVariable("idx") int idx) {
 		rentService.operateMode(idx);
+	}
+	
+	// review를 블락하기 위한 메서드
+	@PostMapping("/admin/blockReview/{idx}")
+	public int blockReview(@PathVariable("idx") int idx) {
+		System.out.println(idx);
+		int row = reportService.updateBlock(idx);
+		
+		return row;
 	}
 }

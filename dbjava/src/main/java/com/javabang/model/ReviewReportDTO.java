@@ -5,9 +5,11 @@ public class ReviewReportDTO {
 	private int idx, member, review;
 	private String content, reportType;
 	
-	/* selectAllReviewReport를 하기위한 필드*/
-	
+	/* selectAllReviewReport를 하기위한 필드 */
 	private String userName, userId, reviewContent, reviewWriterId, reviewWriterName;
+	
+	/* selectOneReviewReport를 하기위한 필드 */
+	private int reviewIdx;
 	
 	public int getIdx() {
 		return idx;
@@ -68,6 +70,12 @@ public class ReviewReportDTO {
 	}
 	public void setUserId(String userId) {
 		this.userId = userId;
+	}
+	public int getReviewIdx() {
+		return reviewIdx;
+	}
+	public void setReviewIdx(int reviewIdx) {
+		this.reviewIdx = reviewIdx;
 	}
 	
 	

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <c:set var="cpath" value="${pageContext.request.contextPath }"/>
 <!DOCTYPE html>
 <html>
@@ -224,6 +225,12 @@ header img {
 	
 }
 /*room.jsp */
+.menu1 {	
+	width: 90%;
+	overflow-wrap: break-word;
+	
+}
+
 .menu2 > p{
     font-size: 25px;
 }
@@ -271,8 +278,11 @@ header img {
 	width:360px;
 }
 .roomTitle{
+	margin-top: 0px;
 	font-weight: bold;
 	font-size: 30px;
+	width: 570px;
+	overflow-wrap: break-word;
 }
 .roomTitle, .roomAddress,
 .roomPrice, .roomDetailAddress {
@@ -296,7 +306,14 @@ header img {
  	border: none;
  	border-radius:5px;
 }
- .ellipsis {
+.roomContent {
+    width: 96%;   
+    height: 1200px; 
+    resize: none;
+    overflow: auto;
+    border: 0px; 
+}
+.ellipsis {
     width: 250px;            /* 원하는 너비로 설정 */
     white-space: nowrap;     /* 텍스트를 한 줄에 표시 */
     overflow: hidden;        /* 너무 긴 텍스트는 숨김 처리 */
@@ -1604,6 +1621,11 @@ legend{
 	display: flex;
 	position: relative;
 }
+.blocked{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
 
 .reviewProfileBox>img {
 	max-width: 150px;
@@ -1636,7 +1658,26 @@ legend{
     margin: 20px 0;
     margin-bottom: 30px;
 }
-
+.blur {
+	filter: blur(5px);
+	position: relative;
+}
+.overlay {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	color: white;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 28px;
+	font-weight: bold;
+}
+.overlayBlur {
+	background-color: black;
+}
 .reviewItem {
     border: 1px solid #ddd;
     width: 100%;
@@ -1710,6 +1751,11 @@ legend{
 	border-radius: 10px;
 	padding: 20px;
 	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.reportViewText {
+	font-size: 18px;
+	font-weight: bold;
+	color: #f8215c;
 }
 
 /* 각각의 row에 대한 스타일 */
@@ -1874,6 +1920,8 @@ legend{
 }
 .roomReport {
 	cursor: pointer;
+	margin-right: 30px;
+	margin-top: 20px;
 }
 /* hostReservation*/
 .hostReserve {
@@ -2010,7 +2058,15 @@ legend{
 
 .adminList li {
 	padding: 10px;
-
+	font-size: 18px;
+}
+.reservationManagement:first-child {
+	margin: 10px;
+}
+.reportWriterId {
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
 }
 
 .reservationManagement,
@@ -2189,6 +2245,17 @@ legend{
   z-index: 1; /* 다른 요소 위에 표시 */
 }
 
+.reportModal {
+	display: none; /* 초기에는 숨김 상태로 설정 */
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.5); /* 배경에 반투명한 레이어 추가 */
+	z-index: 1; /* 다른 요소 위에 표시 */
+}
+
 /* 위치 모달 style */
 .locationList {
 	width: 520px;
@@ -2233,6 +2300,14 @@ legend{
   border: 1px solid #888;
   width:60%;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+.reportModal-content {
+	background-color: #fff;
+	margin: 10% auto;
+	padding: 30px;
+	border: 1px solid #888;
+	width:30%;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
 .modal-content > h2 {
 	text-align: center;
@@ -2404,7 +2479,7 @@ label {
 }
 .reportSimpleRow p {
 	margin: 1px 0; 
-	padding: 8px; 
+	padding: 3px; 
 	text-align: center; 
 	width: 100%;
 }
