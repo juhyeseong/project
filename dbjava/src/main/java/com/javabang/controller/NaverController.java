@@ -17,20 +17,23 @@ public class NaverController {
 	@Autowired MemberService memberService;
 	
 	@PostMapping("/naversignup")   //네이버 회원가입 + 로그인
-	public ModelAndView signup(MemberDTO dto, HttpSession session) {
-		
+	public ModelAndView signup(String url, MemberDTO dto, HttpSession session) {
 		ModelAndView mav = new ModelAndView();
 		MemberDTO tmp = memberService.selectNaver(dto);
 
-			if (tmp == null) { 
-				mav.addObject("dto", dto);
-				mav.setViewName("/member/socialJoin");
-				return mav;
-			} 
-		 else {
-				session.setAttribute("login", tmp);
-				mav.setViewName("redirect:/");
-				return mav;
-			}
+		if (tmp == null) { 
+			mav.addObject("dto", dto);
+			mav.setViewName("/member/socialJoin");
+		} 
+		else {
+			String msg = tmp.getUserNick() + "님 환영합니다 ~~ ";
+			String goUrl = url != null ? url : "/";
+			session.setAttribute("login", tmp);
+			mav.setViewName("alert");
+			mav.addObject("msg", msg);
+			mav.addObject("url", goUrl);
+		}
+		
+		return mav;
 	}
 }

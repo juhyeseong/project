@@ -16,54 +16,17 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.javabang.model.MemberDTO;
 import com.javabang.model.RentDTO;
-import com.javabang.model.ReservationDTO;
-import com.javabang.service.ReportService;
-import com.javabang.model.ReviewDTO;
 import com.javabang.service.RentService;
-import com.javabang.service.ReservationService;
-import com.javabang.service.ReviewService;
 import com.javabang.service.WishListService;
 
 @Controller
 @RequestMapping("/rent")
 public class RentController {
 	@Autowired private RentService rentService;
-	@Autowired private ReviewService reviewService;
-	@Autowired private ReservationService reservationService;
-	@Autowired private ReportService reportService;
 	@Autowired private WishListService wishListService;
 
 	@GetMapping("/hosting")
 	public void hosting() {}
-
-	@GetMapping("/room/{idx}")
-	public ModelAndView room(@PathVariable("idx") int idx, HttpSession session) {
-	      ModelAndView mav = new ModelAndView("/rent/room");
-	      RentDTO dto = rentService.selectOne(idx);
-	        List<ReviewDTO> reviewList = reviewService.reviewSelectAll(idx);
-	        List<ReservationDTO> reservationList = reservationService.selectReservationDate(idx);
-	        int count = 0;
-	        MemberDTO tmp = null;
-	        
-	        if(session.getAttribute("login") != null) {
-	        	tmp = (MemberDTO) session.getAttribute("login");
-		        count = reportService.usedCount(idx, tmp.getIdx());
-	        }
-	        
-	        ObjectMapper mapper = new ObjectMapper();
-	        try {
-	         String json = mapper.writeValueAsString(reservationList);
-	         mav.addObject("dto", dto);
-	         mav.addObject("reviewList", reviewList);
-	         mav.addObject("reservationList", json);
-	         mav.addObject("rentIdx", idx);
-	         mav.addObject("count", count);
-	      } catch (JsonProcessingException e) {
-	         e.printStackTrace();
-	      }
-	        
-	      return mav;
-	}
 	
 	@GetMapping("/rentManage/{member}")
 	public ModelAndView hostManage(@PathVariable("member") int member) {

@@ -7,16 +7,15 @@
   
   <div class="naverlogin">
   	<form id = "naverLoginForm"method="POST" action="${cpath }/api/naversignup">
-  					<input type="hidden" name="userId" id="naveremail" />
-		          	 <input type="hidden" name="userName" id="navername" />  
-		          	  <input type="hidden" name="userNick" id="navernick"/>
+		<input type="hidden" name="userId" id="naveremail" />
+     	<input type="hidden" name="userName" id="navername" />  
+     	<input type="hidden" name="userNick" id="navernick"/>
   	</form>
   </div>
   
   <script>
  var naver_id_login = new naver_id_login("QBQcG_g3ay39MPum66CS", "http://localhost:8080/dbjava/member/navercallback");
  //var naver = new naver("QBQcG_g3ay39MPum66CS", "http://localhost:8080/dbjava/member/navercallback");
-	const token = naver_id_login.oauthParams.access_token
   // 네이버 사용자 프로필 조회
   naver_id_login.get_naver_userprofile("naverSignInCallback()");
   // 네이버 사용자 프로필 조회 이후 프로필 정보를 처리할 callback function

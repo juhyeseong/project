@@ -165,6 +165,7 @@
 			</div>
 		</div>
 		<p>- 안전관련 물품 -</p>
+		<div>
 		<input type="checkbox" name="information" value="구급상자"
 			class="infoCheckbox"> <img
 			src="http://192.168.64.200/구급상자.png" class="checkInfo">구급상자 <br>
@@ -174,6 +175,24 @@
 		<input type="checkbox" name="information" value="소화기"
 			class="infoCheckbox"> <img
 			src="http://192.168.64.200/소화기.png" class="checkInfo">소화기 <br>
+		</div>
+		<p>- 위치 - </p>
+			<div class="locationList">
+				강원특별자치도 <input type="checkbox" name="address" value="강원특별자치도" class="infoCheckbox"> 
+				경기도 <input type="checkbox" name="address" value="경기도" class="infoCheckbox"> 
+				경상남도 <input type="checkbox" name="address" value="경상남도" class="infoCheckbox"> 
+				경상북도 <input type="checkbox" name="address" value="경상북도" class="infoCheckbox"> 
+				광주광역시 <input type="checkbox" name="address" value="광주광역시" class="infoCheckbox"> 
+				서울특별시 <input type="checkbox" name="address" value="서울특별시" class="infoCheckbox"> 
+				세종특별자치시 <input type="checkbox" name="address" value="세종특별자치시" class="infoCheckbox"> 
+				울산광역시 <input type="checkbox" name="address" value="울산광역시" class="infoCheckbox">
+				인천광역시 <input type="checkbox" name="address" value="인천광역시" class="infoCheckbox">
+				전라남도 <input type="checkbox" name="address" value="전라남도" class="infoCheckbox"> 
+				전라북도 <input type="checkbox" name="address" value="전라북도" class="infoCheckbox"> 
+				제주특별자치도 <input type="checkbox" name="address" value="제주특별자치도" class="infoCheckbox"> 
+				충청남도 <input type="checkbox" name="address" value="충청남도" class="infoCheckbox"> 
+				충청북도 <input type="checkbox" name="address" value="충청북도" class="infoCheckbox"> 
+			</div>
 		<br>
 		<br>
 		<button onclick="applyFilter()" class="seeFilter">숙소 보러가기 !</button>
@@ -181,7 +200,7 @@
 </div>
 
 <!-- 위치 모달 부분 -->
-<div id="myModal2" class="modal2">
+<!-- <div id="myModal2" class="modal2">
 	<div class="modal-content2">
 		<span class="close2">×</span>
 		<p>- 위치 -</p>
@@ -204,9 +223,10 @@
 			<button>충청남도</button>
 			<button>충청북도</button>
 		</div>
-		<button onclick="searchLocation()" class="seeFilter">숙소 보러가기 !</button>
+	    <button onclick="searchLocation()" class="seeFilter">숙소 보러가기 !</button> 
+	   <button onclick = "applyFilter()" class="seeFilter"> 숙소 보러가기 !</button>
 	</div>
-</div>
+</div> -->
 
 <!-- 필터 모달을 처리하는 JavaScript -->
 <script>
@@ -298,26 +318,32 @@
 	    function applyFilter() {
 	        var roomElements = document.querySelectorAll('.room') // 모든 room클래스를 가져와서 roomElements 에 저장
 	        var selectedAmenities = getSelectedAmenities()    // 편의시설 요소들을 가져와서 selectedAmenities 에 저장
-	    
 	        var priceSort = getSelectedPriceSort()
+	 
+	        
 	        
 	        
 	        roomElements.forEach(function(room) {
 	
 	            var amenitiesElement = room.querySelector('.roomInfo')
 	            var amenities = amenitiesElement.textContent    // .roomInfo 에 있는 텍스트 콘텐트를 amenities 에 저장
+
 	            
 	            // 선택된 편의시설이 있는지 확인
 	            var hasSelectedAmenities = selectedAmenities.every(function (amenity) {   // every  함수를 이용하여 모든 선택된 편의시설이 해당 시설에 있는 지 확인
 	            	return amenities.indexOf(amenity) !== -1   // 조건이 맞으면 true, 아니면 false
 	            })
-	           
+	        
 	            if(hasSelectedAmenities) {
 	                room.style.display = 'block' // 조건에 맞으면 보임
 	            } else {
 	                room.style.display = 'none' // 조건에 안 맞으면 숨김
 	            }
 	        });
+	        
+	        
+	
+            
 	     // 가격 정렬
 	        if (priceSort === 'low') {
 	            // 최저가 순으로 정렬
@@ -375,8 +401,9 @@
 	        return 'low'
 	    }
 		 
+	
 	 	// location search handler
-		function selectedLocationHandler(event) {
+	 /* 	function selectedLocationHandler(event) {
 			const target = event.target
 			const selectedList = document.querySelectorAll('.locationSelected')
 			let isEqual = false
@@ -427,7 +454,8 @@
 		}
 	    
 	    // location search event
-	    locationBtnList.forEach(locationBtn => locationBtn.onclick = selectedLocationHandler)
+	   locationBtnList.forEach(locationBtn => locationBtn.onclick = selectedLocationHandler)  */
+	
 	</script>
 </body>
 </html>
