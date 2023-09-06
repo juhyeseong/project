@@ -38,7 +38,7 @@
 		</p>
 
 		<p>
-			<input type="text" name="year" placeholder="태어난 년도" required>
+			<input type="text" name="year" placeholder="ex ) 1988" required>
 			<select name="month" required>
 				<option value="">태어난 달 선택</option>
 				<c:forEach var="i" begin="1" end="12" step="1">

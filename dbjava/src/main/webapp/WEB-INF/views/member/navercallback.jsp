@@ -16,7 +16,6 @@
   <script>
  var naver_id_login = new naver_id_login("QBQcG_g3ay39MPum66CS", "http://localhost:8080/dbjava/member/navercallback");
  //var naver = new naver("QBQcG_g3ay39MPum66CS", "http://localhost:8080/dbjava/member/navercallback");
-	const token = naver_id_login.oauthParams.access_token
   // 네이버 사용자 프로필 조회
   naver_id_login.get_naver_userprofile("naverSignInCallback()");
   // 네이버 사용자 프로필 조회 이후 프로필 정보를 처리할 callback function

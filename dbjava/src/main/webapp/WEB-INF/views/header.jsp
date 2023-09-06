@@ -197,11 +197,11 @@ header img {
 .roomBox{
 	display: flex;
 	flex-wrap: wrap;
+	
 }
 .room{
 	width:250px;
-	margin:10px 40px;
-	
+	margin: 10px 20px auto;
 	display: flex;
 	flex-direction: column;
 }
