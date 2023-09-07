@@ -1679,6 +1679,12 @@ legend{
 }
 .overlayBlur {
 	background-color: black;
+	padding: 10px;
+}
+.overlayBlur a {
+	background-color: white;
+	color: black;
+	padding: 10px;
 }
 .reviewItem {
     border: 1px solid #ddd;
@@ -1827,6 +1833,12 @@ legend{
 	right: 10px;
 	font-size: 14px;
 	cursor: pointer;
+}
+.blurReviewReport {
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	background-color: black;
 }
 /* reservation style */
 .reserveInfo {

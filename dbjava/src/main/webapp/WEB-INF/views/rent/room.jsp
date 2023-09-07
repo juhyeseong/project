@@ -179,6 +179,9 @@
 		                  </div>
 							<div class="overlay">
 								<div class="overlayBlur">
+									<c:if test="${login.idx == dto.member }">
+										<a href="${cpath}/review/delete/${dto.idx}" class="deleteButton" onclick="deleteReview(${dto.idx}); return false;">ⓧ</a>
+									</c:if>
 									<span>이 댓글은 관리자에 의해 블락처리 되었습니다.</span>
 								</div>
 							</div>
