@@ -20,4 +20,6 @@ public interface ReportDAO {
 
 	int updateBlock(int reviewIdx);
 
+	int reverseBlock(int reviewIdx);
+
 }

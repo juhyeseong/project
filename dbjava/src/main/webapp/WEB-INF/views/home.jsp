@@ -58,8 +58,8 @@
 	<div class="roomBox">
 		<c:forEach var="dto" items="${rentList }">
 			<div class="room">
-				<a href="${cpath }/rent/room/${dto.idx}"> <img
-					src="${dto.filePath }" class="roomImg">
+				<a href="${cpath }/room/${dto.idx}"> 
+					<img src="${dto.filePath }" class="roomImg">
 				</a>
 				<div class="roomItemInfo">
 					<div>
@@ -89,93 +89,115 @@
 	<div class="modal-content">
 		<span class="close">×</span>
 		<p>- 가격 -</p>
-		<input type="radio" name="priceSort" id="lowPriceRadio" value="low"
-			> ▼ 최저가 순 <input type="radio"
-			name="priceSort" id="highPriceRadio" value="high"
-			> ▲ 최고가 순
+		<label>
+			<input type="radio" name="priceSort" id="lowPriceRadio" value="low"> ▼ 최저가 순 
+		</label>
+		<label>
+			<input type="radio" name="priceSort" id="highPriceRadio" value="high"> ▲ 최고가 순
+		</label>
 		<p>- 편의시설 -</p>
 		<span>필수</span> <br>
 		<div class="checkBoxContainer1">
 			<div class="checkBox1">
-				<label> <input type="checkbox" name="information"
-					value="무선 인터넷" class="infoCheckbox"> <img
-					src="http://192.168.64.200/무선 인터넷.png" class="checkInfo">
-					무선인터넷 <input type="checkbox" name="information" value="주방"
-					class="infoCheckbox"> <img
-					src="http://192.168.64.200/주방.png" class="checkInfo"> 주방 <input
-					type="checkbox" name="information" value="세탁기" class="infoCheckbox">
-					<img src="http://192.168.64.200/세탁기.png" class="checkInfo">
-					세탁기 <input type="checkbox" name="information" value="에어컨"
-					class="infoCheckbox"> <img
-					src="http://192.168.64.200/에어컨.png" class="checkInfo"> 에어컨
+				<label> 
+					<input type="checkbox" name="information" value="무선 인터넷" class="infoCheckbox"> 
+						<img src="http://192.168.64.200/무선 인터넷.png" class="checkInfo"> 무선인터넷 <br>
+				</label>
+				<label>
+					<input type="checkbox" name="information" value="주방"class="infoCheckbox"> 
+						<img src="http://192.168.64.200/주방.png" class="checkInfo"> 주방 <br>
+
 				</label>
 			</div>
 			<div class="checkBox2">
-				<label> <input type="checkbox" name="information" value="TV"
-					class="infoCheckbox"> <img
-					src="http://192.168.64.200/TV.png" class="checkInfo"> TV <input
-					type="checkbox" name="information" value="세탁기" class="infoCheckbox">
-					<img src="http://192.168.64.200/컴퓨터.png" class="checkInfo">
-					컴퓨터 <input type="checkbox" name="information" value="주변 무료 주차"
-					class="infoCheckbox"> <img
-					src="http://192.168.64.200/주변 무료 주차.png" class="checkInfo">
-					주변 무료 주차 <input type="checkbox" name="information" value="주변 유료 주차"
-					class="infoCheckbox"> <img
-					src="http://192.168.64.200/주변 유료 주차.png" class="checkInfo">
-					주변 유료 주차
+				<label> 
+					<input type="checkbox" name="information" value="세탁기" class="infoCheckbox">
+						<img src="http://192.168.64.200/세탁기.png" class="checkInfo">세탁기 <br>
+				</label>
+				<label>
+					<input type="checkbox" name="information" value="에어컨"class="infoCheckbox"> 
+						<img src="http://192.168.64.200/에어컨.png" class="checkInfo"> 에어컨 <br>
+				</label>
+			</div>
+			<div class="checkBox3">
+				<label> 
+					<input type="checkbox" name="information" value="TV" class="infoCheckbox"> 
+						<img src="http://192.168.64.200/TV.png" class="checkInfo"> TV <br>
+				</label>
+				<label>
+					<input type="checkbox" name="information" value="세탁기" class="infoCheckbox">
+						<img src="http://192.168.64.200/컴퓨터.png" class="checkInfo"> 컴퓨터 <br>
+				</label>
+			</div>
+			<div class="checkBox4">
+				<label> 
+					<input type="checkbox" name="information" value="주변 무료 주차" class="infoCheckbox"> 
+						<img src="http://192.168.64.200/주변 무료 주차.png" class="checkInfo"> 주변 무료 주차 <br>
+				</label>
+				<label>
+					<input type="checkbox" name="information" value="주변 유료 주차" class="infoCheckbox"> 
+						<img src="http://192.168.64.200/주변 유료 주차.png" class="checkInfo"> 주변 유료 주차 <br>
 				</label>
 			</div>
 		</div>
 		<p>- 그 밖의 편의시설 -</p>
 		<div class="checkBoxContainer2">
 			<div class="checkBox1">
-				<input type="checkbox" name="information" value="수영장"
-					class="infoCheckbox"> <img
-					src="http://192.168.64.200/수영장.png" class="checkInfo"> 수영장 <br>
-				<input type="checkbox" name="information" value="욕조"
-					class="infoCheckbox"> <img
-					src="http://192.168.64.200/욕조.png" class="checkInfo">욕조 <br>
-				<input type="checkbox" name="information" value="피아노"
-					class="infoCheckbox"> <img
-					src="http://192.168.64.200/피아노.png" class="checkInfo"> 피아노 <br>
+				<label>
+					<input type="checkbox" name="information" value="수영장" class="infoCheckbox"> 
+						<img src="http://192.168.64.200/수영장.png" class="checkInfo"> 수영장 <br>
+				</label>
+				<label>
+					<input type="checkbox" name="information" value="욕조" class="infoCheckbox"> 
+						<img src="http://192.168.64.200/욕조.png" class="checkInfo">욕조 <br>
+				</label>
+				<label>
+					<input type="checkbox" name="information" value="피아노" class="infoCheckbox"> 
+						<img src="http://192.168.64.200/피아노.png" class="checkInfo"> 피아노 <br>
+				</label>
 			</div>
 			<div class="checkBox2">
-				<input type="checkbox" name="information" value="바베큐 그릴"
-					class="infoCheckbox"> <img
-					src="http://192.168.64.200/바베큐 그릴.png" class="checkInfo">바베큐
-				그릴<br> <input type="checkbox" name="information" value="키즈"
-					class="infoCheckbox"> <img
-					src="http://192.168.64.200/키즈.png" class="checkInfo">키즈 <br>
-				<input type="checkbox" name="information" value="무료영화 OTT"
-					class="infoCheckbox"> <img
-					src="http://192.168.64.200/무료영화(OTT).png" class="checkInfo">무료영화
-				OTT <br>
+				<label>
+					<input type="checkbox" name="information" value="바베큐 그릴" class="infoCheckbox"> 
+						<img src="http://192.168.64.200/바베큐 그릴.png" class="checkInfo">바베큐 그릴<br> 
+				</label>
+				<label>
+					<input type="checkbox" name="information" value="키즈" class="infoCheckbox"> 
+						<img src="http://192.168.64.200/키즈.png" class="checkInfo">키즈 <br>
+				</label>
+				<label>
+					<input type="checkbox" name="information" value="무료영화 OTT" class="infoCheckbox"> 
+						<img src="http://192.168.64.200/무료영화(OTT).png" class="checkInfo">무료영화 OTT <br>
+				<label>
 			</div>
 			<div class="checkBox3">
-				<input type="checkbox" name="information" value="운동기구"
-					class="infoCheckbox"> <img
-					src="http://192.168.64.200/운동기구.png" class="checkInfo"> 운동기구<br>
-				<input type="checkbox" name="information" value="계곡과 인접"
-					class="infoCheckbox"> <img
-					src="http://192.168.64.200/계곡과 인접.png" class="checkInfo"> 계곡과
-				인접 <br> <input type="checkbox" name="information"
-					value="해변과 인접" class="infoCheckbox"> <img
-					src="http://192.168.64.200/해변과 인접.png" class="checkInfo"> 해변과
-				인접<br>
+				<label>
+					<input type="checkbox" name="information" value="운동기구" class="infoCheckbox"> 
+						<img src="http://192.168.64.200/운동기구.png" class="checkInfo"> 운동기구<br>
+				</label>
+				<label>
+					<input type="checkbox" name="information" value="계곡과 인접" class="infoCheckbox"> 
+						<img src="http://192.168.64.200/계곡과 인접.png" class="checkInfo"> 계곡과 인접 <br> 
+				</label>
+				<label>
+					<input type="checkbox" name="information" value="해변과 인접" class="infoCheckbox"> 
+						<img src="http://192.168.64.200/해변과 인접.png" class="checkInfo"> 해변과 인접<br>
+				</label>
 			</div>
 		</div>
 		<p>- 안전관련 물품 -</p>
-		<div>
-		<input type="checkbox" name="information" value="구급상자"
-			class="infoCheckbox"> <img
-			src="http://192.168.64.200/구급상자.png" class="checkInfo">구급상자 <br>
-		<input type="checkbox" name="information" value="화재 경보기"
-			class="infoCheckbox"> <img
-			src="http://192.168.64.200/화재경보기.png" class="checkInfo"> 화재 경보기<br>
-		<input type="checkbox" name="information" value="소화기"
-			class="infoCheckbox"> <img
-			src="http://192.168.64.200/소화기.png" class="checkInfo">소화기 <br>
-		</div>
+		<label>
+			<input type="checkbox" name="information" value="구급상자" class="infoCheckbox"> 
+				<img src="http://192.168.64.200/구급상자.png" class="checkInfo">구급상자 <br>
+		</label>
+		<label>
+			<input type="checkbox" name="information" value="화재 경보기" class="infoCheckbox"> 
+				<img src="http://192.168.64.200/화재경보기.png" class="checkInfo"> 화재 경보기<br>
+		</label>
+		<label>
+			<input type="checkbox" name="information" value="소화기" class="infoCheckbox"> 
+				<img src="http://192.168.64.200/소화기.png" class="checkInfo">소화기 <br>
+		</label>
 		<p>- 위치 - </p>
 			<div class="locationList">
 				강원특별자치도 <input type="checkbox" name="address" value="강원특별자치도" class="infoCheckbox"> 

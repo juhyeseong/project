@@ -64,7 +64,7 @@
 	</insert>
 	
 	<select id="selectAllReviewReport" resultType="reviewReport">
-		SELECT rr.*,m.userId, m.userName, r.content as reviewContent, member_of_review.userId as reviewWriterId, member_of_review.userName as reviewWriterName
+		SELECT rr.*,m.userId, m.userName, r.content as reviewContent, member_of_review.userId as reviewWriterId, member_of_review.userName as reviewWriterName, r.reportStatus,r.idx as reviewIdx
 			FROM reviewReport rr
 			JOIN member m ON m.idx = rr.member -- member related to reviewReport
 			JOIN review r ON r.idx = rr.review
@@ -72,7 +72,7 @@
 	</select>
 	
 	<select id="selectAllReviewReportSearch" parameterType="string" resultType="reviewReport">
-		SELECT rr.*,m.userId, m.userName, r.content as reviewContent, member_of_review.userId as reviewWriterId, member_of_review.userName as reviewWriterName
+		SELECT rr.*,m.userId, m.userName, r.content as reviewContent, member_of_review.userId as reviewWriterId, member_of_review.userName as reviewWriterName, r.reportStatus,r.idx as reviewIdx
 			FROM reviewReport rr
 			JOIN member m ON m.idx = rr.member -- member related to reviewReport
 			JOIN review r ON r.idx = rr.review
