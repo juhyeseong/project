@@ -52,7 +52,6 @@
 		</div>
 		<div class="categoryImgBox">
 			<button class="filter">필터✔️</button>
-			<button class="locationFilter">위치📍</button>
 		</div>
 	</div>
 	<div class="roomBox">
@@ -86,15 +85,17 @@
 
 <!-- 필터 모달 부분 -->
 <div id="myModal" class="modal">
-	<div class="modal-content">
+	<div class="modal-content filterModal">
 		<span class="close">×</span>
 		<p>- 가격 -</p>
-		<label>
-			<input type="radio" name="priceSort" id="lowPriceRadio" value="low"> ▼ 최저가 순 
-		</label>
-		<label>
-			<input type="radio" name="priceSort" id="highPriceRadio" value="high"> ▲ 최고가 순
-		</label>
+		<div class="checkBoxContainer0">
+			<label>
+				<input type="radio" name="priceSort" id="lowPriceRadio" value="low"> ▼ 최저가 순 
+			</label>
+			<label>
+				<input type="radio" name="priceSort" id="highPriceRadio" value="high"> ▲ 최고가 순
+			</label>
+		</div>
 		<p>- 편의시설 -</p>
 		<span>필수</span> <br>
 		<div class="checkBoxContainer1">
@@ -186,34 +187,85 @@
 			</div>
 		</div>
 		<p>- 안전관련 물품 -</p>
-		<label>
-			<input type="checkbox" name="information" value="구급상자" class="infoCheckbox"> 
-				<img src="http://192.168.64.200/구급상자.png" class="checkInfo">구급상자 <br>
-		</label>
-		<label>
-			<input type="checkbox" name="information" value="화재 경보기" class="infoCheckbox"> 
-				<img src="http://192.168.64.200/화재경보기.png" class="checkInfo"> 화재 경보기<br>
-		</label>
-		<label>
-			<input type="checkbox" name="information" value="소화기" class="infoCheckbox"> 
-				<img src="http://192.168.64.200/소화기.png" class="checkInfo">소화기 <br>
-		</label>
+		<div class="checkBoxContainer3">
+			<div class="checkBox1">
+			<label>
+				<input type="checkbox" name="information" value="구급상자" class="infoCheckbox"> 
+					<img src="http://192.168.64.200/구급상자.png" class="checkInfo">구급상자 <br>
+				</label>
+			</div>
+			<div class="checkBox2">
+				<label>
+					<input type="checkbox" name="information" value="화재 경보기" class="infoCheckbox"> 
+						<img src="http://192.168.64.200/화재경보기.png" class="checkInfo"> 화재 경보기<br>
+				</label>
+			</div>
+			<div class="checkBox3">
+				<label>
+					<input type="checkbox" name="information" value="소화기" class="infoCheckbox"> 
+						<img src="http://192.168.64.200/소화기.png" class="checkInfo">소화기 <br>
+				</label>
+			</div>
+		</div>
 		<p>- 위치 - </p>
-			<div class="locationList">
-				강원특별자치도 <input type="checkbox" name="address" value="강원특별자치도" class="infoCheckbox"> 
-				경기도 <input type="checkbox" name="address" value="경기도" class="infoCheckbox"> 
-				경상남도 <input type="checkbox" name="address" value="경상남도" class="infoCheckbox"> 
-				경상북도 <input type="checkbox" name="address" value="경상북도" class="infoCheckbox"> 
-				광주광역시 <input type="checkbox" name="address" value="광주광역시" class="infoCheckbox"> 
-				서울특별시 <input type="checkbox" name="address" value="서울특별시" class="infoCheckbox"> 
-				세종특별자치시 <input type="checkbox" name="address" value="세종특별자치시" class="infoCheckbox"> 
-				울산광역시 <input type="checkbox" name="address" value="울산광역시" class="infoCheckbox">
-				인천광역시 <input type="checkbox" name="address" value="인천광역시" class="infoCheckbox">
-				전라남도 <input type="checkbox" name="address" value="전라남도" class="infoCheckbox"> 
-				전라북도 <input type="checkbox" name="address" value="전라북도" class="infoCheckbox"> 
-				제주특별자치도 <input type="checkbox" name="address" value="제주특별자치도" class="infoCheckbox"> 
-				충청남도 <input type="checkbox" name="address" value="충청남도" class="infoCheckbox"> 
-				충청북도 <input type="checkbox" name="address" value="충청북도" class="infoCheckbox"> 
+			<div class="checkBoxContainer4">
+				<div class="checkBox1">
+					<label>
+						<input type="checkbox" name="address" value="강원특별자치도" class="infoCheckbox"> 강원특별자치도  
+					</label>
+					<label>
+						<input type="checkbox" name="address" value="경기도" class="infoCheckbox"> 경기도 
+					</label>
+					<label>
+						<input type="checkbox" name="address" value="경상남도" class="infoCheckbox"> 경상남도 
+					</label>
+					<label>
+						<input type="checkbox" name="address" value="경상북도" class="infoCheckbox">  경상북도 
+					</label>
+					<label>
+						<input type="checkbox" name="address" value="광주광역시" class="infoCheckbox"> 광주광역시 
+					</label>
+					<label>
+						<input type="checkbox" name="address" value="대구광역시" class="infoCheckbox"> 대구광역시 
+				    </label>
+			    </div>
+			    <div class="checkBox2">
+					<label>
+				    	<input type="checkbox" name="address" value="대전광역시" class="infoCheckbox"> 대전광역시 
+					</label>
+					<label>
+						<input type="checkbox" name="address" value="서울특별시" class="infoCheckbox"> 서울특별시 
+					</label>
+					<label>
+						<input type="checkbox" name="address" value="세종특별자치시" class="infoCheckbox"> 세종특별자치시
+					</label>
+					<label>
+						<input type="checkbox" name="address" value="울산광역시" class="infoCheckbox"> 울산광역시 
+				    </label>
+					<label>
+				    	<input type="checkbox" name="address" value="부산광역시" class="infoCheckbox"> 부산광역시 
+					</label>
+					<label>
+						<input type="checkbox" name="address" value="인천광역시" class="infoCheckbox"> 인천광역시 
+				    </label>
+			    </div>
+			    <div class="checkBox3">
+					<label>
+				    	<input type="checkbox" name="address" value="전라남도" class="infoCheckbox"> 전라남도
+					</label>
+					<label>
+						<input type="checkbox" name="address" value="전라북도" class="infoCheckbox"> 전라북도
+					</label>
+					<label>
+						<input type="checkbox" name="address" value="제주특별자치도" class="infoCheckbox"> 제주특별자치도
+					</label>
+					<label>
+						<input type="checkbox" name="address" value="충청남도" class="infoCheckbox"> 충청남도 
+					</label>
+					<label>
+						<input type="checkbox" name="address" value="충청북도" class="infoCheckbox"> 충청북도 
+					</label>
+				</div>
 			</div>
 		<br>
 		<br>
@@ -221,48 +273,17 @@
 	</div>
 </div>
 
-<!-- 위치 모달 부분 -->
-<!-- <div id="myModal2" class="modal2">
-	<div class="modal-content2">
-		<span class="close2">×</span>
-		<p>- 위치 -</p>
-		<div class="locationList">
-			<button>강원특별자치도</button>
-			<button>경기도</button>
-			<button>경상남도</button>
-			<button>경상북도</button>
-			<button>광주광역시</button>
-			<button>대구광역시</button>
-			<button>대전광역시</button>
-			<button>부산광역시</button>
-			<button>서울특별시</button>
-			<button>세종특별자치시</button>
-			<button>울산광역시</button>
-			<button>인천광역시</button>
-			<button>전라남도</button>
-			<button>전라북도</button>
-			<button>제주특별자치도</button>
-			<button>충청남도</button>
-			<button>충청북도</button>
-		</div>
-	    <button onclick="searchLocation()" class="seeFilter">숙소 보러가기 !</button> 
-	   <button onclick = "applyFilter()" class="seeFilter"> 숙소 보러가기 !</button>
-	</div>
-</div> -->
-
 <!-- 필터 모달을 처리하는 JavaScript -->
 <script>
 	    // 모달을 열 버튼 가져오기
 	    var filterButton = document.querySelector(".filter")
-	    var filterButton2 = document.querySelector(".locationFilter")
 	
 	    // 모달 가져오기
 	    var modal = document.getElementById("myModal")
-	    var modal2 = document.getElementById("myModal2")
 	
 	    // 모달을 닫는 <span> 요소 가져오기
 	    var closeBtn = document.querySelector(".close");
-	    var closeBtn2 = document.querySelector(".close2")
+
 	    
 	    // 찜 버튼
 	    const wishBtnList = document.querySelectorAll('.wish')
@@ -276,25 +297,18 @@
 	    filterButton.onclick = function() {
 	        modal.style.display = "block";
 	    }
-	    filterButton2.onclick = function(){
-	    	modal2.style.display = "block"
-	    }
+	 
 	
 	    // 사용자가 <span> (x)을 클릭하면 모달을 닫습니다
 	    closeBtn.onclick = function() {
 	        modal.style.display = "none";
 	    }
-	    closeBtn2.onclick = function(){
-	    	modal2.style.display = "none"
-	    }
+	 
 	
 	    // 사용자가 모달 외부 어느 곳이든 클릭하면 모달을 닫습니다
 	    window.onclick = function(event) {
 	        if (event.target == modal) {
 	            modal.style.display = "none";
-	        }
-	        else if (event.target == modal2){
-	        	modal2.style.display = "none"
 	        }
 	    }
 	    
@@ -341,9 +355,7 @@
 	        var roomElements = document.querySelectorAll('.room') // 모든 room클래스를 가져와서 roomElements 에 저장
 	        var selectedAmenities = getSelectedAmenities()    // 편의시설 요소들을 가져와서 selectedAmenities 에 저장
 	        var priceSort = getSelectedPriceSort()
-	 
-	        
-	        
+	        var selectedLocations = getSelectedLocations()
 	        
 	        roomElements.forEach(function(room) {
 	
@@ -355,17 +367,22 @@
 	            var hasSelectedAmenities = selectedAmenities.every(function (amenity) {   // every  함수를 이용하여 모든 선택된 편의시설이 해당 시설에 있는 지 확인
 	            	return amenities.indexOf(amenity) !== -1   // 조건이 맞으면 true, 아니면 false
 	            })
+	            
+	            var locationElement = room.querySelector('.roomLocation')
+			    var location = locationElement.textContent
+			    
+			  // 주소에서 "서울특별시"와 같은 앞부분만 추출
+			    var addressPrefix = location.split(' ')[0]; // 공백으로 분리하여 첫 번째 부분 가져옴
+			  // 선택된 주소 중 하나라도 일치하면 보이기, 그렇지 않으면 숨김
+			    var isLocationMatch = selectedLocations.length === 0 || selectedLocations.includes(addressPrefix);
 	        
-	            if(hasSelectedAmenities) {
+	            if(hasSelectedAmenities && isLocationMatch) {
 	                room.style.display = 'block' // 조건에 맞으면 보임
 	            } else {
 	                room.style.display = 'none' // 조건에 안 맞으면 숨김
 	            }
 	        });
-	        
-	        
-	
-            
+
 	     // 가격 정렬
 	        if (priceSort === 'low') {
 	            // 최저가 순으로 정렬
@@ -423,61 +440,17 @@
 	        return 'low'
 	    }
 		 
-	
-	 	// location search handler
-	 /* 	function selectedLocationHandler(event) {
-			const target = event.target
-			const selectedList = document.querySelectorAll('.locationSelected')
-			let isEqual = false
-			
-			if(target.classList.contains('locationSelected') == true) {
-				isEqual = true
-			}
-			
-			if(isEqual) {
-				target.classList.remove('locationSelected')
-			}
-			else {
-				target.classList.add('locationSelected')
-			}
-		}
-		
-		function searchLocation() {
-			const locationSelectedList = document.querySelectorAll('.locationSelected')
-			const locationList = document.querySelectorAll('.roomLocation')
-			
-			if(locationSelectedList.length == 0) {
-				locationList.forEach(location => {
-					const room = location.parentNode.parentNode.parentNode
-					
-					room.style.display = 'block'
-				})
-			}
-			
-			locationList.forEach(location => {
-				const room = location.parentNode.parentNode.parentNode
-				let selected = false
-				
-				locationSelectedList.forEach(locationSelected => {
-					if(location.innerText.includes(locationSelected.innerText)) {
-						selected = true
-					}
-				})
-				
-				if(selected == false) {
-					room.style.display = 'none'
-				}
-				else {
-					room.style.display = 'block'
-				}
-			})
-			
-			modal2.style.display = 'none'
-		}
-	    
-	    // location search event
-	   locationBtnList.forEach(locationBtn => locationBtn.onclick = selectedLocationHandler)  */
-	
+		 // 선택한 위치 가져오기 함수
+	    function getSelectedLocations() {
+	    	  var locations = []
+	    	  var locationCheckboxes = document.querySelectorAll('input[name="address"]:checked')
+	    	  
+	    	  locationCheckboxes.forEach(function (checkbox) {
+	    	    	locations.push(checkbox.value)
+	    	  })
+	    	  
+	    	  return locations
+	    	}
 	</script>
 </body>
 </html>

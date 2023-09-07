@@ -211,6 +211,7 @@ header img {
 .roomBox{
 	display: flex;
 	flex-wrap: wrap;
+	margin-left: 25px;
 }
 .room{
 	width:250px;
@@ -237,6 +238,24 @@ header img {
 .roomImg{
 	width: 280px;
 	height: 280px;
+}
+.filterModal {
+	padding: 20px;
+	width: 1000px;
+	height: 600px;
+	overflow: auto;
+}
+.checkBoxContainer3 .checkBox2 {
+	margin-left: -20px; 
+}
+.checkBoxContainer3 .checkBox3 {
+	margin-right: 44px; 
+}
+	.checkBoxContainer4 .checkBox2 {
+	margin-left: -40px; 
+}
+.checkBoxContainer4 .checkBox3 {
+	margin-right: 17px; 
 }
 /*room.jsp */
 .menu1 {	
@@ -2301,33 +2320,6 @@ legend{
 	z-index: 1; /* 다른 요소 위에 표시 */
 }
 
-/* 위치 모달 style */
-.locationList {
-	width: 520px;
-	margin: 40px auto;
-	margin-top: 40px;
-	
-	display: flex;
-	flex-wrap: wrap;
-}
-
-.locationList button {
-	cursor: pointer;
-
-	width: 150px;
-	height: 50px;
-	margin: 10px;
-	
-	font-size: 17px;
-	background-color: black;
-	color: white;
-	
-	border-radius: 10px;
-	border: none;
-}
-.locationList > .locationSelected {
-	background-color: #f8215c;
-}
 
 /* 모달 내용 스타일 */
 .modal-content {
@@ -2338,14 +2330,7 @@ legend{
 	width:70%;
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
-.modal-content2 {
-  background-color: #fff;
-  margin: 10% auto;
-  padding: 30px;
-  border: 1px solid #888;
-  width:60%;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-}
+
 .reportModal-content {
 	background-color: #fff;
 	margin: 10% auto;
@@ -2364,11 +2349,7 @@ legend{
     font-weight: bold; /* 글씨 굵게 */
     text-align: left;
 } 
-.modal-content2 p {
-    font-size: 15px; /* 글씨 크기 조절 */
-    font-weight: bold; /* 글씨 굵게 */
-    text-align: left;
-}
+
 /* 라디오 버튼 스타일 */
 .modal-content input[type="radio"] {
     width: 20px; /* 라디오 버튼 크기 조절 */
@@ -2405,19 +2386,7 @@ label {
 	text-decoration: none;
 	cursor: pointer;
 }
-.close2 {
-	color: #aaa;
-	float: right;
-	font-size: 28px;
-	font-weight: bold;
-}
 
-.close2:hover,
-.close2:focus {
-	color: black;
-	text-decoration: none;
-	cursor: pointer;
-}
 
 
 /*home.jsp ->모달창 -> 숙소보러가기 버튼*/
@@ -2474,14 +2443,12 @@ label {
 	display: flex;
 }
 .checkBoxContainer1,
-.checkBoxContainer2 {
+.checkBoxContainer2,
+.checkBoxContainer3,
+.checkBoxContainer4 {
     display: flex;
     justify-content: space-between; 
     width: 90%; 
-}
-.checkBoxContainer .checkBox1,
-.checkBoxContainer .checkBox2 {
-    flex: 1; /* 가로로 확장되도록 flex 속성을 사용합니다. */
 }
 .checkBox1{
 	height: 35px;
