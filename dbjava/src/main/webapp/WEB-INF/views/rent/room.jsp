@@ -98,7 +98,6 @@
 	      			<div class="roomExplainDetailTextBox">
 	      				<div>숙소 설명</div>
 	      				<textarea>${detail.content }</textarea>
-	      				<span class="roomExplainMore">더보기 > </span>
 	      			</div>
 	      		</div>
 	      	</div>
