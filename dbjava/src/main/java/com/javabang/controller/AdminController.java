@@ -99,6 +99,7 @@ public class AdminController {
 	public ModelAndView replyReport(ReviewReportDTO dto, @RequestParam int rentIdx) {
 		ModelAndView mav = new ModelAndView("alert");
 		System.out.println("dto.memberIdx : " + dto.getMember());
+		System.out.println("dto.rentIdx : " + dto.getRent());
 		System.out.println("dto.reviewIdx : " + dto.getReview());
 		int row = adminService.insertReviewReport(dto);
 		String msg = row != 0 ? "신고가 완료되었습니다. 관리자가 빠르게 처리해 드리겠습니다 ~" : "신고에 실패하셨습니다. 계속 실패할 경우 관리자에게 문의주세요";

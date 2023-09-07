@@ -10,7 +10,7 @@
 			order by
 					idx desc
 				offset #{offset} rows
-				fetch next #{perPage} rows only
+				fetch next #{perPage} rows only 
 	</select>
 	
 	<update id="permitAccomodation" parameterType="int">
@@ -29,13 +29,13 @@
 	<select id="selectAllReservation" resultType="reservation">
 		select RV.*, M.userName, M.userId, RE.roomtype, RE.title from reservation RV 
    			join member M on RV.member = M.idx
-    		join rent RE on RV.rent = RE.idx
+    		join rent RE on RV.rent = RE.idx order by RV.idx desc
 	</select>
 	
 	<select id="selectAllReservationSearch" parameterType="string" resultType="reservation">
 		select RV.*, M.userName, M.userId, RE.roomtype, RE.title from reservation RV 
    			join member M on RV.member = M.idx
-    		join rent RE on RV.rent = RE.idx where M.userId like '%${search}%'
+    		join rent RE on RV.rent = RE.idx where M.userId like '%${search}%' order by RV.idx desc
 	</select> 
 	
 	<insert id="insertReport" parameterType="report">
@@ -47,14 +47,14 @@
 	<select id="selectAllReport" resultType="report">
 		select RP.*, M.userId,M.userName, M.userNick, RE.title from report RP 
 			join member M on RP.member = M.idx
-			join rent RE on RP.rent = RE.idx
+			join rent RE on RP.rent = RE.idx order by RP.idx desc
 	</select>
 	
 	<select id="selectAllReportSearch" resultType="report">
 		select RP.*, M.userId,M.userName, M.userNick, RE.title from report RP 
 			join member M on RP.member = M.idx
 			join rent RE on RP.rent = RE.idx 
-				where M.userId like '%${search}%'
+				where M.userId like '%${search}%' order by RP.idx desc
 	</select>
 	
 	<insert id="insertReviewReport" parameterType="reviewReport">
@@ -68,7 +68,7 @@
 			FROM reviewReport rr
 			JOIN member m ON m.idx = rr.member -- member related to reviewReport
 			JOIN review r ON r.idx = rr.review
-			JOIN member member_of_review ON member_of_review.idx = r.member
+			JOIN member member_of_review ON member_of_review.idx = r.member order by rr.idx desc
 	</select>
 	
 	<select id="selectAllReviewReportSearch" parameterType="string" resultType="reviewReport">
@@ -77,6 +77,6 @@
 			JOIN member m ON m.idx = rr.member -- member related to reviewReport
 			JOIN review r ON r.idx = rr.review
 			JOIN member member_of_review ON member_of_review.idx = r.member	
-				where m.userId like '%${search}%'
+				where m.userId like '%${search}%' order by rr.idx desc
 	</select>
 </mapper>

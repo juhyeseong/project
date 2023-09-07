@@ -2,7 +2,7 @@ package com.javabang.model;
 
 public class ReviewReportDTO {
 	
-	private int idx, member, review;
+	private int idx, member, review, rent;
 	private String content, reportType;
 	
 	/* selectAllReviewReport를 하기위한 필드 */
@@ -82,6 +82,12 @@ public class ReviewReportDTO {
 	}
 	public void setReportStatus(String reportStatus) {
 		this.reportStatus = reportStatus;
+	}
+	public int getRent() {
+		return rent;
+	}
+	public void setRent(int rent) {
+		this.rent = rent;
 	}
 	
 	

@@ -135,7 +135,7 @@
 	                  <label for="file-input" class="file-icon2"> <img
 	                     src="http://192.168.64.200/camera.png" alt="File Icon">
 	                  </label> <input type="file" name="upload" multiple id="file-input"
-	                     style="display: none;">
+	                     style="display: none;" >
 	               </p>
 	               <p class = "reviewSubmit">
 	                  <input type="submit" value="리뷰 작성">

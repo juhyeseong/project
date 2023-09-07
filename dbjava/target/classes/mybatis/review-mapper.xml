@@ -10,7 +10,7 @@
 			join member m
 				on r.member = m.idx
 			where rent = #{idx} 
-			order by r.idx asc
+			order by r.idx desc
 	</select>
 	
 	<select id="reviewFileSelectAll" parameterType="int" resultType="string">

@@ -26,6 +26,9 @@ a{
 p{
     text-align:center;
 }
+textarea {
+	resize: none;
+}
 .main {
 	width: 100%;
 	height: 80vh;
@@ -130,6 +133,7 @@ header img {
     background: none;
     
     border: none;
+
 }
 .search {
     width: 40px;
@@ -364,9 +368,10 @@ ul.tab {
 	
 	height: 50px;
 	padding-left: 0;
-	margin: 0;
+	margin-left: 35px;
 	
 	display: flex;
+	
 }
 
 ul.tab>li {
@@ -2110,7 +2115,7 @@ legend{
 
 .adminList li {
 	padding: 10px;
-	font-size: 18px;
+	font-size: 15px;
 }
 .reservationManagement:first-child {
 	margin: 10px;
@@ -2320,6 +2325,33 @@ legend{
 	z-index: 1; /* 다른 요소 위에 표시 */
 }
 
+/* 위치 모달 style */
+.locationList {
+	width: 520px;
+	margin: 40px auto;
+	margin-top: 40px;
+	
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.locationList button {
+	cursor: pointer;
+
+	width: 150px;
+	height: 50px;
+	margin: 10px;
+	
+	font-size: 17px;
+	background-color: black;
+	color: white;
+	
+	border-radius: 10px;
+	border: none;
+}
+.locationList > .locationSelected {
+	background-color: #f8215c;
+}
 
 /* 모달 내용 스타일 */
 .modal-content {
@@ -2330,7 +2362,14 @@ legend{
 	width:70%;
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
-
+.modal-content2 {
+  background-color: #fff;
+  margin: 10% auto;
+  padding: 30px;
+  border: 1px solid #888;
+  width:60%;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
 .reportModal-content {
 	background-color: #fff;
 	margin: 10% auto;
@@ -2349,7 +2388,11 @@ legend{
     font-weight: bold; /* 글씨 굵게 */
     text-align: left;
 } 
-
+.modal-content2 p {
+    font-size: 15px; /* 글씨 크기 조절 */
+    font-weight: bold; /* 글씨 굵게 */
+    text-align: left;
+}
 /* 라디오 버튼 스타일 */
 .modal-content input[type="radio"] {
     width: 20px; /* 라디오 버튼 크기 조절 */
@@ -2386,7 +2429,19 @@ label {
 	text-decoration: none;
 	cursor: pointer;
 }
+.close2 {
+	color: #aaa;
+	float: right;
+	font-size: 28px;
+	font-weight: bold;
+}
 
+.close2:hover,
+.close2:focus {
+	color: black;
+	text-decoration: none;
+	cursor: pointer;
+}
 
 
 /*home.jsp ->모달창 -> 숙소보러가기 버튼*/
@@ -2449,6 +2504,10 @@ label {
     display: flex;
     justify-content: space-between; 
     width: 90%; 
+}
+.checkBoxContainer .checkBox1,
+.checkBoxContainer .checkBox2 {
+    flex: 1; /* 가로로 확장되도록 flex 속성을 사용합니다. */
 }
 .checkBox1{
 	height: 35px;
@@ -2525,7 +2584,7 @@ label {
 	resize: none
 }
 .reportDetail p {
-	margin: 5px 0;
+	margin: 1px 0;
 }
 /* member -> myReview */
 .myReviewMain {
@@ -2734,7 +2793,7 @@ label {
 	padding: 20px;
 }
 
-.roomExplainDetailTextBox > textarea {
+.roomExplainDetailTextBox  textarea {
     width: 98%;
     height: 440px;
     resize: none;
@@ -2755,6 +2814,9 @@ label {
 .emptySpace{
 	width: 100%;
 	height: 100px;
+}
+.showInput{
+	margin-right: 16px;
 }
 </style>
 </head>
@@ -2779,10 +2841,15 @@ label {
 	        	<c:if test="${not empty login }">
 	           		<a href="${cpath }/rent/rentManage/${login.idx }">호스트페이지</a>
 	            </c:if>
-	            <a href="${cpath }/member/${empty login ? 'login' : 'logout'}"><button>${empty login ? '로그인' : '로그아웃'}</button></a>
-
-		        <c:if test="${not empty login }">
-		       		<img src="${login.profile }"><h4>${login.userNick }님 환영합니다 !</h4> <a href="${cpath }/member/mypage/${login.idx}"><button class="myPageBtn">마이페이지</button></a>
+					<c:if test="${empty login }">
+						<a href="${cpath }/member/login"><button>로그인</button></a>
+					</c:if>
+		        	<c:if test="${not empty login }">
+		       		<img src="${login.profile }"><h4>${login.userNick }님 환영합니다 !</h4> 
+	            	<a href="${cpath }/member/logout"><button>로그아웃</button></a>
+		       		<a href="${cpath }/member/mypage/${login.idx}">
+		       			<button class="myPageBtn">마이페이지</button>
+		       		</a>
 		       	</c:if>
 		       	<c:if test="${login.userId == 'admin'}">
 		       		<a href="${cpath }/admin/adminPage/${login.idx}"><button>관리자 페이지</button></a>
