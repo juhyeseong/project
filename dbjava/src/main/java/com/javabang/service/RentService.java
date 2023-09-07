@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.javabang.model.RentDTO;
+import com.javabang.model.RentExplainDTO;
 import com.javabang.model.ReservationDTO;
 import com.javabang.repository.RentDAO;
 import com.javabang.repository.ReservationDAO;
@@ -244,5 +245,9 @@ public class RentService {
 
 	public void operateMode(int idx) {
 		rentDAO.operateMode(idx);
+	}
+
+	public RentExplainDTO rentDetailOne(int idx) {
+		return rentDAO.rentDetailOne(idx);
 	}
 }

@@ -45,11 +45,18 @@
 			<div class="reportsBox">
 				<c:forEach var="dto" items="${list }">
 					<div class="reportSimpleRow">
+						<c:if test="${dto.reportStatus == 1 }">
+							<p class="reportViewText">블락</p>
+						</c:if>
+						<c:if test="${dto.reportStatus == 0 }">
+							<p class="reportViewText">확인중</p>
+						</c:if>
 						<p>신고 번호 : <span class="reportIdx">${dto.idx }</span></p>
 						<p>신고자 ID : ${dto.userId }</p>
 						<p>신고자 이름 : ${dto.userName }</p>
 						<p>신고 타입 : <br>${dto.reportType }</p>
 						<p>---------------------------</p>
+						<p>신고된 리뷰 번호 : ${dto.reviewIdx}</p>
 						<p>신고된 리뷰 작성자 ID : <br>${dto.reviewWriterId }</p>
 						<p>신고된 리뷰 작성자 이름 : <br>${dto.reviewWriterName }</p>
 						<p class="reportViewText">눌러서 상세내용 보기</p>
@@ -73,7 +80,10 @@
 			<p>------------------------------------------------------------------------------------</p>
 			<div class="reportWriterId">
 				<p id="modalReviewWriterId">신고된 리뷰 작성자 ID : </p>
-				<button class="reviewBlock" data-review-id="">블락하기</button>
+				<div class="blaockBtns">
+					<button class="reviewBlock" data-review-id="">블락</button>
+					<button class="reverseBlock" data-review-id="">해제</button>
+				</div>
 			</div>
 			<p id="modalReviewWriterName">신고된 리뷰 작성자 이름 :</p> 
 			<p>신고 내용</p>
@@ -100,14 +110,15 @@ roomReportButtons.forEach((roomReportButton) => {
 	    .then(res => res.json())
 	    .then(data => {
 	    	// 모달 내용 업데이트
-		    document.getElementById('modalReservationNumber').textContent = "리뷰 신고 번호: " + data.idx;
-		    document.getElementById('modalUserId').textContent = "신고자 ID: " + data.userId;
-		    document.getElementById('modalUserName').textContent = "신고자 성함: " + data.userName;
-		    document.getElementById('modalReportType').textContent = "신고 타입: " + data.reportType;
-		    document.getElementById('modalReviewWriterId').textContent = "신고된 리뷰 작성자 ID: " + data.reviewWriterId;
-		    document.getElementById('modalReviewWriterName').textContent = "신고된 리뷰 작성자 이름: " + data.reviewWriterName;
-		    document.getElementById('modalContent').textContent = "신고 내용: " + data.content;
-		    document.querySelector('.reviewBlock').setAttribute('data-review-id', data.reviewIdx);
+		    document.getElementById('modalReservationNumber').textContent = "리뷰 신고 번호: " + data.idx
+		    document.getElementById('modalUserId').textContent = "신고자 ID: " + data.userId
+		    document.getElementById('modalUserName').textContent = "신고자 성함: " + data.userName
+		    document.getElementById('modalReportType').textContent = "신고 타입: " + data.reportType
+		    document.getElementById('modalReviewWriterId').textContent = "신고된 리뷰 작성자 ID: " + data.reviewWriterId
+		    document.getElementById('modalReviewWriterName').textContent = "신고된 리뷰 작성자 이름: " + data.reviewWriterName
+		    document.getElementById('modalContent').textContent = "신고 내용: " + data.content
+		    document.querySelector('.reviewBlock').setAttribute('data-review-id', data.reviewIdx)
+		    document.querySelector('.reverseBlock').setAttribute('data-review-id', data.reviewIdx)
 	    })
 	    .catch(error => console.error('Error : ',error)) 
 	})
@@ -131,7 +142,7 @@ window.addEventListener('click', (event) => {
 //댓글 블락을 위한 새로운 코드
 document.querySelector('.reviewBlock').addEventListener('click', function() {
     const reviewId = this.getAttribute('data-review-id');
-    const blockUrl = `${cpath}/admin/blockReview/` + reviewId;
+    const blockUrl = `${cpath}/admin/blockReview/` + reviewId
     
     fetch(blockUrl, {
         method: 'POST',
@@ -139,18 +150,46 @@ document.querySelector('.reviewBlock').addEventListener('click', function() {
     .then(res => res.text())
     .then(data => {
         if (data == 1) {
-            alert('댓글을 성공적으로 블락했습니다.');
+            alert('댓글을 성공적으로 블락했습니다.')
+            location.reload()
         } else {
-            alert('댓글 블락에 실패했습니다.');
+            alert('댓글 블락에 실패했습니다.')
         }
     })
     .catch(error => {
-        alert('오류가 발생했습니다.');
-        console.error('Error:', error);
+        alert('오류가 발생했습니다.')
+        console.error('Error:', error)
     });
 });
 	
 </script>
+
+<!-- 댓글 블락을 해제하는 스크립트 -->
+<script>
+document.querySelector('.reverseBlock').addEventListener('click', function() {
+    const reviewId = this.getAttribute('data-review-id');
+    const reverseUrl = `${cpath}/admin/reverseBlock/` + reviewId
+   	alert(reverseUrl)
+    fetch(reverseUrl, {
+        method: 'POST',
+    })
+    .then(res => res.text())
+    .then(data => {
+    	alert(data)
+        if (data == 1) {
+            alert('블락을 성공적으로 해제했습니다.')
+            location.reload()
+        } else {
+            alert('블락 해제에 실패했습니다.')
+        }
+    })
+    .catch(error => {
+        alert('오류가 발생했습니다.')
+        console.error('Error:', error)
+    });
+});
+</script>
+
 
 </main>
 </body>

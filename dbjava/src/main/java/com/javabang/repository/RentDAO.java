@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.stereotype.Repository;
 
 import com.javabang.model.RentDTO;
+import com.javabang.model.RentExplainDTO;
 
 @Repository
 public interface RentDAO {
@@ -52,4 +53,6 @@ public interface RentDAO {
 	public void restMode(int idx);
 
 	public void operateMode(int idx);
+
+	public RentExplainDTO rentDetailOne(int idx);
 }

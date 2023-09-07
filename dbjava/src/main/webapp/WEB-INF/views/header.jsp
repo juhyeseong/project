@@ -12,7 +12,7 @@
 .title > a > img{
 	height: 130px;
 	width: 140px;
-	margin-left:80px;
+
 }
 /* all style */
 body {
@@ -35,6 +35,9 @@ p{
 	align-items: center;
 	
 	overflow-y: scroll;
+	
+    font-family: "굴림";
+    font-weight: bold;
 }
 
 /* header style */
@@ -43,21 +46,36 @@ p{
 	height:100px;
 	
     background-color: #fff;
-    transition: background-color 0.3s; /* 배경색 변화에 애니메이션 적용 */
+    transition: background-color 0.3s; 
+    
+    padding: 0 100px;
+    box-sizing: border-box;
     
 	position: fixed;
 	z-index: 999;
 }
+.headerLogoBox {
+	flex: 1;
+}
+.headerSearchBox {
+	flex: 1;
+	display: flex;
+	justify-content: flex-end;
+	box-sizing: border-box;
+}
+.headerElseBox {
+	flex: 1.4;
+	
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+}
+.headerElseBox * {
+	margin: 5px;
+}
 header {
     height: 100px;
-
-	background-color: white;
-    font-family: "굴림";
-    font-weight: bold;
-    
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    margin-bottom: 20px;
 }
 header button {
 	all: unset;
@@ -129,10 +147,6 @@ header img {
 	margin-left: 50px;
 }
 
-.myPageBtn{
-	margin-right: 90px;
-}
-
 /*home css*/
 .homeMain {
 	width: 95%;
@@ -197,11 +211,10 @@ header img {
 .roomBox{
 	display: flex;
 	flex-wrap: wrap;
-	
 }
 .room{
 	width:250px;
-	margin: 10px 20px auto;
+	margin: 20px 40px;
 	display: flex;
 	flex-direction: column;
 }
@@ -224,7 +237,6 @@ header img {
 .roomImg{
 	width: 280px;
 	height: 280px;
-	
 }
 /*room.jsp */
 .menu1 {	
@@ -585,26 +597,26 @@ legend{
 	
 	display: flex;
 	flex-direction: column;
-	justify-content: center;
+	justify-content: space-between;
 	align-items: center;
 }
 .list-info{
 	width: 1000px;
+	height: 560px;
 	margin: auto;
+	padding: 20px;
 }
-.list-info > h2 {
-	padding-left: 170px;
-}
+
 .profileImg {
     width: 250px;
 	height: 250px; 
 
 	border-radius: 70%;
 }
+
 .mypage{
 	width:450px;
-	height:50px;
-	margin-top:30px;
+	height:56px;
 	line-height:40px;
 	text-align: center;
 	
@@ -612,6 +624,13 @@ legend{
 	color:white;
 	
 	border-radius:10px;
+	
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.mypageWrap {
+	padding: 1px 0px;
 }
 
 /*프로필 사진 변경 버튼*/
@@ -1753,7 +1772,7 @@ legend{
 	/* Report Box 전체에 대한 스타일 */
 .reportBox {
 	width: 400px;
-	height: 300px;
+	height: 340px;
 	margin: auto;
 	border: 1px solid #ccc;
 	border-radius: 10px;
@@ -2082,6 +2101,18 @@ legend{
 	display: flex;
 	justify-content: space-between;
 }
+.reviewBlock,
+.reverseBlock {
+	all: unset;
+	cursor: pointer;
+	
+	padding: 3px 10px;
+	background-color: black;
+    color: white;
+    font-weight: bold;
+    border-radius: 10px;
+}
+
 
 .reservationManagement,
 .reviewManagement {
@@ -2301,7 +2332,7 @@ legend{
 /* 모달 내용 스타일 */
 .modal-content {
 	background-color: #fff;
-	margin: 10% auto;
+	margin: 7% auto;
 	padding: 20px;
 	border: 1px solid #888;
 	width:70%;
@@ -2321,6 +2352,7 @@ legend{
 	padding: 30px;
 	border: 1px solid #888;
 	width:30%;
+	height: 480px;
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
 .modal-content > h2 {
@@ -2438,7 +2470,10 @@ label {
   cursor: pointer; /* 커서 모양을 포인터로 변경합니다. */
 }
 /*필터 모달 창 체크박스*/
-
+.checkBoxContainer0 {
+	display: flex;
+}
+.checkBoxContainer1,
 .checkBoxContainer2 {
     display: flex;
     justify-content: space-between; 
@@ -2663,35 +2698,129 @@ label {
 	border: 0px;
 	font-size: 13px;
 }
+/* rent -> room -> 숙소정보 */
+.roomExplainDetail {
+    border-radius: 12px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.5);
+    height: 600px;
+    display: flex;
+    margin-bottom: 100px;
+}
+
+.roomExplainLeft,
+.roomExplainRight {
+    padding: 16px;
+    flex: 1;
+    box-sizing: border-box;
+}
+
+  /* Title Box */
+.roomExplainTitleBox {
+    height: 100px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+.roomExplainTitle {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.roomExplainSubExplain {
+    font-size: 14px;
+    color: #666;
+}
+
+  /* Profile */
+.roomExplainProfile > img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    box-shadow: 1px 2px 4px rgba(0, 0, 0, 1);
+}
+
+  /* Room Convenient */
+.roomConvenient {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 20px;
+    overflow: auto;
+    border-top: 1px solid #eee;
+    height: 280px;
+}
+.roomConvenientOne {
+  	font-size: 16px;
+  	display: flex;
+  	align-items: center;
+  	margin: 7px 0;
+}
+
+.roomConvenientOne > img {
+    margin-right: 10px;
+}
+
+/* Room Explain Right */
+.roomExplainDetailTextBox {
+	padding: 20px;
+}
+
+.roomExplainDetailTextBox > textarea {
+    width: 98%;
+    height: 440px;
+    resize: none;
+    border: 1px solid #eee;
+    padding: 8px;
+    box-sizing: border-box;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.roomExplainMore {
+    font-size: 12px;
+    cursor: pointer;
+}
+.roomConvenientOne{
+  	display: flex;
+}
+.emptySpace{
+	width: 100%;
+	height: 100px;
+}
 </style>
 </head>
 <body>
 	<header>
         <div class="header">
-        	<div class="title"><a href="${cpath }"><img src="http://192.168.64.200/javaBang.png"></a></div>
-	       
-	       <form method="GET"  action="${cpath }/search"> 
-		        <div class="btn3 hidden">
-		        	<input type="search" name="search" id="searchInput">
-		        	<input type="submit" id ="inputButton" value="">
-		        	<input class="hiddenInput" type="button" value="❌">
-		        </div>
-		        <div class="showInput"><input type="button"  id="showInputButton"></div>
-	        </form>
-	        <ul class="host">
+        	<div class="headerLogoBox">
+				<div class="title"><a href="${cpath }"><img src="http://192.168.64.200/javaBang.png"></a></div>
+        	</div>
+			<div class="headerSearchBox">
+				<form method="GET"  action="${cpath }/search"> 
+					<div class="btn3 hidden">
+						<input type="search" name="search" id="searchInput">
+						<input type="submit" id ="inputButton" value="">
+						<input class="hiddenInput" type="button" value="❌">
+					</div>
+					<div class="showInput"><input type="button"  id="showInputButton"></div>
+				</form>
+			</div>
+			<div class="headerElseBox">
+	
 	        	<c:if test="${not empty login }">
-	           		<li><a href="${cpath }/rent/rentManage/${login.idx }">호스트페이지</a></li>
+	           		<a href="${cpath }/rent/rentManage/${login.idx }">호스트페이지</a>
 	            </c:if>
-	            <li><a href="${cpath }/member/${empty login ? 'login' : 'logout'}"><button>${empty login ? '로그인' : '로그아웃'}</button></a></li>
-	           
-	        </ul>
-	        
-	        <c:if test="${not empty login }">
-	       		<img src="${login.profile }"><h4>${login.userNick }님 환영합니다 !</h4> <a href="${cpath }/member/mypage/${login.idx}"><button class="myPageBtn">마이페이지</button></a>
-	       	</c:if>
-	       	<c:if test="${login.userId == 'admin'}">
-	       		<a href="${cpath }/admin/adminPage/${login.idx}"><button>관리자 페이지</button></a>
-	       	</c:if>
+	            <a href="${cpath }/member/${empty login ? 'login' : 'logout'}"><button>${empty login ? '로그인' : '로그아웃'}</button></a>
+
+		        <c:if test="${not empty login }">
+		       		<img src="${login.profile }"><h4>${login.userNick }님 환영합니다 !</h4> <a href="${cpath }/member/mypage/${login.idx}"><button class="myPageBtn">마이페이지</button></a>
+		       	</c:if>
+		       	<c:if test="${login.userId == 'admin'}">
+		       		<a href="${cpath }/admin/adminPage/${login.idx}"><button>관리자 페이지</button></a>
+		       	</c:if>
+			</div>
         </div>
     </header>
     

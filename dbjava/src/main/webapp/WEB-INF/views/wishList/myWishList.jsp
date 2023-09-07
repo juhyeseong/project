@@ -17,8 +17,8 @@
 								<span class="ellipsis">${dto.title}</span>
 								<span class="roomPrice"><fmt:formatNumber value="${dto.price }" groupingUsed="true"/>원</span> 
 							</div>
-							<div>
-								<img class="wish" src="http://192.168.64.200/heart.png">
+							<div class="wish">
+								<img  src="http://192.168.64.200/heart.png">
 							</div>
 							<input type="hidden" value="${dto.rent }">
 						</div>

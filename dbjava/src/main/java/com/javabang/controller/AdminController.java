@@ -88,7 +88,7 @@ public class AdminController {
 		ModelAndView mav = new ModelAndView("alert");
 		int row = adminService.insertReport(dto);
 		String msg = row != 0 ? "신고가 완료되었습니다. 관리자가 빠르게 처리해 드리겠습니다 ~" : "신고에 실패하셨습니다. 계속 실패할 경우 관리자에게 문의주세요";
-		String url = "/rent/room/" + dto.getRent();
+		String url = "/room/" + dto.getRent();
 		
 		mav.addObject("msg", msg);
 		mav.addObject("url", url);
@@ -103,7 +103,7 @@ public class AdminController {
 		System.out.println("dto.reviewIdx : " + dto.getReview());
 		int row = adminService.insertReviewReport(dto);
 		String msg = row != 0 ? "신고가 완료되었습니다. 관리자가 빠르게 처리해 드리겠습니다 ~" : "신고에 실패하셨습니다. 계속 실패할 경우 관리자에게 문의주세요";
-		String url = "/rent/room/" + rentIdx;
+		String url = "/room/" + rentIdx;
 		
 		mav.addObject("msg", msg);
 		mav.addObject("url", url);

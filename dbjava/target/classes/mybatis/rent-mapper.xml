@@ -154,6 +154,12 @@
     		set state = 1
     		where idx = #{idx}
     </update>
+    
+    <select id="rentDetailOne" parameterType="int" resultType="explain">
+    	select * from rent RT
+		    join member M on RT.member = M.idx
+		    where RT.idx = #{idx}
+    </select>
 </mapper>
 
 

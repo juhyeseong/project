@@ -315,8 +315,14 @@ public class AjaxController {
 	// review를 블락하기 위한 메서드
 	@PostMapping("/admin/blockReview/{idx}")
 	public int blockReview(@PathVariable("idx") int idx) {
-		System.out.println(idx);
 		int row = reportService.updateBlock(idx);
+		
+		return row;
+	}
+	// review 블락을 해제하기 위한 메서드
+	@PostMapping("/admin/reverseBlock/{idx}")
+	public int reverseBlock(@PathVariable("idx") int idx) {
+		int row = reportService.reverseBlock(idx);
 		
 		return row;
 	}

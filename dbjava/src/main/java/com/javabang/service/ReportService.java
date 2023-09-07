@@ -45,6 +45,10 @@ public class ReportService {
 	public int updateBlock(int reviewIdx) {
 		return reportDAO.updateBlock(reviewIdx);
 	}
+
+	public int reverseBlock(int reviewIdx) {
+		return reportDAO.reverseBlock(reviewIdx);
+	}
 	
 	
 

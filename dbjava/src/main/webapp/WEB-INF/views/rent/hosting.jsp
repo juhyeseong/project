@@ -781,7 +781,7 @@
          
          rentInformationSelectedList.forEach(rentInformationSelected => {
             if(count != listLength) {
-               rentInformationValue += rentInformationSelected.children[1].innerText + ', '
+               rentInformationValue += rentInformationSelected.children[1].innerText + ','
             }
             else {
                rentInformationValue += rentInformationSelected.children[1].innerText
