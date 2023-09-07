@@ -97,7 +97,7 @@
 	      		<div class="roomExplainRight">
 	      			<div class="roomExplainDetailTextBox">
 	      				<div>숙소 설명</div>
-	      				<textarea>${detail.content }</textarea>
+	      				<textarea readonly>${detail.content }</textarea>
 	      			</div>
 	      		</div>
 	      	</div>
