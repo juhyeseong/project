@@ -43,7 +43,11 @@
 	<interceptors>
 		<interceptor>
 			<!-- 인터셉터 처리를 적용할 경로 나열 -->
-			<mapping path="/member/**" />		
+			<mapping path="/member/modifyPassword/**" />		
+			<mapping path="/member/mypage/**" />		
+			<mapping path="/member/myReview/**" />		
+			<mapping path="/member/update/**" />		
+			<mapping path="/member/updateProfile/**" />				
 			<mapping path="/admin/**" />		
 			<mapping path="/rent/**" />
 							

@@ -7,9 +7,9 @@
   
   <div class="naverlogin">
   	<form id = "naverLoginForm"method="POST" action="${cpath }/api/naversignup">
-  					<input type="hidden" name="userId" id="naveremail" />
-		          	 <input type="hidden" name="userName" id="navername" />  
-		          	  <input type="hidden" name="userNick" id="navernick"/>
+		<input type="hidden" name="userId" id="naveremail" />
+     	<input type="hidden" name="userName" id="navername" />  
+     	<input type="hidden" name="userNick" id="navernick"/>
   	</form>
   </div>
   

@@ -14,20 +14,20 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
-		
 		HttpSession session = request.getSession();
 		
-		if(session.getAttribute("login") != null) {
-			return true;
+		if(session.getAttribute("login") != null) {	
+			
+			return true;							
 		}
-		
-		String requestURL = request.getRequestURL().toString();
-		requestURL = URLEncoder.encode(requestURL,"UTF-8");
-		
+		String requestURI = request.getRequestURI().toString();
 		String contextPath = request.getContextPath();
-		response.sendRedirect(contextPath + "/member/login?url=" + requestURL); 
 		
-		return false;
+		requestURI = requestURI.substring(contextPath.length());
+		requestURI = URLEncoder.encode(requestURI, "UTF-8");
+		response.sendRedirect(contextPath + "/member/login?url=" + requestURI);
+						
+		return false;	
 	}
 	
 	@Override

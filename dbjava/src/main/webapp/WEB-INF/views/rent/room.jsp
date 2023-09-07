@@ -283,6 +283,7 @@
 	<script>
 		const cpath = '${cpath }'
 		const login = '${login}'
+		const rentIdx = '${dto.idx }'
 	</script>
 
 	<script>
@@ -332,7 +333,11 @@
 	</script>
 
 	<script>
-		const submitBtn = document.querySelector('.reserveBtn > input[type="submit"]')   
+		const submitBtn = document.querySelector('.reserveBtn > input[type="submit"]')
+		const title = '${dto.title }'
+		const userName = '${login.userName }'
+		const userPhone = '${login.phoneNum }'
+		const userIdx = '${login.idx }'
 		var IMP = window.IMP
 		IMP.init("imp06272263")
 	   
@@ -345,24 +350,21 @@
 			const eDateString = document.querySelector('input[name="eDateString"]').value
 			const guestCount = document.querySelector('.guestCountValue').innerText
 			const totalPrice = document.querySelector('input[name="totalPrice"]')
-			const title = '${dto.title }'
-			const userName = '${login.userName }'
-			const userPhone = '${login.phoneNum }'
-			const userIdx = '${login.idx }'
 			
 			if(member == '') {
-			    alert('로그인 후 이용해주세요 ~ ')
-			    location.href = cpath + '/member/login'
+				let url = '/room/' + rentIdx
+				url = encodeURIComponent(url)
+			    location.href = cpath + '/member/login?url=' + url
 			    return
-			 }
-			 if(sDateString == '' || eDateString == '') {
+			}
+			if(sDateString == '' || eDateString == '') {
 			    alert('체크인 또는 체크아웃 날짜를 선택해주세요 ~~')
 			    return
-			 }
-			 if(guestCount == '') {
+			}
+			if(guestCount == '') {
 			    alert('인원 수를 정해주세요 ~')
 			    return
-			 }
+			}
 			 
 			function dateFormat() {
 				const date = new Date()

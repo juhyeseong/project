@@ -30,7 +30,6 @@ import com.javabang.model.MemberDTO;
 import com.javabang.model.RentDTO;
 import com.javabang.model.ReportDTO;
 import com.javabang.model.ReservationDTO;
-import com.javabang.model.ReviewDTO;
 import com.javabang.model.ReviewReportDTO;
 import com.javabang.model.WishListDTO;
 import com.javabang.service.MemberService;

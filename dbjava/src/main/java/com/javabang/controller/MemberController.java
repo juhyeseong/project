@@ -1,10 +1,11 @@
 package com.javabang.controller;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
 import java.util.UUID;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,14 +28,10 @@ import com.javabang.service.ReviewService;
 @Controller
 @RequestMapping("/member")
 public class MemberController {
-	@Autowired
-	private MemberService memberService;
-	@Autowired
-	private MailComponent mailComponent;
-	@Autowired
-	private HashComponent hashComponent;
-	@Autowired
-	private ReviewService reviewService;
+	@Autowired private MemberService memberService;
+	@Autowired private MailComponent mailComponent;
+	@Autowired private HashComponent hashComponent;
+	@Autowired private ReviewService reviewService;
 
 	// 회원가입
 	@GetMapping("/join")
@@ -51,14 +48,25 @@ public class MemberController {
 	public void login() {}
 
 	@PostMapping("/login")
-	public ModelAndView login(MemberDTO dto, HttpSession session) throws NoSuchAlgorithmException {
+	public ModelAndView login(String url, MemberDTO dto, HttpSession session) throws NoSuchAlgorithmException {
 		MemberDTO login = memberService.login(dto);
 		ModelAndView mav = new ModelAndView("alert");
+		
+		try {
+			if(url != null) {
+				url = URLDecoder.decode(url, "UTF-8");
+			}
+			else {
+				url = "/";
+			}
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
 		
 		if(login != null && login.getUserPw().equals(dto.getUserPw())){
 			session.setAttribute("login", login);
 			mav.addObject("msg", login.getUserNick() + "님 환영합니다 ~ ");
-			mav.addObject("url", "/");
+			mav.addObject("url", url);
 		}
 		else {
 			mav.addObject("msg", "로그인 실패 ! 아이디 또는 비밀번호가 올바르지 않습니다");
@@ -78,7 +86,7 @@ public class MemberController {
 	// 회원정보수정
 	@GetMapping("/update/{idx}")
 	public ModelAndView update(@PathVariable("idx") int idx) {
-		ModelAndView mav = new ModelAndView("/member/update");
+		ModelAndView mav = new ModelAndView("member/update");
 		MemberDTO dto = memberService.selectOne(idx);
 		mav.addObject("dto", dto);
 		return mav;
@@ -95,9 +103,11 @@ public class MemberController {
 	// 비밀번호만 수정하기
 	@GetMapping("/modifyPassword/{idx}")
 	public ModelAndView modifyPassword(@PathVariable("idx") int idx) {
-		ModelAndView mav = new ModelAndView("/member/modifyPassword");
+		ModelAndView mav = new ModelAndView("member/modifyPassword");
 		MemberDTO dto = memberService.selectOne(idx);
+		
 		mav.addObject("dto", dto);
+		
 		return mav;
 	}
 
@@ -122,8 +132,7 @@ public class MemberController {
 
 	// 비밀번호 재설정
 	@GetMapping("/resetPassword")
-	public void resetPassword() {
-	}
+	public void resetPassword() {}
 
 	@PostMapping("/resetPassword")
 	@Transactional
@@ -152,9 +161,11 @@ public class MemberController {
 	// 마이페이지
 	@GetMapping("/mypage/{idx}")
 	public ModelAndView mypage(@PathVariable("idx") int idx) {
-		ModelAndView mav = new ModelAndView("/member/mypage");
+		ModelAndView mav = new ModelAndView("member/mypage");
 		MemberDTO one = memberService.selectOne(idx);
+		
 		mav.addObject("one", one);
+		
 		return mav;
 	}
 
@@ -196,16 +207,21 @@ public class MemberController {
 	}
 
 	@GetMapping("/naverlogin")
-	public void naver() {
-	}
+	public void naver() {}
 
 	@GetMapping("/navercallback")
-	public void naver2() {
+	public ModelAndView naver2(String url) {
+		ModelAndView mav = new ModelAndView("member/navercallback");
+		
+		if(url != null) {
+			mav.addObject("url", url);
+		}
+		
+		return mav;
 	}
 
 	@GetMapping("/findId")
-	public void findId() {
-	}
+	public void findId() {}
 
 	@PostMapping("/findId")
 	public ModelAndView findId(MemberDTO dto) {
@@ -216,8 +232,7 @@ public class MemberController {
 	}
 
 	@PostMapping("/resultId")
-	public void resultId() {
-	}
+	public void resultId() {}
 
 	// 유저별 작성한 리뷰보기
 	@GetMapping("myReview/{idx}")
@@ -226,6 +241,7 @@ public class MemberController {
 		List<ReviewDTO> list = reviewService.selectAllMyReview(idx);
 		
 		mav.addObject("list", list);
+		
 		return mav;
 	}
 	// 유저별 작성한 리뷰보기(검색)
