@@ -50,6 +50,9 @@
 			<mapping path="/member/updateProfile/**" />				
 			<mapping path="/admin/**" />		
 			<mapping path="/rent/**" />
+			<mapping path="/reservation/**"/>
+			<mapping path="/review/**"/>
+			<mapping path="/wishList/**"/>
 							
 			<beans:bean id="loginInterceptor"
 						class="com.javabang.interceptor.LoginInterceptor" />

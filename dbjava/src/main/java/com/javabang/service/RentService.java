@@ -113,7 +113,9 @@ public class RentService {
 
 	public RentDTO selectOne(int idx) {
 		RentDTO dto = rentDAO.selectOne(idx);
-		dto.setFilePathList(rentDAO.selectFilePath(idx));
+		if(dto != null) {
+			dto.setFilePathList(rentDAO.selectFilePath(idx));
+		}
 		
 		return dto;
 	}
@@ -121,12 +123,14 @@ public class RentService {
 	public List<RentDTO> selectHost(int member) {
 		List<RentDTO> list = rentDAO.selectHost(member);
 		
-		list.forEach(rent -> {
-			String title = rent.getTitle();
-			if(title.length() > 15) {
-				rent.setTitle(title.substring(0, 16) + "...");;
-			}
-		});
+		if(list != null) {
+			list.forEach(rent -> {
+				String title = rent.getTitle();
+				if(title.length() > 15) {
+					rent.setTitle(title.substring(0, 16) + "...");;
+				}
+			});
+		}
 		
 		return list;
 	}

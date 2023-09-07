@@ -29,45 +29,89 @@ public class RentController {
 	public void hosting() {}
 	
 	@GetMapping("/rentManage/{member}")
-	public ModelAndView hostManage(@PathVariable("member") int member) {
+	public ModelAndView hostManage(@PathVariable("member") int member, HttpSession session) {
 		ModelAndView mav = new ModelAndView("rent/rentManage");
 		List<RentDTO> list = rentService.selectHost(member);
-		
-		mav.addObject("rentList", list);
+		MemberDTO login = (MemberDTO)session.getAttribute("login");
+		if(login.getIdx() != member) {
+			mav.setViewName("alert");
+			mav.addObject("url", "/");
+			mav.addObject("msg", "잘못된 접근입니다 ~ ");
+		}
+		else {
+			mav.addObject("rentList", list);
+		}
 		
 		return mav;
 	}
 	
 	@GetMapping("/modify/{idx}")
-	public ModelAndView rentModify(@PathVariable("idx") int idx) {
+	public ModelAndView rentModify(@PathVariable("idx") int idx, HttpSession session) {
 		ModelAndView mav = new ModelAndView("rent/modify");
 		RentDTO rent = rentService.selectOne(idx);
-		
-		mav.addObject("rent", rent);
+		if(rent == null) {
+			mav.setViewName("alert");
+			mav.addObject("url", "/");
+			mav.addObject("msg", "없는 숙소입니다 ~ ");
+			
+			return mav;
+		}
+		MemberDTO login = (MemberDTO)session.getAttribute("login");
+		if(login.getIdx() != rent.getMember()) {
+			mav.setViewName("alert");
+			mav.addObject("url", "/");
+			mav.addObject("msg", "잘못된 접근입니다 ~ ");
+		}
+		else {
+			mav.addObject("rent", rent);
+		}
 		
 		return mav;
 	}
 	
 	@GetMapping("/fileUpdate/{idx}")
-	public ModelAndView fileUpdate(@PathVariable("idx") int idx) {
+	public ModelAndView fileUpdate(@PathVariable("idx") int idx, HttpSession session) {
 		ModelAndView mav = new ModelAndView("rent/fileUpdate");
 		RentDTO rent = rentService.selectOne(idx);
-		ObjectMapper obm = new ObjectMapper();
-		try {
-			String listToJson = obm.writeValueAsString(rent.getFilePathList());
+		if(rent == null) {
+			mav.setViewName("alert");
+			mav.addObject("url", "/");
+			mav.addObject("msg", "없는 숙소입니다 ~ ");
 			
-			mav.addObject("rent", rent);
-			mav.addObject("listToJson", listToJson);
-		} catch (JsonProcessingException e) {
-			e.printStackTrace();
+			return mav;
+		}
+		ObjectMapper obm = new ObjectMapper();
+		MemberDTO login = (MemberDTO)session.getAttribute("login");
+		if(login.getIdx() != rent.getMember()) {
+			mav.setViewName("alert");
+			mav.addObject("url", "/");
+			mav.addObject("msg", "잘못된 접근입니다 ~ ");
+		}
+		else {
+			try {
+				String listToJson = obm.writeValueAsString(rent.getFilePathList());
+				
+				mav.addObject("rent", rent);
+				mav.addObject("listToJson", listToJson);
+			} catch (JsonProcessingException e) {
+				e.printStackTrace();
+			}
 		}
 		
 		return mav;
 	}
 	
 	@GetMapping("/rentDelete/{idx}/{member}")
-	public ModelAndView rentDelete(@PathVariable("idx") int idx, @PathVariable("member") int member) {
+	public ModelAndView rentDelete(@PathVariable("idx") int idx, @PathVariable("member") int member, HttpSession session) {
 		ModelAndView mav = new ModelAndView("alert");
+		MemberDTO login = (MemberDTO)session.getAttribute("login");
+		if(login.getIdx() != member) {
+			mav.setViewName("alert");
+			mav.addObject("url", "/");
+			mav.addObject("msg", "잘못된 접근입니다 ~ ");
+			
+			return mav;
+		}
 		int row = rentService.deleteRent(idx);
 		String msg = row != 0 ? "숙소가 삭제되었습니다!" : "숙소 삭제에 실패했습니다";
 		String url = row != 0 ? "/rent/rentManage/" + member : "/rent/modify/" + idx;
@@ -78,28 +122,28 @@ public class RentController {
 		return mav;
 	}
 	// 카테고리
-		@GetMapping("/category/{category}")
-		public ModelAndView pension(@PathVariable("category") String category, HttpSession session) {
-			ModelAndView mav = new ModelAndView("home");
-			List<RentDTO> rentList = rentService.filterPension(category);
+	@GetMapping("/category/{category}")
+	public ModelAndView pension(@PathVariable("category") String category, HttpSession session) {
+		ModelAndView mav = new ModelAndView("home");
+		List<RentDTO> rentList = rentService.filterPension(category);
+		
+		rentList.forEach(rent -> {
+			HashMap<String, Object> map = new HashMap<>();
+			MemberDTO login = (MemberDTO)session.getAttribute("login");
 			
-			rentList.forEach(rent -> {
-				HashMap<String, Object> map = new HashMap<>();
-				MemberDTO login = (MemberDTO)session.getAttribute("login");
-				
-				if(login != null) {
-					map.put("rent", rent.getIdx());
-					map.put("member", login.getIdx());
-					rent.setWishCount(wishListService.countWish(map));
-				}
-				else {
-					rent.setWishCount(0);
-				}
-			});
-			
-			mav.addObject("rentList", rentList);
-			
-			return mav;
-		}
+			if(login != null) {
+				map.put("rent", rent.getIdx());
+				map.put("member", login.getIdx());
+				rent.setWishCount(wishListService.countWish(map));
+			}
+			else {
+				rent.setWishCount(0);
+			}
+		});
+		
+		mav.addObject("rentList", rentList);
+		
+		return mav;
+	}
 
 }

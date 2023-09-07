@@ -169,7 +169,7 @@
 				<label>
 					<input type="checkbox" name="information" value="무료영화 OTT" class="infoCheckbox"> 
 						<img src="http://192.168.64.200/무료영화(OTT).png" class="checkInfo">무료영화 OTT <br>
-				<label>
+				</label>
 			</div>
 			<div class="checkBox3">
 				<label>

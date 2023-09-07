@@ -85,10 +85,18 @@ public class MemberController {
 
 	// 회원정보수정
 	@GetMapping("/update/{idx}")
-	public ModelAndView update(@PathVariable("idx") int idx) {
+	public ModelAndView update(@PathVariable("idx") int idx, HttpSession session) {
 		ModelAndView mav = new ModelAndView("member/update");
 		MemberDTO dto = memberService.selectOne(idx);
+		MemberDTO login = (MemberDTO)session.getAttribute("login");
+		if(login.getIdx() != idx) {
+			mav.setViewName("alert");
+			mav.addObject("url", "/");
+			mav.addObject("msg", "잘못된 접근입니다 ~ ");
+		}
+		
 		mav.addObject("dto", dto);
+		
 		return mav;
 	}
 
@@ -96,37 +104,58 @@ public class MemberController {
 	public String update(MemberDTO dto, HttpSession session) {
 		memberService.update(dto);
 		MemberDTO tmp = memberService.selectOne(dto.getIdx());
+		
 		session.setAttribute("login", tmp);
+		
 		return "redirect:/";
 	}
 
 	// 비밀번호만 수정하기
 	@GetMapping("/modifyPassword/{idx}")
-	public ModelAndView modifyPassword(@PathVariable("idx") int idx) {
+	public ModelAndView modifyPassword(@PathVariable("idx") int idx, HttpSession session) {
 		ModelAndView mav = new ModelAndView("member/modifyPassword");
 		MemberDTO dto = memberService.selectOne(idx);
-		
-		mav.addObject("dto", dto);
+		MemberDTO login = (MemberDTO)session.getAttribute("login");
+		if(login.getIdx() != idx) {
+			mav.setViewName("alert");
+			mav.addObject("url", "/");
+			mav.addObject("msg", "잘못된 접근입니다 ~ ");
+		}
+		else {
+			mav.addObject("dto", dto);			
+		}
 		
 		return mav;
 	}
 
 	@PostMapping("/modifyPassword/{idx}")
-	public String modifyPassword(MemberDTO dto) throws NoSuchAlgorithmException {
+	public ModelAndView modifyPassword(MemberDTO dto) throws NoSuchAlgorithmException {
+		ModelAndView mav = new ModelAndView("/");
+		
 		memberService.modifyPassword(dto);
-		return "redirect:/";
+		
+		return mav;
 	}
 
 	// 회원 탈퇴
 	@GetMapping("/delete/{idx}")
 	public ModelAndView delete(@PathVariable("idx") int idx, HttpSession session) {
 		ModelAndView mav = new ModelAndView("alert");
+		MemberDTO login = (MemberDTO)session.getAttribute("login");
+		if(login.getIdx() != idx) {
+			mav.addObject("msg", "잘못된 접근입니다 ~ ");
+			mav.addObject("url", "/");
+			
+			return mav;
+		}
 		int row = memberService.delete(idx);
 		String msg = row != 0 ? "회원탈퇴 완료!" : "회원탈퇴에 실패했습니다";
 		String url = row != 0 ? "/" : "/member/update";
+		
 		mav.addObject("msg", msg);
 		mav.addObject("url", url);
 		session.invalidate();
+		
 		return mav;
 	}
 
@@ -160,8 +189,14 @@ public class MemberController {
 
 	// 마이페이지
 	@GetMapping("/mypage/{idx}")
-	public ModelAndView mypage(@PathVariable("idx") int idx) {
+	public ModelAndView mypage(@PathVariable("idx") int idx, HttpSession session) {
 		ModelAndView mav = new ModelAndView("member/mypage");
+		MemberDTO login = (MemberDTO)session.getAttribute("login");
+		if(login.getIdx() != idx) {
+			mav.setViewName("alert");
+			mav.addObject("msg", "잘못된 접근입니다 ~ ");
+			mav.addObject("url", "/");
+		}
 		MemberDTO one = memberService.selectOne(idx);
 		
 		mav.addObject("one", one);
@@ -171,10 +206,19 @@ public class MemberController {
 
 	// 프로필 사진 수정
 	@GetMapping("/updateProfile/{idx}")
-	public ModelAndView profile(@PathVariable("idx") int idx) {
+	public ModelAndView profile(@PathVariable("idx") int idx, HttpSession session) {
 		ModelAndView mav = new ModelAndView("/member/updateProfile");
 		MemberDTO tmp = memberService.selectOne(idx);
-		mav.addObject("tmp", tmp);
+		MemberDTO login = (MemberDTO)session.getAttribute("login");
+		if(login.getIdx() != idx) {
+			mav.setViewName("alert");
+			mav.addObject("url", "/");
+			mav.addObject("msg", "잘못된 접근입니다 ~ ");
+		}
+		else {
+			mav.addObject("tmp", tmp);			
+		}
+		
 		return mav;
 	}
 
@@ -188,10 +232,19 @@ public class MemberController {
 
 	// 프로필 기본 이미지로 변경
 	@GetMapping("/updateBasicProfile/{idx}")
-	public ModelAndView basicProfilePage(@PathVariable("idx") int idx) {
+	public ModelAndView basicProfilePage(@PathVariable("idx") int idx, HttpSession session) {
 		ModelAndView mav = new ModelAndView("/member/updateBasicProfile");
 		MemberDTO tmp = memberService.selectOne(idx);
-		mav.addObject("tmp", tmp);
+		MemberDTO login = (MemberDTO)session.getAttribute("login");
+		if(login.getIdx() != idx) {
+			mav.setViewName("alert");
+			mav.addObject("url", "/");
+			mav.addObject("msg", "잘못된 접근입니다 ~ ");
+		}
+		else {
+			mav.addObject("tmp", tmp);
+		}
+		
 		return mav;
 	}
 
@@ -201,7 +254,9 @@ public class MemberController {
 		dto.setProfile("http://192.168.64.200/basicProfile.png"); // 기본 이미지 URL로 설정
 		memberService.basicProfile(dto); // 기본 이미지로 변경 작업 수행
 		MemberDTO tmp = memberService.selectOne(idx);
+		
 		session.setAttribute("login", tmp); // 로그인 정보를 변경된 MemberDTO로 업데이트
+		
 		return "redirect:/member/mypage/" + idx;
 
 	}
@@ -227,7 +282,9 @@ public class MemberController {
 	public ModelAndView findId(MemberDTO dto) {
 		ModelAndView mav = new ModelAndView("/member/resultId");
 		MemberDTO tmp = memberService.findId(dto);
+		
 		mav.addObject("tmp", tmp);
+		
 		return mav;
 	}
 
@@ -236,20 +293,30 @@ public class MemberController {
 
 	// 유저별 작성한 리뷰보기
 	@GetMapping("myReview/{idx}")
-	public ModelAndView myReview(@PathVariable("idx") int idx) {
+	public ModelAndView myReview(@PathVariable("idx") int idx, HttpSession session) {
 		ModelAndView mav = new ModelAndView("member/myReview");
 		List<ReviewDTO> list = reviewService.selectAllMyReview(idx);
-		
-		mav.addObject("list", list);
+		MemberDTO login = (MemberDTO)session.getAttribute("login");
+		if(login.getIdx() != idx) {
+			mav.setViewName("alert");
+			mav.addObject("url", "/");
+			mav.addObject("msg", "잘못된 접근입니다 ~ ");
+		}
+		else {
+			mav.addObject("list", list);
+		}
 		
 		return mav;
 	}
+	
 	// 유저별 작성한 리뷰보기(검색)
 	@PostMapping("myReview/{idx}")
 	public ModelAndView myReview(@PathVariable("idx") int idx, @RequestParam String search) {
 		ModelAndView mav = new ModelAndView("member/myReview");
 		List<ReviewDTO> list = reviewService.selectAllMyReviewSearch(idx, search);
+		
 		mav.addObject("list", list);
+		
 		return mav;
 	}
 }

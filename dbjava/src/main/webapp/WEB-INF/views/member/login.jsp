@@ -66,7 +66,6 @@
 	const cpath = '${cpath }'
 </script>
 <script>
-	const submitBtn = document.querySelector('input[type="submit"]')
  	const kakaologin = document.getElementById('kakaologin')
  	//9f70d9bb54ab5d75fd02bf5b519c5a11
  	window.Kakao.init("9f70d9bb54ab5d75fd02bf5b519c5a11");     // kakao sdk 를 초기화 , 클라이언트 아이디 제공
@@ -92,8 +91,6 @@
 						document.getElementById('kakaonick').value = userNick
 						document.getElementById('kakaogender').value = gender
 						document.getElementById('kakaoemail').value = email
-
-						sessionStorage.removeItem('url')
 				 	 
 						event.target.parentNode.submit()              // 정보를 폼에 넣고 폼을 서버로 제출함
 					}
@@ -102,13 +99,12 @@
  		});
  	}
  	
- 	function rmSessionStorage() {
+ 	function rmsessionStorage() {
  		sessionStorage.removeItem('url')
  	}
- 	console.log(sessionStorage.getItem('url'))
  	
+ 	window.addEventListener("beforeunload", rmsessionStorage)
  	kakaologin.addEventListener('click',kakaoLogin)    // 클릭하면 kakaoLogin 함수가 실행돼서 로그인 시작
- 	submitBtn.onclick = rmSessionStorage
  </script>
 
 <!-- 네이버로그인 script-->
@@ -117,6 +113,7 @@
 	if(url != '') {
 		sessionStorage.setItem('url', url)
 	}
+	console.log(sessionStorage.getItem('url'))
 	
   	var naver_id_login = new naver_id_login("QBQcG_g3ay39MPum66CS", "http://localhost:8080/dbjava/member/login")    // 네이버 아이디 로그인을 위한 객체, 클라이언트 아이디, 로그인 후 리다이렉션 될 사용자 정보를 전달
   	var state = naver_id_login.getUniqState()   	// 고유 상태 값 생성 -> state 변수에 저장
@@ -144,13 +141,12 @@
 		let actionUrl = cpath + '/api/naversignup'
 		if(sessionStorage.getItem('url') != '' && sessionStorage.getItem('url') != null) {
 			actionUrl = actionUrl + sessionStorage.getItem('url')
-			sessionStorage.removeItem('url')
 		}
+
 		naverLoginForm.action = actionUrl
 		naverLoginForm.submit()
 	}
 </script>
-
 
 <!-- 눈 아이콘 클릭시 비밀번호 보기 -->
 <script>

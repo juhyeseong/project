@@ -35,7 +35,6 @@ public class AdminController {
 
 	@GetMapping("/reservation")
 	public ModelAndView reservation() {
-	
 		ModelAndView mav = new ModelAndView();
 		List<ReservationDTO> list = adminService.selectAllReservation();
 		mav.addObject("list", list);
