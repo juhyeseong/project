@@ -74,7 +74,6 @@ public class AjaxController {
 	
 	@GetMapping("/sendAuthNumber/{email}/")
 	public HashMap<String, Object> sendAuthNumber(@PathVariable("email") String email, HttpSession session) throws IOException {
-		System.out.println("email : " + email);
 		int row = memberService.sendAuthNumber(email);
 		if(row != 0) {
 			session.setAttribute("authNumber", row);

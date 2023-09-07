@@ -11,6 +11,7 @@ import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 
@@ -44,7 +45,7 @@ public class ReviewService {
 		return list;
 	}
 	
-	
+	@Transactional
 	public int insertReview(ReviewDTO review) {
 	    int row = 0;
 
@@ -101,21 +102,13 @@ public class ReviewService {
 	    return row;
 	}
 
-	
-	
-
-
 	public void deleteReview(int reviewIdx, int memberIdx) {
-		
 		HashMap<String, Integer> map = new HashMap<String, Integer>();
 		
 		map.put("reviewIdx", reviewIdx);
 		map.put("memberIdx", memberIdx);
-		
 		reviewDAO.deleteReview(map);
-		
 	}
-
 
 	public List<ReviewDTO> selectAllMyReview(int idx) {
 		return reviewDAO.selectAllMyReview(idx);
@@ -124,8 +117,10 @@ public class ReviewService {
 
 	public List<ReviewDTO> selectAllMyReviewSearch(int idx, String search) {
 		HashMap<String, String> map = new HashMap<String, String>();
+		
 		map.put("idx", Integer.toString(idx));
 		map.put("search", search);
+		
 		return reviewDAO.selectAllMyReviewSearch(map);
 	}
 

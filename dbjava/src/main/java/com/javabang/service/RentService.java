@@ -11,6 +11,7 @@ import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.javabang.model.RentDTO;
@@ -36,6 +37,7 @@ public class RentService {
 	private String serverPass = "1";
 	private ChannelSftp chSftp = null;
 
+	@Transactional
 	public int rentInsert(RentDTO dto) {
 		int row = 0;
 		int idx = 0;
@@ -155,11 +157,11 @@ public class RentService {
 		return rentDAO.updateRentCountPlus(dto);
 	}
 
+	@Transactional
 	public int insertRentFile(RentDTO dto) {
 		int row = 0;
 		
 		for(MultipartFile file : dto.getFiles()) {
-			System.out.println("for문 실행 !");
 			String ymd = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
 			String fileName = file.getOriginalFilename();
 			fileName = UUID.randomUUID().toString();

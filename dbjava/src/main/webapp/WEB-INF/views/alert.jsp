@@ -6,8 +6,14 @@
 		const cpath = '${cpath }'
 		const url = '${url }' 
 
-		alert(msg)
-		location.href = cpath + url
+		if(url === 'history.go') {
+			alert(msg)
+			history.go(-1)
+		}
+		else {
+			alert(msg)
+			location.href = cpath + url
+		}
 	</script>
 </body>
 </html>

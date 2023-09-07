@@ -6,8 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.javabang.model.ReportDTO;
-import com.javabang.model.ReservationDTO;
-import com.javabang.model.ReviewDTO;
 import com.javabang.model.ReviewReportDTO;
 import com.javabang.repository.ReportDAO;
 

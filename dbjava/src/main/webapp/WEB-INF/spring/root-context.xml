@@ -12,7 +12,7 @@
 	<!-- Root Context: defines shared resources visible to all other web components -->
 	<bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
 	<property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"/>
-	<property name="jdbcUrl" value="jdbc:log4jdbc:oracle:thin:@localhost:1521:xe"/>
+	<property name="jdbcUrl" value="jdbc:log4jdbc:oracle:thin:@192.168.64.100:1521:xe"/>
 	<property name="username" value="c##rent"/>
 	<property name="password" value="rent"/>
 	</bean>
@@ -42,9 +42,14 @@
 		<constructor-arg ref="sqlSessionFactory"></constructor-arg>
 	</bean>
 	
-	<!-- 트랜잭션 어노테이션을 활성화함 -->
 	<tx:annotation-driven/>
+	
+	<bean id="transactionManager"
+		  class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource"/>	  
+	</bean>
 
+	<context:component-scan base-package="com.javabang.exception"/>
 	<context:component-scan base-package="com.javabang.mail"/>
 	<context:component-scan base-package="com.javabang.component"/>
 	<context:component-scan base-package="com.javabang.service"/>

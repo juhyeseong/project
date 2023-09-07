@@ -15,6 +15,7 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.javabang.component.HashComponent;
@@ -91,6 +92,7 @@ public class MemberService {
 	}
 
 	// 비밀번호 재설정
+	@Transactional
 	public int reset(MemberDTO dto) throws FileNotFoundException, IOException{
 		String userPw = (ran.nextInt(999999)+100000) + "";
 		int row = memberDAO.reset(dto);
@@ -157,11 +159,11 @@ public class MemberService {
 		String userPw = dto.getUserPw();
 		userPw = hashComponent.getHash(userPw);
 		dto.setUserPw(userPw);
+		
 		return memberDAO.updatePw(dto);
 	}
 
 	public int dupCheck(String userId) {
-		
 		return memberDAO.selectCount(userId);
 	}
 
@@ -170,18 +172,18 @@ public class MemberService {
 		int authNumber = ran.nextInt(89999999) + 10000000;
 		content = String.format(content, authNumber);
 		int row = mailComponent.sendMailAuth(email, content);
+		
 		return row > 0 ? authNumber : row;
 	}
 
 
 	//프로필 사진 수정
+	@Transactional
 	public int updateProfile(MemberDTO dto) throws Exception {
 
 		MultipartFile file = dto.getUpload();
 		String ymd = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
 		String fileName = UUID.randomUUID().toString();
-		System.out.println("fileName : " + fileName);
-//		fileName = fileName.substring(0, fileName.lastIndexOf("."));
 		String ext = file.getContentType().substring(file.getContentType().indexOf("/") + 1);
 		File dest = new File(ymd + "_" + fileName + "." + ext);
 		
@@ -220,32 +222,26 @@ public class MemberService {
 		}
 
 	public int basicProfile(MemberDTO dto) throws Exception {
-		
-		    return memberDAO.basicProfile(dto);
+		return memberDAO.basicProfile(dto);
 	}
 
 	public MemberDTO selectKakao(MemberDTO dto) {
-	
 		return memberDAO.selectKakao(dto);
 	}
 
 	public int insertKakao(MemberDTO dto) {
-		
 		return memberDAO.insertKakao(dto);
 	}
 
 	public MemberDTO selectNaver(MemberDTO dto) {
-		
 		return memberDAO.selectNaver(dto);
 	}
 
 	public MemberDTO findId(MemberDTO dto) {
-	
 		return memberDAO.findId(dto);
 	}
 
 	public int dupCheck2(String userNick) {
-		
 		return memberDAO.selectCount2(userNick);
 	}
 
