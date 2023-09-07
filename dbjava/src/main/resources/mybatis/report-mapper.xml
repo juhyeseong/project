@@ -29,9 +29,14 @@
 	</select>
 	
 	<update id="updateBlock" parameterType="int">
-		    UPDATE review
-			    SET reportStatus = 1
-			    WHERE review.idx = #{reviewIdx}
+	    UPDATE review
+		    SET reportStatus = 1
+		    WHERE review.idx = #{reviewIdx}
+	</update>
+	<update id="reverseBlock" parameterType="int">
+		UPDATE review
+		   SET reportStatus = 0
+		   WHERE review.idx = #{reviewIdx}
 	</update>
 </mapper>
 

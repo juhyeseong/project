@@ -180,7 +180,8 @@ public class MemberService {
 		MultipartFile file = dto.getUpload();
 		String ymd = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
 		String fileName = UUID.randomUUID().toString();
-		fileName = fileName.substring(0, fileName.lastIndexOf("."));
+		System.out.println("fileName : " + fileName);
+//		fileName = fileName.substring(0, fileName.lastIndexOf("."));
 		String ext = file.getContentType().substring(file.getContentType().indexOf("/") + 1);
 		File dest = new File(ymd + "_" + fileName + "." + ext);
 		

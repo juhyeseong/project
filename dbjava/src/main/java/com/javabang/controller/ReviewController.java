@@ -22,7 +22,7 @@ public class ReviewController {
 	@Autowired private ReviewService reviewService;
 	
 	//리뷰 글 등록
-	@PostMapping("/rent/room/{idx}")
+	@PostMapping("/room/{idx}")
 	public String room(@PathVariable("idx") int idx, HttpSession session, ReviewDTO review) {
 		
 		MemberDTO login = (MemberDTO) session.getAttribute("login");
@@ -31,6 +31,6 @@ public class ReviewController {
 	
 	    reviewService.insertReview(review); 
 
-		return "redirect:/rent/room/" + idx;
+		return "redirect:/room/" + idx;
 	}
 }

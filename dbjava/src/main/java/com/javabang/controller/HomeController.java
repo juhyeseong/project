@@ -17,6 +17,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.javabang.model.MemberDTO;
 import com.javabang.model.RentDTO;
+import com.javabang.model.RentExplainDTO;
 import com.javabang.model.ReservationDTO;
 import com.javabang.model.ReviewDTO;
 import com.javabang.service.RentService;
@@ -89,6 +90,9 @@ public class HomeController {
 	      RentDTO dto = rentService.selectOne(idx);
 	        List<ReviewDTO> reviewList = reviewService.reviewSelectAll(idx);
 	        List<ReservationDTO> reservationList = reservationService.selectReservationDate(idx);
+	     // room의 세부 정보를 가져오는 코드
+	        RentExplainDTO detail = rentService.rentDetailOne(idx);
+	        
 	        int count = 0;
 	        MemberDTO tmp = null;
 	        
@@ -105,6 +109,7 @@ public class HomeController {
 	         mav.addObject("reservationList", json);
 	         mav.addObject("rentIdx", idx);
 	         mav.addObject("count", count);
+	         mav.addObject("detail", detail);
 	      } catch (JsonProcessingException e) {
 	         e.printStackTrace();
 	      }

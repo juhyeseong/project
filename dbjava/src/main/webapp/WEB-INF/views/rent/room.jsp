@@ -66,7 +66,45 @@
 	   </ul>
 	   <div class="box">
 	      <div class="menu1 selected">
-	         <textarea class="roomContent" readonly>${dto.content }</textarea>
+	      	<div class="roomExplainDetail">
+	      		<div class="roomExplainLeft">
+	      			<div class="roomExplainTitleBox">
+	      				<div>
+		      				<div class="roomExplainTitle">
+		      					<span>${detail.userNick }님이 호스팅하는 ${detail.roomType }의 정보</span>
+		      				</div>
+		      				<div class="roomExplainSubExplain">
+		      					<span>최대 인원 ${detail.guestCount}명 . 침실 ${detail.roomCount }개 . 침대 ${detail.bedCount }개 . 욕실 ${detail.bathCount }개</span>
+		      				</div>
+	      				</div>
+	      				<div class="roomExplainProfile">
+	      					<img src="${detail.profile }">
+	      				</div>
+	      			</div>
+		      			<hr>
+	      			<div class="roomConvenientBox">
+	      				<div>숙소 편의시설</div>
+	      				<div class="roomConvenient" style="width: 100%;">
+		      				<c:forTokens var="convenient" items="${detail.information }" delims=",">
+		      					<div class="roomConvenientOne" style="width: 50%;">
+									<img src="http://192.168.64.200/${convenient }.png" style="width:30px; height: 30px;">    					
+			      					<div>${convenient }</div>
+		      					</div>
+		      				</c:forTokens>
+	      				</div>
+	      			</div>
+	      		</div>
+	      		<div class="roomExplainRight">
+	      			<div class="roomExplainDetailTextBox">
+	      				<div>숙소 설명</div>
+	      				<textarea>${detail.content }</textarea>
+	      				<span class="roomExplainMore">더보기 > </span>
+	      			</div>
+	      		</div>
+	      	</div>
+	      	
+	 		<div class="emptySpace"></div>
+	 		
 	      </div>
 	      <div class="menu2">
 	      
@@ -199,7 +237,7 @@
 	<div class="reportModal" id="reportModal">
 	    <div class="reportModal-content modalSize">
 	        <span class="close" id="closeModal">&times;</span>
-	        <h2>이 숙소를 신고하는 이유를 알려주세요</h2>
+	        <h2 style="text-align: center;">이 숙소를 신고하는 이유를 알려주세요</h2>
 	        <p class="modalP">이 내용은 호스트가 볼 수 없습니다</p>
 	        <div class="reportBox">
 	           <form method="post" id="reportForm" action="${cpath }/admin/userReport">
@@ -237,7 +275,7 @@
 	<div class="reportModal" id="reviewReportModal">
 	    <div class="reportModal-content modalSize">
 	        <span class="close" id="reviewCloseModal">&times;</span>
-	        <h2>이 댓글을 신고하는 이유를 알려주세요</h2>
+	        <h2 style="text-align: center;">이 댓글을 신고하는 이유를 알려주세요</h2>
 	        <p class="modalP">이 내용은 호스트가 볼 수 없습니다</p>
 	        <div class="reportBox">
 	           <form method="post" id="reviewReportForm" action="${cpath }/admin/reviewReport">
@@ -283,7 +321,6 @@
 	<script>
 		const cpath = '${cpath }'
 		const login = '${login}'
-		const rentIdx = '${dto.idx }'
 	</script>
 
 	<script>
@@ -333,11 +370,7 @@
 	</script>
 
 	<script>
-		const submitBtn = document.querySelector('.reserveBtn > input[type="submit"]')
-		const title = '${dto.title }'
-		const userName = '${login.userName }'
-		const userPhone = '${login.phoneNum }'
-		const userIdx = '${login.idx }'
+		const submitBtn = document.querySelector('.reserveBtn > input[type="submit"]')   
 		var IMP = window.IMP
 		IMP.init("imp06272263")
 	   
@@ -350,21 +383,24 @@
 			const eDateString = document.querySelector('input[name="eDateString"]').value
 			const guestCount = document.querySelector('.guestCountValue').innerText
 			const totalPrice = document.querySelector('input[name="totalPrice"]')
+			const title = '${dto.title }'
+			const userName = '${login.userName }'
+			const userPhone = '${login.phoneNum }'
+			const userIdx = '${login.idx }'
 			
 			if(member == '') {
-				let url = '/room/' + rentIdx
-				url = encodeURIComponent(url)
-			    location.href = cpath + '/member/login?url=' + url
+			    alert('로그인 후 이용해주세요 ~ ')
+			    location.href = cpath + '/member/login'
 			    return
-			}
-			if(sDateString == '' || eDateString == '') {
+			 }
+			 if(sDateString == '' || eDateString == '') {
 			    alert('체크인 또는 체크아웃 날짜를 선택해주세요 ~~')
 			    return
-			}
-			if(guestCount == '') {
+			 }
+			 if(guestCount == '') {
 			    alert('인원 수를 정해주세요 ~')
 			    return
-			}
+			 }
 			 
 			function dateFormat() {
 				const date = new Date()
