@@ -418,6 +418,44 @@ div.box > div {
 div.box > div.selected {
 	display: block;
 }
+/* calender style */
+
+#ui-datepicker-div {
+   width: 315px;
+}
+.ui-datepicker .ui-datepicker-header { 
+    background-color: white; 
+    border: none; 
+}
+.ui-datepicker-calendar > tbody > tr > td > .ui-state-default {
+   width: 37px;
+   height: 37px;
+   
+   background-color: white;
+   
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   
+   border: none;
+   border-radius: 50%;
+}
+.ui-datepicker-calendar > tbody > tr > td > .ui-state-active {
+   background-color: #f8215c;
+}
+.ui-datepicker-calendar > tbody > tr > td > .ui-state-default:hover {
+   width: 37px;
+   height: 37px;
+   
+   background-color: #f8215c;
+   color: white;
+   
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   
+   border-radius: 50%;
+}
 
 
 /*login css*/
