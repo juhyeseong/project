@@ -167,7 +167,7 @@
 							<img src="http://192.168.64.200/키즈.png" class="checkInfo">키즈 <br>
 					</label>
 					<label>
-						<input type="checkbox" name="information" value="무료영화 OTT" class="infoCheckbox"> 
+						<input type="checkbox" name="information" value="무료영화(OTT)" class="infoCheckbox"> 
 							<img src="http://192.168.64.200/무료영화(OTT).png" class="checkInfo">무료영화 OTT <br>
 					</label>
 				</div>

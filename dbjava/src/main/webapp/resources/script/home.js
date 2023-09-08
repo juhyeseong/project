@@ -42,13 +42,15 @@ function applyFilter() {
     var priceSort = getSelectedPriceSort()
     var selectedLocations = getSelectedLocations()
     
+    console.log('선택된 편의시설 : ', selectedAmenities)
+    
     roomElements.forEach(function(room) {
         var amenitiesElement = room.querySelector('.roomInfo')
         var amenities = amenitiesElement.textContent    // .roomInfo 에 있는 텍스트 콘텐트를 amenities 에 저장
 
         
         // 선택된 편의시설이 있는지 확인
-        var hasSelectedAmenities = selectedAmenities.every(function (amenity) {   // every  함수를 이용하여 모든 선택된 편의시설이 해당 시설에 있는 지 확인
+        var hasSelectedAmenities = selectedAmenities.some(function (amenity) {   // some  함수를 이용하여 모든 선택된 편의시설이 해당 시설에 있는 지 확인
         	return amenities.indexOf(amenity) !== -1   // 조건이 맞으면 true, 아니면 false
         })
         
