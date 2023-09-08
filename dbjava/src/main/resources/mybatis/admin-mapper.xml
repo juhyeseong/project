@@ -30,7 +30,7 @@
 				ON RV.member = M.idx
 			JOIN rent RE 
 				ON RV.rent = RE.idx
-			ORDER BY RV.idx DESC;
+			ORDER BY RV.idx DESC
 	</select>
 	
 	<select id="selectAllReservationSearch" parameterType="string" resultType="reservation">
