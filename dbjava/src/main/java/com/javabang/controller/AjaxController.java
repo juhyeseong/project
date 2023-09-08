@@ -90,7 +90,9 @@ public class AjaxController {
 	@GetMapping("/checkAuthNumber/{authNumber}")
 	public int checkAuthNumber(@PathVariable("authNumber") int authNumber, HttpSession session) {
 		int sessionNumber = (int)session.getAttribute("authNumber");
+		
 		session.setMaxInactiveInterval(1800);
+		
 		return authNumber == sessionNumber ? 1 : 0;
 	}
 
@@ -167,6 +169,7 @@ public class AjaxController {
         	MemberDTO tmp = (MemberDTO) session.getAttribute("login");
         	
             reviewService.deleteReview(reviewId, tmp.getIdx());
+            
             return ResponseEntity.ok("Review deleted successfully.");
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to delete review.");

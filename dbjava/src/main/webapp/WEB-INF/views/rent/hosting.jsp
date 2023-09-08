@@ -1,25 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
 <%@ include file="../header.jsp"%>
-
-<script>
-   window.addEventListener("beforeunload", beforeUnloadHandler)
-   
-   function beforeUnloadHandler(event) {
-      event.returnValue = "변경사항이 저장되지 않을 수 있습니다"
-   }
-   
-   const cpath = '${cpath }'
-   const idx = +'${login.idx }'
-</script>
-
    <!-- host 프론트 -->
    <div class="container">
       <div id="start">
          <div id="host">
             <div class="hostLeft">
                <h1>
-                  당신의<br> 멋진 숙소를<br> 등록해주세요 😉
+                 	 당신의<br> 멋진 숙소를<br> 등록해주세요 😉
                </h1>
             </div>
             <div class="hostRight">
@@ -380,17 +368,17 @@
                         <div class="inputInfo">
                            <img src="http://192.168.64.200/picture.png">
                            <h3>
-                              여기다 사진을 끌어다 놓으세요<br>
+                              	여기다 사진을 끌어다 놓으세요<br>
                            </h3>
                            <span>
-                              또는 공간을 클릭하여<br>
-                              업로드할 사진을 선택해주세요
+				                              또는 공간을 클릭하여<br>
+				                              업로드할 사진을 선택해주세요
                               <br><br>
                            </span>
                         </div>
                      </div>
                      <div class="mainImg hidden">
-                        <button class="imgDelete" onclick="imgDeleteHandler(event)">삭제</button>
+                        <button class="mainImgDelete" onclick="imgDeleteHandler(event)">삭제</button>
                           <img class="preview-img addMainImg">
                      </div>
                   </div>
@@ -404,7 +392,7 @@
                               </div>
                            </div>
                            <div class="subImg hidden">
-                              <button class="imgDelete" onclick="imgDeleteHandler(event)">삭제</button>
+                              <button class="subImgDelete" onclick="imgDeleteHandler(event)">삭제</button>
                                 <img class="preview-img addMainImg">
                            </div>
                         </div>
@@ -416,7 +404,7 @@
                               </div>
                            </div>
                            <div class="subImg hidden">
-                              <button class="imgDelete" onclick="imgDeleteHandler(event)">삭제</button>
+                              <button class="subImgDelete" onclick="imgDeleteHandler(event)">삭제</button>
                                 <img class="preview-img addMainImg">
                            </div>
                         </div>
@@ -428,7 +416,7 @@
                               </div>
                            </div>
                            <div class="subImg hidden">
-                              <button class="imgDelete" onclick="imgDeleteHandler(event)">삭제</button>
+                              <button class="subImgDelete" onclick="imgDeleteHandler(event)">삭제</button>
                                 <img class="preview-img addMainImg">
                            </div>
                         </div>
@@ -440,7 +428,7 @@
                               </div>
                            </div>
                            <div class="subImg hidden">
-                              <button class="imgDelete" onclick="imgDeleteHandler(event)">삭제</button>
+                              <button class="subImgDelete" onclick="imgDeleteHandler(event)">삭제</button>
                                 <img class="preview-img addMainImg">
                            </div>
                         </div>
@@ -469,8 +457,8 @@
                <div class="rentLocationLeft">
                   <h1>숙소의 위치를 알려주세요</h1>
                   <h4>
-                     정확한 도로명 주소를 모를 경우 지도에 위치를 클릭해보세요 ~<br>
-                     지도에서 알아서 도로명 주소를 알려줄거에요😉
+			                     정확한 도로명 주소를 모를 경우 지도에 위치를 클릭해보세요 ~<br>
+			                     지도에서 알아서 도로명 주소를 알려줄거에요😉
                   </h4>
                   <div id="map"></div>
                   <div id="clickLatlng"></div>
@@ -518,635 +506,164 @@
       <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=bc59ff8e2d08662445856ac71a77b312&libraries=services"></script>
    </div>
 <%@ include file="hostFooter.jsp" %>   
-
-   <script>
-      // host 변수
-      const start = document.getElementById('start')
-      const hostBtn = document.getElementById('hostBtn')
-      const nextHost = document.getElementById('nextHost')
-      // category 변수
-      const category = document.getElementById('selectCategory')
-      const categoryItemList = document.querySelectorAll('.categoryItem')
-      const categoryBtn = document.getElementById('categoryBtn')
-      const preCategory = document.getElementById('preCategory')
-      const nextCategory = document.getElementById('nextCategory')
-      // roomType 변수
-      const roomType = document.getElementById('selectRoomType')
-      const roomTypeBtn = document.getElementById('roomTypeBtn')
-      const roomTypeItemList = document.querySelectorAll('.roomTypeItem')
-      const preRoomType = document.getElementById('preRoomType')
-      const nextRoomType = document.getElementById('nextRoomType')
-      // rentCount 변수
-      const rentCount = document.getElementById('rentCount')
-      const rentCountBtn = document.getElementById('rentCountBtn')
-      const minusList = document.querySelectorAll('.minus')
-      const plusList = document.querySelectorAll('.plus')
-      const preRentCount = document.getElementById('preRentCount')
-      const nextRentCount = document.getElementById('nextRentCount')
-      // rentInformation 변수
-      const rentInformation = document.getElementById('rentInformation')
-      const rentInformationBtn = document.getElementById('rentInformationBtn')
-      const rentInformationItemList = document.querySelectorAll('.rentInformationItem')
-      const preRentInformation = document.getElementById('preRentInformation')
-      const nextRentInformation = document.getElementById('nextRentInformation')
-      // rentImg 변수
-      const rentImg = document.getElementById('rentImg')
-      const rentImgBtn = document.getElementById('rentImgBtn')
-      let fileImgList = document.querySelectorAll('.fileImg')
-      const preRentImg = document.getElementById('preRentImg')
-      const nextRentImg = document.getElementById('nextRentImg')
-      let subImgWrap = document.querySelector('.subImgWrap')
-      // rentContent 변수
-      const rentContent = document.getElementById('rentContent')
-      const rentContentBtn = document.getElementById('rentContentBtn')
-      const preRentContent = document.getElementById('preRentContent')
-      const nextRentContent = document.getElementById('nextRentContent')
-      // rentLocation 변수
-      const rentLocation = document.getElementById('rentLocation')
-      const preRentLocation = document.getElementById('preRentLocation')
-      const finish = document.querySelector('.finish')
-      const rentLocationBtn = document.getElementById('rentLocationBtn')
-      const searchLocation = document.querySelector('.searchLocation')
-      // ajax 옵션
-      let opt = {                  
-            method: 'POST'
-      }
-      let formData = new FormData()
-      
-      // host handler
-      function hostHandler() {
-         
-         start.classList.add('hidden')
-         category.classList.remove('hidden')
-         hostBtn.classList.add('hidden')
-         categoryBtn.classList.remove('hidden')
-      }
-      
-      // category handler
-      function preCategoryHandler() {
-         category.classList.add('hidden')
-         start.classList.remove('hidden')
-         categoryBtn.classList.add('hidden')
-         hostBtn.classList.remove('hidden')
-      }
-      
-      function categoryItemHandler(event) {
-         let target = event.target
-         while(target.classList.contains('categoryItem') == false) {
-            target = target.parentNode
-         }
-         const categorySelected = document.querySelector('.categorySelected')
-         
-         if(categorySelected == null) {
-            target.classList.add('categorySelected')
-         }
-         else if(categorySelected == target) {
-            categorySelected.classList.remove('categorySelected')
-         }
-         else {
-            categorySelected.classList.remove('categorySelected')
-            if(target != null) {
-               target.classList.add('categorySelected')
-            }
-         }
-      }
-      
-      function categoryHandler() {
-         const categorySelected = document.querySelector('.categorySelected')
-         
-         if(categorySelected == null) {
-            alert('숙소의 종류를 선택해주세요 ~ ')
-            return
-         }
-         
-         if(formData.get("category") != null) {
-            formData.delete("category")
-         }
-         formData.append("category", categorySelected.children[1].innerText)
-         
-         category.classList.add('hidden')
-         roomType.classList.remove('hidden')
-         categoryBtn.classList.add('hidden')
-         roomTypeBtn.classList.remove('hidden')
-      }
-      
-      // roomType handler
-      function preRoomTypeHandler() {
-         roomType.classList.add('hidden')
-         category.classList.remove('hidden')
-         roomTypeBtn.classList.add('hidden')
-         categoryBtn.classList.remove('hidden')
-      }
-      
-      function roomTypeItemHandler(event) {
-         let target = event.target
-         while(target.classList.contains('roomTypeItem') == false) {
-            target = target.parentNode
-         }
-         const roomTypeSelected = document.querySelector('.roomTypeSelected')
-         
-         if(roomTypeSelected == null) {
-            target.classList.add('roomTypeSelected')
-         }
-         else if(roomTypeSelected == target) {
-            roomTypeSelected.classList.remove('roomTypeSelected')
-         }
-         else {
-            roomTypeSelected.classList.remove('roomTypeSelected')
-            if(target != null) {
-               target.classList.add('roomTypeSelected')
-            }
-         }
-      }
-      
-      function roomTypeHandler() {
-         const roomTypeSelected = document.querySelector('.roomTypeSelected')
-         
-         if(roomTypeSelected == null) {
-            alert('숙소 유형을 선택해주세요 ~ ')
-            return
-         }
-      
-         if(formData.get("roomType") != null) {
-            formData.delete("roomType")
-         }
-         formData.append("roomType", roomTypeSelected.children[0].children[0].innerText)
-         
-         roomType.classList.add('hidden')
-         rentCount.classList.remove('hidden')
-         roomTypeBtn.classList.add('hidden')
-         rentCountBtn.classList.remove('hidden')
-         
-         const roomCount = document.querySelector('.roomCount')
-         const bathCount = document.querySelector('.bathCount')
-         
-         if(roomTypeSelected.children[0].children[0].innerText == '원룸') {
-            roomCount.classList.add('hidden')
-            bathCount.classList.add('hidden')
-         }
-         else {
-            roomCount.classList.remove('hidden')
-            bathCount.classList.remove('hidden')
-         }
-      }
-      
-      // rentCount handler
-      function preRentCountHandler() {
-         rentCount.classList.add('hidden')
-         roomType.classList.remove('hidden')
-         rentCountBtn.classList.add('hidden')
-         roomTypeBtn.classList.remove('hidden')
-      }
-      
-      function minusHandler(event) {
-         let target = event.target
-         if(target.classList.contains('minus') == false) {
-            target = target.parentNode
-         }
-         
-         const value = target.parentNode.children[1]
-         
-         if(+value.innerText - 1 >= 0) {
-            value.innerText = +value.innerText - 1
-         }
-      }
-      
-      function plusHandler(event) {
-         let target = event.target
-         if(target.classList.contains('plus') == false) {
-            target = target.parentNode
-         }
-         
-         const value = target.parentNode.children[1]
-         
-         value.innerText = +value.innerText + 1
-      }
-      
-      function rentCountHandler() {
-         const roomCountValue = document.querySelector('.roomCountValue')
-         const bathCountValue = document.querySelector('.bathCountValue')
-         const guestCountValue = document.querySelector('.guestCountValue')
-         const bedCountValue = document.querySelector('.bedCountValue')
-         
-         if(formData.get("roomCount") != null) {
-            formData.delete("roomCount")
-            formData.delete("bathCount")
-            formData.delete("guestCount")
-            formData.delete("bedCount")
-         }
-         formData.append("roomCount", +roomCountValue.innerText)
-         formData.append("bathCount", +bathCountValue.innerText)
-         formData.append("guestCount", +guestCountValue.innerText)
-         formData.append("bedCount", +bedCountValue.innerText)
-         
-         rentCount.classList.add('hidden')
-         rentInformation.classList.remove('hidden')
-         rentCountBtn.classList.add('hidden')
-         rentInformationBtn.classList.remove('hidden')
-      }
-      
-      // rentInformation handler
-      function preRentInformationHandler() {
-         rentInformation.classList.add('hidden')
-         rentCount.classList.remove('hidden')
-         rentInformationBtn.classList.add('hidden')
-         rentCountBtn.classList.remove('hidden')
-      }
-      
-      function rentInformationItemHandler() {
-         let target = event.target
-         let isEqual = false
-         while(target.classList.contains('rentInformationItem') == false) {
-            target = target.parentNode
-         }
-         const rentInformationSelectedList = document.querySelectorAll('.rentInformationSelected')
-         
-         rentInformationSelectedList.forEach(rentInformationSelected => {
-            if(rentInformationSelected == target) {
-               rentInformationSelected.classList.remove('rentInformationSelected')
-               isEqual = true
-            }
-         })
-         
-         if(isEqual == false) {
-            target.classList.add('rentInformationSelected')
-         }
-      }
-      
-      function rentInformationHandler() {
-         const rentInformationSelectedList = document.querySelectorAll('.rentInformationSelected')
-         const listLength = rentInformationSelectedList.length
-         let rentInformationValue = ''
-         let count = 1
-         
-         rentInformationSelectedList.forEach(rentInformationSelected => {
-            if(count != listLength) {
-               rentInformationValue += rentInformationSelected.children[1].innerText + ','
-            }
-            else {
-               rentInformationValue += rentInformationSelected.children[1].innerText
-            }
-            count++
-         })
-         
-         if(formData.get("information") != null) {
-            formData.delete("information")
-         }
-         formData.append("information", rentInformationValue)
-         
-         rentInformation.classList.add('hidden')
-         rentImg.classList.remove('hidden')
-         rentInformationBtn.classList.add('hidden')
-         rentImgBtn.classList.remove('hidden')
-      }
-      
-      // rentImgHandler
-      function preRentImgHandler() {
-         rentImg.classList.add('hidden')
-         rentInformation.classList.remove('hidden')
-         rentImgBtn.classList.add('hidden')
-         rentInformationBtn.classList.remove('hidden')
-      }
-      
-      function rentImgInputHandler(event) {
-          const target = event.target
-          const selectedFile = target.files[0]
-         
-          if(selectedFile != null) {
-             const reader = new FileReader()
-         
-             reader.readAsDataURL(selectedFile)
-             reader.onload = function(e) {
-                const inputSpace = target.parentNode
-                const imgSpace = inputSpace.parentNode
-                const img = imgSpace.children[1]
-               
-                inputSpace.classList.add('hidden')
-                img.classList.remove('hidden')
-                img.children[1].src = e.target.result
-             };
-          }
-      }
-      
-      function rentImgHandler() {
-         const fileInputs = document.querySelectorAll('.fileImg')
-         let index = 0
-         const mainImgSpace = document.querySelector('.mainImgSpace')
-         
-         for(let i = 0; i > 5; i++) {
-            if(formData.get('files['+ i +']') != null) {
-               formData.delete('files['+ i +']')
-            }
-         }
-         
-         fileInputs.forEach(fileInput => {
-            if(fileInput.files[0] != null) {
-               formData.append('files[' + index + ']', fileInput.files[0])
-               index++
-            }
-         })
-         
-         if(index == 0) {
-            alert('숙소를 표현할 사진 하나 이상은 꼭 등록해주세요 ~~')
-            return
-         } 
-         
-         rentImg.classList.add('hidden')
-         rentContent.classList.remove('hidden')
-         rentImgBtn.classList.add('hidden')
-         rentContentBtn.classList.remove('hidden')
-      }
-      
-      function imgDeleteHandler(event) {
-         const target = event.target
-         const img = target.parentNode
-         const inputSpace = target.parentNode.parentNode.children[0]
-         const input = inputSpace.querySelector('input[type="file"]')
-         const createInput = document.createElement('input')
-         createInput.type = 'file'
-         createInput.className = input.className
-         createInput.addEventListener("change", rentImgInputHandler)
-         
-         inputSpace.removeChild(input)
-         inputSpace.appendChild(createInput)
-         inputSpace.classList.remove('hidden')
-         img.classList.add('hidden')
-      }
-      
-      //rentContent handler
-      function preRentContentHandler() {
-         rentContent.classList.add('hidden')
-         rentImg.classList.remove('hidden')
-         rentContentBtn.classList.add('hidden')
-         rentImgBtn.classList.remove('hidden')
-      }
-      
-      function rentContentHandler() {
-         const title = document.querySelector('input[name="title"]')
-         const price = document.querySelector('input[name="price"]')
-         const content = document.querySelector('textarea[name="content"]')
-         const contactNum = document.querySelector('input[name="contactNum"]')
-         
-         if(title.value == '') {
-            alert('숙소 이름을 꼭 입력해주세요 ~~')
-            return
-         }
-         if(price.value == '') {
-            alert('숙소 가격을 꼭 입력해주세요 ~~')
-            return
-         }
-         if(contactNum.value == '') {
-            alert('숙소 대표 전화번호를 꼭 입력해주세요 ~~')
-            return
-         }
-         if(content.value == '') {
-            alert('숙소 소개를 꼭 입력해주세요 ~~')
-            return
-         }
-         
-         if(formData.get("title") != null) {
-            formData.delete("title")
-         }
-         if(formData.get("price") != null) {
-            formData.delete("price")
-         }
-         if(formData.get("contactNum") != null) {
-            formData.delete("contactNum")
-         }
-         if(formData.get("content") != null) {
-            formData.delete("content")
-         }
-         
-         formData.append('title', title.value)
-         formData.append('price', price.value)
-         formData.append('contactNum', contactNum.value)
-         formData.append('content', content.value)
-         
-         rentContent.classList.add('hidden')
-         rentLocation.classList.remove('hidden')
-         rentContentBtn.classList.add('hidden')
-         rentLocationBtn.classList.remove('hidden')
-         
-         map.relayout()
-      }
-      
-      // rentLocation handler
-      function preRentLocationHandler() {
-         rentLocation.classList.add('hidden')
-         rentContent.classList.remove('hidden')
-         rentLocationBtn.classList.add('hidden')
-         rentContentBtn.classList.remove('hidden')
-      }
-      
-      function finishHandler() {
-         let address = '';
-         const url = cpath + '/rent/createRent'
-         const sido = document.querySelector('select[name="sido"]')
-         const sigugun = document.querySelector('input[name="sigugun"]')
-         const gueup = document.querySelector('input[name="gueup"]')
-         const road = document.querySelector('input[name="road"]')
-         const detailAddress = document.querySelector('input[name="detailAddress"]')
-         address = sido.value + ' ' + sigugun.value + ' ' + gueup.value + ' ' + road.value
-         
-         if(sido.value == '') {
-            alert('시·도를 꼭 선택해주세요 !')
-            return
-         }
-         if(sigugun.value == '') {
-            alert('시·구·군을 꼭 입력해주세요 !')
-            return
-         }
-         if(road.value == '') {
-            alert('도로명 주소를 꼭 입력해주세요 !')
-            return
-         }
-         if(detailAddress.value == '') {
-            alert('상세주소를 꼭 입력해주세요 !')
-            return
-         }
-         
-         if(formData.get('address') != null) {
-            formData.delete("address")
-         }
-         if(formData.get('detailAddress') != null) {
-            formData.delete("detailAddress")
-         }
-         if(formData.get('member') != null) {
-            formData.delete("member")
-         }
-         
-         formData.append('address', address)
-         formData.append('detailAddress', detailAddress.value)
-         formData.append('member', idx)
-         
-         opt.body = formData
-         
-         fetch(url, opt)
-         .then(resp => resp.json())
-         .then(json => {
-            window.removeEventListener("beforeunload", beforeUnloadHandler)
-            alert(json.msg)
-            location.href = cpath + json.url + '/' + idx
-         })
-      }
-      
-      // host event
-      nextHost.onclick = hostHandler
-      // category event
-      preCategory.onclick = preCategoryHandler
-      categoryItemList.forEach(categoryItem => categoryItem.onclick = categoryItemHandler)
-      nextCategory.onclick = categoryHandler
-      // roomType event
-      preRoomType.onclick = preRoomTypeHandler
-      roomTypeItemList.forEach(roomTypeItem => roomTypeItem.onclick = roomTypeItemHandler)
-      nextRoomType.onclick = roomTypeHandler
-      // rentCount event
-      preRentCount.onclick = preRentCountHandler
-      minusList.forEach(minus => minus.onclick = minusHandler)
-      plusList.forEach(plus => plus.onclick = plusHandler)
-      nextRentCount.onclick = rentCountHandler
-      // rentInformation event
-      preRentInformation.onclick = preRentInformationHandler
-      rentInformationItemList.forEach(rentInformationItem => rentInformationItem.onclick = rentInformationItemHandler)
-      nextRentInformation.onclick = rentInformationHandler
-      // rentImg event
-      preRentImg.onclick = preRentImgHandler
-      nextRentImg.onclick = rentImgHandler
-      // rentContent event
-      preRentContent.onclick = preRentContentHandler
-      nextRentContent.onclick = rentContentHandler
-      // rentLocation event
-      preRentLocation.onclick = preRentLocationHandler
-      finish.onclick = finishHandler
-      
-      // kakao 지도 API 변수
-      var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-          mapOption = { 
-              center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
-              level: 3 // 지도의 확대 레벨
-          };
+	
+	<script src="${cpath }/resources/script/rent/hosting.js"></script>
+	<script>
+		window.addEventListener("beforeunload", beforeUnloadHandler)
+		   
+		const cpath = '${cpath }'
+		const idx = +'${login.idx }'
    
-      var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+		// host 변수
+		const start = document.getElementById('start')
+		const hostBtn = document.getElementById('hostBtn')
+		const nextHost = document.getElementById('nextHost')
+		// category 변수
+		const category = document.getElementById('selectCategory')
+		const categoryItemList = document.querySelectorAll('.categoryItem')
+		const categoryBtn = document.getElementById('categoryBtn')
+		const preCategory = document.getElementById('preCategory')
+		const nextCategory = document.getElementById('nextCategory')
+		// roomType 변수
+		const roomType = document.getElementById('selectRoomType')
+		const roomTypeBtn = document.getElementById('roomTypeBtn')
+		const roomTypeItemList = document.querySelectorAll('.roomTypeItem')
+		const preRoomType = document.getElementById('preRoomType')
+		const nextRoomType = document.getElementById('nextRoomType')
+		// rentCount 변수
+		const rentCount = document.getElementById('rentCount')
+		const rentCountBtn = document.getElementById('rentCountBtn')
+		const minusList = document.querySelectorAll('.minus')
+		const plusList = document.querySelectorAll('.plus')
+		const preRentCount = document.getElementById('preRentCount')
+		const nextRentCount = document.getElementById('nextRentCount')
+		// rentInformation 변수
+		const rentInformation = document.getElementById('rentInformation')
+		const rentInformationBtn = document.getElementById('rentInformationBtn')
+		const rentInformationItemList = document.querySelectorAll('.rentInformationItem')
+		const preRentInformation = document.getElementById('preRentInformation')
+		const nextRentInformation = document.getElementById('nextRentInformation')
+		// rentImg 변수
+		const rentImg = document.getElementById('rentImg')
+		const rentImgBtn = document.getElementById('rentImgBtn')
+		let fileImgList = document.querySelectorAll('.fileImg')
+		const preRentImg = document.getElementById('preRentImg')
+		const nextRentImg = document.getElementById('nextRentImg')
+		let subImgWrap = document.querySelector('.subImgWrap')
+		// rentContent 변수
+		const rentContent = document.getElementById('rentContent')
+		const rentContentBtn = document.getElementById('rentContentBtn')
+		const preRentContent = document.getElementById('preRentContent')
+		const nextRentContent = document.getElementById('nextRentContent')
+		// rentLocation 변수
+		const rentLocation = document.getElementById('rentLocation')
+		const preRentLocation = document.getElementById('preRentLocation')
+		const finish = document.querySelector('.finish')
+		const rentLocationBtn = document.getElementById('rentLocationBtn')
+		const searchLocation = document.querySelector('.searchLocation')
+		// ajax 옵션
+		let opt = {                  
+		      method: 'POST'
+		}
+		let formData = new FormData()
       
-      // 지도를 클릭한 위치에 표출할 마커입니다
-      var marker = new kakao.maps.Marker({ 
-          // 지도 중심좌표에 마커를 생성합니다 
-          position: map.getCenter() 
-      }); 
-      // 지도에 마커를 표시합니다
-      marker.setMap(map);
+		// host event
+		nextHost.onclick = hostHandler
+		// category event
+		preCategory.onclick = preCategoryHandler
+		categoryItemList.forEach(categoryItem => categoryItem.onclick = categoryItemHandler)
+		nextCategory.onclick = categoryHandler
+		// roomType event
+		preRoomType.onclick = preRoomTypeHandler
+		roomTypeItemList.forEach(roomTypeItem => roomTypeItem.onclick = roomTypeItemHandler)
+		nextRoomType.onclick = roomTypeHandler
+		// rentCount event
+		preRentCount.onclick = preRentCountHandler
+		minusList.forEach(minus => minus.onclick = minusHandler)
+		plusList.forEach(plus => plus.onclick = plusHandler)
+		nextRentCount.onclick = rentCountHandler
+		// rentInformation event
+		preRentInformation.onclick = preRentInformationHandler
+		rentInformationItemList.forEach(rentInformationItem => rentInformationItem.onclick = rentInformationItemHandler)
+		nextRentInformation.onclick = rentInformationHandler
+		// rentImg event
+		preRentImg.onclick = preRentImgHandler
+		nextRentImg.onclick = rentImgHandler
+		// rentContent event
+		preRentContent.onclick = preRentContentHandler
+		nextRentContent.onclick = rentContentHandler
+		// rentLocation event
+		preRentLocation.onclick = preRentLocationHandler
+		finish.onclick = finishHandler
       
-      // 지도에 클릭 이벤트를 등록합니다
-      // 지도를 클릭하면 마지막 파라미터로 넘어온 함수를 호출합니다
-      kakao.maps.event.addListener(map, 'click', function(mouseEvent) {        
-         const geocoder = new kakao.maps.services.Geocoder()
-          // 클릭한 위도, 경도 정보를 가져옵니다 
-          var latlng = mouseEvent.latLng; 
-         
-         console.log('latlng', latlng)
-          
-          // 마커 위치를 클릭한 위치로 옮깁니다
-          marker.setPosition(latlng);
-          
-          geocoder.coord2Address(latlng.getLng(), latlng.getLat(), (result, status) => {
-             var resultDiv = document.getElementById('clickLatlng');
-             const select = document.querySelector('select[name="sido"]')
-            const sigugun = document.querySelector('input[name="sigugun"]')
-            const gueup = document.querySelector('input[name="gueup"]')
-            const road = document.querySelector('input[name="road"]')
-            
-            select.options[0].selected = true
-            sigugun.value = ""
-            gueup.value = ""
-            road.value = ""
-             
-             if(status === kakao.maps.services.Status.OK) {
-                const roadAddress = result[0].road_address.address_name
-                var message = roadAddress
-             }
-             resultDiv.innerText = message
-             
-             const addressParts = message.split(' ')
-            
-             for(let i = 0; i < addressParts.length; i++) {
-                if(i == 0) {
-                  const option = document.querySelector('option[value="' + addressParts[i] + '"]')
-                   option.selected = true
-                }
-                else if(i == 1) {
-                   sigugun.value = addressParts[i]
-                }
-                else if('구/읍'.includes(addressParts[i].charAt(addressParts[i].length - 1))) {
-                  gueup.value = addressParts[i]
-               }
-               else {
-                  road.value += addressParts[i] + " "
-               }
-            }
-          })
-          
-      });
+		// kakao 지도 API 변수
+		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+		    mapOption = { 
+		        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+		        level: 3 // 지도의 확대 레벨
+		    };
+		
+		var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
       
-      function searchLocationHandler() {
-         const inputLocation = document.querySelector('.inputLocation')
-         const geocoder = new kakao.maps.services.Geocoder()
-         
-         geocoder.addressSearch(inputLocation.value, function(result, status) {
-            const select = document.querySelector('select[name="sido"]')
-            const sigugun = document.querySelector('input[name="sigugun"]')
-            const gueup = document.querySelector('input[name="gueup"]')
-            const road = document.querySelector('input[name="road"]')
-            
-            select.options[0].selected = true
-            sigugun.value = ""
-            gueup.value = ""
-            road.value = ""
-            
-            if(status === kakao.maps.services.Status.OK) {
-               const lng = result[0].x
-               const lat = result[0].y
-               
-               geocoder.coord2Address(lng, lat, function(result, status) {
-                  var resultDiv = document.getElementById('clickLatlng'); 
-                  
-                  if(status === kakao.maps.services.Status.OK) {
-                     var coords = new kakao.maps.LatLng(lat, lng);
-                     const roadAddress = result[0].road_address.address_name
-                     var message = roadAddress
-                     
-                     console.log(coords)
-                     
-                     // 결과값으로 받은 위치를 마커로 표시합니다
-                     marker.setPosition(coords)
-                     
-                     console.log(event.target.innerText, coords)
-                     map.setCenter(coords);
-                  }
-                  
-                  resultDiv.innerText = message
-                  
-                  const addressParts = message.split(' ')
-                  
-                   for(let i = 0; i < addressParts.length; i++) {
-                      if(i == 0) {
-                        const option = document.querySelector('option[value="' + addressParts[i] + '"]')
-                         option.selected = true
-                      }
-                      else if(i == 1) {
-                         sigugun.value = addressParts[i]
-                      }
-                      else if('구/읍'.includes(addressParts[i].charAt(addressParts[i].length - 1))) {
-                         gueup.value = addressParts[i]
-                      }
-                      else {
-                         road.value += addressParts[i] + " "
-                      }
-                   }
-               })
-            }
-         })
-      }
+		// 지도를 클릭한 위치에 표출할 마커
+		var marker = new kakao.maps.Marker({ 
+		    // 지도 중심좌표에 마커를 생성
+		    position: map.getCenter() 
+		}); 
+		// 지도에 마커를 표시
+		marker.setMap(map);
+		
+		// 지도에 클릭 이벤트를 등록합니다
+		// 지도를 클릭하면 마지막 파라미터로 넘어온 함수를 호출합니다
+		kakao.maps.event.addListener(map, 'click', function(mouseEvent) {        
+		   const geocoder = new kakao.maps.services.Geocoder()
+		    // 클릭한 위도, 경도 정보를 가져옵니다 
+		    var latlng = mouseEvent.latLng; 
+		   
+		   console.log('latlng', latlng)
+		    
+		    // 마커 위치를 클릭한 위치로 옮깁니다
+		    marker.setPosition(latlng);
+		    
+			geocoder.coord2Address(latlng.getLng(), latlng.getLat(), (result, status) => {
+				var resultDiv = document.getElementById('clickLatlng');
+				const select = document.querySelector('select[name="sido"]')
+				const sigugun = document.querySelector('input[name="sigugun"]')
+				const gueup = document.querySelector('input[name="gueup"]')
+				const road = document.querySelector('input[name="road"]')
+				
+				select.options[0].selected = true
+				sigugun.value = ""
+				gueup.value = ""
+				road.value = ""
+				 
+				if(status === kakao.maps.services.Status.OK) {
+					const roadAddress = result[0].road_address.address_name
+					var message = roadAddress
+				}
+				resultDiv.innerText = message
+				
+				const addressParts = message.split(' ')
+				
+				for(let i = 0; i < addressParts.length; i++) {
+					if(i == 0) {
+						const option = document.querySelector('option[value="' + addressParts[i] + '"]')
+						option.selected = true
+					}
+					else if(i == 1) {
+						sigugun.value = addressParts[i]
+					}
+					else if('구/읍'.includes(addressParts[i].charAt(addressParts[i].length - 1))) {
+						gueup.value = addressParts[i]
+					}
+					else {
+						road.value += addressParts[i] + " "
+					}
+				}
+			})
+		});
       
+      // 지도 검색 event
       searchLocation.onclick = searchLocationHandler
    </script>
 </body>

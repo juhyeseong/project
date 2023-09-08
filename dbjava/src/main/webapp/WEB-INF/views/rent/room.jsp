@@ -20,7 +20,7 @@
 		            <div class="roomText">
 		               <p class="roomTitle">${dto.title }</p>
 		               <p class="roomAddress">${dto.address }${dto.detailAddress }</p>
-		               <p class="roomPrice"></p>
+		               <p class="roomPrice">₩ <fmt:formatNumber value="${dto.price }" groupingUsed="true"/> / 박</p>
 		            </div>
 		            <div class="reserveDate-container">
 		            <div class="reserveDate">
@@ -43,9 +43,13 @@
 		            </div>
 		            <div class="priceSpace hidden">
 		               <div class="reserveCal">
-		                  <span class="roomPrice"></span> X <span class="nightValue">박</span>
+		                  <span class="roomPrice">
+		                  	₩ <fmt:formatNumber value="${dto.price }" groupingUsed="true"/>
+		                  </span>
+		                   X 
+		                  <span class="nightValue"></span>
 		               </div>
-		               <div class="reserveTotal" id="totalPrice">원</div>
+		               <div class="reserveTotal" id="totalPrice"></div>
 		            </div>
 		            <input type="hidden" name="totalPrice"> 
 		            <input type="hidden" name="member" value="${login.idx }"> 
@@ -317,175 +321,72 @@
 	<link rel="stylesheet"
 	   href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<script src="${cpath }/resources/script/room.js"></script>
 	<script>
+		// el tag 변수
 		const cpath = '${cpath }'
 		const login = '${login}'
-	</script>
-
-	<script>
-		const roomPriceList = document.querySelectorAll('.roomPrice')
-		const price = ${dto.price }
-		const formatPrice = new Intl.NumberFormat().format(price)
-		let index = 0
+		const price = '${dto.price }'
+		const title = '${dto.title }'
+		const userName = '${login.userName }'
+		const userPhone = '${login.phoneNum }'
+		const userIdx = '${login.idx }'
+		// reservation guestCount 변수
 		const minus = document.querySelector('.minusBtn')
 		const plus = document.querySelector('.plusBtn')
 		
-		roomPriceList.forEach(roomPrice => {
-		   if(index == 0) {
-		      roomPrice.innerText = '₩ ' + formatPrice + ' / 박'
-		   }
-		   else {
-		      roomPrice.innerText = '₩ ' + formatPrice
-		   }
-		   index++
-		})
-		
-		function minusBtnHandler(event) {
-		   const guestCount = event.target.parentNode.children[1]
-		   const guestCountValue = +guestCount.innerText
-		   
-		   if(guestCountValue - 1 > 0) {
-		      guestCount.innerText = guestCountValue - 1
-		   }
-		}
-		
-		function plusBtnHandler(event) {
-		   const rent = document.querySelector('input[name="rent"]')
-		   const guestCount = event.target.parentNode.children[1]
-		   const guestCountValue = +guestCount.innerText
-		   const url = cpath + '/reservation/selectGuestCount/' + rent.value
-		   
-		   fetch(url)
-		   .then(resp => resp.text())
-		   .then(text => {
-		      if(guestCountValue + 1 <= text) {
-		         guestCount.innerText = guestCountValue + 1
-		      }
-		   })
-		}
-		
-		minus.onclick = minusBtnHandler
-		plus.onclick = plusBtnHandler
-	</script>
-
-	<script>
+		// 결제 변수
 		const submitBtn = document.querySelector('.reserveBtn > input[type="submit"]')   
 		var IMP = window.IMP
 		IMP.init("imp06272263")
-	   
-		function payHandler(event) {
-			event.preventDefault()
-			
-			const rent = document.querySelector('input[name="rent"]').value
-			const member = document.querySelector('input[name="member"]').value
-			const sDateString = document.querySelector('input[name="sDateString"]').value
-			const eDateString = document.querySelector('input[name="eDateString"]').value
-			const guestCount = document.querySelector('.guestCountValue').innerText
-			const totalPrice = document.querySelector('input[name="totalPrice"]')
-			const title = '${dto.title }'
-			const userName = '${login.userName }'
-			const userPhone = '${login.phoneNum }'
-			const userIdx = '${login.idx }'
-			
-			if(member == '') {
-			    alert('로그인 후 이용해주세요 ~ ')
-			    location.href = cpath + '/member/login?url=/room/' + rent
-			    return
-			 }
-			 if(sDateString == '' || eDateString == '') {
-			    alert('체크인 또는 체크아웃 날짜를 선택해주세요 ~~')
-			    return
-			 }
-			 if(guestCount == '') {
-			    alert('인원 수를 정해주세요 ~')
-			    return
-			 }
-			 
-			function dateFormat() {
-				const date = new Date()
-				const year = date.getFullYear()
-				const month = String(date.getMonth() + 1).padStart(2, '0')
-				const day = String(date.getDate()).padStart(2, '0')
-				const hours = String(date.getHours()).padStart(2, '0')
-				const minutes = String(date.getMinutes()).padStart(2, '0')
-				const seconds = String(date.getSeconds()).padStart(2, '0')
-			
-			 	return year + month + day + hours + minutes + seconds
-			 }
-			 
-			const date = dateFormat()
-			const random = Math.floor(Math.random() * (1000000 - 1)) + 1
-			const merchant_uid = date + '_' + random
-		    
-			IMP.request_pay({
-				pg: "kakaopay",
-				merchant_uid: merchant_uid,
-				name: title,
-				amount: totalPrice.value,
-				buyer_name: userName,
-				buyer_tel: userPhone
-			}, function (resp) {
-			 	if(resp.success) {
-					const url = cpath + '/insertReservation'
-					const opt = {
-						method: 'POST',
-						headers: {                  
-						   'Content-Type': 'application/json; charset=utf-8'
-						},
-						body: JSON.stringify({   
-							rent: rent,
-							member: member,
-							sDateString: sDateString,
-							eDateString: eDateString,
-							guestCount: guestCount,
-							totalPrice: totalPrice.value,
-							merchant_uid: merchant_uid
-						})
-					}
-				 		  
-					fetch(url, opt)
-					.then(resp => resp.text())
-					.then(text => {
-						if(text != 0 && text != null) {
-							alert('예약이 완료되었습니다 ~~')
-							location.href = cpath + '/reservation/reservationList/' + userIdx
-						}
-						else {
-							alert('예약에 실패하셨습니다 ~~')
-						}
-					})
-				}
-			 	else {
-					alert(resp.error_msg)
-				}
-			})
-		}
-	
-		submitBtn.onclick = payHandler
-	</script>
-
-
-	<!-- roomSmall 을 눌렀을 때 roomBig에 사진 크게 뜨게 하기 -->
-	<script>
+		
+		// roomImg 변수
 		const roomBigImg = document.querySelector('.roomBig > img')
 		const roomSmallImgs = document.querySelectorAll('.roomSmall > img')
-		
-		function inputImgHandler(event) {
-		   const src = event.target.src
-		   
-		   roomBigImg.src = src
-		}
-		
-		roomSmallImgs.forEach(roomSmallImg => roomSmallImg.onclick = inputImgHandler)
-	</script>
-
-
-<!-- 탭 메뉴 -->
-	<script>
-		// nodeList
+	   
+		// tab 변수
 		const tabList = document.querySelectorAll('ul.tab > li')
 		const boxList = document.querySelectorAll('div.box > div')
 		
+		// 별점 변수
+		const stars = document.querySelectorAll('.star')
+		
+		// reviewImgCarousels 변수
+		const reviewCarousels = document.querySelectorAll('.carousel') // 모든 리뷰 캐러셀을 선택합니다.
+		let currentPage = 0
+		
+
+		// 별점 스크립트 변수
+		const totalPoints = '${totalPoints}'
+		const totalReviews = '${totalReviews}'
+		const averageRating = totalPoints / totalReviews
+		const averageRatingDocument = document.getElementById('averageRating')
+		 
+		if(averageRatingDocument != null) {
+		   averageRatingDocument.innerText = averageRating.toFixed(1)
+		}
+		
+		// room report 변수
+		const roomReportButton = document.querySelector('.roomReport')
+		const reportModal = document.getElementById('reportModal')
+		const closeModal = document.getElementById('closeModal')
+	   
+		// review report 변수
+		const reviewReportButtons = document.querySelectorAll('.reviewReport')
+		const reviewReportModal = document.getElementById('reviewReportModal')
+		const reviewCloseModal = document.getElementById('reviewCloseModal')
+	    
+		// reservation guestCount event
+		minus.onclick = minusBtnHandler
+		plus.onclick = plusBtnHandler
+		
+		// 결제 이벤트
+		submitBtn.onclick = payHandler
+		
+		// roomImg event
+		roomSmallImgs.forEach(roomSmallImg => roomSmallImg.onclick = inputImgHandler)
+		
+		// tab event, hander
 		tabList.forEach((element, index) => {
 		    element.onclick = function() {
 		
@@ -521,96 +422,31 @@
 			    })
 			}
 		})
-   </script>
-	<!-- 별점 스크립트 -->
-	<script>
-	   //HTML에서 별점 아이콘들을 선택합니다.
-	   const stars = document.querySelectorAll('.star')
-	   
-	   // 별점을 클릭할 때마다 이벤트를 처리합니다.
-	   stars.forEach((star, index) => {
-	       star.addEventListener('click', () => {
-	           // 클릭한 별 이후의 별들을 모두 활성화(색 변경)합니다.
-	           for (let i = 0; i <= index; i++) {
-	               stars[i].classList.add('active')
-	           }
-	           // 클릭한 별 이후의 별들을 비활성화(색 초기화)합니다.
-	           for (let i = index + 1; i < stars.length; i++) {
-	               stars[i].classList.remove('active')
-	           }
-	           
-	           // 선택한 별점 값을 가진 숨겨진 입력 필드 업데이트
-	           const starRatingInput = document.getElementById('starRating')
-	           starRatingInput.value = index + 1
-	       })
-	   })
-	</script>
-	<script>
-		function printStars() {
-		    const starPointElements = document.querySelectorAll('.starPoint')
-		    
-		    starPointElements.forEach(starPointElement => {
-		        const numStars = parseInt(starPointElement.textContent)
-		        if (!isNaN(numStars) && numStars > 0) {
-		            // 별점을 표시하는 문자열을 초기화
-		            let starRatingString = ''
-		            for (let i = 0; i < numStars; i++) {
-		                starRatingString += "⭐"
-		            }
-		            // 텍스트로 설정
-		            starPointElement.textContent = starRatingString
-		        } else {
-		            alert('올바른 숫자를 입력하세요.')
+		
+		// 별점 event, handler
+		stars.forEach((star, index) => {
+		    star.addEventListener('click', () => {
+		        // 클릭한 별 이후의 별들을 모두 활성화(색 변경)합니다.
+		        for (let i = 0; i <= index; i++) {
+		            stars[i].classList.add('active')
 		        }
+		        // 클릭한 별 이후의 별들을 비활성화(색 초기화)합니다.
+		        for (let i = index + 1; i < stars.length; i++) {
+		            stars[i].classList.remove('active')
+		        }
+		        
+		        // 선택한 별점 값을 가진 숨겨진 입력 필드 업데이트
+		        const starRatingInput = document.getElementById('starRating')
+		        starRatingInput.value = index + 1
 		    })
-		}
+		})
+	   
+		// 별점 출력 event
 		window.addEventListener('load', printStars)
-	</script>
-
-
-	<!-- 리뷰 이미지 캐러셀 -->
-	<script>
-	  const reviewCarousels = document.querySelectorAll('.carousel') // 모든 리뷰 캐러셀을 선택합니다.
-
-	    // 캐러셀을 초기화하고 현재 페이지를 추적하는 변수를 추가합니다.
-	    reviewCarousels.forEach((carousel, index) => {
-	        let currentPage = 0;
-
-	        // 페이지를 업데이트하고 보이지 않는 항목을 숨깁니다.
-	        function updatePage() {
-	            const itemsPerPage = 1 // 한 번에 보여줄 항목 수를 설정합니다.
-	            const reviewItems = carousel.querySelectorAll('.reviewImgs'); // 변경: 클래스 이름이 올바른지 확인하세요.
-
-	            reviewItems.forEach((item, itemIndex) => {
-	                if (itemIndex >= currentPage * itemsPerPage && itemIndex < (currentPage + 1) * itemsPerPage) {
-	                    item.style.display = 'block';
-	                }
-	                else {
-	                    item.style.display = 'none';
-	                }
-	            });
-	        }
-
-	        // 이전 페이지로 이동하는 함수
-	        function prevPage() {
-	            if (currentPage > 0) {
-	                currentPage--;
-	                updatePage();
-	            }
-	        }
-
-	        // 다음 페이지로 이동하는 함수
-	        function nextPage() {
-	            const itemsPerPage = 1; // 한 번에 보여줄 항목 수를 설정합니다.
-	            const reviewItems = carousel.querySelectorAll('.reviewImgs'); // 변경: 클래스 이름이 올바른지 확인하세요.
-	            const totalPages = Math.ceil(reviewItems.length / itemsPerPage);
-
-	            if (currentPage < totalPages - 1) {
-	                currentPage++;
-	                updatePage();
-	            }
-	        }
-
+		
+		// reviewCarousels event, handler
+		// 캐러셀을 초기화하고 현재 페이지를 추적하는 변수를 추가
+		reviewCarousels.forEach((carousel, index) => {
 	        // 변경: 이전 버튼과 다음 버튼에 이벤트 리스너를 추가합니다.
 	        const prevButton = carousel.querySelector('.prevButton'); // 캐러셀 내의 이전 버튼을 선택합니다.
 	        const nextButton = carousel.querySelector('.nextButton'); // 캐러셀 내의 다음 버튼을 선택합니다.
@@ -625,9 +461,8 @@
 	        // 초기 페이지를 업데이트합니다.
 	        updatePage();
 	    });
-	</script> 
-	
-	<script>
+		
+		// jquery(datepicker)
 		$.datepicker.setDefaults({
 		     dateFormat: 'yy. mm. dd',
 		     monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
@@ -638,30 +473,7 @@
 		     showMonthAfterYear: true,
 		     yearSuffix: '년'
 		})
-	
-		function totalPriceHandler(sDateString, eDateString) {
-			if(sDateString != '' && eDateString != '') {
-				sDateString = sDateString.replaceAll('. ', '-')
-				eDateString = eDateString.replaceAll('. ', '-')
-				const startDate = new Date(sDateString)
-				const endDate = new Date(eDateString)
-				const timeDifference = endDate - startDate
-				const daysDifference = Math.floor(timeDifference / (1000 * 60 * 60 * 24))
-				const nights = daysDifference
-				const nightValue = document.querySelector('.nightValue')
-				nightValue.innerText = nights + '박'
-				
-				const price = ${dto.price }
-				const totalPrice = document.querySelector('#totalPrice')
-				const totalPriceValue = document.querySelector('input[name="totalPrice"]')
-				totalPriceValue.value = price * nights
-				totalPrice.innerText = new Intl.NumberFormat().format(price * nights) + '원'
-				
-				const priceSpace = document.querySelector('.priceSpace')
-				priceSpace.classList.remove('hidden')
-			}
-		}
-	
+		
 		const reservationList = ${reservationList }
 		$(document).ready(function() {
 		    // 시작 날짜 입력란에 달력을 연결합니다.
@@ -727,44 +539,8 @@
 		        }
 		    })
 		})
-	</script>
-
-	<!--평균 별점 스크립트 -->
-	<script>
-		const totalPoints = '${totalPoints}'
-		const totalReviews = '${totalReviews}'
-		const averageRating = totalPoints / totalReviews
-		const averageRatingDocument = document.getElementById('averageRating')
-		 
-		if(averageRatingDocument != null) {
-		   averageRatingDocument.innerText = averageRating.toFixed(1)
-		}
-	</script>
-
-	<!-- delete 코드 수행시 리로드하는 스크립트 -->
-	<script>
-	function deleteReview(reviewId) {
-	    if (confirm("이 리뷰를 삭제하시겠습니까?")) {
-	       fetch(`${cpath}/review/delete/` + reviewId, {
-	            method: 'DELETE'
-	        })
-	        .then(response => response.text())
-	        .then(data => {
-	            alert('리뷰 삭제 성공')
-	            location.reload()
-	        })
-	        .catch(error => {
-	            alert('리뷰 삭제 실패')
-	        })
-	    }
-	}
-	</script>
-	<!-- 숙소 신고 모달창 -->
-	<script>
-		const roomReportButton = document.querySelector('.roomReport')
-		const reportModal = document.getElementById('reportModal')
-		const closeModal = document.getElementById('closeModal')
 		
+		// room report event, handler
 		if (roomReportButton && reportModal && closeModal) {
 			roomReportButton.addEventListener('click', () => {
 			    reportModal.style.display = 'block'
@@ -780,21 +556,8 @@
 		        reportModal.style.display = 'none'
 		    }
 		})
-	</script>
-
-	<!-- 댓글 신고 모달창 -->
-	<script>
-		const reviewReportButtons = document.querySelectorAll('.reviewReport')
-		const reviewReportModal = document.getElementById('reviewReportModal')
-		const reviewCloseModal = document.getElementById('reviewCloseModal')
 		
-		// 리뷰 신고 모달창을 열기 위한 함수를 정의합니다.
-		function openReviewReportModal(reviewIdx) {
-		    reviewReportModal.style.display = 'block'
-		    const hiddenInput = document.querySelector('input[name="review"]')
-		    hiddenInput.value = reviewIdx
-		}
-		
+		// review report event, handler
 		// 각 리뷰 신고 버튼에 이벤트 리스너를 추가합니다.
 		reviewReportButtons.forEach((button) => {
 		    button.addEventListener('click', (event) => {

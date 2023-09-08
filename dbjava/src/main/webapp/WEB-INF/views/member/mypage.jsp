@@ -1,40 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="../header.jsp"%>
-
-	<style>
-.list-info {
-	background-color: #F4F4F4; /* 배경색은 회색 계열 */
-	box-shadow: 9px 9px 18px 0px #8a8a8a;
-	border-radius: 15px;
-}
-.mypageWrap {
-	height: 100%;
-}
-.profileImg {
-	box-shadow: 0px 2px 2px 2px #8a8a8a;
-}
-.mypage {
-	padding: 10px;
-	margin: 5px;
-	text-align: center;
-	border-radius: 5px;
-	background-color: #FFFFFF; /* 각 메뉴 배경색은 흰색 */
-	color: #333333; /* 텍스트 색은 어두운 회색 */
-	box-shadow: 0px 0px 2px 2px #8a8a8a;
-}
-
-.mypage:hover {
-  background-color: #f8215c; /* 마우스 오버 시 배경색은 파란색 */
-  color: #FFFFFF; /* 마우스 오버 시 텍스트 색은 흰색 */
-}
-
-.list-info >h2 {
-	text-align: center;
-}
-		
-</style>
-
 	<div class="mypageSpace">
 		<div class="list-info">
 			<h2>${one.userNick }님의정보</h2>

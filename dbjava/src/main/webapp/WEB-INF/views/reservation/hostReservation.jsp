@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ include file="../manageHeader.jsp" %>
 <script>
-   const cpath = '${cpath }'
+   
 </script>
 
 <style>
@@ -36,9 +36,13 @@
                <div class="reserveBtn">
                   <input type="submit" value="예약하기">
                </div>
-               <div class="reservePrice hidden">
+               <div class="priceSpace hidden">
                   <div class="reserveCal">
-                     <span class="roomPrice"></span> X <span class="nightValue">박</span>
+                     <span class="roomPrice">
+                     	₩ <fmt:formatNumber value="${rent.price }" groupingUsed="true"/>
+                     </span>
+                      X 
+                     <span class="nightValue"></span>
                   </div>
                   <div class="reserveTotal" id="totalPrice">원</div>
                </div>
@@ -54,45 +58,18 @@
    href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
+<script src="${cpath }/resources/script/room.js"></script>
 <script>
+   const cpath = '${cpath }'
    const roomPriceList = document.querySelectorAll('.roomPrice')
    const minus = document.querySelector('.minusBtn')
    const plus = document.querySelector('.plusBtn')
    const roomPrice = document.querySelector('.roomPrice')
    const price = ${rent.price }
-   const formatPrice = new Intl.NumberFormat().format(price)
-   roomPrice.innerText = '₩ ' + formatPrice
-
-
-   function minusBtnHandler(event) {
-      const guestCount = event.target.parentNode.children[1]
-      const guestCountValue = +guestCount.innerText
-   
-      if(guestCountValue - 1 > 0) {
-         guestCount.innerText = guestCountValue - 1
-      }
-   }
-
-   function plusBtnHandler(event) {
-      const rent = document.querySelector('input[name="rent"]')
-      const guestCount = event.target.parentNode.children[1]
-      const guestCountValue = +guestCount.innerText
-      const url = cpath + '/reservation/selectGuestCount/' + rent.value
-   
-      fetch(url)
-      .then(resp => resp.text())
-      .then(text => {
-         if(guestCountValue + 1 <= text) {
-            guestCount.innerText = guestCountValue + 1
-         }
-      })
-   }
 
    minus.onclick = minusBtnHandler
    plus.onclick = plusBtnHandler
-</script>
-
-<script>
+   
    $.datepicker.setDefaults({
       dateFormat: 'yy. mm. dd',
       monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
@@ -103,29 +80,6 @@
       showMonthAfterYear: true,
       yearSuffix: '년'
    });
-
-   function totalPriceHandler(sDateString, eDateString) {
-      if(sDateString != '' && eDateString != '') {
-         sDateString = sDateString.replaceAll('. ', '-')
-         eDateString = eDateString.replaceAll('. ', '-')
-         const startDate = new Date(sDateString)
-         const endDate = new Date(eDateString)
-         const timeDifference = endDate - startDate
-         const daysDifference = Math.floor(timeDifference / (1000 * 60 * 60 * 24))
-         const nights = daysDifference
-         const nightValue = document.querySelector('.nightValue')
-         nightValue.innerText = nights + '박'
-         
-         const price = ${rent.price }
-         const totalPrice = document.querySelector('#totalPrice')
-         const totalPriceValue = document.querySelector('input[name="totalPrice"]')
-         totalPriceValue.value = price * nights
-         totalPrice.innerText = new Intl.NumberFormat().format(price * nights) + '원'
-         
-         const reservePrice = document.querySelector('.hidden')
-         reservePrice.classList.remove('hidden')
-      }
-   }
 
    const reservationList = ${reservationList }
    $(document).ready(function() {
@@ -193,6 +147,5 @@
        });
    });
 </script>
-
 </body>
 </html>

@@ -1,8 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="../header.jsp"%>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<fieldset>
 		<legend>프로필 사진 수정</legend>
 		<div class="update-profile">
@@ -32,24 +31,9 @@
 			</div>
 		</div>
 	</fieldset>
-	
+	<script src="${cpath }/resources/script/member/updateProfile.js"></script>
 	<script>
 		const file = document.querySelector('input[type="file"]')
-		
-		function inputProfileHandler(event) {
-			const target = event.target
-			const selectedFile = target.files[0]
-			const profileImg = document.querySelector('.profileImg')
-			
-			if(selectedFile != null) {
-				const reader = new FileReader()
-				
-				reader.readAsDataURL(selectedFile)
-				reader.onload = function(e) {
-					profileImg.src = e.target.result
-				}
-			}
-		}
 		
 		file.onchange = inputProfileHandler
 	</script>

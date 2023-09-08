@@ -9,7 +9,7 @@
 		<div class="roomBox">
 			<c:forEach var="dto" items="${wishList }">
 					<div class="room">
-						<a href="${cpath }/rent/room/${dto.rent}">
+						<a href="${cpath }/room/${dto.rent}">
 							<img src="${dto.filePath }" class="roomImg">
 						</a>
 						<div class="roomItemInfo">
@@ -26,33 +26,11 @@
 			</c:forEach>
 		</div>		
 	</div>
-	
+	<script src="${cpath }/resources/script/wishList/myWishList.js"></script>
 	<script>
 		const wishBtnList = document.querySelectorAll('.wish')
 	    const loginIdx = '${login.idx }'
 	    const cpath = '${cpath }'
-	    
-	    function wishDeleteHandler(event) {
-	    	const target = event.target
-	    	const rentIdx = target.parentNode.parentNode.children[2]
-	    	const opt = {
-    				method: 'POST',
-    				headers:  {
-    					'CONTENT-TYPE' : 'application/json; charset=utf-8'
-    				},
-    				body: JSON.stringify({
-    					rent: rentIdx.value,
-    					member: loginIdx
-    				})
-    		}
-    		const url = cpath + '/wishList/deleteWishList'
-    		
-    		console.log(loginIdx)
-    		console.log(rentIdx.value)
-    		
-    		fetch(url, opt)
-    		location.reload()
-	    }
 	    
 	    wishBtnList.forEach(wishBtn => wishBtn.onclick = wishDeleteHandler)
 	</script>
