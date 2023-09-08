@@ -1,6 +1,6 @@
 'use strict';
 
-function wishDeleteHandler(event) {
+async function wishDeleteHandler(event) {
 	const target = event.target
 	const rentIdx = target.parentNode.parentNode.children[2]
 	const opt = {
@@ -15,9 +15,6 @@ function wishDeleteHandler(event) {
 	}
 	const url = cpath + '/wishList/deleteWishList'
 	
-	console.log(loginIdx)
-	console.log(rentIdx.value)
-	
-	fetch(url, opt)
+	await fetch(url, opt)
 	location.reload()
 }
