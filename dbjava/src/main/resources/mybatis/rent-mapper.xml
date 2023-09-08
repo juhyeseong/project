@@ -5,174 +5,138 @@
 	
 <mapper namespace="com.javabang.repository.RentDAO">
 	<insert id="rentInsert" parameterType="rent">
-		insert into
-			rent(member, category, roomType, address, detailAddress, roomCount, guestCount, bedCount, bathCount, information, title, contactNum, content, price)
-			values(#{member}, #{category}, #{roomType}, #{address}, #{detailAddress}, #{roomCount}, #{guestCount}, #{bedCount}, #{bathCount}, #{information}, #{title}, #{contactNum}, #{content}, #{price})
+		INSERT INTO
+			rent (member, category, roomType, address, detailAddress, roomCount, guestCount, bedCount, bathCount, information, title, contactNum, content, price)
+			VALUES (#{member}, #{category}, #{roomType}, #{address}, #{detailAddress}, #{roomCount}, #{guestCount}, #{bedCount}, #{bathCount}, #{information}, #{title}, #{contactNum}, #{content}, #{price})
 	</insert>
 	
 	<select id="getRentIdx" parameterType="int">
-		select max(idx) from rent
+		SELECT MAX(idx) FROM rent
 	</select>
 	
 	<insert id="fileInsert" parameterType="hashmap">
-		insert into
-			rent_img(rent, filePath)
-			values(#{rent}, #{filePath})
+		INSERT INTO rent_img (rent, filePath) VALUES (#{rent}, #{filePath})
 	</insert>
 	
 	<select id="selectAll" resultType="rent">
-		<!-- 	select R.*, I.filePath from rent R join (select rent, min(filePath) as filePath from rent_img group by rent ) I on r.idx = I.rent -->
-		SELECT
-			R.*, I.filePath
+		SELECT R.*, I.filePath
 			FROM rent R
 			JOIN (SELECT ri.rent, MIN(ri.idx) AS min_idx FROM rent_img ri GROUP BY ri.rent) min_img
 				ON R.idx = min_img.rent
 			JOIN rent_img I
 				ON min_img.min_idx = I.idx
-			where R.state = 1
+			WHERE R.state = 1
 	</select>
 	
 	<select id="selectOne" parameterType="int" resultType="rent">
-		<!-- select r.*, i.filePath from rent R join Rent_img I on r.idx = i.rent where r.idx = #{idx} -->
-		select * from rent where idx = #{idx}
-			
+		SELECT * FROM rent WHERE idx = #{idx}
 	</select>
 	
 	<select id="selectHost" parameterType="int" resultType="rent">
-		select * from rent where member = #{member} order by idx desc
+		SELECT * FROM rent WHERE member = #{member} ORDER BY idx DESC
 	</select>
 	
 	<select id="selectFilePath" parameterType="int" resultType="string">
-		select filePath from rent_img where rent = #{idx} order by idx
+		SELECT filePath FROM rent_img WHERE rent = #{idx} ORDER BY idx
 	</select>
 	
 	<update id="updateRentTitle" parameterType="rent">
-		update rent
-			set title = #{title}
-			where idx = #{idx}
+		UPDATE rent SET title = #{title} WHERE idx = #{idx}
 	</update>
 	
 	<update id="updateRentContent" parameterType="rent">
-		update rent
-			set content = #{content}
-		where idx = #{idx}
+		UPDATE rent SET content = #{content} WHERE idx = #{idx}
 	</update>
 	
 	<update id="updateRentPrice" parameterType="rent">
-		update rent
-			set price = #{price}
-		where idx = #{idx}
+		UPDATE rent SET price = #{price} WHERE idx = #{idx}
 	</update>
 	
 	<update id="updateRentCountMinus" parameterType="rent">
-		update rent
-		<if test="guestCount != 0">
-			set guestCount = #{guestCount} - 1
-		</if>
-		<if test="bedCount != 0">
-			set bedCount = #{bedCount} - 1
-		</if>
-		<if test="bathCount != 0">
-			set bathCount = #{bathCount} - 1
-		</if>
-		<if test="roomCount != 0">
-			set roomCount = #{roomCount} - 1
-		</if>
-		where idx = #{idx}
+		UPDATE rent
+			<if test="guestCount != 0">
+				SET guestCount = #{guestCount} - 1
+			</if>
+			<if test="bedCount != 0">
+				SET bedCount = #{bedCount} - 1
+			</if>
+			<if test="bathCount != 0">
+				SET bathCount = #{bathCount} - 1
+			</if>
+			<if test="roomCount != 0">
+				SET roomCount = #{roomCount} - 1
+			</if>
+		WHERE idx = #{idx}
 	</update>
 	
 	<update id="updateRentCountPlus" parameterType="rent">
-		update rent
-		<if test="guestCount != 0">
-			set guestCount = #{guestCount}
-		</if>
-		<if test="bedCount != 0">
-			set bedCount = #{bedCount}
-		</if>
-		<if test="bathCount != 0">
-			set bathCount = #{bathCount}
-		</if>
-		<if test="roomCount != 0">
-			set roomCount = #{roomCount}
-		</if>
-		where idx = #{idx}
+		UPDATE rent
+			<if test="guestCount != 0">
+				SET guestCount = #{guestCount}
+			</if>
+			<if test="bedCount != 0">
+				SET bedCount = #{bedCount}
+			</if>
+			<if test="bathCount != 0">
+				SET bathCount = #{bathCount}
+			</if>
+			<if test="roomCount != 0">
+				SET roomCount = #{roomCount}
+			</if>
+		WHERE idx = #{idx}
 	</update>
 	
 	<delete id="deleteRentFile" parameterType="hashmap">
-		delete rent_img where filePath = #{filePath}
+		DELETE rent_img WHERE filePath = #{filePath}
 	</delete>
 	
 	<select id="filterPension" parameterType="string" resultType="rent"> 
-	SELECT
-		R.*, I.filePath
-		FROM rent R
-		JOIN (SELECT ri.rent, MIN(ri.idx) AS min_idx FROM rent_img ri GROUP BY ri.rent) min_img
-			ON R.idx = min_img.rent
-		JOIN rent_img I
-			ON min_img.min_idx = I.idx where category = #{category} and R.state = 1
+		SELECT R.*, I.filePath
+			FROM rent R
+			JOIN (SELECT ri.rent, MIN(ri.idx) AS min_idx FROM rent_img ri GROUP BY ri.rent) min_img
+				ON R.idx = min_img.rent
+			JOIN rent_img I
+				ON min_img.min_idx = I.idx 
+			WHERE category = #{category} AND R.state = 1
 	</select>
 
 	
 	<select id="selectGuestCount" parameterType="int" resultType="int">
-         select guestCount from rent where idx = #{idx}
+         SELECT guestCount FROM rent WHERE idx = #{idx}
     </select>
     
     <select id="find" resultType="rent" parameterType="string">
-    	<!-- select * from rent where title like '%${title}%' -->
-    	SELECT
-		    R.*, I.filePath
-		FROM rent R
-		JOIN (
-		    SELECT ri.rent, MIN(ri.idx) AS min_idx FROM rent_img ri GROUP BY ri.rent
-		) min_img
-		ON R.idx = min_img.rent
-		JOIN rent_img I
-		ON min_img.min_idx = I.idx
-		WHERE R.state = 1
-		AND R.title LIKE '%${title}%'
+    	SELECT R.*, I.filePath
+			FROM rent R
+			JOIN (SELECT ri.rent, MIN(ri.idx) AS min_idx FROM rent_img ri GROUP BY ri.rent) min_img
+				ON R.idx = min_img.rent
+			JOIN rent_img I
+				ON min_img.min_idx = I.idx
+			WHERE R.state = 1 AND R.title LIKE '%${title}%'
     </select>
     
     <delete id="deleteRent" parameterType="int">
-    	delete rent where idx = #{idx}
+    	DELETE rent WHERE idx = #{idx}
     </delete>
     
     <select id="selectOneFile" parameterType="int">
-    	select
-		    filePath
-		    from rent_img
-		    where idx = (select min(idx) from rent_img where rent = #{rent})
+    	SELECT filePath
+		    FROM rent_img
+		    WHERE idx = (SELECT MIN(idx) FROM rent_img WHERE rent = #{rent})
     </select>
     
     <update id="restMode" parameterType="int">
-    	update rent
-    		set state = 2
-    		where idx = #{idx}
+    	UPDATE rent SET state = 2 WHERE idx = #{idx}
     </update>
     
     <update id="operateMode" parameterType="int">
-    	update rent
-    		set state = 1
-    		where idx = #{idx}
+    	UPDATE rent SET state = 1 WHERE idx = #{idx}
     </update>
     
     <select id="rentDetailOne" parameterType="int" resultType="explain">
-    	select * from rent RT
-		    join member M on RT.member = M.idx
-		    where RT.idx = #{idx}
+    	SELECT * FROM rent RT 
+    		JOIN member M 
+    			ON RT.member = M.idx 
+    		WHERE RT.idx = #{idx}
     </select>
 </mapper>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

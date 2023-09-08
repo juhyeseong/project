@@ -5,8 +5,6 @@ import java.util.HashMap;
 import org.springframework.stereotype.Repository;
 
 import com.javabang.model.ReportDTO;
-import com.javabang.model.ReservationDTO;
-import com.javabang.model.ReviewDTO;
 import com.javabang.model.ReviewReportDTO;
 
 @Repository
@@ -21,5 +19,4 @@ public interface ReportDAO {
 	int updateBlock(int reviewIdx);
 
 	int reverseBlock(int reviewIdx);
-
 }

@@ -9,6 +9,7 @@ import com.javabang.model.WishListDTO;
 
 @Repository
 public interface WishListDAO {
+	
 	int countWish(HashMap<String, Object> map);
 
 	void createWishList(WishListDTO dto);

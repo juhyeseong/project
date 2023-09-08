@@ -26,85 +26,87 @@ public class ReservationController {
 	@Autowired private RentService rentService;
 	
 	@GetMapping("/reservationManage/{idx}")
-	   public ModelAndView reservationManage(@PathVariable("idx") int rent, HttpSession session) {
-	      ModelAndView mav = new ModelAndView("reservation/reservationManage");
-	      List<ReservationDTO> list = reservationService.selectReservation(rent);
-	      RentDTO rentDTO = rentService.selectOne(rent);
-	      MemberDTO login = (MemberDTO)session.getAttribute("login");
-	      if(rentDTO == null) {
-	    	  mav.setViewName("alert");
-			  mav.addObject("url", "/");
-			  mav.addObject("msg", "잘못된 접근입니다 ~ ");
+	public ModelAndView reservationManage(@PathVariable("idx") int rent, HttpSession session) {
+		ModelAndView mav = new ModelAndView("reservation/reservationManage");
+		
+		List<ReservationDTO> list = reservationService.selectReservation(rent);
+		RentDTO rentDTO = rentService.selectOne(rent);
+		MemberDTO login = (MemberDTO)session.getAttribute("login");
+		if(rentDTO == null) {
+			mav.setViewName("alert");
+			mav.addObject("url", "/");
+			mav.addObject("msg", "잘못된 접근입니다 ~ ");
 			
-			  return mav;
-	      }
+			return mav;
+		}
+		if(login.getIdx() != rentDTO.getMember()) {
+			mav.setViewName("alert");
+			mav.addObject("url", "/");
+			mav.addObject("msg", "잘못된 접근입니다 ~ ");
+		}
+		else {
+			mav.addObject("reservationList", list);
+			mav.addObject("rent", rent);
+		}
 	      
-	      if(login.getIdx() != rentDTO.getMember()) {
-	    	  mav.setViewName("alert");
-			  mav.addObject("url", "/");
-			  mav.addObject("msg", "잘못된 접근입니다 ~ ");
-	      }
-	      else {
-	    	  mav.addObject("reservationList", list);
-	    	  mav.addObject("rent", rent);
-	      }
-	      
-	      return mav;
-	  }
+		return mav;
+	}
    
-   @GetMapping("/hostReservation/{idx}")
-   public ModelAndView hostReservation(@PathVariable("idx") int idx, HttpSession session) {
-      ModelAndView mav = new ModelAndView("reservation/hostReservation");
-      RentDTO rent = rentService.selectOne(idx);
-      if(rent == null) {
-    	  mav.setViewName("alert");
-		  mav.addObject("url", "/");
-		  mav.addObject("msg", "잘못된 접근입니다 ~ ");
+	@GetMapping("/hostReservation/{idx}")
+	public ModelAndView hostReservation(@PathVariable("idx") int idx, HttpSession session) {
+		ModelAndView mav = new ModelAndView("reservation/hostReservation");
+		
+		RentDTO rent = rentService.selectOne(idx);
+		if(rent == null) {
+			mav.setViewName("alert");
+			mav.addObject("url", "/");
+			mav.addObject("msg", "잘못된 접근입니다 ~ ");
 		  
-		  return mav;
-      }
-      MemberDTO login = (MemberDTO)session.getAttribute("login");
-      if(login.getIdx() != rent.getMember()) {
-    	  mav.setViewName("alert");
-		  mav.addObject("url", "/");
-		  mav.addObject("msg", "잘못된 접근입니다 ~ ");
-      }
-      else {
-    	  mav.addObject("rent", rent);    	  
-      }
+			return mav;
+		}
+		MemberDTO login = (MemberDTO)session.getAttribute("login");
+		if(login.getIdx() != rent.getMember()) {
+			mav.setViewName("alert");
+			mav.addObject("url", "/");
+			mav.addObject("msg", "잘못된 접근입니다 ~ ");
+		}
+		else {
+			mav.addObject("rent", rent);    	  
+		}
       
-      
-      return mav;
-   }
+		return mav;
+	}
    
-   @PostMapping("/hostReservation/{idx}")
-   public ModelAndView hostReservation(@PathVariable("idx") int idx, ReservationDTO dto) {
-       ModelAndView mav = new ModelAndView("alert");
-       dto.setRent(idx);
-       int row = reservationService.insertReservation(dto);
-       String msg = row != 0 ? "예약이 완료되었습니다 ~" : "예약에 실패하셨습니다 ~\n 계속 실패할 경우 관리자에게 문의주세요";
-       String url = row != 0 ? "/" : "redirect:/rent/rentManage/";
+	@PostMapping("/hostReservation/{idx}")
+	public ModelAndView hostReservation(@PathVariable("idx") int idx, ReservationDTO dto) {
+		ModelAndView mav = new ModelAndView("alert");
+		dto.setRent(idx);
+
+		int row = reservationService.insertReservation(dto);
+		String msg = row != 0 ? "예약이 완료되었습니다 ~" : "예약에 실패하셨습니다 ~\n 계속 실패할 경우 관리자에게 문의주세요";
+		String url = row != 0 ? "/" : "redirect:/rent/rentManage/";
       
-      mav.addObject("msg", msg);
-      mav.addObject("url", url);
+		mav.addObject("msg", msg);
+		mav.addObject("url", url);
         
-      return mav;
-   }
+		return mav;
+	}
    
-   @GetMapping("/reservationList/{member}")
-   public ModelAndView reservationList(@PathVariable("member") int member, HttpSession session) {
-      ModelAndView mav = new ModelAndView("reservation/reservationList");
-      List<ReservationDTO> list = reservationService.selectReservationList(member);
-      MemberDTO login = (MemberDTO)session.getAttribute("login");
-      if(login.getIdx() != member) {
-    	  mav.setViewName("alert");
-		  mav.addObject("url", "/");
-		  mav.addObject("msg", "잘못된 접근입니다 ~ ");
-      }
-      else {
-    	  mav.addObject("list", list);    	  
-      }
+	@GetMapping("/reservationList/{member}")
+	public ModelAndView reservationList(@PathVariable("member") int member, HttpSession session) {
+		ModelAndView mav = new ModelAndView("reservation/reservationList");
+		
+		List<ReservationDTO> list = reservationService.selectReservationList(member);
+		MemberDTO login = (MemberDTO)session.getAttribute("login");
+		if(login.getIdx() != member) {
+			mav.setViewName("alert");
+			mav.addObject("url", "/");
+			mav.addObject("msg", "잘못된 접근입니다 ~ ");
+		}
+		else {
+			mav.addObject("list", list);    	  
+		}
       
-      return mav;
-   }
+		return mav;
+	}
 }

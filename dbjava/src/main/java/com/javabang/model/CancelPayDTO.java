@@ -1,6 +1,7 @@
 package com.javabang.model;
 
 public class CancelPayDTO {
+	
 	private int cancel_request_amount, reservationIdx;
 	private String merchant_uid, access_token;
 	

@@ -11,7 +11,6 @@ import com.javabang.repository.ReportDAO;
 
 @Service
 public class ReportService {
-	
 	@Autowired private ReportDAO reportDAO;
 
 	public int usedCount(int rentIdx, int memberIdx) {
@@ -19,20 +18,18 @@ public class ReportService {
 		
 		map.put("rentIdx", rentIdx);
 		map.put("memberIdx", memberIdx);
+		
 		return reportDAO.usedCount(map);
 	}
 
 	public ReportDTO selectOneReport(int idx) {
-		
 		ReportDTO dto = reportDAO.selectOneReport(idx);
 		
 		if (dto.getTitle().length() >= 40) {
 			String titleSh = dto.getTitle().substring(0, 40);
 			titleSh += "...";
-			System.out.println("titleSh : " + titleSh);
 			dto.setTitle(titleSh);
 		}
-		
 		return dto;
 	}
 
@@ -47,7 +44,4 @@ public class ReportService {
 	public int reverseBlock(int reviewIdx) {
 		return reportDAO.reverseBlock(reviewIdx);
 	}
-	
-	
-
 }

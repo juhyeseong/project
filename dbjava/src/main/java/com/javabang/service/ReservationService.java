@@ -14,7 +14,6 @@ import com.javabang.repository.ReservationDAO;
 
 @Service
 public class ReservationService {
-	
 	@Autowired private ReservationDAO reservationDAO;
 	
 	public int insertReservation(ReservationDTO dto) {
@@ -35,26 +34,26 @@ public class ReservationService {
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
-	
+
 		return row;
 	}
 	
 	public List<ReservationDTO> selectReservation(int rent) {
-	      List<ReservationDTO> list = reservationDAO.selectReservation(rent);
+		List<ReservationDTO> list = reservationDAO.selectReservation(rent);
 	      
-	      for(ReservationDTO dto : list) {
-	    	  String title = dto.getTitle();
+		for(ReservationDTO dto : list) {
+			String title = dto.getTitle();
 	    	  
-	    	  if(title.length() > 20) {
-	    		  dto.setTitle(title.substring(0, 20)+"...");
-	    	  }
-	      }
-	      
-	      return list;
+			if(title.length() > 20) {
+				dto.setTitle(title.substring(0, 20) + "...");
+			}
+		}
+		
+		return list;
 	}
 
 	public List<ReservationDTO> selectReservationDate(int rent) {
-	      return reservationDAO.selectReservationDate(rent);
+		return reservationDAO.selectReservationDate(rent);
 	}
 
 	public RentDTO selectOneRent(int idx) {

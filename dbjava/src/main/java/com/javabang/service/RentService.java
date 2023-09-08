@@ -43,19 +43,19 @@ public class RentService {
 		int idx = 0;
 		
 		if(dto.getContactNum().contains("-") == false) {
-	         String phoneNum = dto.getContactNum();
+			String phoneNum = dto.getContactNum();
 	         String hyphen = "";
 	         
 	         for(int i = 0; i < phoneNum.length(); i++) {
-	            if(i == 2 || i == 6) {
-	               hyphen += phoneNum.charAt(i) + "-";
+	        	 if(i == 2 || i == 6) {
+	            	hyphen += phoneNum.charAt(i) + "-";
 	            }
 	            else {
-	               hyphen += phoneNum.charAt(i);
+	            	hyphen += phoneNum.charAt(i);
 	            }
 	         }
 	         dto.setContactNum(hyphen);
-	    }
+		}
 		
 		row += rentDAO.rentInsert(dto);
 		idx = rentDAO.getRentIdx();
@@ -105,7 +105,6 @@ public class RentService {
 				e.printStackTrace();
 			}
 		}
-		
 		return row;
 	}
 	
@@ -115,10 +114,10 @@ public class RentService {
 
 	public RentDTO selectOne(int idx) {
 		RentDTO dto = rentDAO.selectOne(idx);
+		
 		if(dto != null) {
 			dto.setFilePathList(rentDAO.selectFilePath(idx));
 		}
-		
 		return dto;
 	}
 
@@ -133,7 +132,6 @@ public class RentService {
 				}
 			});
 		}
-		
 		return list;
 	}
 	
@@ -167,6 +165,7 @@ public class RentService {
 			fileName = UUID.randomUUID().toString();
 			String ext = file.getContentType().substring(file.getContentType().indexOf("/") + 1);
 			File dest = new File(ymd + "_" + fileName + "." + ext);
+			
 			try {
 				file.transferTo(dest);
 			} catch (IllegalStateException | IOException e) {
@@ -209,7 +208,6 @@ public class RentService {
 				e.printStackTrace();
 			}
 		};
-		
 		return row;
 	}
 
@@ -217,14 +215,11 @@ public class RentService {
 		return rentDAO.deleteRentFile(filePath);
 	}
 
-	// 카테고리 - 펜션
 	public List<RentDTO> filterPension(String category) {
 		return rentDAO.filterPension(category);
 	}
 
-	// 카테고리 - 풀빌라
 	public List<RentDTO> filterPoolVilla(String category) {
-		
 		return rentDAO.filterPoolVilla(category);
 	}
 	
@@ -236,7 +231,6 @@ public class RentService {
 	    return reservationDAO.selectReservationDate(rent);
 	}
 
-	// 검색어 
 	public List<RentDTO> search(String search) {
 		return rentDAO.find(search);
 	}

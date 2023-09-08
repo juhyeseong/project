@@ -14,9 +14,10 @@ import com.javabang.service.MemberService;
 @Controller   
 @RequestMapping("/api")
 public class NaverController {
+	
 	@Autowired MemberService memberService;
 	
-	@PostMapping("/naversignup")   //네이버 회원가입 + 로그인
+	@PostMapping("/naversignup")  
 	public ModelAndView signup(String url, MemberDTO dto, HttpSession session) {
 		ModelAndView mav = new ModelAndView();
 		MemberDTO tmp = memberService.selectNaver(dto);

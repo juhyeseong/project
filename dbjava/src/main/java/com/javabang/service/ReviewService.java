@@ -26,8 +26,7 @@ import com.jcraft.jsch.SftpException;
 
 @Service
 public class ReviewService {
-	@Autowired
-	ReviewDAO reviewDAO;
+	@Autowired private ReviewDAO reviewDAO;
 	
 	private String serverIp = "192.168.64.200";
 	private int serverPort = 22;
@@ -44,31 +43,31 @@ public class ReviewService {
 		
 		return list;
 	}
-	
+   	
 	@Transactional
 	public int insertReview(ReviewDTO review) {
-	    int row = 0;
+		int row = 0;
 
 	    row += reviewDAO.insertReview(review);
 	    review.setIdx(reviewDAO.selectIdx());
 	    
-	    for (MultipartFile file : review.getUpload()) {
-	        if (!file.isEmpty()) { // 파일이 비어있지 않은 경우에만 처리
-	            String ymd = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
+	    for(MultipartFile file : review.getUpload()) {
+	    	if(!file.isEmpty()) { 
+	        	String ymd = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
 	            String fileName = UUID.randomUUID().toString();
 	            String ext = file.getContentType().substring(file.getContentType().indexOf("/") + 1);
 	            File dest = new File(ymd + "_" + fileName + "." + ext);
 	            try {
-	                file.transferTo(dest);
+	            	file.transferTo(dest);
 	            } catch (IllegalStateException | IOException e) {
-	                e.printStackTrace();
+	            	e.printStackTrace();
 	            }
 	            Session session = null;
 	            Channel channel = null;
 	            JSch jsch = new JSch();
 	            
 	            try {
-	                session = jsch.getSession(serverUser, serverIp, serverPort);
+	            	session = jsch.getSession(serverUser, serverIp, serverPort);
 	                session.setPassword(serverPass);
 	                session.setConfig("StrictHostKeyChecking", "no");
 	                session.connect();
@@ -92,10 +91,9 @@ public class ReviewService {
 	                map.put("review", review.getIdx());
 	                map.put("filePath", filePath);
 	                
-	                
 	                row += reviewDAO.fileInsert(map);
 	            } catch (JSchException | SftpException | IOException e) {
-	                e.printStackTrace();
+	            	e.printStackTrace();
 	            }
 	        }
 	    }
@@ -114,7 +112,6 @@ public class ReviewService {
 		return reviewDAO.selectAllMyReview(idx);
 	}
 
-
 	public List<ReviewDTO> selectAllMyReviewSearch(int idx, String search) {
 		HashMap<String, String> map = new HashMap<String, String>();
 		
@@ -123,5 +120,4 @@ public class ReviewService {
 		
 		return reviewDAO.selectAllMyReviewSearch(map);
 	}
-
 }

@@ -1,6 +1,7 @@
 package com.javabang.model;
 
 public class WishListDTO {
+	
 	private int idx, member, rent;
 	private String title, price;
 	

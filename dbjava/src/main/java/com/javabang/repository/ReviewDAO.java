@@ -28,5 +28,4 @@ public interface ReviewDAO {
 	List<ReviewDTO> selectAllMyReview(int idx);
 
 	List<ReviewDTO> selectAllMyReviewSearch(HashMap<String, String> map);
-
 }

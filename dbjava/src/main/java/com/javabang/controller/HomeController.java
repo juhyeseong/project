@@ -28,6 +28,7 @@ import com.javabang.service.WishListService;
 
 @Controller
 public class HomeController {
+	
 	@Autowired private RentService rentService;
 	@Autowired private WishListService wishListService;
 	@Autowired private ReviewService reviewService;
@@ -63,8 +64,8 @@ public class HomeController {
 	@GetMapping("/search")
 	public ModelAndView search (@RequestParam("search") String search, HttpSession session) {
 		ModelAndView mav = new ModelAndView("home");
-		List<RentDTO> rentList = rentService.search(search);
 		
+		List<RentDTO> rentList = rentService.search(search);
 		rentList.forEach(rent -> {
 			HashMap<String, Object> map = new HashMap<>();
 			MemberDTO login = (MemberDTO)session.getAttribute("login");
@@ -86,35 +87,37 @@ public class HomeController {
 	
 	@GetMapping("/room/{idx}")
 	public ModelAndView room(@PathVariable("idx") int idx, HttpSession session) {
-	      ModelAndView mav = new ModelAndView("rent/room");
-	      RentDTO dto = rentService.selectOne(idx);
-	        List<ReviewDTO> reviewList = reviewService.reviewSelectAll(idx);
-	        List<ReservationDTO> reservationList = reservationService.selectReservationDate(idx);
-	     // room의 세부 정보를 가져오는 코드
-	        RentExplainDTO detail = rentService.rentDetailOne(idx);
+		ModelAndView mav = new ModelAndView("rent/room");
+		
+		RentDTO dto = rentService.selectOne(idx);
+		List<ReviewDTO> reviewList = reviewService.reviewSelectAll(idx);
+		List<ReservationDTO> reservationList = reservationService.selectReservationDate(idx);
 	        
-	        int count = 0;
-	        MemberDTO tmp = null;
+		// room의 세부 정보를 가져오는 코드
+		RentExplainDTO detail = rentService.rentDetailOne(idx);
 	        
-	        if(session.getAttribute("login") != null) {
-	        	tmp = (MemberDTO) session.getAttribute("login");
-		        count = reportService.usedCount(idx, tmp.getIdx());
-	        }
+		int count = 0;
+		MemberDTO tmp = null;
 	        
-	        ObjectMapper mapper = new ObjectMapper();
-	        try {
-	         String json = mapper.writeValueAsString(reservationList);
-	         mav.addObject("dto", dto);
-	         mav.addObject("reviewList", reviewList);
-	         mav.addObject("reservationList", json);
-	         mav.addObject("rentIdx", idx);
-	         mav.addObject("count", count);
-	         mav.addObject("detail", detail);
-	      } catch (JsonProcessingException e) {
-	         e.printStackTrace();
-	      }
+		if(session.getAttribute("login") != null) {
+			tmp = (MemberDTO) session.getAttribute("login");
+			count = reportService.usedCount(idx, tmp.getIdx());
+		}
 	        
-	      return mav;
+		ObjectMapper mapper = new ObjectMapper();
+		try {
+			String json = mapper.writeValueAsString(reservationList);
+			
+			mav.addObject("dto", dto);
+			mav.addObject("reviewList", reviewList);
+			mav.addObject("reservationList", json);
+			mav.addObject("rentIdx", idx);
+			mav.addObject("count", count);
+			mav.addObject("detail", detail);
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		}
+	        
+		return mav;
 	}
 }
-

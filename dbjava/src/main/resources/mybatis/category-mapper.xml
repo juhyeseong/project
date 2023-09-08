@@ -5,6 +5,6 @@
 	
 <mapper namespace="com.javabang.repository.CategoryDAO">
 	<select id="filterHotel" parameterType="string" resultType="rent"> 
-		select * from rent where category like '%${category}%'
+		SELECT * FROM rent WHERE category LIKE '%${category}%'
 	</select>
 </mapper>

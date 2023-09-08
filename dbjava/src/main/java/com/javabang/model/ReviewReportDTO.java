@@ -89,7 +89,4 @@ public class ReviewReportDTO {
 	public void setRent(int rent) {
 		this.rent = rent;
 	}
-	
-	
-
 }

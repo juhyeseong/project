@@ -4,39 +4,44 @@
 	"https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 	
 <mapper namespace="com.javabang.repository.ReportDAO">
-	
 	<select id="usedCount" parameterType="hashmap" resultType="int">
-		select count(*) as count from reservation rv 
-		    join member m on m.idx = rv.member
-		    join rent re on re.idx = rv.rent
-		        where m.idx=#{memberIdx} and rv.rent=#{rentIdx}
+		SELECT count(*) AS count 
+			FROM reservation rv 
+		    JOIN member m 
+				ON m.idx = rv.member
+		    JOIN rent re 
+		    	ON re.idx = rv.rent
+			WHERE m.idx=#{memberIdx} AND rv.rent=#{rentIdx}
 	</select>
 		
 	<select id="selectOneReport" parameterType="int" resultType="report">
-		select rt.*, m.userId, m.userName, re.title from report rt
-	        join member m on m.idx = rt.member
-	        join rent re on re.idx = rt.rent 
-	            where rt.idx = #{idx}
+		SELECT rt.*, m.userId, m.userName, re.title 
+			FROM report rt
+	        JOIN member m 
+	        	ON m.idx = rt.member
+	        JOIN rent re 
+				ON re.idx = rt.rent 
+			WHERE rt.idx = #{idx}
 	</select>
 	
 	<select id="selectOneReviewReport" parameterType="int" resultType="reviewReport">
-		SELECT rr.*,m.userId, m.userName, r.content as reviewContent, member_of_review.userId as reviewWriterId, member_of_review.userName as reviewWriterName, r.idx as reviewIdx
+		SELECT rr.*,m.userId, m.userName, r.content AS reviewContent, member_of_review.userId AS reviewWriterId, member_of_review.userName AS reviewWriterName, r.idx AS reviewIdx
 			FROM reviewReport rr
-			JOIN member m ON m.idx = rr.member
-			JOIN review r ON r.idx = rr.review
-			JOIN member member_of_review ON member_of_review.idx = r.member
-				where rr.idx = #{idx}
+			JOIN member m 
+				ON m.idx = rr.member
+			JOIN review r 
+				ON r.idx = rr.review
+			JOIN member member_of_review 
+				ON member_of_review.idx = r.member
+			WHERE rr.idx = #{idx}
 	</select>
 	
 	<update id="updateBlock" parameterType="int">
-	    UPDATE review
-		    SET reportStatus = 1
-		    WHERE review.idx = #{reviewIdx}
+	    UPDATE review SET reportStatus = 1 WHERE review.idx = #{reviewIdx}
 	</update>
+	
 	<update id="reverseBlock" parameterType="int">
-		UPDATE review
-		   SET reportStatus = 0
-		   WHERE review.idx = #{reviewIdx}
+		UPDATE review SET reportStatus = 0 WHERE review.idx = #{reviewIdx}
 	</update>
 </mapper>
 

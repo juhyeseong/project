@@ -59,7 +59,4 @@ public class RentExplainDTO {
 	public void setProfile(String profile) {
 		this.profile = profile;
 	}
-	
-	
-	
 }

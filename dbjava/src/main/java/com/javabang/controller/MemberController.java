@@ -28,6 +28,7 @@ import com.javabang.service.ReviewService;
 @Controller
 @RequestMapping("/member")
 public class MemberController {
+	
 	@Autowired private MemberService memberService;
 	@Autowired private MailComponent mailComponent;
 	@Autowired private HashComponent hashComponent;
@@ -83,10 +84,11 @@ public class MemberController {
 		return "redirect:/";
 	}
 
-	// 회원정보수정
+	// 회원정보 수정
 	@GetMapping("/update/{idx}")
 	public ModelAndView update(@PathVariable("idx") int idx, HttpSession session) {
 		ModelAndView mav = new ModelAndView("member/update");
+
 		MemberDTO dto = memberService.selectOne(idx);
 		MemberDTO login = (MemberDTO)session.getAttribute("login");
 		if(login.getIdx() != idx) {
@@ -94,7 +96,6 @@ public class MemberController {
 			mav.addObject("url", "/");
 			mav.addObject("msg", "잘못된 접근입니다 ~ ");
 		}
-		
 		mav.addObject("dto", dto);
 		
 		return mav;
@@ -114,6 +115,7 @@ public class MemberController {
 	@GetMapping("/modifyPassword/{idx}")
 	public ModelAndView modifyPassword(@PathVariable("idx") int idx, HttpSession session) {
 		ModelAndView mav = new ModelAndView("member/modifyPassword");
+		
 		MemberDTO dto = memberService.selectOne(idx);
 		MemberDTO login = (MemberDTO)session.getAttribute("login");
 		if(login.getIdx() != idx) {
@@ -130,7 +132,7 @@ public class MemberController {
 
 	@PostMapping("/modifyPassword/{idx}")
 	public ModelAndView modifyPassword(MemberDTO dto) throws NoSuchAlgorithmException {
-		ModelAndView mav = new ModelAndView("/");
+		ModelAndView mav = new ModelAndView("home");
 		
 		memberService.modifyPassword(dto);
 		
@@ -141,6 +143,7 @@ public class MemberController {
 	@GetMapping("/delete/{idx}")
 	public ModelAndView delete(@PathVariable("idx") int idx, HttpSession session) {
 		ModelAndView mav = new ModelAndView("alert");
+		
 		MemberDTO login = (MemberDTO)session.getAttribute("login");
 		if(login.getIdx() != idx) {
 			mav.addObject("msg", "잘못된 접근입니다 ~ ");
@@ -172,9 +175,7 @@ public class MemberController {
 		String random = UUID.randomUUID().toString().replace("-", "").substring(0, 16);
 
 		tmp.setUserPw(random);
-
 		mailComponent.sendMailPw(tmp.getEmail(), tmp.getUserPw());
-
 		random = hashComponent.getHash(random);
 		tmp.setUserPw(random);
 		int row = memberService.updatePw(tmp);
@@ -191,6 +192,7 @@ public class MemberController {
 	@GetMapping("/mypage/{idx}")
 	public ModelAndView mypage(@PathVariable("idx") int idx, HttpSession session) {
 		ModelAndView mav = new ModelAndView("member/mypage");
+		
 		MemberDTO login = (MemberDTO)session.getAttribute("login");
 		if(login.getIdx() != idx) {
 			mav.setViewName("alert");
@@ -198,7 +200,6 @@ public class MemberController {
 			mav.addObject("url", "/");
 		}
 		MemberDTO one = memberService.selectOne(idx);
-		
 		mav.addObject("one", one);
 		
 		return mav;
@@ -208,6 +209,7 @@ public class MemberController {
 	@GetMapping("/updateProfile/{idx}")
 	public ModelAndView profile(@PathVariable("idx") int idx, HttpSession session) {
 		ModelAndView mav = new ModelAndView("/member/updateProfile");
+		
 		MemberDTO tmp = memberService.selectOne(idx);
 		MemberDTO login = (MemberDTO)session.getAttribute("login");
 		if(login.getIdx() != idx) {
@@ -227,6 +229,7 @@ public class MemberController {
 	    memberService.updateProfile(dto);
 		MemberDTO tmp = memberService.selectOne(idx);
 		session.setAttribute("login", tmp);
+		
 		return "redirect:/member/mypage/" + idx;
 	}
 
@@ -234,6 +237,7 @@ public class MemberController {
 	@GetMapping("/updateBasicProfile/{idx}")
 	public ModelAndView basicProfilePage(@PathVariable("idx") int idx, HttpSession session) {
 		ModelAndView mav = new ModelAndView("/member/updateBasicProfile");
+		
 		MemberDTO tmp = memberService.selectOne(idx);
 		MemberDTO login = (MemberDTO)session.getAttribute("login");
 		if(login.getIdx() != idx) {
@@ -250,11 +254,10 @@ public class MemberController {
 
 	@PostMapping("/updateBasicProfile/{idx}")
 	public String basicProfile(HttpSession session, @PathVariable("idx") int idx, MemberDTO dto) throws Exception {
-		// 여기에서 기본 이미지로 변경하는 로직을 수행합니다.
+		// 기본 이미지로 변경하는 로직을 수행
 		dto.setProfile("http://192.168.64.200/basicProfile.png"); // 기본 이미지 URL로 설정
-		memberService.basicProfile(dto); // 기본 이미지로 변경 작업 수행
+		memberService.basicProfile(dto); // 기본 이미지로 변경
 		MemberDTO tmp = memberService.selectOne(idx);
-		
 		session.setAttribute("login", tmp); // 로그인 정보를 변경된 MemberDTO로 업데이트
 		
 		return "redirect:/member/mypage/" + idx;
@@ -281,8 +284,8 @@ public class MemberController {
 	@PostMapping("/findId")
 	public ModelAndView findId(MemberDTO dto) {
 		ModelAndView mav = new ModelAndView("/member/resultId");
-		MemberDTO tmp = memberService.findId(dto);
 		
+		MemberDTO tmp = memberService.findId(dto);
 		mav.addObject("tmp", tmp);
 		
 		return mav;
@@ -295,6 +298,7 @@ public class MemberController {
 	@GetMapping("myReview/{idx}")
 	public ModelAndView myReview(@PathVariable("idx") int idx, HttpSession session) {
 		ModelAndView mav = new ModelAndView("member/myReview");
+		
 		List<ReviewDTO> list = reviewService.selectAllMyReview(idx);
 		MemberDTO login = (MemberDTO)session.getAttribute("login");
 		if(login.getIdx() != idx) {
@@ -309,12 +313,12 @@ public class MemberController {
 		return mav;
 	}
 	
-	// 유저별 작성한 리뷰보기(검색)
+	// 유저별 작성한 리뷰보기 (검색)
 	@PostMapping("myReview/{idx}")
 	public ModelAndView myReview(@PathVariable("idx") int idx, @RequestParam String search) {
 		ModelAndView mav = new ModelAndView("member/myReview");
+
 		List<ReviewDTO> list = reviewService.selectAllMyReviewSearch(idx, search);
-		
 		mav.addObject("list", list);
 		
 		return mav;

@@ -15,18 +15,17 @@ import com.javabang.service.CategoryService;
 @Controller
 @RequestMapping("/rent")
 public class CategoryControrller {
-	@Autowired
-	private CategoryService categoryService;
+	
+	@Autowired private CategoryService categoryService;
 
 	// 카테고리 호텔만 불러오기
-
 	@GetMapping("/hotelcategory/{category}")
 	public ModelAndView hotelcategory(@PathVariable("category") String category) {
-		/* String category = "호텔"; */
-		
 		ModelAndView mav = new ModelAndView("/rent/hotelcategory") ;
+
 		List<RentDTO> hotelList = categoryService.filterHotel(category);
 		mav.addObject("hotelList", hotelList);
+		
 		return mav;
 	}
 }

@@ -25,7 +25,6 @@ public class WishListController {
 		ModelAndView mav = new ModelAndView("wishList/myWishList");
 		List<WishListDTO> wishList = wishListService.selectMyWishList(member);
 		MemberDTO login = (MemberDTO)session.getAttribute("login");
-		
 		if(login.getIdx() != member) {
 			mav.setViewName("alert");
 			mav.addObject("url", "/");

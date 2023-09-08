@@ -10,6 +10,7 @@ import com.javabang.model.RentExplainDTO;
 
 @Repository
 public interface RentDAO {
+	
 	public int rentInsert(RentDTO dto);
 	
 	public int getRentIdx();

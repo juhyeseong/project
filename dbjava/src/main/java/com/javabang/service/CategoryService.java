@@ -13,8 +13,6 @@ public class CategoryService {
 	@Autowired CategoryDAO categoryDAO;
 
 	public List<RentDTO> filterHotel(String category) {
-		
 		return categoryDAO.filterHotel(category);
 	}
-	
 }

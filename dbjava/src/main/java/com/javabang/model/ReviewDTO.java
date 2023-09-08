@@ -5,21 +5,14 @@ import java.util.List;
 import org.springframework.web.multipart.MultipartFile;
 
 public class ReviewDTO {
-	private int idx;
-	private int member;
-	private int rent;
-	private String content;
-	private int point;
-	private int reportStatus;
 	
-	private String profile;
-	private String userNick;
-	
+	private int idx, member, rent, point, reportStatus;
+	private String profile, userNick, content;
+
 	private List<String> filePathList;
 	private String filePath;
 	private List<MultipartFile> upload;   // input type name="upload" 
 	
-
 	public int getIdx() {
 		return idx;
 	}
@@ -62,7 +55,6 @@ public class ReviewDTO {
 	public void setUserNick(String userNick) {
 		this.userNick = userNick;
 	}	
-
 	public List<MultipartFile> getUpload() {
 		return upload;
 	}

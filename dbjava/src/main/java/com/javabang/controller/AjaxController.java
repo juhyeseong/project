@@ -39,9 +39,9 @@ import com.javabang.service.ReservationService;
 import com.javabang.service.ReviewService;
 import com.javabang.service.WishListService;
 
-
 @RestController
 public class AjaxController {
+	
 	@Autowired private MemberService memberService;
 	@Autowired private RentService rentService;
 	@Autowired private ReviewService reviewService; 
@@ -59,12 +59,14 @@ public class AjaxController {
 		
 		return result;
 	}
+	
 	@GetMapping("/dupCheck/{userId}/")
 	public int dupCheck(@PathVariable("userId") String userId) {
 		int row = memberService.dupCheck(userId);
 		
 		return row;
 	}
+	
 	@GetMapping("/dupCheck2/{userNick}")
 	public int dupCheck2(@PathVariable("userNick") String userNick) {
 		int row = memberService.dupCheck2(userNick);
@@ -90,7 +92,6 @@ public class AjaxController {
 	@GetMapping("/checkAuthNumber/{authNumber}")
 	public int checkAuthNumber(@PathVariable("authNumber") int authNumber, HttpSession session) {
 		int sessionNumber = (int)session.getAttribute("authNumber");
-		
 		session.setMaxInactiveInterval(1800);
 		
 		return authNumber == sessionNumber ? 1 : 0;
@@ -106,7 +107,6 @@ public class AjaxController {
 		row = rentService.rentInsert(dto);
 		msg = row != 0 ? "숙소 등록이 완료되었습니다 ~~\n관리자가 등록 수락할때까지 기다려주세요!! " : "숙소 등록에 실패하였습니다 ~~";
 		url = row != 0 ? "/rent/rentManage" : "/rent/hosting";
-
 		map.put("msg", msg);
 		map.put("url", url);
 		
@@ -161,32 +161,32 @@ public class AjaxController {
 		
 		return row;
 	}
+	
 	// 리뷰 삭제 
-    @DeleteMapping("review/delete/{reviewId}")
+	@DeleteMapping("review/delete/{reviewId}")
     @ResponseBody
     public ResponseEntity<String> deleteReview(@PathVariable("reviewId")int reviewId, HttpSession session) {
-        try {
+    	try {
         	MemberDTO tmp = (MemberDTO) session.getAttribute("login");
         	
-            reviewService.deleteReview(reviewId, tmp.getIdx());
+        	reviewService.deleteReview(reviewId, tmp.getIdx());
             
             return ResponseEntity.ok("Review deleted successfully.");
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to delete review.");
+        	return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to delete review.");
         }
     }
     
-    @PostMapping("/insertReservation")
-    public int insertReservation(@RequestBody ReservationDTO dto) {
-      System.out.println(dto.getMerchant_uid());
-      int row = reservationService.insertReservation(dto);
+	@PostMapping("/insertReservation")
+	public int insertReservation(@RequestBody ReservationDTO dto) {
+		int row = reservationService.insertReservation(dto);
       
-      return row;
-    }
+		return row;
+	}
     
-    @GetMapping("/getToken")
-    public String getToken() {
-    	try {
+	@GetMapping("/getToken")
+	public String getToken() {
+		try {
 			URL address = new URL("https://api.iamport.kr/users/getToken");
 			HttpURLConnection conn = (HttpURLConnection)address.openConnection();
 			
@@ -217,18 +217,18 @@ public class AjaxController {
 			String ref = bReader.readLine();
 			
 			return ref;
-    	} catch (IOException e) {
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
     	
-    	return "";
-    }
+		return "";
+	}
     
-    @PostMapping("/cancelPay")
-    public int cancelPay(@RequestBody CancelPayDTO dto) {
+	@PostMapping("/cancelPay")
+	public int cancelPay(@RequestBody CancelPayDTO dto) {
 		int row = 0;
 		
-    	try {
+		try {
 			URL address = new URL("https://api.iamport.kr/payments/cancel");
 			HttpURLConnection conn = (HttpURLConnection)address.openConnection();
 			
@@ -271,30 +271,30 @@ public class AjaxController {
 		return row;
     }
     
-    @GetMapping("/reservation/selectGuestCount/{idx}")
-    public int selectGuestCount(@PathVariable("idx") int idx) {
-       int guestCount = rentService.selectGuestCount(idx);
+	@GetMapping("/reservation/selectGuestCount/{idx}")
+	public int selectGuestCount(@PathVariable("idx") int idx) {
+		int guestCount = rentService.selectGuestCount(idx);
        
-        return guestCount;
-    }
+		return guestCount;
+	}
     
     // report의 개별 정보를 불러오는 메서드
-    @GetMapping("/admin/reportOne/{idx}")
-    public ReportDTO reportOne(@PathVariable("idx") int idx) {
-    	ReportDTO dto = reportService.selectOneReport(idx);
+	@GetMapping("/admin/reportOne/{idx}")
+	public ReportDTO reportOne(@PathVariable("idx") int idx) {
+		ReportDTO dto = reportService.selectOneReport(idx);
     	
-    	return dto;
-    }
+		return dto;
+	}
     
     // reviewReport의 개별 정보를 불러오는 메서드
-    @GetMapping("/admin/reviewReportOne/{idx}")
-    public ReviewReportDTO reviewReportOne(@PathVariable("idx") int idx) {
-    	ReviewReportDTO dto = reportService.selectOneReviewReport(idx);
+	@GetMapping("/admin/reviewReportOne/{idx}")
+	public ReviewReportDTO reviewReportOne(@PathVariable("idx") int idx) {
+		ReviewReportDTO dto = reportService.selectOneReviewReport(idx);
     	
-    	return dto;
-    }
+		return dto;
+	}
     
-    @PostMapping("/wishList/createWishList")
+	@PostMapping("/wishList/createWishList")
 	public void createWishList(@RequestBody WishListDTO dto) {
 		wishListService.createWishList(dto);
 	}
@@ -321,6 +321,7 @@ public class AjaxController {
 		
 		return row;
 	}
+	
 	// review 블락을 해제하기 위한 메서드
 	@PostMapping("/admin/reverseBlock/{idx}")
 	public int reverseBlock(@PathVariable("idx") int idx) {

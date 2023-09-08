@@ -36,7 +36,4 @@ public interface AdminDAO {
 	List<ReviewReportDTO> selectAllReviewReport();
 
 	List<ReviewReportDTO> selectAllReviewReportSearch(String search);
-
-
-
 }

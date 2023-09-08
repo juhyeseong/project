@@ -11,5 +11,4 @@ public interface CategoryDAO {
 
 	// 카테고리 눌렀을 때 호텔만 뜨게 하기
 	List<RentDTO> filterHotel(String category);
-
 }

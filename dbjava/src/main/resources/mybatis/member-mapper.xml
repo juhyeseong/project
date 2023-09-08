@@ -4,83 +4,63 @@
 	"https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 	
 <mapper namespace="com.javabang.repository.MemberDAO">
-
-<insert id="add" parameterType="member">
-
-	insert into member(userId, userPw, userNick, email, userName, birth, phoneNum, gender) 
-	values(#{userId}, #{userPw}, #{userNick}, #{email}, #{userName}, #{birth}, #{phoneNum}, #{gender})
-
-</insert>
-
-<select id="login" resultType="member" parameterType="member">
-
-	select * from member where userId = #{userId} and userPw = #{userPw}
-
-</select>
-
-<select id="selectOne" resultType="member" parameterType="int">
-	select * from member where idx = #{idx}	
-</select>
-
-<update id="update" parameterType="member">
-	update member set userNick = #{userNick}, phoneNum = #{phoneNum}, email = #{email} where idx = #{idx} 
-</update>
-
-<delete id="delete">
-	delete from member where idx = #{idx}
-</delete>
-
-<select id="userCheck" parameterType="member" resultType="member">
-	select * from member where userId = #{userId} and email = #{email} 
-</select>
+	<insert id="add" parameterType="member">
+		INSERT INTO 
+			member (userId, userPw, userNick, email, userName, birth, phoneNum, gender) 
+			VALUES (#{userId}, #{userPw}, #{userNick}, #{email}, #{userName}, #{birth}, #{phoneNum}, #{gender})
+	</insert>
 	
-<update id="updatePw" parameterType="member">
-	update member set userPw = #{userPw} where idx = #{idx}
-</update>
-
-<select id="selectCount" resultType="int" parameterType="string">
-	select count(*) as cnt from member where userId = #{userId}
-
-</select>
-
-<update id="updateProfile" parameterType="member">
-	update member set profile = #{profile} where idx = #{idx} 
-</update>
-
-<update id="basicProfile" parameterType="member">
-	update member set profile = #{profile}
-	where idx = #{idx}
-</update>
-
-<select id="selectKakao" parameterType="member" resultType="member">
-	select * from member where userId=#{userId} and userName=#{userName}
-</select>
-
-<select id="selectNaver" parameterType="member" resultType="member">
-	select * from member where userId=#{userId} and userName=#{userName}
-</select>
-
-<select id="findId" parameterType="member" resultType="member">
-	select * from member where userName = #{userName} and phoneNum=#{phoneNum}
-</select>
-<select id="selectCount2" resultType="int" parameterType="string">
-	select count(*) as cnt from member where userNick = #{userNick}
-
-</select>
-
+	<select id="login" resultType="member" parameterType="member">
+		SELECT * FROM member WHERE userId = #{userId} AND userPw = #{userPw}
+	</select>
+	
+	<select id="selectOne" resultType="member" parameterType="int">
+		SELECT * FROM member WHERE idx = #{idx}	
+	</select>
+	
+	<update id="update" parameterType="member">
+		UPDATE member 
+			SET userNick = #{userNick}, phoneNum = #{phoneNum}, email = #{email} 
+			WHERE idx = #{idx} 
+	</update>
+	
+	<delete id="delete">
+		DELETE FROM member WHERE idx = #{idx}
+	</delete>
+	
+	<select id="userCheck" parameterType="member" resultType="member">
+		SELECT * FROM member WHERE userId = #{userId} AND email = #{email} 
+	</select>
+		
+	<update id="updatePw" parameterType="member">
+		UPDATE member SET userPw = #{userPw} WHERE idx = #{idx}
+	</update>
+	
+	<select id="selectCount" resultType="int" parameterType="string">
+		SELECT count(*) AS cnt FROM member WHERE userId = #{userId}
+	</select>
+	
+	<update id="updateProfile" parameterType="member">
+		UPDATE member SET profile = #{profile} WHERE idx = #{idx} 
+	</update>
+	
+	<update id="basicProfile" parameterType="member">
+		UPDATE member SET profile = #{profile} WHERE idx = #{idx}
+	</update>
+	
+	<select id="selectKakao" parameterType="member" resultType="member">
+		SELECT * FROM member WHERE userId=#{userId} AND userName=#{userName}
+	</select>
+	
+	<select id="selectNaver" parameterType="member" resultType="member">
+		SELECT * FROM member WHERE userId=#{userId} AND userName=#{userName}
+	</select>
+	
+	<select id="findId" parameterType="member" resultType="member">
+		SELECT * FROM member WHERE userName = #{userName} AND phoneNum=#{phoneNum}
+	</select>
+	
+	<select id="selectCount2" resultType="int" parameterType="string">
+		SELECT count(*) AS cnt FROM member WHERE userNick = #{userNick}
+	</select>
 </mapper>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

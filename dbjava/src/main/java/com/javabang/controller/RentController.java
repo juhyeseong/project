@@ -22,6 +22,7 @@ import com.javabang.service.WishListService;
 @Controller
 @RequestMapping("/rent")
 public class RentController {
+	
 	@Autowired private RentService rentService;
 	@Autowired private WishListService wishListService;
 
@@ -31,6 +32,7 @@ public class RentController {
 	@GetMapping("/rentManage/{member}")
 	public ModelAndView hostManage(@PathVariable("member") int member, HttpSession session) {
 		ModelAndView mav = new ModelAndView("rent/rentManage");
+		
 		List<RentDTO> list = rentService.selectHost(member);
 		MemberDTO login = (MemberDTO)session.getAttribute("login");
 		if(login.getIdx() != member) {
@@ -48,6 +50,7 @@ public class RentController {
 	@GetMapping("/modify/{idx}")
 	public ModelAndView rentModify(@PathVariable("idx") int idx, HttpSession session) {
 		ModelAndView mav = new ModelAndView("rent/modify");
+		
 		RentDTO rent = rentService.selectOne(idx);
 		if(rent == null) {
 			mav.setViewName("alert");
@@ -72,6 +75,7 @@ public class RentController {
 	@GetMapping("/fileUpdate/{idx}")
 	public ModelAndView fileUpdate(@PathVariable("idx") int idx, HttpSession session) {
 		ModelAndView mav = new ModelAndView("rent/fileUpdate");
+		
 		RentDTO rent = rentService.selectOne(idx);
 		if(rent == null) {
 			mav.setViewName("alert");
@@ -90,7 +94,7 @@ public class RentController {
 		else {
 			try {
 				String listToJson = obm.writeValueAsString(rent.getFilePathList());
-				
+
 				mav.addObject("rent", rent);
 				mav.addObject("listToJson", listToJson);
 			} catch (JsonProcessingException e) {
@@ -104,6 +108,7 @@ public class RentController {
 	@GetMapping("/rentDelete/{idx}/{member}")
 	public ModelAndView rentDelete(@PathVariable("idx") int idx, @PathVariable("member") int member, HttpSession session) {
 		ModelAndView mav = new ModelAndView("alert");
+		
 		MemberDTO login = (MemberDTO)session.getAttribute("login");
 		if(login.getIdx() != member) {
 			mav.setViewName("alert");
@@ -115,22 +120,22 @@ public class RentController {
 		int row = rentService.deleteRent(idx);
 		String msg = row != 0 ? "숙소가 삭제되었습니다!" : "숙소 삭제에 실패했습니다";
 		String url = row != 0 ? "/rent/rentManage/" + member : "/rent/modify/" + idx;
-		
 		mav.addObject("msg", msg);
 		mav.addObject("url", url);
 		
 		return mav;
 	}
+	
 	// 카테고리
 	@GetMapping("/category/{category}")
 	public ModelAndView pension(@PathVariable("category") String category, HttpSession session) {
 		ModelAndView mav = new ModelAndView("home");
-		List<RentDTO> rentList = rentService.filterPension(category);
 		
+		List<RentDTO> rentList = rentService.filterPension(category);
 		rentList.forEach(rent -> {
 			HashMap<String, Object> map = new HashMap<>();
-			MemberDTO login = (MemberDTO)session.getAttribute("login");
 			
+			MemberDTO login = (MemberDTO)session.getAttribute("login");
 			if(login != null) {
 				map.put("rent", rent.getIdx());
 				map.put("member", login.getIdx());
@@ -140,10 +145,8 @@ public class RentController {
 				rent.setWishCount(0);
 			}
 		});
-		
 		mav.addObject("rentList", rentList);
 		
 		return mav;
 	}
-
 }

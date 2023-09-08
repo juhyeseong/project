@@ -5,22 +5,10 @@ import java.sql.Date;
 import org.springframework.web.multipart.MultipartFile;
 
 public class MemberDTO {
+	
 	private int idx;
-	private String userId;
-	private String userPw;
-	private String userNick;
-	private String email;
-	private String year;
-	private String month;
-	private String day;
-	private String userName;
-	private String phoneNum;
-	
-	private String profile;   // 프사 경로
-	private String gender;
-	
-	private MultipartFile upload;   // input type name="upload" 
-
+	private String userId, userPw, userNick, email, year, month, day, userName, phoneNum, profile, gender;
+	private MultipartFile upload;  
 	private Date birth;
 	
 	public int getIdx() {
@@ -101,7 +89,6 @@ public class MemberDTO {
 	public void setGender(String gender) {
 		this.gender = gender;
 	}
-	
 	public MultipartFile getUpload() {
 		return upload;
 	}

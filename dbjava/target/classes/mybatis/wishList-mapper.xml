@@ -5,40 +5,22 @@
 	
 <mapper namespace="com.javabang.repository.WishListDAO">
 	<select id="countWish" parameterType="int" resultType="int">
-		select count(*) from wishList
-			where rent = #{rent} and member = #{member}
+		SELECT count(*) FROM wishList WHERE rent = #{rent} AND member = #{member}
 	</select>
 	
 	<insert id="createWishList" parameterType="wishList">
-		insert into
-			wishList(rent, member)
-			values(#{rent}, #{member})
+		INSERT INTO wishList (rent, member) VALUES (#{rent}, #{member})
 	</insert>
 	
 	<delete id="deleteWishList" parameterType="wishList">
-		delete wishList where rent = #{rent} and member = #{member}
+		DELETE wishList WHERE rent = #{rent} AND member = #{member}
 	</delete>
 	
 	<select id="selectMyWishList" parameterType="int" resultType="wishList">
-		select W.*, R.title, R.price
-			from wishList W
-			join rent R
-				on R.idx = W.rent
-			where W.member = #{member}
+		SELECT W.*, R.title, R.price
+			FROM wishList W
+			JOIN rent R
+				ON R.idx = W.rent
+			WHERE W.member = #{member}
 	</select>
 </mapper>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

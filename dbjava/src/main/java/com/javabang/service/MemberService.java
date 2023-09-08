@@ -79,7 +79,6 @@ public class MemberService {
 		} catch (ParseException e) {
 			System.err.println("dateFormat 예외 : "  + e);
 		}
-		
 		return row;
 	}
 
@@ -88,6 +87,7 @@ public class MemberService {
 		String hash = hashComponent.getHash(dto.getUserPw());
 		dto.setUserPw(hash);
 		MemberDTO login = memberDAO.login(dto);
+		
 		return login;
 	}
 
@@ -114,6 +114,7 @@ public class MemberService {
 
 	// 회원정보 수정 목록 하나만 불러오기
 	public MemberDTO selectOne(int idx) {
+		
 		return memberDAO.selectOne(idx);
 	}
 
@@ -143,7 +144,6 @@ public class MemberService {
 
 	// 비밀번호 재설정 이메일 받기
 	public String getEmail(MemberDTO dto) {
-		
 		return memberDAO.getMail(dto);
 	}
 
@@ -176,7 +176,6 @@ public class MemberService {
 		return row > 0 ? authNumber : row;
 	}
 
-
 	//프로필 사진 수정
 	@Transactional
 	public int updateProfile(MemberDTO dto) throws Exception {
@@ -198,17 +197,14 @@ public class MemberService {
 		sess.setConfig("StrictHostKeyChecking", "no");
 		sess.connect();
 		
-		System.out.println("sftp> connected");
-		
 		channel = sess.openChannel("sftp");	
 		channel.connect();
 		
 		chSftp = (ChannelSftp) channel;
-		
 		FileInputStream fis = new FileInputStream(dest);
+
 		chSftp.cd("/var/www/html");		
 		chSftp.put(fis, dest.getName());	
-		System.out.println("sftp> transfer complete");
 		fis.close();
 		chSftp.isClosed();
 		String filePath = "";	
@@ -217,9 +213,9 @@ public class MemberService {
 		filePath += "/" + dest.getName();
 		dto.setProfile(filePath);
 		dest.delete();
+		
 		return memberDAO.updateProfile(dto);
-
-		}
+	}
 
 	public int basicProfile(MemberDTO dto) throws Exception {
 		return memberDAO.basicProfile(dto);
@@ -244,13 +240,4 @@ public class MemberService {
 	public int dupCheck2(String userNick) {
 		return memberDAO.selectCount2(userNick);
 	}
-
 }
-		
-		
-		
-		
-
-		
-	
-
