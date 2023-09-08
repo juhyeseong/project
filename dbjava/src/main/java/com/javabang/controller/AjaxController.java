@@ -295,13 +295,13 @@ public class AjaxController {
 	}
     
 	@PostMapping("/wishList/createWishList")
-	public void createWishList(@RequestBody WishListDTO dto) {
-		wishListService.createWishList(dto);
+	public int createWishList(@RequestBody WishListDTO dto) {
+		return wishListService.createWishList(dto);
 	}
 	
 	@PostMapping("/wishList/deleteWishList")
-	public void deleteWishList(@RequestBody WishListDTO dto) {
-		wishListService.deleteWishList(dto);
+	public int deleteWishList(@RequestBody WishListDTO dto) {
+		return wishListService.deleteWishList(dto);
 	}
 	
 	@GetMapping("/rent/restMode/{idx}")

@@ -12,9 +12,9 @@ public interface WishListDAO {
 	
 	int countWish(HashMap<String, Object> map);
 
-	void createWishList(WishListDTO dto);
+	int createWishList(WishListDTO dto);
 
-	void deleteWishList(WishListDTO dto);
+	int deleteWishList(WishListDTO dto);
 
 	List<WishListDTO> selectMyWishList(int member);
 }

@@ -15,6 +15,9 @@ async function wishDeleteHandler(event) {
 	}
 	const url = cpath + '/wishList/deleteWishList'
 	
-	await fetch(url, opt)
-	location.reload()
+	const response = await fetch(url, opt)
+	
+	if(response != 0) {
+		location.reload()
+	}
 }

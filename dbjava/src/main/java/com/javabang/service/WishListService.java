@@ -19,12 +19,12 @@ public class WishListService {
 		return wishListDAO.countWish(map);
 	}
 
-	public void createWishList(WishListDTO dto) {
-		wishListDAO.createWishList(dto);
+	public int createWishList(WishListDTO dto) {
+		return wishListDAO.createWishList(dto);
 	}
 
-	public void deleteWishList(WishListDTO dto) {
-		wishListDAO.deleteWishList(dto);
+	public int deleteWishList(WishListDTO dto) {
+		return wishListDAO.deleteWishList(dto);
 	}
 
 	public List<WishListDTO> selectMyWishList(int member) {

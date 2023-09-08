@@ -22,15 +22,21 @@ async function wishHandler(event) {
 	if(wishCount.value == 0 && loginIdx != '') {
 		const url = cpath + '/wishList/createWishList'
 		
-		await fetch(url, opt)
-    	location.reload()
+		const response = await fetch(url, opt)
+    	
+		if(response != 0) {
+			location.reload()
+		}
 	}
 	if(wishCount.value != 0 && loginIdx != '') {
 		const url = cpath + '/wishList/deleteWishList'
 		
 		
-		await fetch(url, opt)
-		location.reload()
+		const response = await fetch(url, opt)
+    	
+		if(response != 0) {
+			location.reload()
+		}
 	}
 	
 }
