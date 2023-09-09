@@ -38,7 +38,6 @@ async function wishHandler(event) {
 			location.reload()
 		}
 	}
-	
 }
 
 //필터를 적용하는 함수
@@ -48,12 +47,9 @@ function applyFilter() {
     var priceSort = getSelectedPriceSort()
     var selectedLocations = getSelectedLocations()
     
-    console.log('선택된 편의시설 : ', selectedAmenities)
-    
     roomElements.forEach(function(room) {
         var amenitiesElement = room.querySelector('.roomInfo')
         var amenities = amenitiesElement.textContent    // .roomInfo 에 있는 텍스트 콘텐트를 amenities 에 저장
-
         
         // 선택된 편의시설이 있는지 확인
         var hasSelectedAmenities = selectedAmenities.some(function (amenity) {   // some  함수를 이용하여 모든 선택된 편의시설이 해당 시설에 있는 지 확인
@@ -66,11 +62,15 @@ function applyFilter() {
 	    // 주소에서 "서울특별시"와 같은 앞부분만 추출
 	    var addressPrefix = location.split(' ')[0]; // 공백으로 분리하여 첫 번째 부분 가져옴
         // 선택된 주소 중 하나라도 일치하면 보이기, 그렇지 않으면 숨김
-	    var isLocationMatch = selectedLocations.length === 0 || selectedLocations.includes(addressPrefix);
-    
-        if(hasSelectedAmenities && isLocationMatch) {
+	    var isLocationMatch = selectedLocations.includes(addressPrefix);
+	    
+	    if(selectedAmenities.length == 0 && selectedLocations.length == 0) {
+	    	room.style.display = 'block'
+	    }
+	    else if(hasSelectedAmenities || isLocationMatch) {
             room.style.display = 'block' // 조건에 맞으면 보임
-        } else {
+        }
+        else {
             room.style.display = 'none' // 조건에 안 맞으면 숨김
         }
     });

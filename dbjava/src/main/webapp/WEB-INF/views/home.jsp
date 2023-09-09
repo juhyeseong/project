@@ -285,8 +285,6 @@
 	    const wishBtnList = document.querySelectorAll('.wish')
 	    const loginIdx = '${login.idx }'
 	    const cpath = '${cpath }'
-	    // 지역검색 변수
-	    const locationBtnList = document.querySelectorAll('.locationList button')
 	    
 	    // modal open event, handler
 	    filterButton.onclick = function() {

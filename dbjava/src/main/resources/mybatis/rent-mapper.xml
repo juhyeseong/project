@@ -26,6 +26,7 @@
 			JOIN rent_img I
 				ON min_img.min_idx = I.idx
 			WHERE R.state = 1
+			ORDER BY R.price
 	</select>
 	
 	<select id="selectOne" parameterType="int" resultType="rent">
