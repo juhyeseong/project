@@ -96,7 +96,9 @@ public class RentService {
 				
 				HashMap<String, Object> map = new HashMap<>();
 				String filePath = "http://192.168.64.200/" + dest.getName();
-				
+
+                dest.delete();
+                
 				map.put("rent", idx);
 				map.put("filePath", filePath);
 				
@@ -197,11 +199,11 @@ public class RentService {
 
 				HashMap<String, Object> map = new HashMap<>();
 				String filePath = "http://192.168.64.200/" + dest.getName();
-				
+
+                dest.delete();
+                
 				map.put("rent", dto.getIdx());
 				map.put("filePath", filePath);
-				System.out.println("rent : " + map.get("rent"));
-				System.out.println("filePath : " + map.get("filePath"));
 				
 				row += rentDAO.fileInsert(map);
 			} catch (JSchException | SftpException | IOException e) {

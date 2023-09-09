@@ -57,11 +57,13 @@ public class ReviewService {
 	            String fileName = UUID.randomUUID().toString();
 	            String ext = file.getContentType().substring(file.getContentType().indexOf("/") + 1);
 	            File dest = new File(ymd + "_" + fileName + "." + ext);
+	            
 	            try {
 	            	file.transferTo(dest);
 	            } catch (IllegalStateException | IOException e) {
 	            	e.printStackTrace();
 	            }
+	            
 	            Session session = null;
 	            Channel channel = null;
 	            JSch jsch = new JSch();
@@ -87,7 +89,9 @@ public class ReviewService {
 	                
 	                HashMap<String, Object> map = new HashMap<>();
 	                String filePath = "http://192.168.64.200/" + dest.getName();
-	     
+
+	                dest.delete();
+	                
 	                map.put("review", review.getIdx());
 	                map.put("filePath", filePath);
 	                
