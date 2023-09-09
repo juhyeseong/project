@@ -137,43 +137,6 @@ function printStars() {
     })
 }
 
-
-
-// 이전 페이지로 이동하는 함수
-function prevPage() {
-    if (currentPage > 0) {
-        currentPage--;
-        updatePage();
-    }
-}
-
-// 다음 페이지로 이동하는 함수
-function nextPage() {
-    const itemsPerPage = 1; // 한 번에 보여줄 항목 수를 설정합니다.
-    const reviewItems = document.querySelectorAll('.reviewImgs'); // 변경: 클래스 이름이 올바른지 확인하세요.
-    const totalPages = Math.ceil(reviewItems.length / itemsPerPage);
-    
-    if (currentPage < totalPages - 1) {
-        currentPage++;
-        updatePage();
-    }
-}
-
-//페이지를 업데이트하고 보이지 않는 항목을 숨김
-function updatePage() {
-    const itemsPerPage = 1 // 한 번에 보여줄 항목 수를 설정
-	const reviewItems = document.querySelectorAll('.reviewImgs'); // 변경: 클래스 이름이 올바른지 확인
-		
-    reviewItems.forEach((item, itemIndex) => {
-        if (itemIndex >= currentPage * itemsPerPage && itemIndex < (currentPage + 1) * itemsPerPage) {
-            item.style.display = 'block';
-        }
-        else {
-            item.style.display = 'none';
-        }
-    });
-}
-
 // totalPrice
 function totalPriceHandler(sDateString, eDateString) {
 	if(sDateString != '' && eDateString != '') {

@@ -75,7 +75,7 @@
 	 	const kakaologin = document.getElementById('kakaologin')
 	 	window.Kakao.init("9f70d9bb54ab5d75fd02bf5b519c5a11");     // kakao sdk 를 초기화 , 클라이언트 아이디 제공
 		// naverLogin 변수
-	  	var naver_id_login = new naver_id_login("QBQcG_g3ay39MPum66CS", "http://localhost:8080/dbjava/member/login")    // 네이버 아이디 로그인을 위한 객체, 클라이언트 아이디, 로그인 후 리다이렉션 될 사용자 정보를 전달
+	  	var naver_id_login = new naver_id_login("QBQcG_g3ay39MPum66CS", "http://192.168.64.128/dbjava/member/login")    // 네이버 아이디 로그인을 위한 객체, 클라이언트 아이디, 로그인 후 리다이렉션 될 사용자 정보를 전달
 	  	var state = naver_id_login.getUniqState()   	// 고유 상태 값 생성 -> state 변수에 저장
 	  	naver_id_login.setButton("green", 3, 50)		// 네이버 아이디 버튼 생성
 	  	naver_id_login.setState(state)

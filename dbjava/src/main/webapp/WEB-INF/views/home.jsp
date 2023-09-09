@@ -4,49 +4,49 @@
 	<div class="homeMain">
 		<div class="categories">
 			<div class="categoryImgBox">
-				<a href="${cpath }/rent/category/펜션"> <img
+				<a href="${cpath }/category/펜션"> <img
 					src="http://192.168.64.200/펜션.png" class="categoryImg"
 					style="background-color: grey;"> 펜션
 				</a>
 			</div>
 			<div class="categoryImgBox">
-				<a href="${cpath }/rent/category/풀빌라"> <img
+				<a href="${cpath }/category/풀빌라"> <img
 					src="http://192.168.64.200/풀빌라.png" class="categoryImg"> 풀빌라
 				</a>
 			</div>
 			<div class="categoryImgBox">
-				<a href="${cpath }/rent/category/호텔"> <img
+				<a href="${cpath }/category/호텔"> <img
 					src="http://192.168.64.200/호텔.png" class="categoryImg"> 호텔
 				</a>
 			</div>
 			<div class="categoryImgBox">
-				<a href="${cpath }/rent/category/리조트"> <img
+				<a href="${cpath }/category/리조트"> <img
 					src="http://192.168.64.200/리조트.png" class="categoryImg"> 리조트
 				</a>
 			</div>
 			<div class="categoryImgBox">
-				<a href="${cpath }/rent/category/글램핑"> <img
+				<a href="${cpath }/category/글램핑"> <img
 					src="http://192.168.64.200/글램핑.png" class="categoryImg"> 글램핑
 				</a>
 			</div>
 			<div class="categoryImgBox">
-				<a href="${cpath }/rent/category/캠핑"> <img
+				<a href="${cpath }/category/캠핑"> <img
 					src="http://192.168.64.200/캠핑.png" class="categoryImg"> 캠핑
 				</a>
 			</div>
 			<div class="categoryImgBox">
-				<a href="${cpath }/rent/category/게스트하우스"> <img
+				<a href="${cpath }/category/게스트하우스"> <img
 					src="http://192.168.64.200/게스트하우스.png" class="categoryImg">
 					게스트하우스
 				</a>
 			</div>
 			<div class="categoryImgBox">
-				<a href="${cpath }/rent/category/한옥"> <img
+				<a href="${cpath }/category/한옥"> <img
 					src="http://192.168.64.200/한옥.png" class="categoryImg"> 한옥
 				</a>
 			</div>
 			<div class="categoryImgBox">
-				<a href="${cpath }/rent/category/료칸"> <img
+				<a href="${cpath }/category/료칸"> <img
 					src="http://192.168.64.200/료칸.png" class="categoryImg"> 료칸
 				</a>
 			</div>
