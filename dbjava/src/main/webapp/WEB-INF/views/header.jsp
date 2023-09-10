@@ -71,7 +71,7 @@
     		const btn3 = showInput.parentNode.children[0]
     		
     		btn3.classList.remove('hidden')
-    		showInput.classList.add('hidden')
+    		showInput.classList.add('hidden') 
     	}
     	
     	function hiddenInputHandler(event) {

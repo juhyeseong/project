@@ -9,7 +9,7 @@ function hostHandler() {
    start.classList.add('hidden')
    category.classList.remove('hidden')
    hostBtn.classList.add('hidden')
-   categoryBtn.classList.remove('hidden')
+   categoryBtn.classList.remove('hidden') 
 }
 
 //category handler

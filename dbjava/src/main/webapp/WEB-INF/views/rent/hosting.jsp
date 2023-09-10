@@ -12,7 +12,7 @@
             </div>
             <div class="hostRight">
                <div class="hostInfo">
-                  <div class="infoWrite">
+                  <div class="infoWrite"> 
                      <h2>1. 숙소 정보를 알려주세요</h2>
                      <span> 숙소 위치와 숙박가능 인원 등<br> 기본정보를 열려주세요
                      </span>
