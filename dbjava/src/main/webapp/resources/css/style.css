@@ -1253,7 +1253,7 @@ legend{
 	font-size: 20px;
 	font-weight: bold;
 	
-	border: 2px solid gray;
+	border: 2px solid lightgray;
 	border-radius: 10px;
 }
 .categoryItem:hover {
@@ -1287,7 +1287,7 @@ legend{
 	margin-bottom: 20px;
 	padding-left: 30px;
 	
-	border: 2px solid gray;
+	border: 2px solid lightgray;
 	border-radius: 10px;
 	
 	display: flex;
@@ -1418,7 +1418,7 @@ legend{
 	font-size: 17px;
 	font-weight: bold;
 	
-	border: 2px solid gray;
+	border: 2px solid lightgray;
 	border-radius: 10px;
 }
 .rentInformationItem:hover {

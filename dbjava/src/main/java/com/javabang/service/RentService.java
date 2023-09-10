@@ -37,7 +37,7 @@ public class RentService {
 	private String serverPass = "1";
 	private ChannelSftp chSftp = null;
 
-	@Transactional
+//	@Transactional
 	public int rentInsert(RentDTO dto) {
 		int row = 0;
 		int idx = 0;
