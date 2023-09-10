@@ -1,5 +1,6 @@
 package com.javabang.repository;
 
+import java.sql.Date;
 import java.util.List;
 
 import org.springframework.stereotype.Repository;
@@ -21,4 +22,6 @@ public interface ReservationDAO {
 	List<ReservationDTO> selectReservationList(int member);
 
 	int deleteReservation(int reservationIdx);
+
+	Date selectSysdate();
 }

@@ -1,5 +1,6 @@
 package com.javabang.controller;
 
+import java.sql.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -108,6 +109,7 @@ public class ReservationController {
 		ModelAndView mav = new ModelAndView("reservation/reservationList");
 		
 		List<ReservationDTO> list = reservationService.selectReservationList(member);
+		Date today = reservationService.selectSysdate();
 		MemberDTO login = (MemberDTO)session.getAttribute("login");
 		if(login.getIdx() != member) {
 			mav.setViewName("alert");
@@ -115,7 +117,8 @@ public class ReservationController {
 			mav.addObject("msg", "잘못된 접근입니다 ~ ");
 		}
 		else {
-			mav.addObject("list", list);    	  
+			mav.addObject("list", list);
+			mav.addObject("today", today);
 		}
       
 		return mav;

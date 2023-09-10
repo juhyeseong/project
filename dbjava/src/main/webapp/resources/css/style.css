@@ -861,7 +861,8 @@ legend{
 }
 .rentList .name,
 .rentList .guestCount,
-.rentList .cancel {
+.rentList .cancel,
+.rentList .noCancel {
    flex: 1;
 }
 .rentList .phoneNum,
@@ -875,6 +876,18 @@ legend{
     padding: 10px 15px;
    
     background-color: black;
+    color: white;
+    font-weight: bold;
+   
+    border-radius: 10px;
+}
+.noCancel button {
+	all: unset;
+    cursor: pointer;
+   
+    padding: 10px 15px;
+   
+    background-color: #f8215c;
     color: white;
     font-weight: bold;
    

@@ -67,4 +67,8 @@ public class ReservationService {
 	public int deleteReservation(int reservationIdx) {
 		return reservationDAO.deleteReservation(reservationIdx);
 	}
+
+	public java.sql.Date selectSysdate() {
+		return reservationDAO.selectSysdate();
+	}
 }

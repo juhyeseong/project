@@ -46,4 +46,8 @@
    <delete id="deleteReservation" parameterType="int">
 		DELETE reservation WHERE idx = #{reservationIdx}
    </delete>
+   
+   <select id="selectSysdate" resultType="java.sql.Date">
+   		select trunc(sysdate) from dual
+   </select>
 </mapper>
