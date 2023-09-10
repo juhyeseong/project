@@ -24,11 +24,10 @@
                   <div class="totalPrice">${reservation.totalPrice }</div>
                   <input type="hidden" value="${reservation.totalPrice }">
                   <div class="phoneNum">${reservation.phoneNum }</div>
-                  <c:if test="${reservation.startDate < today }">
-                  	${reservation.startDate } ${today }
+                  <c:if test="${reservation.startDate > today }">
                   	<div class="cancel"><button>예약 취소</button></div>
                   </c:if>
-                  <c:if test="${reservation.startDate >= today }">
+                  <c:if test="${reservation.startDate <= today }">
                   	<div class="noCancel"><button>취소 불가</button></div>
                   </c:if>
                   <input type="hidden" value="${reservation.idx }">
