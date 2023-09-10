@@ -54,19 +54,48 @@
 	<script>
 		const cpath = '${cpath }'
 	    const reviewCarousels = document.querySelectorAll('.carousel') // 모든 리뷰 캐러셀을 선택합니다.
-        let currentPage = 0
 	
 	    // 캐러셀을 초기화하고 현재 페이지를 추적하는 변수를 추가합니다.
 	    reviewCarousels.forEach((carousel, index) => {
 	        // 변경: 이전 버튼과 다음 버튼에 이벤트 리스너를 추가합니다.
 	        const prevButton = carousel.querySelector('.prevBtn') // 캐러셀 내의 이전 버튼을 선택합니다.
 	        const nextButton = carousel.querySelector('.nextBtn') // 캐러셀 내의 다음 버튼을 선택합니다.
+	        let currentPage = 0
 	
-	        if (prevButton) {
-	            prevButton.onclick = prevPage // 이전 버튼의 클릭 이벤트에 함수를 연결합니다.
+	        if(prevButton) {
+	            prevButton.addEventListener('click', function() {
+	            	if (currentPage > 0) {
+	                    currentPage--
+	                    updatePage()
+	                }
+	            }) // 이전 버튼의 클릭 이벤트에 함수를 연결합니다.
 	        }
-	        if (nextButton) {
-	            nextButton.onclick = nextPage // 다음 버튼의 클릭 이벤트에 함수를 연결합니다.
+	        if(nextButton) {
+	            nextButton.addEventListener('click', function() {
+	            	const itemsPerPage = 1 // 한 번에 보여줄 항목 수를 설정합니다.
+	                const reviewItems = carousel.querySelectorAll('.myReviewImgs') // 변경: 클래스 이름이 올바른지 확인하세요.
+	                const totalPages = Math.ceil(reviewItems.length / itemsPerPage)
+
+	                if (currentPage < totalPages - 1) {
+	                    currentPage++
+	                    updatePage()
+	                }
+	            }) // 다음 버튼의 클릭 이벤트에 함수를 연결합니다.
+	        }
+	        
+	      //페이지를 업데이트하고 보이지 않는 항목을 숨깁니다.
+	        function updatePage() {
+	            const itemsPerPage = 1 // 한 번에 보여줄 항목 수를 설정합니다.
+	            const reviewItems = carousel.querySelectorAll('.myReviewImgs') // 변경: 클래스 이름이 올바른지 확인하세요.
+
+	            reviewItems.forEach((item, itemIndex) => {
+	                if (itemIndex >= currentPage * itemsPerPage && itemIndex < (currentPage + 1) * itemsPerPage) {
+	                    item.style.display = 'block'
+	                }
+	                else {
+	                    item.style.display = 'none'
+	                }
+	            })
 	        }
 	
 	        // 초기 페이지를 업데이트합니다.

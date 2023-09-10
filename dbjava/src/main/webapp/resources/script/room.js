@@ -4,9 +4,13 @@
 function minusBtnHandler(event) {
 	const guestCount = event.target.parentNode.children[1]
 	const guestCountValue = +guestCount.innerText
-	   
+	const inputGuestCount = document.querySelector('.reserveGuestCount > input[type="hidden"]')
+	 
 	if(guestCountValue - 1 > 0) {
 		guestCount.innerText = guestCountValue - 1
+		if(inputGuestCount != null) {
+			inputGuestCount.value = +inputGuestCount.value - 1
+		}
 	}
 }
 	
@@ -14,6 +18,7 @@ function plusBtnHandler(event) {
 	const rent = document.querySelector('input[name="rent"]')
 	const guestCount = event.target.parentNode.children[1]
 	const guestCountValue = +guestCount.innerText
+	const inputGuestCount = document.querySelector('.reserveGuestCount > input[type="hidden"]')
 	const url = cpath + '/reservation/selectGuestCount/' + rent.value
 	   
 	fetch(url)
@@ -21,6 +26,9 @@ function plusBtnHandler(event) {
 	.then(text => {
 		if(guestCountValue + 1 <= text) {
 			guestCount.innerText = guestCountValue + 1
+			if(inputGuestCount != null) {
+				inputGuestCount.value = +inputGuestCount.value + 1
+			}
 		}
 	})  
 }

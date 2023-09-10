@@ -2070,11 +2070,22 @@ legend{
 /* hostReservation*/
 .hostReserve {
    display: flex;
-   flex-direction; column;
    justify-content: center;
    align-items: center;
    
    margin: 0px auto;
+}
+.hostReserve fieldset {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+.hostReserve > form > fieldset > .reserveBtn > input {
+	margin: 0px;
+}
+.hostReserve > form > fieldset > .priceSpace {
+	width: 570px;
 }
 /* review style */
 .carousel {

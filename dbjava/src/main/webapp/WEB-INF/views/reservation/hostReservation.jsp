@@ -8,47 +8,47 @@
 <style>
 
 </style>
-
-   <h1>예약 생성</h1>
    <div class="hostReserve">
       <form method="POST">
-           <input type="hidden" name="rent" value="${rent.idx }" ><br>
-     
-           <label for="member">예약자 :</label>
-           <input type="text" name="member" value="${login.idx }" readonly><br>
-           
-           <div class="reserveDate-container">
-               <div class="reserveDate">
-                 <label>체크인</label>
-                 <input type="text" name="sDateString" id="sDateString" placeholder="날짜 선택" autocomplete="off">
-                 <label>체크아웃</label>
-                 <input type="text" name="eDateString" id="eDateString" placeholder="날짜 선택" autocomplete="off">
-               </div>
-               </div>
-               <div class="reserveGuest">
-                      <div>게스트 수</div> 
-                      <div class="reserveGuestCount">
-                        <input class="minusBtn" type="button" value="➖">
-                        <span class="guestCountValue">1</span>
-                        <input class="plusBtn" type="button" value="➕">
-                      </div>
-                  </div>
-               <div class="reserveBtn">
-                  <input type="submit" value="예약하기">
-               </div>
-               <div class="priceSpace hidden">
-                  <div class="reserveCal">
-                     <span class="roomPrice">
-                     	₩ <fmt:formatNumber value="${rent.price }" groupingUsed="true"/>
-                     </span>
-                      X 
-                     <span class="nightValue"></span>
-                  </div>
-                  <div class="reserveTotal" id="totalPrice">원</div>
-               </div>
-               <input type="hidden" name="totalPrice"> 
-               <input type="hidden" name="member" value="${login.idx }"> 
-               <input type="hidden" name="rent" value="${rent.idx }">
+           <fieldset>
+           	   <legend>숙소 예약</legend>
+           	   <input type="hidden" name="rent" value="${rent.idx }" ><br>
+	           <input type="hidden" name="member" value="${login.idx }" readonly><br>
+	           
+	           <div class="reserveDate-container">
+	               <div class="reserveDate">
+	                 <label>체크인</label>
+	                 <input type="text" name="sDateString" id="sDateString" placeholder="날짜 선택" autocomplete="off">
+	                 <label>체크아웃</label>
+	                 <input type="text" name="eDateString" id="eDateString" placeholder="날짜 선택" autocomplete="off">
+	               </div>
+	           </div>
+	           <div class="reserveGuest">
+	              <div>게스트 수</div> 
+	              <div class="reserveGuestCount">
+	                <input class="minusBtn" type="button" value="➖">
+	                <span class="guestCountValue">1</span>
+	                <input type="hidden" name="guestCount" value="1">
+	                <input class="plusBtn" type="button" value="➕">
+	              </div>
+	           </div>
+	           <div class="reserveBtn">
+	              <input type="submit" value="예약하기">
+	           </div>
+	           <div class="priceSpace hidden">
+	              <div class="reserveCal">
+	                 <span class="roomPrice">
+	                 	₩ <fmt:formatNumber value="${rent.price }" groupingUsed="true"/>
+	                 </span>
+	                  X 
+	                 <span class="nightValue"></span>
+	              </div>
+	              <div class="reserveTotal" id="totalPrice">원</div>
+	           </div>
+	           <input type="hidden" name="totalPrice"> 
+	           <input type="hidden" name="member" value="${login.idx }"> 
+	           <input type="hidden" name="rent" value="${rent.idx }">
+           </fieldset>
        </form>
     </div>
 

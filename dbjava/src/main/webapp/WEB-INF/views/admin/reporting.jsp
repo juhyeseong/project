@@ -66,7 +66,7 @@
 					<p id="modalReservationNumber">예약 번호 : </p>
 					<p id="modalUserId">예약자 ID : </p>
 					<p id="modalUserName">예약자 성함 : </p>
-					<a href="${cpath }/rent/room/${dto.rent}"><p id="modalTitle">예약룸 : </p></a>
+					<a href="${cpath }/room/${dto.rent}"><p id="modalTitle">예약룸 : </p></a>
 					<p id="modalReportType">신고 타입 : </p>
 					<p>신고 내용</p>
 					<textarea id="modalContent" readonly></textarea>

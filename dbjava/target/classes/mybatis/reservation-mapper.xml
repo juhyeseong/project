@@ -6,8 +6,14 @@
 <mapper namespace="com.javabang.repository.ReservationDAO">
    <insert id="insertReservation" parameterType="reservation">
 		INSERT INTO
-			reservation (member, rent, startDate, endDate, guestCount, totalPrice, merchant_uid)
-			VALUES (#{member}, #{rent}, #{startDate}, #{endDate}, #{guestCount}, #{totalPrice}, #{merchant_uid})
+			<if test="merchant_uid != null">
+				reservation (member, rent, startDate, endDate, guestCount, totalPrice, merchant_uid)
+					VALUES (#{member}, #{rent}, #{startDate}, #{endDate}, #{guestCount}, #{totalPrice}, #{merchant_uid})
+			</if>
+			<if test="merchant_uid == null">
+				reservation (member, rent, startDate, endDate, guestCount, totalPrice)
+					VALUES (#{member}, #{rent}, #{startDate}, #{endDate}, #{guestCount}, #{totalPrice})
+			</if>
    </insert>
    
    <select id="selectReservation" parameterType="int" resultType="reservation">
@@ -25,7 +31,7 @@
 		SELECT startDate, endDate FROM reservation WHERE rent = #{rent} ORDER BY idx
    </select>
    
-   <select id="selectOne" parameterType="int" resultType="reservation">
+   <select id="selectOneRent" parameterType="int" resultType="reservation">
 		SELECT * FROM reservation WHERE idx = #{idx}
    </select>
    

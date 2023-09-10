@@ -58,7 +58,7 @@
 				            	<th>${dto.idx }</th>
 				            	<th>${dto.userId }</th>
 				            	<th>${dto.userName }</th>
-				            	<th><a href="${cpath }/rent/room/${dto.rent}">${dto.title }</a></th>
+				            	<th><a href="${cpath }/room/${dto.rent}">${dto.title }</a></th>
 				            	<th>${dto.roomType }</th>
 				            	<th>${dto.startDate }</th>
 				            	<th>${dto.endDate }</th>

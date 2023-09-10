@@ -3,7 +3,7 @@
 <%@ include file="../header.jsp"%>
 	<div class="mypageSpace">
 		<div class="list-info">
-			<h2>${one.userNick }님의정보</h2>
+			<h2>${one.userNick }님의 정보</h2>
 			<div class="listSpace">
 				<div class="list">
 					<table>

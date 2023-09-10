@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.javabang.model.MemberDTO;
 import com.javabang.model.RentDTO;
 import com.javabang.model.ReservationDTO;
@@ -57,6 +59,8 @@ public class ReservationController {
 		ModelAndView mav = new ModelAndView("reservation/hostReservation");
 		
 		RentDTO rent = rentService.selectOne(idx);
+		List<ReservationDTO> reservationList = reservationService.selectReservationDate(idx);
+		
 		if(rent == null) {
 			mav.setViewName("alert");
 			mav.addObject("url", "/");
@@ -71,7 +75,14 @@ public class ReservationController {
 			mav.addObject("msg", "잘못된 접근입니다 ~ ");
 		}
 		else {
-			mav.addObject("rent", rent);    	  
+			try {
+			ObjectMapper mapper = new ObjectMapper();
+				String json = mapper.writeValueAsString(reservationList);
+				mav.addObject("rent", rent);
+				mav.addObject("reservationList", json);
+			} catch (JsonProcessingException e) {
+				e.printStackTrace();
+			}
 		}
       
 		return mav;
