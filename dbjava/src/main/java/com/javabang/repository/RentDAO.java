@@ -40,8 +40,6 @@ public interface RentDAO {
 	public int deleteRentFile(HashMap<String, String> filePath);
 
 	public List<RentDTO> filterPension(String category);
-
-	public List<RentDTO> filterPoolVilla(String category);
 	
 	public int selectGuestCount(int idx);
 

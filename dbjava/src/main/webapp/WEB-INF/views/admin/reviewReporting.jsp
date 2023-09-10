@@ -164,13 +164,11 @@ document.querySelector('.reviewBlock').addEventListener('click', function() {
 document.querySelector('.reverseBlock').addEventListener('click', function() {
     const reviewId = this.getAttribute('data-review-id');
     const reverseUrl = `${cpath}/admin/reverseBlock/` + reviewId
-   	alert(reverseUrl)
     fetch(reverseUrl, {
         method: 'POST',
     })
     .then(res => res.text())
     .then(data => {
-    	alert(data)
         if (data == 1) {
             alert('블락을 성공적으로 해제했습니다.')
             location.reload()

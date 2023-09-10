@@ -99,6 +99,7 @@
 			JOIN rent_img I
 				ON min_img.min_idx = I.idx 
 			WHERE category = #{category} AND R.state = 1
+			ORDER BY R.price
 	</select>
 
 	

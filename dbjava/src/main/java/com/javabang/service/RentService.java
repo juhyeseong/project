@@ -220,10 +220,6 @@ public class RentService {
 	public List<RentDTO> filterPension(String category) {
 		return rentDAO.filterPension(category);
 	}
-
-	public List<RentDTO> filterPoolVilla(String category) {
-		return rentDAO.filterPoolVilla(category);
-	}
 	
 	public int selectGuestCount(int idx) {
 	    return rentDAO.selectGuestCount(idx);
